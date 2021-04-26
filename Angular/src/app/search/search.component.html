@@ -10,7 +10,7 @@
                       <input type="text" list="users" class="form-control px-4" placeholder="Search for Users" formControlName="userName"> 
                       <input type="submit" class="search-domain btn btn-primary px-5" value="Search" (click)="selectUser()">  
                       <datalist id="users">
-                        <option *ngFor="let user of users" [value]="user.username">
+                        <option *ngFor="let user of users" [value]="user.userName">
                       </datalist>
                         
                     </div>
@@ -34,7 +34,7 @@
                       <div class="col-lg-3 order-lg-2">
                         <div class="card-profile-image">
                           <a href="#">
-                            <img [src]="selectedUser?.profilePic" class="rounded-circle">
+                            <img [src]="selectedUser?.profile_img_url" class="rounded-circle">
                           </a>
                         </div>
                       </div>
@@ -52,14 +52,14 @@
                           {{selectedUser?.firstName +" "+ selectedUser?.lastName}}
                         </h3>
                         <div class="h5 font-weight-300">
-                            {{selectedUser?.emailAddress}}
+                            {{selectedUser?.email}}
                         </div>
                         
                         <div>
-                          <i class="ni education_hat mr-2"></i>@{{selectedUser?.username}}
+                          <i class="ni education_hat mr-2"></i>@{{selectedUser?.userName}}
                         </div>
                         <hr class="my-4">
-                        <p>{{selectedUser?.description}}</p>
+                        <p>{{selectedUser?.bio}}</p>
                         
                       </div>
                     </div>
@@ -83,10 +83,10 @@
                                   <div class="d-flex justify-content-between align-items-center">
                                       <div class="d-flex justify-content-between align-items-center">
                                           <div class="mr-2">
-                                              <img class="rounded-circle" width="45" [src]="post?.creator?.profilePic" alt="" onerror='this.src="https://rev-training-p2-bucket.s3.us-east-2.amazonaws.com/Project_2_Logo.png"' >
+                                              <img class="rounded-circle" width="45" [src]="post?.creator?.profile_img_url" alt="" onerror='this.src="https://rev-training-p2-bucket.s3.us-east-2.amazonaws.com/Project_2_Logo.png"' >
                                           </div>
                                           <div class="ml-2">
-                                              <div class="h5 m-0">@{{post?.creator?.username}}</div>
+                                              <div class="h5 m-0">@{{post?.creator?.userName}}</div>
                                               <div class="h7 text-muted">{{post?.creator?.firstName}} {{post?.creator?.lastName}}</div>
                                           </div>
                                       </div>

@@ -22,10 +22,10 @@
                 <div class="card">
                     <div class="card-body">
                         <div></div>
-                        <img class="rounded-circle" onerror="this.src='https://rev-training-p2-bucket.s3.us-east-2.amazonaws.com/Project_2_Logo.png'" [src]="loggedInUser?.profilePic">
-                        <div class="h5"><a routerLink="">@{{loggedInUser?.username}}</a></div>
-                        <div class="h7 text-muted">{{loggedInUser?.emailAddress}}</div>
-                        <div class="h7">{{loggedInUser?.description}}</div>
+                        <img class="rounded-circle" onerror="this.src='https://rev-training-p2-bucket.s3.us-east-2.amazonaws.com/Project_2_Logo.png'" [src]="loggedInUser?.profile_img_url">
+                        <div class="h5"><a routerLink="">@{{loggedInUser?.userName}}</a></div>
+                        <div class="h7 text-muted">{{loggedInUser?.email}}</div>
+                        <div class="h7">{{loggedInUser?.bio}}</div>
                     </div>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
