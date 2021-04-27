@@ -44,7 +44,7 @@ export class ChatComponent implements OnInit,OnDestroy{
           this.router.navigate(['/login']);
         }
         else {
-           this.lastMsgSender = data.username;  
+           this.lastMsgSender = data.userName;  
            this.router.events.subscribe(
              event =>{
                this.sendDisconnect();
@@ -109,8 +109,8 @@ export class ChatComponent implements OnInit,OnDestroy{
   sendMessage() {
     this.userService.getCurrentUser().subscribe(
       userName => {
-        this.message.sender = userName.username;
-        this.lastMsgSender = userName.username;
+        this.message.sender = userName.userName;
+        this.lastMsgSender = userName.userName;
         this.webSocketAPI._send(this.message);
       }
     );
@@ -132,7 +132,7 @@ export class ChatComponent implements OnInit,OnDestroy{
     this.userService.getCurrentUser().subscribe(
       userName => {
         if(userName!=null){
-          this.webSocketAPI._sendStatus(userName.username);
+          this.webSocketAPI._sendStatus(userName.userName);
           this.sendForOldMessages();
         }
       }
@@ -142,13 +142,13 @@ export class ChatComponent implements OnInit,OnDestroy{
   sendDisconnect() {
     let userName=this.loginService.getCurrent();
     if(userName !=null){
-      this.webSocketAPI._sendDisconnect(userName.username);
+      this.webSocketAPI._sendDisconnect(userName.userName);
       this.disconnect();
     }
     // this.userService.getCurrentUser().subscribe(
     //   userName => {
     //     console.log("send disconnect");
-    //     this.webSocketAPI._sendDisconnect(userName.username);
+    //     this.webSocketAPI._sendDisconnect(userName.userName);
     //     this.disconnect();
     //   }
     // );

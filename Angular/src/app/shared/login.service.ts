@@ -12,7 +12,7 @@ export class LoginService {
   constructor(private httpCli:HttpClient) { }
 
   loginUser(user:User): Observable<User> {
-    let url:string="http://localhost:9001/toph/link/users/login";
+    let url:string="http://localhost:9080/api/userservice/login";
     console.log("in loginUser");
     const httpPost ={
       headers : new HttpHeaders({
@@ -29,7 +29,7 @@ export class LoginService {
   }
 
   getLoggedInUser(): Observable<User>{
-    let url:string ="http://localhost:9001/toph/link/users/getLoggedInUser";
+    let url:string ="http://localhost:9080/api/userservice/getLoggedInUser";
     let content:any=this.httpCli.get<User>(url,{withCredentials:true})
     let content2=content.subscribe(
       data=>{

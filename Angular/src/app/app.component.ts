@@ -34,7 +34,7 @@ export class AppComponent implements OnInit{
 
   logout(){
     // this.chatCom.logoutAndDisconnect();
-    //this.webSocketAPI._sendDisconnect(this.user.username);
+    //this.webSocketAPI._sendDisconnect(this.user.userName);
     this.loginService.logoutUser().subscribe(
       data=>{
         this.appCom.setAttribute("style","display: none");

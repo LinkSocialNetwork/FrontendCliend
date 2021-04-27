@@ -10,12 +10,12 @@ import { LoginService } from '../shared/login.service';
 export class UserInfoComponent implements OnInit {
 
   loggedInUser:User={
-    userId: 0,
-    username: '',
+    userID: 0,
+    userName: '',
     password: '',
-    emailAddress: '',
-    profilePic: '',
-    description: '',
+    email: '',
+    profile_img_url: '',
+    bio: '',
     posts: null,
     likes: null,
     firstName:'',

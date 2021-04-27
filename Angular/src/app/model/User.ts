@@ -4,12 +4,12 @@ import { Post } from "./Post";
 
 
 export interface User{
-    'userId': number;
-    'username':string;
+    'userID': number;
+    'userName':string;
     'password':string;
-    'emailAddress':string;
-    'profilePic':string;
-    'description':string;
+    'email':string;
+    'profile_img_url':string;
+    'bio':string;
     'firstName':string;
     'lastName':string;
     'posts':Post[];

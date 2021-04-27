@@ -25,12 +25,12 @@ export class ProfileComponent implements OnInit,OnDestroy {
   passwordBlock:HTMLElement;
   isChecked:boolean = false;
   currentUser:User ={
-    userId: 0,
-    username: '',
+    userID: 0,
+    userName: '',
     password: '',
-    emailAddress: '',
-    profilePic: '',
-    description: '',
+    email: '',
+    profile_img_url: '',
+    bio: '',
     posts: null,
     likes: null,
     firstName:'',
@@ -43,14 +43,14 @@ export class ProfileComponent implements OnInit,OnDestroy {
     emailInput:'',
     firstNameInput:'',
     lastNameInput:'',
-    descriptionInput:''
+    bioInput:''
     });
 
   userName:string='';
   email:string='';
   firstName:string='';
   lastName:string='';
-  description:string='';
+  bio:string='';
   image:File=null;
   
   constructor(private getUserService:GetUserService,
@@ -101,14 +101,14 @@ export class ProfileComponent implements OnInit,OnDestroy {
         
         this.updateForm.value.firstNameInput= this.currentUser.firstName;
         this.updateForm.value.lastNameInput= this.currentUser.lastName;
-        this.updateForm.value.descriptionInput= this.currentUser.description;
+        this.updateForm.value.bioInput= this.currentUser.bio;
         
-        this.userName = this.currentUser.username;
-        this.email= this.currentUser.emailAddress;
+        this.userName = this.currentUser.userName;
+        this.email= this.currentUser.email;
         this.firstName= this.currentUser.firstName;
         this.lastName= this.currentUser.lastName;
-        this.description= this.currentUser.description;
-        this.getUserPosts(date.userId);
+        this.bio= this.currentUser.bio;
+        this.getUserPosts(date.userID);
       }
     );
 
@@ -166,10 +166,10 @@ export class ProfileComponent implements OnInit,OnDestroy {
     //   emailInput:'',
     //   firstNameInput:'',
     //   lastNameInput:'',
-    //   descriptionInput:''
+    //   bioInput:''
     //   });
 
-    let de:string = (<HTMLInputElement>document.getElementById("input-description")).value;
+    let de:string = (<HTMLInputElement>document.getElementById("input-bio")).value;
     let fn:string = (<HTMLInputElement>document.getElementById("input-first-name")).value;
     let ln:string = (<HTMLInputElement>document.getElementById("input-last-name")).value;
     let np:string = (<HTMLInputElement>document.getElementById("input-new-password")).value;
@@ -189,12 +189,12 @@ export class ProfileComponent implements OnInit,OnDestroy {
         return;
       }
       user = {
-        userId: this.currentUser.userId,
-        username: this.userName,
+        userID: this.currentUser.userID,
+        userName: this.userName,
         password: op,
-        emailAddress: this.email,
-        profilePic: this.currentUser.profilePic,
-        description: de,
+        email: this.email,
+        profile_img_url: this.currentUser.profile_img_url,
+        bio: de,
         posts: this.currentUser.posts,
         likes: this.currentUser.likes,
         firstName:fn,
@@ -209,8 +209,13 @@ export class ProfileComponent implements OnInit,OnDestroy {
           data=>{
             console.log("We got the url:"+data.message);
             console.log(data.message);
+<<<<<<< HEAD
             user.profilePic=data.message;
             console.log(user.profilePic);
+=======
+            user.profile_img_url="https://rev-training-p2-bucket.s3.us-east-2.amazonaws.com/"+data.message;
+            console.log(user.profile_img_url);
+>>>>>>> 5534e6b154b510e3cbfbc16915a56fa151e9ebe7
             this.userService.checkOldPass(user).subscribe(
               data=>{
                 
@@ -224,12 +229,12 @@ export class ProfileComponent implements OnInit,OnDestroy {
                   return;
                 }else{
                   user = {
-                    userId: this.currentUser.userId,
-                    username: this.userName,
+                    userID: this.currentUser.userID,
+                    userName: this.userName,
                     password: np,
-                    emailAddress: this.email,
-                    profilePic: this.currentUser.profilePic,
-                    description: de,
+                    email: this.email,
+                    profile_img_url: this.currentUser.profile_img_url,
+                    bio: de,
                     posts: this.currentUser.posts,
                     likes: this.currentUser.likes,
                     firstName:fn,
@@ -269,12 +274,12 @@ export class ProfileComponent implements OnInit,OnDestroy {
               return;
             }else{
               user = {
-                userId: this.currentUser.userId,
-                username: this.userName,
+                userID: this.currentUser.userID,
+                userName: this.userName,
                 password: np,
-                emailAddress: this.email,
-                profilePic: this.currentUser.profilePic,
-                description: de,
+                email: this.email,
+                profile_img_url: this.currentUser.profile_img_url,
+                bio: de,
                 posts: this.currentUser.posts,
                 likes: this.currentUser.likes,
                 firstName:fn,
@@ -302,12 +307,12 @@ export class ProfileComponent implements OnInit,OnDestroy {
     else{
 
       user = {
-        userId: this.currentUser.userId,
-        username: this.userName,
+        userID: this.currentUser.userID,
+        userName: this.userName,
         password: this.currentUser.password,
-        emailAddress: this.email,
-        profilePic: this.currentUser.profilePic,
-        description: de,
+        email: this.email,
+        profile_img_url: this.currentUser.profile_img_url,
+        bio: de,
         posts: this.currentUser.posts,
         likes: this.currentUser.likes,
         firstName:fn,
@@ -321,8 +326,13 @@ export class ProfileComponent implements OnInit,OnDestroy {
           data=>{
             console.log("We got the url:"+data.message);
             console.log(data.message);
+<<<<<<< HEAD
             user.profilePic=data.message;
             console.log(user.profilePic);
+=======
+            user.profile_img_url="https://rev-training-p2-bucket.s3.us-east-2.amazonaws.com/"+data.message;
+            console.log(user.profile_img_url);
+>>>>>>> 5534e6b154b510e3cbfbc16915a56fa151e9ebe7
             this.userService.updateUser(user).subscribe(
               data =>{
                 Swal.fire({ 
