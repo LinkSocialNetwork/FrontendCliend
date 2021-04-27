@@ -209,13 +209,8 @@ export class ProfileComponent implements OnInit,OnDestroy {
           data=>{
             console.log("We got the url:"+data.message);
             console.log(data.message);
-<<<<<<< HEAD
-            user.profilePic=data.message;
-            console.log(user.profilePic);
-=======
-            user.profile_img_url="https://rev-training-p2-bucket.s3.us-east-2.amazonaws.com/"+data.message;
+            user.profile_img_url=data.message;
             console.log(user.profile_img_url);
->>>>>>> 5534e6b154b510e3cbfbc16915a56fa151e9ebe7
             this.userService.checkOldPass(user).subscribe(
               data=>{
                 
@@ -326,13 +321,8 @@ export class ProfileComponent implements OnInit,OnDestroy {
           data=>{
             console.log("We got the url:"+data.message);
             console.log(data.message);
-<<<<<<< HEAD
-            user.profilePic=data.message;
-            console.log(user.profilePic);
-=======
-            user.profile_img_url="https://rev-training-p2-bucket.s3.us-east-2.amazonaws.com/"+data.message;
+            user.profile_img_url=data.message;
             console.log(user.profile_img_url);
->>>>>>> 5534e6b154b510e3cbfbc16915a56fa151e9ebe7
             this.userService.updateUser(user).subscribe(
               data =>{
                 Swal.fire({ 
