@@ -104,7 +104,7 @@ export class LoginComponent implements OnInit {
       lastName:""
     };
     let response =  this.loginService.loginUser(user).subscribe(
-      (RCurrentUser: User)=> {
+      (RCurrentUser)=> {
         console.log("RCurrentUser"+RCurrentUser);
         if (RCurrentUser){
           Swal.fire({ 
@@ -113,6 +113,7 @@ export class LoginComponent implements OnInit {
             timer: 4000,
             showConfirmButton: true
           });
+          document.cookie = `token=${RCurrentUser.authToken}`
           window.location.reload();
           this.appCom.setAttribute("style","");
           
