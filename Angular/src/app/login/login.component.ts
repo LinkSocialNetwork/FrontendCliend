@@ -41,26 +41,28 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.appCom = document.getElementById("home-navbar");
+    this.appCom.setAttribute("style","display:none;");
+        
+    this.container = document.getElementById('container');
+
     this.loginService.getLoggedInUser().subscribe(
       data =>{
         // info=data;
         
-        if(data==null){
-
-        }
-        else {
+        if(!data) {
           this.router.navigate(['/home']);   
         }
 
-        this.appCom = document.getElementById("home-navbar");
-        this.appCom.setAttribute("style","display:none;");
-        
-        this.container = document.getElementById('container');
         this.loginService.setCurrent(data);
         console.log("LOGIN COMPONENT LOGIN: "+data);
+
+        
         return data;
       }
     )
+    
+        
     
   }
 
