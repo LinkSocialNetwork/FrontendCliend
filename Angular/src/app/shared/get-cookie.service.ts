@@ -7,10 +7,15 @@ export class GetCookieService {
 
   constructor() { }
 
-   getCookie(name) {
+  getCookie(name) {
     const value = `; ${document.cookie}`;
     const parts = value.split(`; ${name}=`);
     if (parts.length === 2) return parts.pop().split(';').shift();
   }
+
+  eraseCookie(name) {
+    document.cookie = name + '=; Max-Age=0'
+}
+
   
 }
