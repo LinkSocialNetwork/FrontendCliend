@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { GetUserService } from 'src/app/shared/services/get-user.service';
 import Swal from 'sweetalert2';
-import { AppComponent } from '../app.component';
-import { User } from '../model/User';
-import { GetUserService } from '../shared/get-user.service';
+import { AppComponent } from '../../app.component';
+import { User } from '../../shared/model/User';
 
 
-import { LoginService } from '../shared/login.service';
-import { UserService } from '../shared/user.service';
+
+import { LoginService } from '../../shared/services/login.service';
+import { UserService } from '../../shared/services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -50,7 +51,7 @@ export class LoginComponent implements OnInit {
       data =>{
         // info=data;
         
-        if(!data) {
+        if(data) {
           this.router.navigate(['/home']);   
         }
 

@@ -2,14 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginComponent } from '../login/login.component';
-import { Like } from '../model/LIke';
-import { Post } from '../model/Post';
+import { Like } from '../../shared/model/LIke';
+import { Post } from '../../shared/model/Post';
 
-import { User } from '../model/User';
-import { GetPostService } from '../shared/get-post.service';
-import { GetUserService } from '../shared/get-user.service';
-import { LikeService } from '../shared/like.service';
-import { LoginService } from '../shared/login.service';
+import { User } from '../../shared/model/User';
+import { LikeService } from '../../shared/services/like.service';
+import { LoginService } from '../../shared/services/login.service';
+import { GetPostService } from 'src/app/shared/services/get-post.service';
+import { GetUserService } from 'src/app/shared/services/get-user.service';
 
 
 

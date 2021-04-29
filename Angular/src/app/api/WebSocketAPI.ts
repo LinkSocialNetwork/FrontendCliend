@@ -1,7 +1,7 @@
 import * as SockJS from 'sockjs-client';
 import * as Stomp from 'stompjs';
-import { ChatComponent } from '../chat/chat.component';
-import { LoginService } from '../shared/login.service';
+import { ChatComponent } from '../pages/chat/chat.component';
+import { LoginService } from '../shared/services/login.service';
 
 export class WebSocketAPI {
     webSocketEndPoint: string = 'http://localhost:9001/toph/link/ws';
