@@ -91,6 +91,7 @@ export class LoginComponent implements OnInit {
       }
       
     });
+    //TODO: probably should remove this log after we are done with it -Author: Devin Kadrie
     console.log(this.loginForm.value.password);
     console.log(this.loginForm.value.userName);
     let user: User = {
@@ -116,7 +117,7 @@ export class LoginComponent implements OnInit {
             showConfirmButton: true
           });
           document.cookie = `token=${RCurrentUser.authToken}`
-          window.location.reload();
+          this.router.navigate(["/home"]);
           this.appCom.setAttribute("style","");
           
         }else{
