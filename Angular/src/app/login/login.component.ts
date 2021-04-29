@@ -41,26 +41,28 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.appCom = document.getElementById("home-navbar");
+    this.appCom.setAttribute("style","display:none;");
+        
+    this.container = document.getElementById('container');
+
     this.loginService.getLoggedInUser().subscribe(
       data =>{
         // info=data;
         
-        if(data==null){
-
-        }
-        else {
+        if(!data) {
           this.router.navigate(['/home']);   
         }
 
-        this.appCom = document.getElementById("home-navbar");
-        this.appCom.setAttribute("style","display:none;");
-        
-        this.container = document.getElementById('container');
         this.loginService.setCurrent(data);
         console.log("LOGIN COMPONENT LOGIN: "+data);
+
+        
         return data;
       }
     )
+    
+        
     
   }
 
@@ -92,19 +94,19 @@ export class LoginComponent implements OnInit {
     console.log(this.loginForm.value.password);
     console.log(this.loginForm.value.userName);
     let user: User = {
-      userId: null,
-      username: this.loginForm.value.userName,
+      userID: null,
+      userName: this.loginForm.value.userName,
       password: this.loginForm.value.password,
-      emailAddress: null,
-      profilePic: null,
-      description: null,
+      email: null,
+      profile_img_url: null,
+      bio: null,
       posts: null,
       likes: null,
       firstName:"",
       lastName:""
     };
     let response =  this.loginService.loginUser(user).subscribe(
-      (RCurrentUser: User)=> {
+      (RCurrentUser)=> {
         console.log("RCurrentUser"+RCurrentUser);
         if (RCurrentUser){
           Swal.fire({ 
@@ -113,6 +115,7 @@ export class LoginComponent implements OnInit {
             timer: 4000,
             showConfirmButton: true
           });
+          document.cookie = `token=${RCurrentUser.authToken}`
           window.location.reload();
           this.appCom.setAttribute("style","");
           
@@ -148,12 +151,12 @@ export class LoginComponent implements OnInit {
     console.log(this.registrationForm.value.userName);
     console.log(this.registrationForm.value.email);
     let user: User = {
-      userId: null,
-      username: this.registrationForm.value.userName,
+      userID: null,
+      userName: this.registrationForm.value.userName,
       password: this.registrationForm.value.password,
-      emailAddress: this.registrationForm.value.email,
-      profilePic: null,
-      description: "",
+      email: this.registrationForm.value.email,
+      profile_img_url: null,
+      bio: "",
       posts: null,
       likes: null,
       firstName:"",
@@ -169,14 +172,14 @@ export class LoginComponent implements OnInit {
           showConfirmButton: true
         });
         this.container.classList.remove("right-panel-active");
-        (<HTMLInputElement>document.getElementById("loginusername")).value=this.registrationForm.value.userName;
+        (<HTMLInputElement>document.getElementById("loginuserName")).value=this.registrationForm.value.userName;
         this.loginForm.value.userName=this.registrationForm.value.userName;
         (<HTMLInputElement>document.getElementById("loginpassword")).value=this.registrationForm.value.password;
         this.loginForm.value.password=this.registrationForm.value.password;
-      }else if(data.message=="Username already taken"){
+      }else if(data.message=="userName already taken"){
         Swal.fire({ 
           icon: 'warning',
-          title: '"Username already taken try again',
+          title: '"userName already taken try again',
           timer: 4000,
           showConfirmButton: true
         });
@@ -189,7 +192,7 @@ export class LoginComponent implements OnInit {
 
   onPasswordReset():void{
     Swal.fire({
-      title: 'Enter Your Username',
+      title: 'Enter Your userName',
       input: 'text',
       showClass: {
           popup: 'animate__animated animate__fadeInDown'

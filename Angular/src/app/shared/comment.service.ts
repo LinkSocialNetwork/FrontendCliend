@@ -12,7 +12,7 @@ export class CommentService {
   constructor(private myHttpCli:HttpClient) { }
 
   insertNewComment(comment:Comments):Observable<string>{
-    let url:string="http://localhost:9001/toph/link/comments/createComment";
+    let url:string="http://localhost:9080/api/postservice/comment";
     return this.myHttpCli.post<string>(url,comment,{withCredentials:true});
   }
 }

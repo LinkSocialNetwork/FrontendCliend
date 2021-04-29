@@ -11,20 +11,20 @@ export class GetPostService {
   constructor(private myHttpCli:HttpClient) { }
 
   getAllPosts():Observable<Post[]>{
-    let url:string ="http://localhost:9001/toph/link/posts/getAllPosts";
+    let url:string ="http://localhost:9080/api/postervice/post/post";
     return this.myHttpCli.get<Post[]>(url,{withCredentials:true});
   }
-  getPostById(postId:number):Observable<Post>{
-    let url:string =`http://localhost:9001/toph/link/posts/getPostById/${postId}`;
+  getPostById(id:number):Observable<Post>{
+    let url:string =`http://localhost:9080/api/postervice/post/post/${id}`;
     return this.myHttpCli.get<Post>(url,{withCredentials:true});
   }
 
-  getPostsCreatedByUser(userId:number):Observable<Post[]>{
-    let url:string =`http://localhost:9001/toph/link/posts/getPostsByUser/${userId}`;
+  getPostsCreatedByUser(id:number):Observable<Post[]>{
+    let url:string =`http://localhost:9080/api/postervice/post/user/${id}`;
     return this.myHttpCli.get<Post[]>(url,{withCredentials:true});
   }
-  getPostsLikedByUser(userId:number):Observable<Post[]>{
-    let url:string =`http://localhost:9001/toph/link/posts/getPostsLikedByUser/${userId}`;
-    return this.myHttpCli.get<Post[]>(url,{withCredentials:true});
-  }
+  // getPostsLikedByUser(userId:number):Observable<Post[]>{
+  //   let url:string =`http://localhost:9080/api/postervice/post/posts/getPostsLikedByUser/${userId}`;
+  //   return this.myHttpCli.get<Post[]>(url,{withCredentials:true});
+  // }
 }

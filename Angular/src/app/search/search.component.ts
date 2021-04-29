@@ -64,7 +64,7 @@ export class SearchComponent implements OnInit {
 
   selectUser(){
     for (const user of this.users) {
-      if(user.username==this.searchForm.value.userName){
+      if(user.userName==this.searchForm.value.userName){
         this.selectedUser=user;
       }
     }
@@ -73,7 +73,7 @@ export class SearchComponent implements OnInit {
   }
 
   getAllPosts():void{
-    this.getPostService.getPostsCreatedByUser(this.selectedUser.userId).subscribe(
+    this.getPostService.getPostsCreatedByUser(this.selectedUser.userID).subscribe(
       data =>{
         
         let newPosts:Post[];
@@ -86,11 +86,11 @@ export class SearchComponent implements OnInit {
 
   selectUserByKey(event:any){
     for (const user of this.users) {
-      if(user.username==this.searchForm.value.userName){
+      if(user.userName==this.searchForm.value.userName){
         this.selectedUser=user;
       }
     }
-    this.getPostService.getPostsCreatedByUser(this.selectedUser.userId).subscribe(
+    this.getPostService.getPostsCreatedByUser(this.selectedUser.userID).subscribe(
 
       data =>{
         this.userPosts= data;
@@ -130,7 +130,7 @@ export class SearchComponent implements OnInit {
     }
     else{
       let newLike:Like = {"likeId":0,"user":this.loginServ.getCurrent(),"post":valueOfPost}
-      console.log("////////////NEWLIKE: POST:"+newLike.post.postId +" USER:"+newLike.user.userId +" "+newLike.user.username+" "+JSON.stringify(newLike.user.likes));
+      console.log("////////////NEWLIKE: POST:"+newLike.post.postId +" USER:"+newLike.user.userID +" "+newLike.user.userName+" "+JSON.stringify(newLike.user.likes));
 
       this.likeServ.insertNewLike(newLike).subscribe(
         data=>{

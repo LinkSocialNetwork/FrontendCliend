@@ -11,12 +11,12 @@ export class GetUserService {
   constructor(private myHttpCli:HttpClient) { }
 
   getAllUsers():Observable<User[]> {
-    let url:string="http://localhost:9001/toph/link/users/getAllUsers";
+    let url:string="http://localhost:9080/api/userservice/user";
     return this.myHttpCli.get<User[]>(url,{withCredentials:true});
   }
 
-  getUserById(userId:number): Observable<User> {
-    let url:string =`http://localhost:9001/toph/link/users/getUserById/${userId}`;
+  getUserById(id:number): Observable<User> {
+    let url:string =`http://localhost:9080/api/userservice/user/${id}`;
     return this.myHttpCli.get<User>(url,{withCredentials:true})
   }
 
@@ -27,7 +27,7 @@ export class GetUserService {
         'withCredentials':'true'
       })
     }
-    let url:string =`http://localhost:9001/toph/link/users/getLoggedInUser`;
+    let url:string =`http://localhost:9080/api/userservice/user/session`;
     return this.myHttpCli.get<User>(url,{withCredentials:true})
   }
 }

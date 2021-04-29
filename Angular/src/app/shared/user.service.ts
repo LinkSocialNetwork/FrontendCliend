@@ -13,24 +13,28 @@ export class UserService {
   constructor(private myHttpCli:HttpClient) { }
 
   insertNewUser(user:User): Observable<ResponseMessage> {
-    let url:string="http://localhost:9001/toph/link/users/insertNewUser";
+    let url:string="http://localhost:9080/api/userservice/user";
     return this.myHttpCli.post<ResponseMessage>(url,user,{withCredentials:true});
   }
+
   updateUser(user:User): Observable<HttpResponse<string>>{
-    let url: string = "http://localhost:9001/toph/link/users/updateUser";
+    let url: string = "http://localhost:9080/api/userservice/user";
     console.log(" inside the user update  >>> "+user);
     return this.myHttpCli.put<HttpResponse<string>>(url,user,{withCredentials:true});
 
   }
+
+  deleteUser(id:number): void{
+    let url: string = `http://localhost:9080/api/userservice/user/${id}`;
+    //TODO: change in Java from deletemapping to postmapping
+    this.myHttpCli.delete<HttpResponse<ArrayBuffer>>(url);
+  }
+
   checkOldPass(user:User): Observable<HttpResponse<string>>{
-    let url: string = "http://localhost:9001/toph/link/users/checkOldPassword";
+    let url: string = "http://localhost:9080/api/userservice/user/validate-password";
     
     return this.myHttpCli.post<HttpResponse<string>>(url,user,{withCredentials:true});
   }
 
-  deleteUser(user:User): Observable<HttpResponse<string>>{
-    let url: string = "http://localhost:9001/toph/link/users/deleteUser";
-    //TODO: change in Java from deletemapping to postmapping
-    return this.myHttpCli.post<HttpResponse<string>>(url,user,{withCredentials:true});
-  }
+  
 }

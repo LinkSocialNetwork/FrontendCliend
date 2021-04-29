@@ -1550,7 +1550,7 @@
     display: block;
   }
   
-  .card-profile-stats>div .description {
+  .card-profile-stats>div .bio {
     font-size: .875rem;
     color: #adb5bd;
   }
@@ -1980,7 +1980,7 @@
     line-height: 1.7;
   }
   
-  .description {
+  .bio {
     font-size: .875rem;
   }
   

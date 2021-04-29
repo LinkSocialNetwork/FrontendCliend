@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from '../model/User';
+import { GetCookieService } from './get-cookie.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,34 +10,33 @@ import { User } from '../model/User';
 export class LoginService {
   private currentUser: User;
 
-  constructor(private httpCli:HttpClient) { }
+  constructor(private httpCli:HttpClient, private cookieService: GetCookieService) { }
 
-  loginUser(user:User): Observable<User> {
-    let url:string="http://localhost:9001/toph/link/users/login";
+  loginUser(user:User): Observable<any> {
+    let url:string="http://localhost:9080/api/userservice/login";
     console.log("in loginUser");
     const httpPost ={
       headers : new HttpHeaders({
-        'Content-Type':'application/json',
-        'withCredentials':'true'
+        'Content-Type':'application/json'
       })
     }
-    return this.httpCli.post<User>(url,user,{withCredentials:true});
+    return this.httpCli.post<any>(url,user,httpPost);
   }
 
   logoutUser(): Observable<string>{
-    let url: string="http://localhost:9001/toph/link/users/logout";
+    let url: string="http://localhost:9080/api/userservice/user/logout";
     return this.httpCli.get<string>(url, {withCredentials:true});
   }
 
   getLoggedInUser(): Observable<User>{
-    let url:string ="http://localhost:9001/toph/link/users/getLoggedInUser";
-    let content:any=this.httpCli.get<User>(url,{withCredentials:true})
-    let content2=content.subscribe(
-      data=>{
-        this.currentUser=data;
-      }
-    )
-    return content;
+    let authtoken = this.cookieService.getCookie("token")
+    console.log(authtoken); 
+    if(authtoken) {
+    return this.httpCli.get<User>(`http://localhost:9080/api/userservice/checkToken`, {
+      headers: {
+        token: authtoken
+      }, withCredentials:true
+    })}
   }
 
   getCurrent():User{
@@ -67,7 +67,7 @@ export class LoginService {
   }
 
   resetPassword(userName:string):Observable<string>{
-    let url:string = "http://localhost:9001/toph/link/users/resetPassword";
+    let url:string = "http://localhost:9080/api/userservice/user/password-reset";
     return this.httpCli.post<string>(url,userName,{withCredentials:true});
   }
 }
