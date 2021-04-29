@@ -2,15 +2,16 @@ import { HttpResponse } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { NavigationEnd, Router } from '@angular/router';
+import { GetPostService } from 'src/app/shared/services/get-post.service';
+import { GetUserService } from 'src/app/shared/services/get-user.service';
+import { ImageUploadService } from 'src/app/shared/services/image-upload.service';
 import Swal from 'sweetalert2';
-import { AppComponent } from '../app.component';
-import { Post } from '../model/Post';
-import { User } from '../model/User';
-import { GetPostService } from '../shared/get-post.service';
-import { GetUserService } from '../shared/get-user.service';
-import { ImageUploadService } from '../shared/image-upload.service';
-import { LoginService } from '../shared/login.service';
-import { UserService } from '../shared/user.service';
+import { AppComponent } from '../../app.component';
+import { Post } from '../../shared/model/Post';
+import { User } from '../../shared/model/User';
+
+import { LoginService } from '../../shared/services/login.service';
+import { UserService } from '../../shared/services/user.service';
 
 @Component({
   selector: 'app-profile',

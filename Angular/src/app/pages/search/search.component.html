@@ -83,7 +83,9 @@
                                   <div class="d-flex justify-content-between align-items-center">
                                       <div class="d-flex justify-content-between align-items-center">
                                           <div class="mr-2">
-                                              <img class="rounded-circle" width="45" [src]="post?.creator?.profile_img_url" alt="" onerror='this.src="https://rev-training-p2-bucket.s3.us-east-2.amazonaws.com/Project_2_Logo.png"' >
+                                             <!-- The following s3 link refers to the project LOGO and NEEDS to be hardcoded as it does not belong to a USER -->
+                                              <!-- Once we obtain the full S3 link for the application logo we can uncomment and hardcode it below -->
+                                              <img class="rounded-circle" width="45" [src]="post?.creator?.profile_img_url" alt="" onerror="src/app/shared/images/Project_2_Logo.png" >
                                           </div>
                                           <div class="ml-2">
                                               <div class="h5 m-0">@{{post?.creator?.userName}}</div>

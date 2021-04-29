@@ -1,12 +1,11 @@
-import { HttpClient } from '@angular/common/http';
+
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { WebSocketAPI } from './api/WebSocketAPI';
-import { LoginComponent } from './login/login.component';
-import { User } from './model/User';
-import { GetCookieService } from './shared/get-cookie.service';
-import { GetUserService } from './shared/get-user.service';
-import { LoginService } from './shared/login.service';
+import { User } from './shared/model/User';
+import { GetCookieService } from './shared/services/get-cookie.service';
+import { LoginService } from './shared/services/login.service';
+
+
 
 @Component({
   selector: 'app-root',

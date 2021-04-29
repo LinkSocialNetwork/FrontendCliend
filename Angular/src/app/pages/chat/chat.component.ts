@@ -2,10 +2,11 @@ import { ThrowStmt } from '@angular/compiler';
 import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { WebSocketAPI } from '../api/WebSocketAPI';
-import { ChatMessage } from '../model/ChatMessage';
-import { GetUserService } from '../shared/get-user.service';
-import { LoginService } from '../shared/login.service';
+import { GetUserService } from 'src/app/shared/services/get-user.service';
+import { WebSocketAPI } from '../../api/WebSocketAPI';
+import { ChatMessage } from '../../shared/model/ChatMessage';
+
+import { LoginService } from '../../shared/services/login.service';
 
 
 @Component({

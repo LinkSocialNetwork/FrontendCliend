@@ -1,17 +1,18 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import { CommentService } from 'src/app/shared/services/comment.service';
+import { GetPostService } from 'src/app/shared/services/get-post.service';
+import { GetUserService } from 'src/app/shared/services/get-user.service';
+import { ImageUploadService } from 'src/app/shared/services/image-upload.service';
+import { LikeService } from 'src/app/shared/services/like.service';
 import Swal from 'sweetalert2';
-import { Comments } from '../model/Comments';
-import { Like } from '../model/LIke';
-import { Post } from '../model/Post';
-import { User } from '../model/User';
-import { CommentService } from '../shared/comment.service';
-import { GetPostService } from '../shared/get-post.service';
-import { GetUserService } from '../shared/get-user.service';
-import { ImageUploadService } from '../shared/image-upload.service';
-import { LikeService } from '../shared/like.service';
-import { LoginService } from '../shared/login.service';
-import { PostService } from '../shared/post.service';
+import { Comments } from '../../../shared/model/Comments';
+import { Like } from '../../../shared/model/LIke';
+import { Post } from '../../../shared/model/Post';
+import { User } from '../../../shared/model/User';
+
+import { LoginService } from '../../../shared/services/login.service';
+import { PostService } from '../../../shared/services/post.service';
 
 @Component({
   selector: 'app-time-line',

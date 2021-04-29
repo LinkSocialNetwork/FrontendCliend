@@ -14,6 +14,9 @@
                 <div class="card-profile-image">
                   <a href="#">
                     <!-- <img onerror="this.src='https://rev-training-p2-bucket.s3.us-east-2.amazonaws.com/Project_2_Logo.png'" [src]='currentUser?.profile_img_url' class="big-rounded-circle"> -->
+                     <!-- The following s3 link refers to the project LOGO and NEEDS to be hardcoded as it does not belong to a USER -->
+                                <!-- Once we obtain the full S3 link for the application logo we can uncomment and hardcode it below -->
+                    <img onerror="this.src='../assets/logo.png'" [src]='currentUser?.profile_img_url' class="big-rounded-circle"> 
                   </a>
                 </div>
               </div>
@@ -101,7 +104,9 @@
                                   {{post?.postContent}}
                               </p>
                               <div class="vid-container" *ngIf="post.postImageUrl!=null">
-                                  <img height="100%" width="100%" onerror="this.src='https://rev-training-p2-bucket.s3.us-east-2.amazonaws.com/Project_2_Logo.png'" [src]="post.postImageUrl" alt="">
+                                <!-- The following s3 link refers to the project LOGO and NEEDS to be hardcoded as it does not belong to a USER -->
+                                <!-- Once we obtain the full S3 link for the application logo we can uncomment and hardcode it below -->
+                                  <img height="100%" width="100%" onerror="this.src='../assets/logo.png'" [src]="post.postImageUrl" alt="">
                               </div>
                               <div class="vid-container" *ngIf="post.youtubeUrl!=null">
                                   <iframe width="100%" height="350" [src]="post.youtubeUrl | safe" frameborder="0" allowfullscreen></iframe>
