@@ -11,16 +11,16 @@ export class GetPostService {
   constructor(private myHttpCli:HttpClient) { }
 
   getAllPosts():Observable<Post[]>{
-    let url:string ="http://localhost:9080/api/postervice/post/post";
+    let url:string ="http://localhost:9080/api/postservice/post/post";
     return this.myHttpCli.get<Post[]>(url,{withCredentials:true});
   }
   getPostById(id:number):Observable<Post>{
-    let url:string =`http://localhost:9080/api/postervice/post/post/${id}`;
+    let url:string =`http://localhost:9080/api/postservice/post/post/${id}`;
     return this.myHttpCli.get<Post>(url,{withCredentials:true});
   }
 
   getPostsCreatedByUser(id:number):Observable<Post[]>{
-    let url:string =`http://localhost:9080/api/postervice/post/user/${id}`;
+    let url:string =`http://localhost:9080/api/postservice/post/user/${id}`;
     return this.myHttpCli.get<Post[]>(url,{withCredentials:true});
   }
   // getPostsLikedByUser(userId:number):Observable<Post[]>{
