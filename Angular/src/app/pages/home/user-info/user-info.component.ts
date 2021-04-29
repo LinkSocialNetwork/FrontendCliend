@@ -14,6 +14,7 @@ export class UserInfoComponent implements OnInit {
     userName: '',
     password: '',
     email: '',
+    dob:'',
     profile_img_url: '',
     bio: '',
     posts: null,

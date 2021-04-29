@@ -8,6 +8,7 @@ export interface User{
     'userName':string;
     'password':string;
     'email':string;
+    'dob': string;
     'profile_img_url':string;
     'bio':string;
     'firstName':string;

@@ -30,6 +30,7 @@ export class ProfileComponent implements OnInit,OnDestroy {
     userName: '',
     password: '',
     email: '',
+    dob: null,
     profile_img_url: '',
     bio: '',
     posts: null,
@@ -170,6 +171,9 @@ export class ProfileComponent implements OnInit,OnDestroy {
     //   bioInput:''
     //   });
 
+    // TODOs : need to create a field of dob on HTML for updating user
+    let dob:string = (<HTMLInputElement>document.getElementById("input-dob")).value;
+
     let de:string = (<HTMLInputElement>document.getElementById("input-bio")).value;
     let fn:string = (<HTMLInputElement>document.getElementById("input-first-name")).value;
     let ln:string = (<HTMLInputElement>document.getElementById("input-last-name")).value;
@@ -194,6 +198,7 @@ export class ProfileComponent implements OnInit,OnDestroy {
         userName: this.userName,
         password: op,
         email: this.email,
+        dob: dob,
         profile_img_url: this.currentUser.profile_img_url,
         bio: de,
         posts: this.currentUser.posts,
@@ -229,6 +234,7 @@ export class ProfileComponent implements OnInit,OnDestroy {
                     userName: this.userName,
                     password: np,
                     email: this.email,
+                    dob: dob,
                     profile_img_url: this.currentUser.profile_img_url,
                     bio: de,
                     posts: this.currentUser.posts,
@@ -274,6 +280,7 @@ export class ProfileComponent implements OnInit,OnDestroy {
                 userName: this.userName,
                 password: np,
                 email: this.email,
+                dob: dob,
                 profile_img_url: this.currentUser.profile_img_url,
                 bio: de,
                 posts: this.currentUser.posts,
@@ -307,6 +314,7 @@ export class ProfileComponent implements OnInit,OnDestroy {
         userName: this.userName,
         password: this.currentUser.password,
         email: this.email,
+        dob: dob,
         profile_img_url: this.currentUser.profile_img_url,
         bio: de,
         posts: this.currentUser.posts,

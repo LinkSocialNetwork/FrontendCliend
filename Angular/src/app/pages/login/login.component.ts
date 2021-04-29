@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DateService } from 'src/app/shared/pipes/date.service';
 import { GetUserService } from 'src/app/shared/services/get-user.service';
 import Swal from 'sweetalert2';
 import { AppComponent } from '../../app.component';
@@ -23,7 +24,9 @@ export class LoginComponent implements OnInit {
   registrationForm = this.formBuilder.group({
     userName: '',
     password: '',
-    email:''
+    email:'',
+    dob: ''
+
     });
   loginForm = this.formBuilder.group({
   userName: '',
@@ -34,6 +37,7 @@ export class LoginComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
+    private dobModifier : DateService,
     private loginService: LoginService,
     private getUserService:GetUserService,
     private userComponent:UserService) { 
@@ -100,6 +104,7 @@ export class LoginComponent implements OnInit {
       userName: this.loginForm.value.userName,
       password: this.loginForm.value.password,
       email: null,
+      dob: null,
       profile_img_url: null,
       bio: null,
       posts: null,
@@ -157,6 +162,7 @@ export class LoginComponent implements OnInit {
       userName: this.registrationForm.value.userName,
       password: this.registrationForm.value.password,
       email: this.registrationForm.value.email,
+      dob : this.dobModifier.dobModifier(this.registrationForm.value.dob),
       profile_img_url: null,
       bio: "",
       posts: null,
