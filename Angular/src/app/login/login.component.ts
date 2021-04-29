@@ -50,12 +50,12 @@ export class LoginComponent implements OnInit {
       data =>{
         // info=data;
         
-        if(!data) {
+        if(data != null) {
           this.router.navigate(['/home']);   
         }
 
         this.loginService.setCurrent(data);
-        console.log("LOGIN COMPONENT LOGIN: "+data);
+        console.log(data);
 
         
         return data;
