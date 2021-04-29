@@ -27,7 +27,7 @@ export class GetUserService {
         'withCredentials':'true'
       })
     }
-    let url:string =`http://localhost:9080/api/userservice/user/session`;
+    let url:string =`http://localhost:9080/api/userservice/checkToken`;
     return this.myHttpCli.get<User>(url,{withCredentials:true})
   }
 }

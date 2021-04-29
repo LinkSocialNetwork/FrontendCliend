@@ -72,15 +72,9 @@ export class TimeLineComponent implements OnInit,OnDestroy {
       data =>{
         let newPosts:Post[];
         newPosts=data;
-        newPosts.forEach(element => {
-          console.log(element.comments);
-          console.log(element.usersWhoLiked);
-          element.comments.forEach(element1=>{
-            console.log(element1)
-          })
-          
-        });
+        console.log(newPosts)
         newPosts.sort((a,b) => (a.postedAt > b.postedAt) ? -1 : ((b.postedAt > a.postedAt) ? 1 : 0))
+        console.log(newPosts)
         this.posts= newPosts;
       }
     )
