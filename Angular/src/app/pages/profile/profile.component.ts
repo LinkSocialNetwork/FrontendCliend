@@ -85,6 +85,7 @@ export class ProfileComponent implements OnInit,OnDestroy {
         else {
           //force update the current user
           this.loginService.setCurrent(data);
+          this.currentUser = data;
         }
 
       }
@@ -96,7 +97,11 @@ export class ProfileComponent implements OnInit,OnDestroy {
     this.passwordBlock.setAttribute("style","display:none")
     this.appCom = document.getElementById("home-navbar");
     this.appCom.setAttribute("style","");
-    this.getUserService.getCurrentUser().subscribe(
+
+
+
+    /*  */
+/*     this.getUserService.getCurrentUser().subscribe(
       date => {
         this.currentUser = date;
 
@@ -112,7 +117,7 @@ export class ProfileComponent implements OnInit,OnDestroy {
         this.bio= this.currentUser.bio;
         this.getUserPosts(date.userID);
       }
-    );
+    ); */
 
     
   }
