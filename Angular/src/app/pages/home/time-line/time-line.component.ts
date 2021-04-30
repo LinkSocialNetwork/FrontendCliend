@@ -1,18 +1,19 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
+import { Comments } from 'src/app/shared/model/Comments';
+import { Like } from 'src/app/shared/model/LIke';
+import { Post } from 'src/app/shared/model/Post';
+import { User } from 'src/app/shared/model/User';
 import { CommentService } from 'src/app/shared/services/comment.service';
 import { GetPostService } from 'src/app/shared/services/get-post.service';
 import { GetUserService } from 'src/app/shared/services/get-user.service';
 import { ImageUploadService } from 'src/app/shared/services/image-upload.service';
 import { LikeService } from 'src/app/shared/services/like.service';
-import Swal from 'sweetalert2';
-import { Comments } from '../../../shared/model/Comments';
-import { Like } from '../../../shared/model/LIke';
-import { Post } from '../../../shared/model/Post';
-import { User } from '../../../shared/model/User';
+import { LoginService } from 'src/app/shared/services/login.service';
+import { PostService } from 'src/app/shared/services/post.service';
 
-import { LoginService } from '../../../shared/services/login.service';
-import { PostService } from '../../../shared/services/post.service';
+import Swal from 'sweetalert2';
+
+
 
 @Component({
   selector: 'app-time-line',
@@ -72,15 +73,9 @@ export class TimeLineComponent implements OnInit,OnDestroy {
       data =>{
         let newPosts:Post[];
         newPosts=data;
-        newPosts.forEach(element => {
-          console.log(element.comments);
-          console.log(element.usersWhoLiked);
-          element.comments.forEach(element1=>{
-            console.log(element1)
-          })
-          
-        });
+        console.log(newPosts)
         newPosts.sort((a,b) => (a.postedAt > b.postedAt) ? -1 : ((b.postedAt > a.postedAt) ? 1 : 0))
+        console.log(newPosts)
         this.posts= newPosts;
       }
     )

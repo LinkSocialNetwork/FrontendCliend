@@ -1,17 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoginComponent } from '../login/login.component';
-import { Like } from '../../shared/model/LIke';
-import { Post } from '../../shared/model/Post';
-
-import { User } from '../../shared/model/User';
-import { LikeService } from '../../shared/services/like.service';
-import { LoginService } from '../../shared/services/login.service';
+import { Like } from 'src/app/shared/model/LIke';
+import { Post } from 'src/app/shared/model/Post';
+import { User } from 'src/app/shared/model/User';
 import { GetPostService } from 'src/app/shared/services/get-post.service';
 import { GetUserService } from 'src/app/shared/services/get-user.service';
-
-
+import { LikeService } from 'src/app/shared/services/like.service';
+import { LoginService } from 'src/app/shared/services/login.service';
 
 @Component({
   selector: 'app-search',

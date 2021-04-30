@@ -96,11 +96,11 @@
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="mr-2">
-                                <img class="rounded-circle" width="45" onerror="this.src='../assets/logo.png'" [src]='post?.creator?.profile_img_url' alt="">
+                                <img class="rounded-circle" width="45" onerror="this.src='../assets/logo.png'" [src]='post?.user?.profile_img_url' alt="">
                             </div>
                             <div class="ml-2">
-                                <div class="h5 m-0">@{{post?.creator?.userName}}</div>
-                                <div class="h7 text-muted">{{post?.creator?.firstName}} {{post?.creator?.lastName}}</div>
+                                <div class="h5 m-0">@{{post?.user?.userName}}</div>
+                                <div class="h7 text-muted">{{post?.user?.firstName}} {{post?.user?.lastName}}</div>
                             </div>
                         </div>
                         

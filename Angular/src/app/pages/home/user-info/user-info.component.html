@@ -26,8 +26,8 @@
                                 <!-- Once we obtain the full S3 link for the application logo we can uncomment and hardcode it below -->
                         <img class="rounded-circle" onerror="this.src='../assets/logo.png'" [src]="loggedInUser?.profile_img_url">
                         <div class="h5"><a routerLink="">@{{loggedInUser?.userName}}</a></div>
-                        <div class="h7 text-muted">{{loggedInUser?.email}}</div>
-                        <div class="h7">{{loggedInUser?.bio}}</div>
+                        <div class="h7 text-muted">{{loggedInUser?.firstName}} {{loggedInUser?.lastName}}</div>
+                        <!-- <div class="h7">{{loggedInUser?.bio}}</div> -->
                     </div>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">

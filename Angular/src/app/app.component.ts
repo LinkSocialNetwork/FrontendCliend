@@ -7,6 +7,7 @@ import { LoginService } from './shared/services/login.service';
 
 
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -25,9 +26,9 @@ export class AppComponent implements OnInit{
   
   title = 'Project2';
   ngOnInit(): void {
-    // this.loginService.getLoggedInUser().subscribe(
-    //   data=> this.user=data
-    // );
+    this.loginService.getLoggedInUser().subscribe(
+      data=> this.user=data
+    );
     this.down = false;
     this.appCom = document.getElementById("home-navbar");
   }

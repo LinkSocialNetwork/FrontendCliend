@@ -2,16 +2,16 @@ import { HttpResponse } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { NavigationEnd, Router } from '@angular/router';
+import { AppComponent } from 'src/app/app.component';
+import { Post } from 'src/app/shared/model/Post';
+import { User } from 'src/app/shared/model/User';
 import { GetPostService } from 'src/app/shared/services/get-post.service';
 import { GetUserService } from 'src/app/shared/services/get-user.service';
 import { ImageUploadService } from 'src/app/shared/services/image-upload.service';
+import { LoginService } from 'src/app/shared/services/login.service';
+import { UserService } from 'src/app/shared/services/user.service';
 import Swal from 'sweetalert2';
-import { AppComponent } from '../../app.component';
-import { Post } from '../../shared/model/Post';
-import { User } from '../../shared/model/User';
 
-import { LoginService } from '../../shared/services/login.service';
-import { UserService } from '../../shared/services/user.service';
 
 @Component({
   selector: 'app-profile',
@@ -85,6 +85,7 @@ export class ProfileComponent implements OnInit,OnDestroy {
         else {
           //force update the current user
           this.loginService.setCurrent(data);
+          this.currentUser = data;
         }
 
       }
@@ -96,7 +97,11 @@ export class ProfileComponent implements OnInit,OnDestroy {
     this.passwordBlock.setAttribute("style","display:none")
     this.appCom = document.getElementById("home-navbar");
     this.appCom.setAttribute("style","");
-    this.getUserService.getCurrentUser().subscribe(
+
+
+
+    /*  */
+/*     this.getUserService.getCurrentUser().subscribe(
       date => {
         this.currentUser = date;
 
@@ -112,7 +117,7 @@ export class ProfileComponent implements OnInit,OnDestroy {
         this.bio= this.currentUser.bio;
         this.getUserPosts(date.userID);
       }
-    );
+    ); */
 
     
   }
