@@ -1,16 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { User } from 'src/app/shared/model/User';
 import { DateService } from 'src/app/shared/pipes/date.service';
 import { GetUserService } from 'src/app/shared/services/get-user.service';
+import { LoginService } from 'src/app/shared/services/login.service';
+import { UserService } from 'src/app/shared/services/user.service';
 import Swal from 'sweetalert2';
-import { AppComponent } from '../../app.component';
-import { User } from '../../shared/model/User';
 
 
 
-import { LoginService } from '../../shared/services/login.service';
-import { UserService } from '../../shared/services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -40,7 +39,7 @@ export class LoginComponent implements OnInit {
     private dobModifier : DateService,
     private loginService: LoginService,
     private getUserService:GetUserService,
-    private userComponent:UserService) { 
+    private userService:UserService) { 
     
   }
 
@@ -112,7 +111,7 @@ export class LoginComponent implements OnInit {
       firstName:"",
       lastName:""
     };
-    let response =  this.loginService.loginUser(user).subscribe(
+    this.loginService.loginUser(user).subscribe(
       (RCurrentUser)=> {
         console.log("RCurrentUser"+RCurrentUser);
         if (RCurrentUser){
@@ -170,7 +169,7 @@ export class LoginComponent implements OnInit {
       firstName:"",
       lastName:""
     };
-  let response =  this.userComponent.insertNewUser(user).subscribe(
+  let response =  this.userService.insertNewUser(user).subscribe(
     data=> {
       if(data.message=="User was created"){
         Swal.fire({ 

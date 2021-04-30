@@ -8,13 +8,14 @@ import { HomeComponent } from './pages/home/home.component';
 import { UserInfoComponent } from './pages/home/user-info/user-info.component';
 import {HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { LoginService } from './shared/services/login.service';
+
 import { ReactiveFormsModule } from '@angular/forms';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { ChatComponent } from './pages/chat/chat.component';
 import { SearchComponent } from './pages/search/search.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SafePipe } from './shared/pipes/safe.pipe';
+import { LoginService } from './shared/services/login.service';
 
 
 
