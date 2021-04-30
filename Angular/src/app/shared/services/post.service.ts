@@ -2,13 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Post } from '../model/Post';
+import { GetCookieService } from './get-cookie.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PostService {
 
-  constructor(private myHttpCli:HttpClient) { }
+  constructor(private myHttpCli:HttpClient,private cookieService: GetCookieService) { }
 
   insertNewPost(post:Post):Observable<string>{
     let url:string="http://localhost:9080/api/postservice/post";

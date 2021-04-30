@@ -4,4 +4,5 @@ export interface ChatMessage{
     'sender' : string;
     'text' : string;
     'time' : string;
+    'imgUrl':string;
 }
