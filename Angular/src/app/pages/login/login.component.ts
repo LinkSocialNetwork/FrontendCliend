@@ -109,7 +109,8 @@ export class LoginComponent implements OnInit {
       posts: null,
       likes: null,
       firstName:"",
-      lastName:""
+      lastName:"",
+      following: []
     };
     this.loginService.loginUser(user).subscribe(
       (RCurrentUser)=> {
@@ -167,7 +168,8 @@ export class LoginComponent implements OnInit {
       posts: null,
       likes: null,
       firstName:"",
-      lastName:""
+      lastName:"",
+      following: []
     };
   let response =  this.userService.insertNewUser(user).subscribe(
     data=> {

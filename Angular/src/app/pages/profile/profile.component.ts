@@ -36,7 +36,9 @@ export class ProfileComponent implements OnInit,OnDestroy {
     posts: null,
     likes: null,
     firstName:'',
-    lastName:''};
+    lastName:'',
+    following: []
+  };
 
 
   updateForm = this.formBuilder.group({
@@ -209,7 +211,8 @@ export class ProfileComponent implements OnInit,OnDestroy {
         posts: this.currentUser.posts,
         likes: this.currentUser.likes,
         firstName:fn,
-        lastName:ln
+        lastName:ln,
+        following: this.currentUser.following
       };
 
       if(this.image!=null){
@@ -245,7 +248,8 @@ export class ProfileComponent implements OnInit,OnDestroy {
                     posts: this.currentUser.posts,
                     likes: this.currentUser.likes,
                     firstName:fn,
-                    lastName:ln
+                    lastName:ln,
+                    following: this.currentUser.following
                   };
                   console.log(user);
                   this.userService.updateUser(user).subscribe(
@@ -291,7 +295,8 @@ export class ProfileComponent implements OnInit,OnDestroy {
                 posts: this.currentUser.posts,
                 likes: this.currentUser.likes,
                 firstName:fn,
-                lastName:ln
+                lastName:ln,
+                following: this.currentUser.following
               };
               console.log(user);
               this.userService.updateUser(user).subscribe(
@@ -325,7 +330,8 @@ export class ProfileComponent implements OnInit,OnDestroy {
         posts: this.currentUser.posts,
         likes: this.currentUser.likes,
         firstName:fn,
-        lastName:ln
+        lastName:ln,
+        following: this.currentUser.following
       }
       if(this.image!=null){
         

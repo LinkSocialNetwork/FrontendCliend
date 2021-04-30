@@ -18,7 +18,8 @@ export class DateService {
     'firstName':'',
     'lastName':'',
     'posts':[],
-    'likes':[]
+    'likes':[],
+    'following': []
   }
   constructor() { }
   dobModifier(dob: string) {

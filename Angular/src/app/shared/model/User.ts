@@ -15,6 +15,5 @@ export interface User{
     'lastName':string;
     'posts':Post[];
     'likes':Like[];
-    
-    
+    'following': User[];
 }
