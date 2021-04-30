@@ -20,15 +20,22 @@ export class AppComponent implements OnInit{
   public isShow: boolean = false ;
   down:boolean = false;
 
-  constructor(private loginService:LoginService, private cookieServ: GetCookieService,private router:Router){
+  constructor(private loginService:LoginService, private cookieServ: GetCookieService,private router:Router,private cookieService:GetCookieService){
     
   }
   
   title = 'Project2';
   ngOnInit(): void {
-    this.loginService.getLoggedInUser().subscribe(
-      data=> this.user=data
-    );
+    let authtoken = this.cookieService.getCookie("token")
+    if(authtoken){
+      this.loginService.getLoggedInUser().subscribe(
+        data=> {
+          if(data){
+            this.user=data;
+          }
+        }
+      );
+    }
     this.down = false;
     this.appCom = document.getElementById("home-navbar");
   }
