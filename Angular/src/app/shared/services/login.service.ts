@@ -43,7 +43,9 @@ export class LoginService {
     if(this.currentUser==null || this.currentUser==undefined){
       this.getLoggedInUser().subscribe(
         data =>{
+          console.log(data);
           this.currentUser=data;
+          console.log(this.currentUser);
         }
       )
     }
