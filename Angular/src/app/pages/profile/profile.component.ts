@@ -23,7 +23,6 @@ export class ProfileComponent implements OnInit {
   posts:Post[]=[];
   mySubscription: any;
   appCom: HTMLElement;
-  passwordBlock:HTMLElement;
   isChecked:boolean = false;
   currentUser:User ={
     userID: 0,
@@ -40,6 +39,8 @@ export class ProfileComponent implements OnInit {
   };
 
   // We create another User to hold all changed fields
+  // We changed it from a FormGroup so it's easier to send as
+  // we're just sending the user object anyways
   updatedUser:User = {
     userID: 0,
     userName: '',
@@ -92,8 +93,6 @@ export class ProfileComponent implements OnInit {
     this.appCom = document.getElementById("home-navbar");
     this.appCom.setAttribute("style","");
 
-    this.passwordBlock = document.getElementById("passwordBlock");
-    this.passwordBlock.setAttribute("style","display:none")
     this.appCom = document.getElementById("home-navbar");
     this.appCom.setAttribute("style","");
   }
@@ -133,7 +132,7 @@ export class ProfileComponent implements OnInit {
 
   // Updates the logged in user with field values from the form (if they are not empty)
   // We set the updatedUser object to the currentUser object onInit, so if they are not changed, then they will all be the current values
-  // TODO: if the user inputs a value, but then deletes the value, the updateUser object field should be changed back to the currentUser object field 
+  // TODO: if the user inputs a value, but then deletes the value, the updateUser object field should be changed back to the currentUser object field
   updateUserInfo(){
     Swal.fire({
       title: 'Updating',
@@ -214,16 +213,4 @@ export class ProfileComponent implements OnInit {
       }
     );
   }
-
-  checkValue(event:any){
-    if(event.checked){
-      this.isChecked=true;
-      this.passwordBlock.setAttribute("style","")
-    }else{
-      this.isChecked=false;
-      this.passwordBlock.setAttribute("style","display:none")
-    }
-    
- }
-
 }
