@@ -22,7 +22,8 @@ export class ChatComponent implements OnInit,OnDestroy{
   message: ChatMessage = {
     'sender': "null",
     'text' : "",
-    'time': ""
+    'time': "",
+    'imgUrl':""
   };
 
   allMessages:ChatMessage[];

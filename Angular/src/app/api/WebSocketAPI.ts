@@ -4,7 +4,7 @@ import { ChatComponent } from '../pages/chat/chat.component';
 import { LoginService } from '../shared/services/login.service';
 
 export class WebSocketAPI {
-    webSocketEndPoint: string = 'http://localhost:9001/toph/link/ws';
+    webSocketEndPoint: string = 'http://localhost:9080/toph/link/ws';
     topic: string = "/topic/messages";
     stompClient: any;
     chatComponent: ChatComponent;
