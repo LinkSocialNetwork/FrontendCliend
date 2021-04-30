@@ -10,6 +10,7 @@ import { ImageUploadService } from 'src/app/shared/services/image-upload.service
 import { LikeService } from 'src/app/shared/services/like.service';
 import { LoginService } from 'src/app/shared/services/login.service';
 import { PostService } from 'src/app/shared/services/post.service';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 import Swal from 'sweetalert2';
 
@@ -30,13 +31,20 @@ export class TimeLineComponent implements OnInit,OnDestroy {
   postImage:File=null;
   posts:Post[]=[];
 
+
+  imageURL: string;
   constructor(private postservice:PostService,
     private getPostService:GetPostService,
     private loginServ:LoginService,
     private likeServ:LikeService,
     private imageServ:ImageUploadService,
     private getUserService:GetUserService,
-    private commentService:CommentService) { }
+    private commentService:CommentService,
+    public fb: FormBuilder
+    ) {
+   
+    
+    }
   ngOnDestroy(): void {
     window.removeEventListener('scroll', this.scroll, true);
   }
@@ -61,6 +69,24 @@ export class TimeLineComponent implements OnInit,OnDestroy {
       topButton.style.display = "none";
     }
   }
+  
+  handleFileInput(files:FileList){
+    this.postImage=files.item(0);
+  }
+  // Notice: in P2 version handleFileInput was used to post an Image,
+  // Changed function utilized to showPreview below
+  showPreview(event){
+    const file = (event.target as HTMLInputElement).files[0];
+    const reader = new FileReader();
+    reader.onload = () => {
+       this.imageURL = reader.result as string; 
+     
+    }
+    reader.readAsDataURL(file)
+    
+    this.postImage=file;
+  }
+  
 
   goToTop(){
     document.body.scrollTop = 0; // For Safari
@@ -82,9 +108,7 @@ export class TimeLineComponent implements OnInit,OnDestroy {
   }
 
 
-  handleFileInput(files:FileList){
-    this.postImage=files.item(0);
-  }
+  
 
 
   addPost(){
@@ -123,7 +147,7 @@ export class TimeLineComponent implements OnInit,OnDestroy {
     //todo add current user to the post object and image url to
     let post:Post = {
       'postId':0,
-      'user':this.loginServ.getCurrent(),
+      'user':this.currentUser,
       'postTitle':"New Post",
       'postContent':this.postContrnt,
       'postImageUrl':null,
@@ -282,6 +306,7 @@ export class TimeLineComponent implements OnInit,OnDestroy {
     }
     
   }
+  
 
   
 

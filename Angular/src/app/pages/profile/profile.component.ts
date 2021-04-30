@@ -18,12 +18,11 @@ import Swal from 'sweetalert2';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
-export class ProfileComponent implements OnInit,OnDestroy {
+export class ProfileComponent implements OnInit {
 
   posts:Post[]=[];
   mySubscription: any;
   appCom: HTMLElement;
-  passwordBlock:HTMLElement;
   isChecked:boolean = false;
   currentUser:User ={
     userID: 0,
@@ -40,25 +39,33 @@ export class ProfileComponent implements OnInit,OnDestroy {
     following: []
   };
 
+  // We create another User to hold all changed fields
+  // We changed it from a FormGroup so it's easier to send as
+  // we're just sending the user object anyways
+  updatedUser:User = {
+    userID: 0,
+    userName: '',
+    password: '',
+    email: '',
+    dob: null,
+    profile_img_url: '',
+    bio: '',
+    posts: null,
+    likes: null,
+    firstName:'',
+    lastName:'',
+    following: []
+  }
 
-  updateForm = this.formBuilder.group({
-    imageInput:'',
-    userNameInput:'',
-    emailInput:'',
-    firstNameInput:'',
-    lastNameInput:'',
-    bioInput:''
-    });
+  // This will hold the updated profile pic file
+  updatedImage:File=null;
 
-  userName:string='';
-  email:string='';
-  firstName:string='';
-  lastName:string='';
-  bio:string='';
-  image:File=null;
+  // This will hold all the password update fields
+  newPassword1:string = '';
+  newPassword2:string = '';
+  oldPassword:string = '';
   
   constructor(private getUserService:GetUserService,
-    private formBuilder: FormBuilder,
     private userService:UserService,
     private router:Router,
     private getPostService:GetPostService,
@@ -66,21 +73,12 @@ export class ProfileComponent implements OnInit,OnDestroy {
     private imageServ:ImageUploadService,
     private appComponent:AppComponent) {  }
 
-
-  ngOnDestroy():void {
-   
-  }
   ngOnInit(): void {
-    
-
- 
-
     this.appComponent.isShow=true;
 
+    // Get the currently logged in user and set it
     this.loginService.getLoggedInUser().subscribe(
       data =>{
-        // info=data;
-        
         if(data==null){
           this.router.navigate(['/login']);
         }
@@ -88,47 +86,25 @@ export class ProfileComponent implements OnInit,OnDestroy {
           //force update the current user
           this.loginService.setCurrent(data);
           this.currentUser = data;
-        }
 
+          // Initialize the updated user with the current fields
+          this.updatedUser = data;
+        }
       }
     )
     this.appCom = document.getElementById("home-navbar");
     this.appCom.setAttribute("style","");
 
-    this.passwordBlock = document.getElementById("passwordBlock");
-    this.passwordBlock.setAttribute("style","display:none")
     this.appCom = document.getElementById("home-navbar");
     this.appCom.setAttribute("style","");
-
-
-
-    /*  */
-/*     this.getUserService.getCurrentUser().subscribe(
-      date => {
-        this.currentUser = date;
-
-        
-        this.updateForm.value.firstNameInput= this.currentUser.firstName;
-        this.updateForm.value.lastNameInput= this.currentUser.lastName;
-        this.updateForm.value.bioInput= this.currentUser.bio;
-        
-        this.userName = this.currentUser.userName;
-        this.email= this.currentUser.email;
-        this.firstName= this.currentUser.firstName;
-        this.lastName= this.currentUser.lastName;
-        this.bio= this.currentUser.bio;
-        this.getUserPosts(date.userID);
-      }
-    ); */
-
-    
   }
 
+  // Basically a ngModel for the updatedImage field
   handleFileInput(files:FileList){
-    this.image=files.item(0);
-    console.log("file name:"+this.image.name);
-    console.log("file type:"+this.image.type);
-    console.log("file size:"+this.image.size);
+    this.updatedImage = files.item(0);
+    console.log("file name:"+this.updatedImage.name);
+    console.log("file type:"+this.updatedImage.type);
+    console.log("file size:"+this.updatedImage.size);
   }
 
 
@@ -156,9 +132,10 @@ export class ProfileComponent implements OnInit,OnDestroy {
     return false;
   }
 
-
+  // Updates the logged in user with field values from the form (if they are not empty)
+  // We set the updatedUser object to the currentUser object onInit, so if they are not changed, then they will all be the current values
+  // TODO: if the user inputs a value, but then deletes the value, the updateUser object field should be changed back to the currentUser object field
   updateUserInfo(){
-
     Swal.fire({
       title: 'Updating',
       allowEscapeKey: false,
@@ -169,222 +146,73 @@ export class ProfileComponent implements OnInit,OnDestroy {
         Swal.showLoading();
       }
     });
-
-    // updateForm = this.formBuilder.group({
-    //   userNameInput:'',
-    //   emailInput:'',
-    //   firstNameInput:'',
-    //   lastNameInput:'',
-    //   bioInput:''
-    //   });
-
-    // TODOs : need to create a field of dob on HTML for updating user
-    let dob:string = (<HTMLInputElement>document.getElementById("input-dob")).value;
-
-    let de:string = (<HTMLInputElement>document.getElementById("input-bio")).value;
-    let fn:string = (<HTMLInputElement>document.getElementById("input-first-name")).value;
-    let ln:string = (<HTMLInputElement>document.getElementById("input-last-name")).value;
-    let np:string = (<HTMLInputElement>document.getElementById("input-new-password")).value;
-    let renp:string = (<HTMLInputElement>document.getElementById("input-renew-password")).value;
-    let op:string = (<HTMLInputElement>document.getElementById("input-old-password")).value;
     
     let user:User;
-    console.log("Checking if password checkmark is there")
+    console.log("Checking if password checkmark is there");
+
+    // This checks if the user is trying to update their password via the toggle button
+    // If so, then we use the userService.checkOldPass with the entered in old password to verify if it's valid
+    // If not, we return and don't update anything
     if(this.isChecked){
-      if(np!=renp || np.length==0 || renp.length==0){
+      if(this.newPassword1 != this.newPassword2 || this.newPassword1.length==0 || this.newPassword2.length==0)
+      {
         Swal.fire({
           icon: 'warning',
-          title: "passwords does't match",
+          title: "Passwords do not match",
           timer: 4000,
           showConfirmButton: true
         });
         return;
       }
-      user = {
-        userID: this.currentUser.userID,
-        userName: this.userName,
-        password: op,
-        email: this.email,
-        dob: dob,
-        profile_img_url: this.currentUser.profile_img_url,
-        bio: de,
-        posts: this.currentUser.posts,
-        likes: this.currentUser.likes,
-        firstName:fn,
-        lastName:ln,
-        following: this.currentUser.following
-      };
+      else
+      {
+        this.updatedUser.password = this.oldPassword;
 
-      if(this.image!=null){
-        
-        let file:FormData=new FormData;
-        file.append("file",this.image)
-        this.imageServ.imageUpload(file).subscribe(
-          data=>{
-            console.log("We got the url:"+data.message);
-            console.log(data.message);
-            user.profile_img_url=data.message;
-            console.log(user.profile_img_url);
-            this.userService.checkOldPass(user).subscribe(
-              data=>{
-                
-                if(data==null){
-                  Swal.fire({
-                    icon: 'warning',
-                    title: "Old Password Does't match the entered password",
-                    timer: 4000,
-                    showConfirmButton: true
-                  });
-                  return;
-                }else{
-                  user = {
-                    userID: this.currentUser.userID,
-                    userName: this.userName,
-                    password: np,
-                    email: this.email,
-                    dob: dob,
-                    profile_img_url: this.currentUser.profile_img_url,
-                    bio: de,
-                    posts: this.currentUser.posts,
-                    likes: this.currentUser.likes,
-                    firstName:fn,
-                    lastName:ln,
-                    following: this.currentUser.following
-                  };
-                  console.log(user);
-                  this.userService.updateUser(user).subscribe(
-                    data =>{
-                      Swal.fire({ 
-                        icon: 'success',
-                        title: 'Done',
-                        timer: 4000,
-                        showConfirmButton: true
-                      });
-                      console.log("UpdateUser result: "+data);
-                      window.location.reload();
-                    }
-                  );
-                }
-              }
-            );
-          }
-        );
-      }else{
-
-        console.log(user);
-        this.userService.checkOldPass(user).subscribe(
-          data=>{
-            
-            if(data==null){
-              Swal.fire({
-                icon: 'warning',
-                title: "Old Password Does't match the entered password",
-                timer: 4000,
-                showConfirmButton: true
-              });
-              return;
-            }else{
-              user = {
-                userID: this.currentUser.userID,
-                userName: this.userName,
-                password: np,
-                email: this.email,
-                dob: dob,
-                profile_img_url: this.currentUser.profile_img_url,
-                bio: de,
-                posts: this.currentUser.posts,
-                likes: this.currentUser.likes,
-                firstName:fn,
-                lastName:ln,
-                following: this.currentUser.following
-              };
-              console.log(user);
-              this.userService.updateUser(user).subscribe(
-                data =>{
-                  Swal.fire({ 
-                    icon: 'success',
-                    title: 'Done',
-                    timer: 4000,
-                    showConfirmButton: true
-                  });
-                  console.log("UpdateUser result: "+data);
-                  window.location.reload();
-                }
-              );
-            }
-          }
-        );
-      }
-
-    }
-    else{
-
-      user = {
-        userID: this.currentUser.userID,
-        userName: this.userName,
-        password: this.currentUser.password,
-        email: this.email,
-        dob: dob,
-        profile_img_url: this.currentUser.profile_img_url,
-        bio: de,
-        posts: this.currentUser.posts,
-        likes: this.currentUser.likes,
-        firstName:fn,
-        lastName:ln,
-        following: this.currentUser.following
-      }
-      if(this.image!=null){
-        
-        let file:FormData=new FormData;
-        file.append("file",this.image)
-        this.imageServ.imageUpload(file).subscribe(
-          data=>{
-            console.log("We got the url:"+data.message);
-            console.log(data.message);
-            user.profile_img_url=data.message;
-            console.log(user.profile_img_url);
-            this.userService.updateUser(user).subscribe(
-              data =>{
-                Swal.fire({ 
-                  icon: 'success',
-                  title: 'Done',
-                  timer: 4000,
-                  showConfirmButton: true
-                });
-                console.log("UpdateUser result: "+data);
-                window.location.reload();
-              }
-            );
-          }
-        );
-      }else{
-
-        console.log(user);
-        this.userService.updateUser(user).subscribe(
-          data =>{
-            Swal.fire({ 
-              icon: 'success',
-              title: 'Done',
+        // If the entered in current password value is not what's in the db,
+        // we don't update anything
+        this.userService.checkOldPass(this.updatedUser).subscribe(data => {
+          if(data)
+          {
+            Swal.fire({
+              icon: 'warning',
+              title: "Incorrect Old Password",
               timer: 4000,
               showConfirmButton: true
             });
-            console.log("UpdateUser result: "+data);
-            window.location.reload();
+            return;
           }
-        );
+        })
       }
-    }    
-  }
-
-  checkValue(event:any){
-    if(event.checked){
-      this.isChecked=true;
-      this.passwordBlock.setAttribute("style","")
-    }else{
-      this.isChecked=false;
-      this.passwordBlock.setAttribute("style","display:none")
     }
-    
- }
 
+    // If there's a new image, upload it and set it to the updatedUser object
+    if(this.updatedImage != null){  
+      let file:FormData=new FormData;
+      file.append("file",this.updatedImage)
+      this.imageServ.imageUpload(file).subscribe(
+        data=>{
+          console.log("We got the url:"+data.message);
+          console.log(data.message);
+
+          // Set it to the updated user
+          this.updatedUser.profile_img_url=data.message;
+        }
+      );
+    }
+
+    // This will update the user by sending the updatedUser object through the service
+    console.log(user);
+    this.userService.updateUser(this.updatedUser).subscribe(
+      data =>{
+        Swal.fire({ 
+          icon: 'success',
+          title: 'Done',
+          timer: 4000,
+          showConfirmButton: true
+        });
+        console.log("UpdateUser result: "+data);
+        window.location.reload();
+      }
+    );
+  }
 }
