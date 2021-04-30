@@ -2,13 +2,11 @@ import { ThrowStmt } from '@angular/compiler';
 import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { WebSocketAPI } from 'src/app/api/WebSocketAPI';
-import { ChatMessage } from 'src/app/shared/model/ChatMessage';
 import { GetUserService } from 'src/app/shared/services/get-user.service';
-import { LoginService } from 'src/app/shared/services/login.service';
+import { WebSocketAPI } from '../../api/WebSocketAPI';
+import { ChatMessage } from '../../shared/model/ChatMessage';
 
-
-
+import { LoginService } from '../../shared/services/login.service';
 
 
 @Component({
@@ -24,7 +22,8 @@ export class ChatComponent implements OnInit,OnDestroy{
   message: ChatMessage = {
     'sender': "null",
     'text' : "",
-    'time': ""
+    'time': "",
+    'imgUrl':""
   };
 
   allMessages:ChatMessage[];
