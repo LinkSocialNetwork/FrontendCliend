@@ -7,9 +7,6 @@ import { GetCookieService } from './shared/services/get-cookie.service';
 import { LoginService } from './shared/services/login.service';
 import { NotificationService } from './shared/services/notification/notification.service';
 
-
-
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -44,10 +41,8 @@ export class AppComponent implements OnInit{
   }
 
   getNotifications(){
-    console.log("running");
     this.notificationServ.getAllNotifications(this.user.userID).subscribe(note => {
         this.notifications = note;
-        console.log(note);
     });
   }
 
@@ -71,7 +66,6 @@ export class AppComponent implements OnInit{
 }
 
   notify(){
-
     let box = document.getElementById("box");
     if(this.down){
       this.down = false;
