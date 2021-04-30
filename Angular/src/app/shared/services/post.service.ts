@@ -11,15 +11,15 @@ export class PostService {
   constructor(private myHttpCli:HttpClient) { }
 
   insertNewPost(post:Post):Observable<string>{
-    let url:string="http://localhost:9080/api/postervice/post";
+    let url:string="http://localhost:9080/api/postservice/post";
     return this.myHttpCli.post<string>(url,post,{withCredentials:true});
   }
   updatePost(post:Post):Observable<string>{
-    let url:string = "http://localhost:9080/api/postervice/post";
+    let url:string = "http://localhost:9080/api/postservice/post";
     return this.myHttpCli.put<string>(url,post,{withCredentials:true});
   }
   deletePost(id:number):Observable<ArrayBuffer>{
-    let url:string = `http://localhost:9080/api/postervice/post/${id}`;
+    let url:string = `http://localhost:9080/api/postservice/post/${id}`;
     return this.myHttpCli.delete<ArrayBuffer>(url);
   }
 }

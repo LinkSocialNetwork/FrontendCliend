@@ -123,7 +123,7 @@ export class TimeLineComponent implements OnInit,OnDestroy {
     //todo add current user to the post object and image url to
     let post:Post = {
       'postId':0,
-      'creator':this.loginServ.getCurrent(),
+      'user':this.loginServ.getCurrent(),
       'postTitle':"New Post",
       'postContent':this.postContrnt,
       'postImageUrl':null,
