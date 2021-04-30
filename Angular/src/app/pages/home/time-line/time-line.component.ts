@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
 import { Comments } from 'src/app/shared/model/Comments';
 import { Like } from 'src/app/shared/model/LIke';
 import { Post } from 'src/app/shared/model/Post';
