@@ -30,7 +30,7 @@ export class ProfileComponent implements OnInit,OnDestroy {
     userName: '',
     password: '',
     email: '',
-    dob: null,
+    dob: '',
     profile_img_url: '',
     bio: '',
     posts: null,
