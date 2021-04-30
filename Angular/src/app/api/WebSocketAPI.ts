@@ -5,7 +5,7 @@ import { LoginService } from '../shared/services/login.service';
 
 
 export class WebSocketAPI {
-    webSocketEndPoint: string = 'http://localhost:9080/toph/link/ws';
+    webSocketEndPoint: string = 'http://localhost:9080/api/chatservice/ws';
     topic: string = "/topic/messages";
     stompClient: any;
     chatComponent: ChatComponent;
@@ -14,9 +14,9 @@ export class WebSocketAPI {
     }
     _connect() {
         console.log("Start websocket connection");
-        if(this.loginServ.getCurrent()==null){
-            return;
-        }
+        // if(this.loginServ.getCurrent()==null){
+        //     return;
+        // }
         let ws = new SockJS(this.webSocketEndPoint);
         this.stompClient = Stomp.over(ws);
         const _this = this;
