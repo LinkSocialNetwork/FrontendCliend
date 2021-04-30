@@ -1,2 +1,2 @@
-<button type="button" class="btn btn-primary" *ngIf="following" (click) = "toggleFollow()">Unfollow</button>
-<button type="button" class="btn btn-primary" *ngIf="!following" (click) = "toggleFollow()">Follow</button>
+<button type="button" class="btn btn-primary" *ngIf="followStatus" (click) = "toggleFollow()">Unfollow</button>
+<button type="button" class="btn btn-primary" *ngIf="!followStatus" (click) = "toggleFollow()">Follow</button>
