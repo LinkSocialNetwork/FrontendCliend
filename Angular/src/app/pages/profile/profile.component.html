@@ -13,9 +13,6 @@
               <div class="col-lg-3 order-lg-2">
                 <div class="card-profile-image">
                   <a href="#">
-                    <!-- <img onerror="this.src='https://rev-training-p2-bucket.s3.us-east-2.amazonaws.com/Project_2_Logo.png'" [src]='currentUser?.profile_img_url' class="big-rounded-circle"> -->
-                     <!-- The following s3 link refers to the project LOGO and NEEDS to be hardcoded as it does not belong to a USER -->
-                                <!-- Once we obtain the full S3 link for the application logo we can uncomment and hardcode it below -->
                     <img onerror="this.src='../assets/logo.png'" [src]='currentUser?.profile_img_url' class="big-rounded-circle"> 
                   </a>
                 </div>
@@ -171,6 +168,14 @@
                                         <div class="form-group focused">
                                           <label class="form-control-label" for="input-last-name">Last name</label>
                                           <input type="text" id="input-last-name" class="form-control form-control-alternative" placeholder="Last name" [value]="currentUser.lastName" formControlName = "lastNameInput" [(ngModel)]="currentUser.lastName">
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="row">
+                                      <div class="col-lg-6">
+                                        <div class="form-group focused">
+                                          <label class="form-control-label" for="input-dob">Date of Birth</label>
+                                          <input type="date" id="input-dob" class="form-control form-control-alternative" placeholder="Birth date" [value]="currentUser.dob" formControlName = "dobInput" [(ngModel)]="currentUser.dob">
                                         </div>
                                       </div>
                                     </div>

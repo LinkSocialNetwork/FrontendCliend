@@ -45,6 +45,7 @@ export class ProfileComponent implements OnInit,OnDestroy {
     emailInput:'',
     firstNameInput:'',
     lastNameInput:'',
+    dobInput:'',
     bioInput:''
     });
 
