@@ -5,10 +5,9 @@ nav {
     display: flex;
     align-items: center;
     background: #AB47BC;
-    height: 60px;
     position: fixed;
     width: 100%;
-    border-bottom: 1px solid #495057
+    border-bottom: 1px solid #495057;
 }
 
 .icon {
