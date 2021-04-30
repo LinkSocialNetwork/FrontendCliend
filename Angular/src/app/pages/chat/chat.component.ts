@@ -2,6 +2,7 @@ import { ThrowStmt } from '@angular/compiler';
 import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { GetCookieService } from 'src/app/shared/services/get-cookie.service';
 import { GetUserService } from 'src/app/shared/services/get-user.service';
 import { WebSocketAPI } from '../../api/WebSocketAPI';
 import { ChatMessage } from '../../shared/model/ChatMessage';
@@ -32,7 +33,7 @@ export class ChatComponent implements OnInit,OnDestroy{
   userInput = new FormControl('');
   onlineUsers:string[];
 
-  constructor(private userService:GetUserService,private loginService:LoginService,private router:Router){
+  constructor(private userService:GetUserService,private loginService:LoginService,private router:Router,private cookieServ:GetCookieService){
     this.allMessages=[];
     window.addEventListener("unload", this.sendDisconnect.bind(this));
   }
@@ -60,9 +61,14 @@ export class ChatComponent implements OnInit,OnDestroy{
     
     this.appCom = document.getElementById("home-navbar");
     this.appCom.setAttribute("style","");
-    this.webSocketAPI = new WebSocketAPI(this,this.loginService);
+    this.webSocketAPI = new WebSocketAPI(this,this.loginService,this.cookieServ);
+    this.webSocketAPI.getObs().subscribe(
+      data=>{
+        this.sendStatus();
+      }
+    )
     this.connect();
-    this.sendStatus();
+    //this.sendStatus();
     let container = document.getElementById("msgContainer");
     container.scrollTop = container.scrollHeight;
     
