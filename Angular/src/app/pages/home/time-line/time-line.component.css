@@ -73,6 +73,14 @@
     width: 100%;
     
   }
+  .imagePreview{
+    max-width: 400px;
+    max-height: 400px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 2em;
+  }
   
   /* Then style the iframe to fit in the container div with full height and width */
   .responsive-iframe {
