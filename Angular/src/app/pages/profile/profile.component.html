@@ -131,29 +131,29 @@
                           <div class="tab-pane fade" id="profileSetting" role="tabpanel" aria-labelledby="profile-tab">
                             <div class="card bg-secondary shadow">
                               <div class="card-body">
-                                <form [formGroup]="updateForm"   (ngSubmit)= "updateUserInfo()">
+                                <form (ngSubmit)= "updateUserInfo()">
                                   <h6 class="heading-small text-muted mb-4">User information</h6>
                                   <div class="pl-lg-4">
                                     <div class="row">
                                       <div class="col-lg-6">
                                         <div class="form-group">
                                           <label class="form-control-label" for="input-email">Profile Image</label>
-                                          <input type="file" id="input-image" accept="image/x-png,image/gif,image/jpeg" class="form-control form-control-alternative" placeholder="Select Your Image" formControlName = "imageInput" (change)="handleFileInput($event.target.files)">
+                                          <input type="file" id="input-image" accept="image/x-png,image/gif,image/jpeg" class="form-control form-control-alternative" placeholder="Select Your Image" (change)="handleFileInput($event.target.files)">
                                         </div>
                                       </div>
                                     </div>
                                     <div class="row">
                                       <div class="col-lg-6">
                                         <div class="form-group focused">
-                                          <label class="form-control-label" for="input-userName">userName</label>
+                                          <label class="form-control-label" for="input-userName">Username</label>
                                           
-                                          <input type="text" id="input-userName" class="form-control form-control-alternative" placeholder="userName" [value]="currentUser.userName" formControlName = "userNameInput" readonly>
+                                          <input type="text" id="input-userName" class="form-control form-control-alternative" placeholder="Username" [value]="currentUser.userName" [(ngModel)]="currentUser.userName" name="userName" readonly>
                                         </div>
                                       </div>
                                       <div class="col-lg-6">
                                         <div class="form-group">
                                           <label class="form-control-label" for="input-email">Email address</label>
-                                          <input type="email" id="input-email" class="form-control form-control-alternative" placeholder="Email" [value]="currentUser.email" formControlName = "emailInput" readonly>
+                                          <input type="email" id="input-email" class="form-control form-control-alternative" placeholder="Email" [value]="currentUser.email" [(ngModel)]="currentUser.email" name="email" readonly>
                                         </div>
                                       </div>
                                     </div>
@@ -161,13 +161,13 @@
                                       <div class="col-lg-6">
                                         <div class="form-group focused">
                                           <label class="form-control-label" for="input-first-name">First name</label>
-                                          <input type="text" id="input-first-name" class="form-control form-control-alternative" placeholder="First name" [value]="currentUser.firstName" formControlName = "firstNameInput" [(ngModel)]="currentUser.firstName">
+                                          <input type="text" id="input-first-name" class="form-control form-control-alternative" placeholder="First name" [value]="updatedUser.firstName" [(ngModel)]="updatedUser.firstName" name="firstName">
                                         </div>
                                       </div>
                                       <div class="col-lg-6">
                                         <div class="form-group focused">
                                           <label class="form-control-label" for="input-last-name">Last name</label>
-                                          <input type="text" id="input-last-name" class="form-control form-control-alternative" placeholder="Last name" [value]="currentUser.lastName" formControlName = "lastNameInput" [(ngModel)]="currentUser.lastName">
+                                          <input type="text" id="input-last-name" class="form-control form-control-alternative" placeholder="Last name" [value]="updatedUser.lastName" [(ngModel)]="updatedUser.lastName" name="lastName">
                                         </div>
                                       </div>
                                     </div>
@@ -175,53 +175,51 @@
                                       <div class="col-lg-6">
                                         <div class="form-group focused">
                                           <label class="form-control-label" for="input-dob">Date of Birth</label>
-                                          <input type="date" id="input-dob" class="form-control form-control-alternative" placeholder="Birth date" [value]="currentUser.dob" formControlName = "dobInput" [(ngModel)]="currentUser.dob">
+                                          <input type="date" id="input-dob" class="form-control form-control-alternative" placeholder="Birth date" [value]="updatedUser.dob" [(ngModel)]="updatedUser.dob" name="dob">
                                         </div>
                                       </div>
                                     </div>
                                   </div>
                   
-                  
-                                  <hr class="my-4">
-                                  
-                                  <input id="password-change" type="checkbox" class="switch" (change)="checkValue($event.target)">
-                                  
-                                  <h6 class="heading-small text-muted mb-4">User Password</h6>
                                   <div class="pl-lg-4" id="passwordBlock">
+                                    <hr class="my-4">
+                                    <input id="password-change" type="checkbox" class="switch" (change)="checkValue($event.target)">
+                                    <h6 class="heading-small text-muted mb-4">User Password</h6>
                                     <div class="row">
                                       <div class="col-lg-4">
                                         <div class="form-group focused">
                                           <label class="form-control-label" for="input-new-password">New Password</label>
                                           
-                                          <input type="text" id="input-new-password" class="form-control form-control-alternative" placeholder="New Password">
+                                          <input type="text" id="input-new-password" class="form-control form-control-alternative" placeholder="New Password" [(ngModel)]="newPassword1" name="newPassword1">
                                         </div>
                                       </div>
                                       <div class="col-lg-4">
                                         <div class="form-group focused">
-                                          <label class="form-control-label" for="input-renew-password">RE-New Password</label>
+                                          <label class="form-control-label" for="input-renew-password">Confirm New Password</label>
                                           
-                                          <input type="text" id="input-renew-password" class="form-control form-control-alternative" placeholder="RE-New Password">
+                                          <input type="text" id="input-renew-password" class="form-control form-control-alternative" placeholder="Confirm New Password" [(ngModel)]="newPassword2" name="newPassword2">
                                         </div>
                                       </div>
                                       <div class="col-lg-4">
                                         <div class="form-group">
                                           <label class="form-control-label" for="input-old-password">Old Password</label>
-                                          <input type="email" id="input-old-password" class="form-control form-control-alternative" placeholder="Old Password">
+                                          <input type="email" id="input-old-password" class="form-control form-control-alternative" placeholder="Old Password" [(ngModel)]="oldPassword" name="oldPassword">
                                         </div>
                                       </div>
                                     </div>
                                   </div>
-                  
+
+                                  
                                   <hr class="my-4">
                                   <!-- bio -->
-                                  <h6 class="heading-small text-muted mb-4">About me</h6>
                                   <div class="pl-lg-4">
                                     <div class="form-group focused">
-                                      <label>About Me</label>
-                                      <textarea id="input-bio" rows="4" class="form-control form-control-alternative" placeholder="A few words about you ..." [value]="bio" formControlName = "bioInput"></textarea>
+                                      <label class="form-control-label" for="input-old-password">About Me</label>
+                                      <textarea id="input-bio" rows="4" class="form-control form-control-alternative" placeholder="A few words about you ..." [value]="updatedUser.bio" [(ngModel)]="updatedUser.bio" name="bio"></textarea>
                                     </div>
                                   </div>
-                  
+                                  
+
                                   <div class="col-12 text-right">
                                       <button type="submit" class="btn btn-sm btn-primary">Update</button>
                                   </div>
