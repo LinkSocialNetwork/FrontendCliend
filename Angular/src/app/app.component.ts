@@ -24,7 +24,6 @@ export class AppComponent implements OnInit{
   down:boolean = false;
 
   constructor(private loginService:LoginService, private cookieService: GetCookieService,private router:Router, private notificationServ: NotificationService){
-
   }
   
   title = 'Project2';
