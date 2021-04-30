@@ -60,9 +60,15 @@
 
                         </div>
                         <div class="tab-pane fade" id="images" role="tabpanel" aria-labelledby="images-tab">
+                         
+                           
                             <div class="form-group">
+                                <div  *ngIf="imageURL && imageURL !== ''" >
+                                    <p style="text-align: center;"> <strong>Image Preview:</strong></p>
+                                    <img class="imagePreview" [src]="imageURL" >
+                                  </div>
                                 <div class="custom-file">
-                                    <input type="file" accept="image/x-png,image/gif,image/jpeg" class="custom-file-input" id="customFile" [(ngModel)]="postimg" (change)="handleFileInput($event.target.files)" >
+                                    <input type="file" accept="image/x-png,image/gif,image/jpeg" class="custom-file-input" id="customFile" [(ngModel)]="postimg" (change)="showPreview($event)" >
                                     <label class="custom-file-label" for="customFile">Upload image</label>
                                 </div>
                             </div>
@@ -135,11 +141,10 @@
                 
                 <div class="box-comments">
                     <div *ngFor="let comment of post.comments" class="comment">
-<<<<<<< HEAD:Angular/src/app/time-line/time-line.component.html
-                        <!-- <img onerror="this.src='https://rev-training-p2-bucket.s3.us-east-2.amazonaws.com/Project_2_Logo.png'" [src]="comment.commentWriter.profile_img_url" alt="" /> -->
-=======
+
+
                         <img onerror="this.src='../assets/logo.png'" [src]="comment.commentWriter.profile_img_url" alt="" />
->>>>>>> 7ecc2f25e02798429d13e2ead6563ff01ef137bb:Angular/src/app/pages/home/time-line/time-line.component.html
+
                         <div class="content">
                             <h4>{{post.comments.commentContent}}</h4>
                             <h3><a href="">@{{comment.commentWriter.userName}}</a><span><time> {{comment.commentedAt | date:'medium'}} </time></span></h3>
@@ -149,11 +154,9 @@
                     
                 </div>
                 <div class="box-new-comment" *ngIf="currentUser">
-<<<<<<< HEAD:Angular/src/app/time-line/time-line.component.html
-                    <!-- <img onerror="this.src='https://rev-training-p2-bucket.s3.us-east-2.amazonaws.com/Project_2_Logo.png'" [src]="currentUser.profile_img_url" alt="" /> -->
-=======
+
                     <img onerror="this.src='../assets/logo.png'" [src]="currentUser.profile_img_url" alt="" />
->>>>>>> 7ecc2f25e02798429d13e2ead6563ff01ef137bb:Angular/src/app/pages/home/time-line/time-line.component.html
+
                     <div class="content">
                     <div class="row">
                         <textarea [id]="post.postId" placeholder="write a comment..."></textarea>
