@@ -23,17 +23,23 @@ export class AppComponent implements OnInit{
   public isShow: boolean = false ;
   down:boolean = false;
 
-  constructor(private loginService:LoginService, private cookieServ: GetCookieService,private router:Router, private notificationServ: NotificationService){
-    
+  constructor(private loginService:LoginService, private cookieService: GetCookieService,private router:Router, private notificationServ: NotificationService){
+
   }
   
   title = 'Project2';
   ngOnInit(): void {
-    this.loginService.getLoggedInUser().subscribe(data=> {
-      this.user=data;
-      this.getNotifications();
+    let authtoken = this.cookieService.getCookie("token")
+    if(authtoken){
+      this.loginService.getLoggedInUser().subscribe(
+        data=> {
+          if(data){
+            this.user=data;
+            this.getNotifications();
+          }
+        }
+      );
     }
-    );
     this.down = false;
     this.appCom = document.getElementById("home-navbar");
   }
@@ -50,7 +56,7 @@ export class AppComponent implements OnInit{
     // this.chatCom.logoutAndDisconnect();
     //this.webSocketAPI._sendDisconnect(this.user.userName);
     
-    this.cookieServ.eraseCookie("token");
+    this.cookieService.eraseCookie("token");
 
     this.appCom.setAttribute("style","display: none");
     this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
