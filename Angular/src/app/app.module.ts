@@ -16,6 +16,7 @@ import { SearchComponent } from './pages/search/search.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SafePipe } from './shared/pipes/safe.pipe';
 import { LoginService } from './shared/services/login.service';
+import { FollowButtonComponent } from './shared/components/follow-button/follow-button/follow-button.component';
 
 
 
@@ -31,7 +32,8 @@ import { LoginService } from './shared/services/login.service';
     ProfileComponent,
     ChatComponent,
     SearchComponent,
-    SafePipe
+    SafePipe,
+    FollowButtonComponent
   ],
   imports: [
     BrowserModule,
