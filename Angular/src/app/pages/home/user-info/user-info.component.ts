@@ -21,7 +21,8 @@ export class UserInfoComponent implements OnInit {
     posts: null,
     likes: null,
     firstName:'',
-    lastName:''
+    lastName:'',
+    following: []
   };;
   constructor(private loginServ:LoginService) { }
 
