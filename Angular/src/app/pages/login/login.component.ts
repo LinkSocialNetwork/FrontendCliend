@@ -3,6 +3,7 @@ import { FormBuilder} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/shared/model/User';
 import { DateService } from 'src/app/shared/pipes/date.service';
+import { GetCookieService } from 'src/app/shared/services/get-cookie.service';
 import { GetUserService } from 'src/app/shared/services/get-user.service';
 import { LoginService } from 'src/app/shared/services/login.service';
 import { UserService } from 'src/app/shared/services/user.service';
@@ -39,7 +40,8 @@ export class LoginComponent implements OnInit {
     private dobModifier : DateService,
     private loginService: LoginService,
     private getUserService:GetUserService,
-    private userService:UserService) { 
+    private userService:UserService,
+    private cookieService:GetCookieService) { 
     
   }
 
@@ -50,21 +52,21 @@ export class LoginComponent implements OnInit {
         
     this.container = document.getElementById('container');
 
-    this.loginService.getLoggedInUser().subscribe(
-      data =>{
-        // info=data;
-        
-        if(data) {
-          this.router.navigate(['/home']);   
+    let authtoken = this.cookieService.getCookie("token")
+    if(authtoken){
+      this.loginService.getLoggedInUser().subscribe(
+        data =>{
+          // info=data;
+          
+          if(data) {
+            this.router.navigate(['/home']);   
+          }
+
+          this.loginService.setCurrent(data);
+          console.log("data is null");
         }
-
-        this.loginService.setCurrent(data);
-        console.log(data);
-
-        
-        return data;
-      }
-    )
+      )
+    }
     
         
     

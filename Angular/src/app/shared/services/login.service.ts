@@ -31,12 +31,12 @@ export class LoginService {
   getLoggedInUser(): Observable<User>{
     let authtoken = this.cookieService.getCookie("token")
     console.log(authtoken); 
-    if(authtoken) {
+    
     return this.httpCli.get<User>(`http://localhost:9080/api/userservice/checkToken`, {
       headers: {
         token: authtoken
       }, withCredentials:true
-    })}
+    })
   }
 
   getCurrent():User{

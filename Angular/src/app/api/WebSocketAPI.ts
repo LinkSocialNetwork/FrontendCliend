@@ -1,16 +1,23 @@
+import { HttpHeaders } from '@angular/common/http';
+import { Subject } from 'rxjs';
 import * as SockJS from 'sockjs-client';
 import * as Stomp from 'stompjs';
 import { ChatComponent } from '../pages/chat/chat.component';
+import { GetCookieService } from '../shared/services/get-cookie.service';
 import { LoginService } from '../shared/services/login.service';
 
 
 export class WebSocketAPI {
-    webSocketEndPoint: string = 'http://localhost:9080/api/chatservice/ws';
+    webSocketEndPoint: string = 'http://localhost:9081/ws';
     topic: string = "/topic/messages";
-    stompClient: any;
+    stompClient: Stomp.Client;
     chatComponent: ChatComponent;
-    constructor(chatComponent: ChatComponent ,private loginServ:LoginService) {
+    tempObs = new Subject<String>();
+    constructor(chatComponent: ChatComponent ,private loginServ:LoginService, private cookieService:GetCookieService) {
         this.chatComponent = chatComponent;
+    }
+    getObs(){
+        return this.tempObs.asObservable();
     }
     _connect() {
         console.log("Start websocket connection");
@@ -20,7 +27,12 @@ export class WebSocketAPI {
         let ws = new SockJS(this.webSocketEndPoint);
         this.stompClient = Stomp.over(ws);
         const _this = this;
-        _this.stompClient.connect({}, function (frame) {
+        let authtoken = this.cookieService.getCookie("token")
+        _this.stompClient.connect({
+            headers: {
+              token: authtoken
+            }, withCredentials:true
+          }, function (frame) {
             _this.stompClient.subscribe("/topic/messages", function (sdkEvent) {
                 _this.onMessageReceived(sdkEvent);
             });
@@ -30,12 +42,13 @@ export class WebSocketAPI {
             _this.stompClient.subscribe("/topic/loadMessages", function (sdkEvent){
                 _this.onOldMessagesReceived(sdkEvent);
             });
+            _this.tempObs.next("Done");
         }, this.errorCallBack);
     };
 
     _disconnect() {
         if (this.stompClient !== null) {
-            this.stompClient.disconnect();
+            this.stompClient.disconnect(()=>{});
         }
         console.log("Disconnected");
     }
