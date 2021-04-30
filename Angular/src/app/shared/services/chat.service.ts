@@ -16,7 +16,8 @@ export class ChatService {
         return {
           "sender": data.sender,
           "text": data.text,
-          "time": data.time
+          "time": data.time,
+          "imgUrl":data.imgUrl
         };
       }
     ));
