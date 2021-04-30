@@ -1,9 +1,11 @@
 
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Notifications } from './shared/model/Notifications';
 import { User } from './shared/model/User';
 import { GetCookieService } from './shared/services/get-cookie.service';
 import { LoginService } from './shared/services/login.service';
+import { NotificationService } from './shared/services/notification/notification.service';
 
 
 
@@ -16,23 +18,33 @@ import { LoginService } from './shared/services/login.service';
 export class AppComponent implements OnInit{
 
   user:User;
+  notifications: Array<Notifications>;
   appCom: HTMLElement;
   public isShow: boolean = false ;
   down:boolean = false;
 
-  constructor(private loginService:LoginService, private cookieServ: GetCookieService,private router:Router){
+  constructor(private loginService:LoginService, private cookieServ: GetCookieService,private router:Router, private notificationServ: NotificationService){
     
   }
   
   title = 'Project2';
   ngOnInit(): void {
-    this.loginService.getLoggedInUser().subscribe(
-      data=> this.user=data
+    this.loginService.getLoggedInUser().subscribe(data=> {
+      this.user=data;
+      this.getNotifications();
+    }
     );
     this.down = false;
     this.appCom = document.getElementById("home-navbar");
   }
 
+  getNotifications(){
+    console.log("running");
+    this.notificationServ.getAllNotifications(this.user.userID).subscribe(note => {
+        this.notifications = note;
+        console.log(note);
+    });
+  }
 
   logout(){
     // this.chatCom.logoutAndDisconnect();

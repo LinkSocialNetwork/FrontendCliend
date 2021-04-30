@@ -41,17 +41,8 @@
             </div>
             <div *ngIf="down" class="notifications" style="background-color: azure;" id="box">
                 <h2>Notifications - <span>2</span></h2>
-                <div class="notifications-item"> <img src="https://picsum.photos/50/50" alt="img">
-                    <div class="text">
-                        <h4>Sam J</h4>
-                        <p>Suliman Liked your Post</p>
-                    </div>
-                </div>
-                <div class="notifications-item"> <img src="https://picsum.photos/50/50" alt="img">
-                    <div class="text">
-                        <h4>mickeal</h4>
-                        <p>rafael Liked your Post</p>
-                    </div>
+                <div *ngFor='let notification of notifications'>
+                  <app-notification [notification]='notification'></app-notification>
                 </div>
             </div>
         </li>
