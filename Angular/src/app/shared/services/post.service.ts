@@ -25,7 +25,8 @@ export class PostService {
       posts: null,
       likes: null,
       firstName:'',
-      lastName:''};
+      lastName:'',
+      following: []};
   
     let url:string="http://localhost:9080/api/postservice/post";
     console.log("New post", post);

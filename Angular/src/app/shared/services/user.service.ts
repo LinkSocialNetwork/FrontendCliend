@@ -20,17 +20,14 @@ export class UserService {
 
   updateUser(user:User): Observable<HttpResponse<string>>{
     let authtoken = this.cookieService.getCookie("token")
-    console.log(authtoken);
-
     let url: string = "http://localhost:9080/api/userservice/user";
     console.log(" inside the user update  >>> "+user);
-    if(authtoken) {
-      return this.myHttpCli.put<HttpResponse<string>>(url,user,{
-        headers: {
-          token: authtoken
-        }, withCredentials:true
-      });
-    }
+    return this.myHttpCli.put<HttpResponse<string>>(url,user,{
+      headers: {
+        token: authtoken
+      }, withCredentials:true
+    });
+
   }
 
   deleteUser(id:number): void{

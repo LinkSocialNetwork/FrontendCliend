@@ -17,7 +17,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SafePipe } from './shared/pipes/safe.pipe';
 import { LoginService } from './shared/services/login.service';
 import { NotificationComponent } from './shared/components/notification/notification.component';
-
+import { FollowButtonComponent } from './shared/components/follow-button/follow-button/follow-button.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +30,8 @@ import { NotificationComponent } from './shared/components/notification/notifica
     ChatComponent,
     SearchComponent,
     SafePipe,
-    NotificationComponent
+    NotificationComponent,
+    FollowButtonComponent
   ],
   imports: [
     BrowserModule,

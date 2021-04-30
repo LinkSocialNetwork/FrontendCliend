@@ -36,6 +36,7 @@ export class ProfileComponent implements OnInit {
     likes: null,
     firstName:'',
     lastName:'',
+    following: []
   };
 
   // We create another User to hold all changed fields
@@ -53,6 +54,7 @@ export class ProfileComponent implements OnInit {
     likes: null,
     firstName:'',
     lastName:'',
+    following: []
   }
 
   // This will hold the updated profile pic file
