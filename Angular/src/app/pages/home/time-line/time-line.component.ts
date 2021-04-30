@@ -73,6 +73,8 @@ export class TimeLineComponent implements OnInit,OnDestroy {
   handleFileInput(files:FileList){
     this.postImage=files.item(0);
   }
+  // Notice: in P2 version handleFileInput was used to post an Image,
+  // Changed function utilized to showPreview below
   showPreview(event){
     const file = (event.target as HTMLInputElement).files[0];
     const reader = new FileReader();
@@ -81,6 +83,7 @@ export class TimeLineComponent implements OnInit,OnDestroy {
      
     }
     reader.readAsDataURL(file)
+    
     this.postImage=file;
   }
   
