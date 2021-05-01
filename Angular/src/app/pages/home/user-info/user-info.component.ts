@@ -16,7 +16,7 @@ export class UserInfoComponent implements OnInit {
     password: '',
     email: '',
     dob:'',
-    profile_img_url: '',
+    profileImg: '',
     bio: '',
     posts: null,
     likes: null,
@@ -37,5 +37,4 @@ export class UserInfoComponent implements OnInit {
       }
     )
   }
-
 }

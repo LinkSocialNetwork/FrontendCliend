@@ -9,7 +9,7 @@ export interface User{
     'password':string;
     'email':string;
     'dob': string;
-    'profile_img_url':string;
+    'profileImg':string;
     'bio':string;
     'firstName':string;
     'lastName':string;

@@ -16,7 +16,7 @@ export class FollowButtonComponent implements OnInit, OnChanges, OnDestroy {
     'password':null,
     'email':null,
     'dob': null,
-    'profile_img_url':null,
+    'profileImg':null,
     'bio':null,
     'firstName':null,
     'lastName':null,

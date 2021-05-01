@@ -103,7 +103,7 @@ export class LoginComponent implements OnInit {
       password: this.loginForm.value.password,
       email: null,
       dob: null,
-      profile_img_url: null,
+      profileImg: null,
       bio: null,
       posts: null,
       likes: null,
@@ -149,7 +149,6 @@ export class LoginComponent implements OnInit {
       onOpen: () => {
         Swal.showLoading();
       }
-      
     });
     
     console.log(this.registrationForm.value.password);
@@ -161,7 +160,7 @@ export class LoginComponent implements OnInit {
       password: this.registrationForm.value.password,
       email: this.registrationForm.value.email,
       dob : this.dobModifier.dobModifier(this.registrationForm.value.dob),
-      profile_img_url: null,
+      profileImg: null,
       bio: "",
       posts: null,
       likes: null,

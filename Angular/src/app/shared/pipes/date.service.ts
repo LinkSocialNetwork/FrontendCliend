@@ -13,7 +13,7 @@ export class DateService {
     'password':'',
     'email':'',
     'dob': '',
-    'profile_img_url':'',
+    'profileImg':'',
     'bio':'',
     'firstName':'',
     'lastName':'',

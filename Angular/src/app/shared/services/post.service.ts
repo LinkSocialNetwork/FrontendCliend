@@ -20,7 +20,7 @@ export class PostService {
       password: '',
       email: '',
       dob: '',
-      profile_img_url: '',
+      profileImg: '',
       bio: '',
       posts: null,
       likes: null,

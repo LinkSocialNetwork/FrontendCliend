@@ -30,7 +30,7 @@ export class ProfileComponent implements OnInit {
     password: '',
     email: '',
     dob: '',
-    profile_img_url: '',
+    profileImg: '',
     bio: '',
     posts: null,
     likes: null,
@@ -48,7 +48,7 @@ export class ProfileComponent implements OnInit {
     password: '',
     email: '',
     dob: null,
-    profile_img_url: '',
+    profileImg: '',
     bio: '',
     posts: null,
     likes: null,
@@ -88,14 +88,14 @@ export class ProfileComponent implements OnInit {
 
           // Initialize the updated user with the current fields
           this.updatedUser = data;
+          
         }
       }
     )
-    this.appCom = document.getElementById("home-navbar");
-    this.appCom.setAttribute("style","");
-
-    this.appCom = document.getElementById("home-navbar");
-    this.appCom.setAttribute("style","");
+    // this.currentUser.profileImg = 'https://testbucket-revtest.s3.us-east-2.amazonaws.com/pngtest.png';
+    console.log('CurrentUser img URL: ', this.currentUser.profileImg);
+          
+    console.log('UpdatedUser img URL: ', this.updatedUser.profileImg);
   }
 
   // Basically a ngModel for the updatedImage field
@@ -146,8 +146,8 @@ export class ProfileComponent implements OnInit {
       }
     });
     
-    let user:User;
-    console.log("Checking if password checkmark is there");
+    // let user:User;
+    // console.log("Checking if password checkmark is there");
 
     // This checks if the user is trying to update their password via the toggle button
     // If so, then we use the userService.checkOldPass with the entered in old password to verify if it's valid
@@ -185,33 +185,47 @@ export class ProfileComponent implements OnInit {
     }
 
     // If there's a new image, upload it and set it to the updatedUser object
-    if(this.updatedImage != null){  
+    if(this.updatedImage != null){ 
+      // console.log('updatedImg: ', this.updatedImage); 
       let file:FormData=new FormData;
       file.append("file",this.updatedImage)
       this.imageServ.imageUpload(file).subscribe(
         data=>{
           console.log("We got the url:"+data.message);
-          console.log(data.message);
+          //Set it to the updated user
+          this.updatedUser.profileImg=data.message;
+          
+          console.log('updated user img url: ',this.updatedUser.profileImg);
 
-          // Set it to the updated user
-          this.updatedUser.profile_img_url=data.message;
+          // This will update the user by sending the updatedUser object through the service
+          this.userService.updateUser(this.updatedUser).subscribe(
+            response =>{
+              Swal.fire({ 
+                icon: 'success',
+                title: 'Done',
+                timer: 4000,
+                showConfirmButton: true
+              });
+              this.ngOnInit();
+              // console.log("UpdateUser result: "+data);
+              
+            }
+          );
+
+        }
+      );
+    }else{
+      this.userService.updateUser(this.updatedUser).subscribe(
+        response =>{
+          Swal.fire({ 
+            icon: 'success',
+            title: 'Done',
+            timer: 4000,
+            showConfirmButton: true
+          });
+          this.ngOnInit();
         }
       );
     }
-
-    // This will update the user by sending the updatedUser object through the service
-    console.log(user);
-    this.userService.updateUser(this.updatedUser).subscribe(
-      data =>{
-        Swal.fire({ 
-          icon: 'success',
-          title: 'Done',
-          timer: 4000,
-          showConfirmButton: true
-        });
-        console.log("UpdateUser result: "+data);
-        window.location.reload();
-      }
-    );
-  }
+}
 }

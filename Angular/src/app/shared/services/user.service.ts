@@ -21,7 +21,7 @@ export class UserService {
   updateUser(user:User): Observable<HttpResponse<string>>{
     let authtoken = this.cookieService.getCookie("token")
     let url: string = "http://localhost:9080/api/userservice/user";
-    console.log(" inside the user update  >>> "+user);
+    console.log(" inside the user update >>> "+user);
     return this.myHttpCli.put<HttpResponse<string>>(url,user,{
       headers: {
         token: authtoken

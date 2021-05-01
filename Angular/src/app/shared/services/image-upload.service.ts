@@ -15,7 +15,7 @@ export class ImageUploadService {
   imageUpload(imageForm: FormData): Observable<ResponseMessage>{
     // we need to create S3 url to retraive the image url 
     console.log('Uploading Image...');
-    let url:string ="http://localhost:9080/api/userservice/user/image";
+    let url:string ="http://localhost:9080/api/userservice/image";
     return this.http.post<ResponseMessage>(url,imageForm,{withCredentials:true});
   }
 
