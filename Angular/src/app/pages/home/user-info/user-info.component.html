@@ -14,11 +14,11 @@
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">
                         <div class="h6 text-muted"><a routerLink="">Followers</a></div>
-                        <div class="h5">5M</div>
+                        <div class="h5">{{followers?.length}}</div>
                     </li>
                     <li class="list-group-item">
                         <div class="h6 text-muted"><a routerLink="">Following</a></div>
-                        <div class="h5">{{loggedInUser.following.length}}</div>
+                        <div class="h5">{{following?.length}}</div>
                     </li>
                     <li class="list-group-item">********************</li>
                 </ul>

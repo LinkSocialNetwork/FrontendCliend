@@ -8,6 +8,7 @@ import { GetPostService } from 'src/app/shared/services/get-post.service';
 import { GetUserService } from 'src/app/shared/services/get-user.service';
 import { LikeService } from 'src/app/shared/services/like.service';
 import { LoginService } from 'src/app/shared/services/login.service';
+import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
   selector: 'app-search',
@@ -15,9 +16,24 @@ import { LoginService } from 'src/app/shared/services/login.service';
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit {
-  appCom;
   users:User[];
-  selectedUser:User;
+  selectedUser:User = {
+    userID: 0,
+    userName: '',
+    password: '',
+    email: '',
+    dob: null,
+    profileImg: '',
+    bio: '',
+    posts: null,
+    likes: null,
+    firstName:'',
+    lastName:'',
+    following: []
+  }
+  currentUser: User;
+  /* variable to check if user is following searched user */
+  isFollowing: boolean = null;
   userPosts:Post[];
   searchForm = this.formBuilder.group({
     userName: ''
@@ -27,26 +43,25 @@ export class SearchComponent implements OnInit {
     private getPostService:GetPostService,
     private loginServ:LoginService,
     private likeServ:LikeService,
-    private router:Router) { }
+    private router:Router,
+    private userServe: UserService) { }
 
   ngOnInit(): void {
 
     this.loginServ.getLoggedInUser().subscribe(
       data =>{
-        // info=data;
-        
         if(data==null){
           this.router.navigate(['/login']);
         }
         else {
-             
+          this.currentUser=data;
         }
 
       }
     )
+
     
-    this.appCom = document.getElementById("home-navbar");
-    this.appCom.setAttribute("style","");
+  
 
     this.getUserService.getAllUsers().subscribe(
       data => {
@@ -62,6 +77,15 @@ export class SearchComponent implements OnInit {
     for (const user of this.users) {
       if(user.userName==this.searchForm.value.userName){
         this.selectedUser=user;
+        //verify user is following selected user
+        this.userServe.getFollowers(this.selectedUser.userID).subscribe(data => {
+          let found = data.find(element => element.userID === this.currentUser.userID)
+          console.log("FOUND",found, data)
+          if(found)
+            this.isFollowing = true;
+          else
+            this.isFollowing = false;
+        })
       }
     }
     this.getAllPosts();

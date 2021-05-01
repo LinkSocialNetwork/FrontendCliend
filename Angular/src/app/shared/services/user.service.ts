@@ -1,6 +1,7 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Follow } from '../model/Follow';
 import { ResponseMessage } from '../model/ResponseMessage';
 import { User } from '../model/User';
 import { GetCookieService } from './get-cookie.service';
@@ -42,5 +43,22 @@ export class UserService {
     return this.myHttpCli.post<HttpResponse<string>>(url,user,{withCredentials:true});
   }
 
+
+  getFollowers(userId: number): Observable<User[]>{
+    let url: string = `http://localhost:9080/api/userservice/follow/follower/${userId}`;
+    
+    return this.myHttpCli.get<User[]>(url,{withCredentials:true});
+  }
+
+  getFollowees(userId: number): Observable<User[]>{
+    let url: string = `http://localhost:9080/api/userservice/follow/followee/${userId}`;
+    return this.myHttpCli.get<User[]>(url,{withCredentials:true});
+  }
+
+  followUser(follow: Follow): Observable<boolean>{
+    console.log("FOLLOW BB",follow)
+    let url: string = `http://localhost:9080/api/userservice/follow`;
+    return this.myHttpCli.post<boolean>(url,follow,{withCredentials:true});
+  }
   
 }

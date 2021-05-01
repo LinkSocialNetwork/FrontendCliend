@@ -92,10 +92,6 @@ export class ProfileComponent implements OnInit {
         }
       }
     )
-    // this.currentUser.profileImg = 'https://testbucket-revtest.s3.us-east-2.amazonaws.com/pngtest.png';
-    console.log('CurrentUser img URL: ', this.currentUser.profileImg);
-          
-    console.log('UpdatedUser img URL: ', this.updatedUser.profileImg);
   }
 
   // Basically a ngModel for the updatedImage field

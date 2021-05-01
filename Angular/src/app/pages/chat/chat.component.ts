@@ -16,7 +16,6 @@ import { LoginService } from '../../shared/services/login.service';
   styleUrls: ['./chat.component.css']
 })
 export class ChatComponent implements OnInit,OnDestroy{
-  appCom;
   title = 'Chat'
 
   webSocketAPI: WebSocketAPI;
@@ -59,8 +58,6 @@ export class ChatComponent implements OnInit,OnDestroy{
       }
     )
     
-    this.appCom = document.getElementById("home-navbar");
-    this.appCom.setAttribute("style","");
     this.webSocketAPI = new WebSocketAPI(this,this.loginService,this.cookieServ);
     this.webSocketAPI.getObs().subscribe(
       data=>{
