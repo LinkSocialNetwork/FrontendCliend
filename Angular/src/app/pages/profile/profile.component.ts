@@ -91,11 +91,7 @@ export class ProfileComponent implements OnInit {
         }
       }
     )
-    this.appCom = document.getElementById("home-navbar");
-    this.appCom.setAttribute("style","");
 
-    this.appCom = document.getElementById("home-navbar");
-    this.appCom.setAttribute("style","");
   }
 
   // Basically a ngModel for the updatedImage field

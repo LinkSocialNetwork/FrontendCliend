@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/shared/model/User';
 import { LoginService } from 'src/app/shared/services/login.service';
+import { UserService } from 'src/app/shared/services/user.service';
 
 
 @Component({
@@ -23,19 +24,36 @@ export class UserInfoComponent implements OnInit {
     firstName:'',
     lastName:'',
     following: []
-  };;
-  constructor(private loginServ:LoginService) { }
+  };
+
+  followers: User[] = [];
+  following: User[] = [];
+
+  constructor(private loginServ:LoginService, private userServ: UserService) { }
 
   ngOnInit(): void {
-    let info:any=null;
-    info = this.loginServ.getLoggedInUser().subscribe(
+    this.loginServ.getLoggedInUser().subscribe(
       data => {
         
         this.loggedInUser=data;
         this.loginServ.setCurrent(this.loggedInUser);
-        return data;
+
+        if(data !== null){
+          this.userServ.getFollowers(data.userID).subscribe(data => {
+            this.followers = data;
+            console.log("FOLLOWERS", data)
+          })
+
+          this.userServ.getFollowees(data.userID).subscribe(data => {
+            this.following = data;
+            console.log("FOLLOWING", data)
+          })
+        }
       }
     )
+
+    
+
   }
 
 }

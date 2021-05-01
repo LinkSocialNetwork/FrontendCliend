@@ -35,7 +35,7 @@
                       <div class="col-lg-3 order-lg-2">
                         <div class="card-profile-image">
                           <a href="#">
-                            <img [src]="selectedUser?.profile_img_url" class="rounded-circle">
+                            <img class="rounded-circle" *ngIf="selectedUser" [src]="selectedUser?.profile_img_url" alt="" onerror="this.src='../assets/logo.png'" >
                           </a>
                         </div>
                       </div>
@@ -56,12 +56,14 @@
                             {{selectedUser?.email}}
                         </div>
                         
-                        <div>
+                        <div *ngIf="selectedUser.userID">
                           <i class="ni education_hat mr-2"></i>@{{selectedUser?.userName}}
                         </div>
 
+
                         <div>
-                          <app-follow-button [searchedUser]="selectedUser"></app-follow-button>
+                          <app-follow-button *ngIf="isFollowing===false" [searchedUser]="selectedUser"></app-follow-button>
+                          <app-unfollow-button *ngIf="isFollowing===true" [searchedUser]="selectedUser"></app-unfollow-button>
                         </div>
 
                         <hr class="my-4">
@@ -91,11 +93,11 @@
                                           <div class="mr-2">
                                              <!-- The following s3 link refers to the project LOGO and NEEDS to be hardcoded as it does not belong to a USER -->
                                               <!-- Once we obtain the full S3 link for the application logo we can uncomment and hardcode it below -->
-                                              <img class="rounded-circle" width="45" [src]="post?.creator?.profile_img_url" alt="" onerror="src/app/shared/images/Project_2_Logo.png" >
+                                              <img class="rounded-circle" width="45" [src]="post?.user?.profile_img_url" alt="" onerror="this.src='../assets/logo.png'" >
                                           </div>
                                           <div class="ml-2">
-                                              <div class="h5 m-0">@{{post?.creator?.userName}}</div>
-                                              <div class="h7 text-muted">{{post?.creator?.firstName}} {{post?.creator?.lastName}}</div>
+                                              <div class="h5 m-0">@{{post?.user?.userName}}</div>
+                                              <div class="h7 text-muted">{{post?.user?.firstName}} {{post?.user?.lastName}}</div>
                                           </div>
                                       </div>
                                       
