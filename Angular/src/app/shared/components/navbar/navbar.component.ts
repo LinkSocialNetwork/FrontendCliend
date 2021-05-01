@@ -14,7 +14,7 @@ import { NotificationService } from '../../services/notification/notification.se
 export class NavbarComponent implements OnInit {
 
   user:User;
-  notifications: Array<Notifications>;
+  notifications: Array<Notifications> = [];
   down:boolean = false;
 
   constructor(private loginService:LoginService, private cookieService: GetCookieService,private router:Router, private notificationServ: NotificationService){

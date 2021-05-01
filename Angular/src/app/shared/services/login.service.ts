@@ -8,13 +8,12 @@ import { GetCookieService } from './get-cookie.service';
   providedIn: 'root'
 })
 export class LoginService {
-  private currentUser: User;
+  private currentUser: User = null;
 
   constructor(private httpCli:HttpClient, private cookieService: GetCookieService) { }
 
   loginUser(user:User): Observable<any> {
     let url:string="http://localhost:9080/api/userservice/login";
-    console.log("in loginUser");
     const httpPost ={
       headers : new HttpHeaders({
         'Content-Type':'application/json'
@@ -30,7 +29,6 @@ export class LoginService {
 
   getLoggedInUser(): Observable<User>{
     let authtoken = this.cookieService.getCookie("token")
-    console.log(authtoken); 
     
     return this.httpCli.get<User>(`http://localhost:9080/api/userservice/checkToken`, {
       headers: {
@@ -43,9 +41,7 @@ export class LoginService {
     if(this.currentUser==null || this.currentUser==undefined){
       this.getLoggedInUser().subscribe(
         data =>{
-          console.log(data);
           this.currentUser=data;
-          console.log(this.currentUser);
         }
       )
     }
@@ -53,9 +49,6 @@ export class LoginService {
     return this.currentUser;
   }
   setCurrent(user:User):void{
-    console.log("Current User is being set.")
-    console.log(user);
-    this.currentUser=null;
     this.currentUser=user;
   }
 
