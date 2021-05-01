@@ -14,11 +14,10 @@ import { LoginService } from 'src/app/shared/services/login.service';
 export class HomeComponent implements OnInit {
 
   appCom;
-  constructor(private loginService:LoginService,private router:Router,private appComponent:AppComponent) { }
+  constructor(private loginService:LoginService,private router:Router) { }
 
   ngOnInit(): void {
 
-    this.appComponent.isShow=true;
     this.loginService.getLoggedInUser().subscribe(
       data =>{
         // info=data;
@@ -34,7 +33,6 @@ export class HomeComponent implements OnInit {
     )
     this.appCom = document.getElementById("home-navbar");
     this.appCom.setAttribute("style","");
-    this.appComponent.isShow=true;
     //this.loginService.logoutUser().subscribe();
   }
 

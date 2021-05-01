@@ -18,6 +18,7 @@ import { SafePipe } from './shared/pipes/safe.pipe';
 import { LoginService } from './shared/services/login.service';
 import { NotificationComponent } from './shared/components/notification/notification.component';
 import { FollowButtonComponent } from './shared/components/follow-button/follow-button/follow-button.component';
+import { NavbarComponent } from './shared/components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { FollowButtonComponent } from './shared/components/follow-button/follow-
     SearchComponent,
     SafePipe,
     NotificationComponent,
-    FollowButtonComponent
+    FollowButtonComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

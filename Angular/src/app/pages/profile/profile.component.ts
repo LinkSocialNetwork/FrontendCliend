@@ -74,7 +74,6 @@ export class ProfileComponent implements OnInit {
     private appComponent:AppComponent) {  }
 
   ngOnInit(): void {
-    this.appComponent.isShow=true;
 
     // Get the currently logged in user and set it
     this.loginService.getLoggedInUser().subscribe(
