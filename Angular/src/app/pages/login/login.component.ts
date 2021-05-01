@@ -32,7 +32,6 @@ export class LoginComponent implements OnInit {
   userName: '',
   password: ''
   });
-  appCom: HTMLElement;
 
   constructor(private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -47,10 +46,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.appCom = document.getElementById("home-navbar");
-    this.appCom.setAttribute("style","display:none;");
-        
     this.container = document.getElementById('container');
+    
 
     let authtoken = this.cookieService.getCookie("token")
     if(authtoken){
@@ -126,7 +123,6 @@ export class LoginComponent implements OnInit {
           });
           document.cookie = `token=${RCurrentUser.authToken}`
           this.router.navigate(["/home"]);
-          this.appCom.setAttribute("style","");
           
         }else{
           
