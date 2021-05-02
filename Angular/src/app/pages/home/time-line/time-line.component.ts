@@ -248,19 +248,6 @@ export class TimeLineComponent implements OnInit,OnDestroy {
     }
   }
 
-  checkIfPostIsLiked(post:Post):boolean{
-    let loggedInUser:User = this.loginServ.getCurrent();
-    for(var like of post.usersWhoLiked){//will search the post for the Like that connects the user and post
-
-      for(var likeOfUser of loggedInUser.likes){
-        if(like.likeId===likeOfUser.likeId){
-          return true;
-        }
-      }
-    }
-    return false;
-  }
-
   addNewComment(valueOfPost:Post){
     let commentText = (<HTMLInputElement>document.getElementById(<string><unknown>valueOfPost.postId)).value;
 
