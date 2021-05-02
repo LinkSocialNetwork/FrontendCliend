@@ -190,6 +190,14 @@ export class LoginComponent implements OnInit {
           showConfirmButton: true
         });
       }
+      else if(data.message=="Could not create user"){
+        Swal.fire({ 
+          icon: 'warning',
+          title: '"Could not create user at this time',
+          timer: 4000,
+          showConfirmButton: true
+        });
+      }
       
     }
   );
