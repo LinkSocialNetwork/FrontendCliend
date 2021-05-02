@@ -23,6 +23,11 @@ export class GetPostService {
     let url:string =`http://localhost:9080/api/postservice/post/user/${id}`;
     return this.myHttpCli.get<Post[]>(url,{withCredentials:true});
   }
+
+  getUsersFollowingPosts(userId: number,page:number):Observable<Post[]>{
+    let url:string =`http://localhost:9080/api/postservice/post/user/${userId}/page/${page}`;
+    return this.myHttpCli.get<Post[]>(url,{withCredentials:true});
+  }
   // getPostsLikedByUser(userId:number):Observable<Post[]>{
   //   let url:string =`http://localhost:9080/api/postervice/post/posts/getPostsLikedByUser/${userId}`;
   //   return this.myHttpCli.get<Post[]>(url,{withCredentials:true});
