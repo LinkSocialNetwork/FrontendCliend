@@ -23,16 +23,31 @@ import Swal from 'sweetalert2';
 })
 export class TimeLineComponent implements OnInit,OnDestroy {
 
-  
+  @Input()
+  following:User[]=[];
+
+  @HostListener("window:scroll", ["$event"])
+  onWindowScroll() {
+    //In chrome and some browser scroll is given to body tag
+    let pos = (document.documentElement.scrollTop || document.body.scrollTop) + document.documentElement.offsetHeight;
+    let max = document.documentElement.scrollHeight;
+    // pos/max will give you the distance between scroll bottom and and bottom of screen in percentage.
+    if(pos == max )   {
+      //Do your action here
+      this.addPage()
+    }
+  }
+
+  page:number = 0;
+
   currentUser:User;
   postContrnt: string = null;
   youtubeUrl: string = null;
   postimg: string = null;
   postImage:File=null;
+  imageURL: string;
   posts:Post[]=[];
 
-
-  imageURL: string;
   constructor(private postservice:PostService,
     private getPostService:GetPostService,
     private loginServ:LoginService,
@@ -41,28 +56,33 @@ export class TimeLineComponent implements OnInit,OnDestroy {
     private getUserService:GetUserService,
     private commentService:CommentService,
     public fb: FormBuilder
-    ) {
-   
-    
-    }
+    ) {}
+
   ngOnDestroy(): void {
     window.removeEventListener('scroll', this.scroll, true);
   }
 
   ngOnInit(): void {
-
-    
     this.getUserService.getCurrentUser().subscribe(
       data=>{
         this.currentUser=data;
         this.getFollowingPosts();
       }
     );
-    //window.addEventListener('scroll', this.scroll, true);
-    //gets everyone's post
-    //this.getAllPosts();
-    
   }
+
+  
+  addPage() {
+      this.page += 1;
+      this.getFollowingPosts();
+  }
+
+  resetPage() {
+    this.posts = [];
+    this.page = 0;
+    this.getFollowingPosts();
+  }
+
   scroll = (event): void => {
     const topButton = document.getElementById("topButton");
     if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
@@ -72,30 +92,10 @@ export class TimeLineComponent implements OnInit,OnDestroy {
     }
   }
 
-  @HostListener("window:scroll", ["$event"])
-  onWindowScroll() {
-  //In chrome and some browser scroll is given to body tag
-  let pos = (document.documentElement.scrollTop || document.body.scrollTop) + document.documentElement.offsetHeight;
-  let max = document.documentElement.scrollHeight;
-  // pos/max will give you the distance between scroll bottom and and bottom of screen in percentage.
-  if(pos == max )   {
-  //Do your action here
-    this.addPage()
-  }
-  }
-  addPage() {
-      this.page += 1;
-      this.getFollowingPosts();
-  }
-  resetPage() {
-    this.posts = [];
-    this.page = 0;
-    this.getFollowingPosts();
-  }
-  
   handleFileInput(files:FileList){
     this.postImage=files.item(0);
   }
+
   // Notice: in P2 version handleFileInput was used to post an Image,
   // Changed function utilized to showPreview below
   showPreview(event){
@@ -103,14 +103,11 @@ export class TimeLineComponent implements OnInit,OnDestroy {
     const reader = new FileReader();
     reader.onload = () => {
        this.imageURL = reader.result as string; 
-     
     }
     reader.readAsDataURL(file)
-    
     this.postImage=file;
   }
   
-
   goToTop(){
     document.body.scrollTop = 0; // For Safari
     document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
@@ -133,9 +130,6 @@ export class TimeLineComponent implements OnInit,OnDestroy {
     )
   }
 
-  @Input()
-  following:User[]=[];
-  page:number = 0;
   getFollowingPosts():void{
     this.getPostService.getUsersFollowingPosts(this.currentUser.userID,this.page).subscribe(
       data =>{
@@ -151,10 +145,7 @@ export class TimeLineComponent implements OnInit,OnDestroy {
     )
   }
   
-
-
   addPost(){
-    
     if (this.postContrnt.length<5){
       Swal.fire({ 
         icon: 'warning',
@@ -184,7 +175,6 @@ export class TimeLineComponent implements OnInit,OnDestroy {
       onOpen: () => {
         Swal.showLoading();
       }
-      
     });
     //todo add current user to the post object and image url to
     let post:Post = {
@@ -199,12 +189,10 @@ export class TimeLineComponent implements OnInit,OnDestroy {
       'postedAt':<string>(<unknown>new Date().getTime())
     }
     if(this.postImage!=null){
-      
       let file:FormData=new FormData;
       file.append("file",this.postImage)
       this.imageServ.postImageUpload(file).subscribe(
         data=>{
-          
           post.postImageUrl=data.message;
           
           let response =  this.postservice.insertNewPost(post).subscribe(
@@ -302,40 +290,6 @@ export class TimeLineComponent implements OnInit,OnDestroy {
     }
   }
 
-  addNewComment(valueOfPost:Post){
-    let commentText = (<HTMLInputElement>document.getElementById(<string><unknown>valueOfPost.postId)).value;
-
-    console.log("commentText= "+ commentText)
-    if(commentText.length==0){
-      Swal.fire({
-        icon: 'warning',
-        title: 'please Write a comment first',
-        timer: 8000,
-        showConfirmButton: true
-      });
-      return;
-    }
-
-    let newComment:Comments = {
-      "commentId":0,
-      "commentContent":commentText,
-      "commentedAt":<string>(<unknown>new Date().getTime()),
-      "commentWriter":this.loginServ.getCurrent(),
-      "commentPost":valueOfPost
-    }
-    
-      this.commentService.insertNewComment(newComment).subscribe(
-        data=>{
-          
-          //gets everyone's post
-          //this.getAllPosts();
-          this.resetPage();
-          this.getFollowingPosts();
-          this.loginServ.triggerRetrieveCurrent();
-        }
-      );
-  }
-
   filterPosts(event: any){
     let matcher = new RegExp(event.target.value, "gi");
 
@@ -351,7 +305,4 @@ export class TimeLineComponent implements OnInit,OnDestroy {
     
   }
   
-
-  
-
 }

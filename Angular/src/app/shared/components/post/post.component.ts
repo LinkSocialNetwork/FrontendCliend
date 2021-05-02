@@ -1,6 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import Swal from 'sweetalert2';
+import { Comments } from '../../model/Comments';
 import { Post } from '../../model/Post';
 import { User } from '../../model/User';
+import { CommentService } from '../../services/comment.service';
 import { LoginService } from '../../services/login.service';
 
 @Component({
@@ -16,10 +19,22 @@ export class PostComponent implements OnInit {
   @Input()
   currentUser: User;
 
-  constructor(private loginServ: LoginService) { }
+  @Output()
+  getFollowingPosts: EventEmitter<void> = new EventEmitter();
+
+  @Output()
+  resetPage: EventEmitter<void> = new EventEmitter();
+
+//---------------------------------------------------------------------------------------------------------------//
+
+
+  constructor(private loginServ: LoginService,
+    private commentService: CommentService) { }
 
   ngOnInit(): void {
   }
+
+  //---------------------------------------------------------------------------------------------------------------//
 
   checkIfPostIsLiked(post:Post):boolean{
     let loggedInUser:User = this.loginServ.getCurrent();
@@ -33,5 +48,44 @@ export class PostComponent implements OnInit {
     }
     return false;
   }
+
+//---------------------------------------------------------------------------------------------------------------//
+  
+  addNewComment(valueOfPost:Post){
+    let commentText = (<HTMLInputElement>document.getElementById(<string><unknown>valueOfPost.postId)).value;
+
+    console.log("commentText= "+ commentText)
+    if(commentText.length==0){
+      Swal.fire({
+        icon: 'warning',
+        title: 'please Write a comment first',
+        timer: 8000,
+        showConfirmButton: true
+      });
+      return;
+    }
+
+    let newComment:Comments = {
+      "commentId":0,
+      "commentContent":commentText,
+      "commentedAt":<string>(<unknown>new Date().getTime()),
+      "commentWriter":this.loginServ.getCurrent(),
+      "commentPost":valueOfPost
+    }
+    
+      this.commentService.insertNewComment(newComment).subscribe(
+        data=>{
+          
+          //gets everyone's post
+          //this.getAllPosts();
+          this.resetPage.emit();
+          this.getFollowingPosts.emit();
+          this.loginServ.triggerRetrieveCurrent();
+        }
+      );
+  }
+
+  //---------------------------------------------------------------------------------------------------------------//
+
 
 }
