@@ -47,9 +47,8 @@ export class NavbarComponent implements OnInit {
     //this.webSocketAPI._sendDisconnect(this.user.userName);
     
     this.cookieService.eraseCookie("token");
-    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-      this.router.navigate(["login"]);
-    })
+    this.router.navigate(['login']);
+
   }
 
   reloadCurrentRoute() {
