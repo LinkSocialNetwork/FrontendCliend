@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
+import { User } from 'src/app/shared/model/User';
 import { LoginService } from 'src/app/shared/services/login.service';
 
 
@@ -33,6 +34,12 @@ export class HomeComponent implements OnInit {
     )
 
     //this.loginService.logoutUser().subscribe();
+  }
+
+  following: User[] = [];
+  udpateFollowingList(e): void{
+    this.following = e;
+    console.log(this.following);
   }
 
 }

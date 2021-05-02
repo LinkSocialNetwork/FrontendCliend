@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnDestroy, OnInit } from '@angular/core';
 import { Comments } from 'src/app/shared/model/Comments';
 import { Like } from 'src/app/shared/model/LIke';
 import { Post } from 'src/app/shared/model/Post';
@@ -55,10 +55,12 @@ export class TimeLineComponent implements OnInit,OnDestroy {
     this.getUserService.getCurrentUser().subscribe(
       data=>{
         this.currentUser=data;
+        this.getFollowingPosts();
       }
     );
-    window.addEventListener('scroll', this.scroll, true);
-    this.getAllPosts();
+    //window.addEventListener('scroll', this.scroll, true);
+    //gets everyone's post
+    //this.getAllPosts();
     
   }
   scroll = (event): void => {
@@ -68,6 +70,27 @@ export class TimeLineComponent implements OnInit,OnDestroy {
     } else {
       topButton.style.display = "none";
     }
+  }
+
+  @HostListener("window:scroll", ["$event"])
+  onWindowScroll() {
+  //In chrome and some browser scroll is given to body tag
+  let pos = (document.documentElement.scrollTop || document.body.scrollTop) + document.documentElement.offsetHeight;
+  let max = document.documentElement.scrollHeight;
+  // pos/max will give you the distance between scroll bottom and and bottom of screen in percentage.
+  if(pos == max )   {
+  //Do your action here
+    this.addPage()
+  }
+  }
+  addPage() {
+      this.page += 1;
+      this.getFollowingPosts();
+  }
+  resetPage() {
+    this.posts = [];
+    this.page = 0;
+    this.getFollowingPosts();
   }
   
   handleFileInput(files:FileList){
@@ -91,7 +114,10 @@ export class TimeLineComponent implements OnInit,OnDestroy {
   goToTop(){
     document.body.scrollTop = 0; // For Safari
     document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-    this.getAllPosts();
+    //gets everyone's posts
+    //this.getAllPosts();
+    this.resetPage();
+    this.getFollowingPosts();
   }
 
   getAllPosts():void{
@@ -107,7 +133,23 @@ export class TimeLineComponent implements OnInit,OnDestroy {
     )
   }
 
-
+  @Input()
+  following:User[]=[];
+  page:number = 0;
+  getFollowingPosts():void{
+    this.getPostService.getUsersFollowingPosts(this.currentUser.userID,this.page).subscribe(
+      data =>{
+        let newPosts:Post[];
+        newPosts=data;
+        console.log("in getFollowingPosts" , newPosts)
+        newPosts.sort((a,b) => (a.postedAt > b.postedAt) ? -1 : ((b.postedAt > a.postedAt) ? 1 : 0))
+        console.log(newPosts)
+        for (const post of newPosts) {
+          this.posts.push(post);
+        }
+      }
+    )
+  }
   
 
 
@@ -174,7 +216,10 @@ export class TimeLineComponent implements OnInit,OnDestroy {
                 timer: 4000,
                 showConfirmButton: true
               });
-              this.getAllPosts();
+              //gets everyone's post
+              //this.getAllPosts();
+              this.resetPage();
+              this.getFollowingPosts();
               this.postImage=null;
               this.postContrnt=null;
               this.youtubeUrl=null;
@@ -194,7 +239,10 @@ export class TimeLineComponent implements OnInit,OnDestroy {
             timer: 4000,
             showConfirmButton: true
           });
-          this.getAllPosts();
+          //gets everyone's posts
+          //this.getAllPosts();
+          this.resetPage();
+          this.getFollowingPosts();
           this.postImage=null;
           this.postContrnt=null;
           this.youtubeUrl=null;
@@ -228,7 +276,10 @@ export class TimeLineComponent implements OnInit,OnDestroy {
       this.likeServ.deleteLike(valueOfLike).subscribe(
         data=>{
           
-          this.getAllPosts();
+          //gets everyone's post
+          //this.getAllPosts();
+          this.resetPage();
+          this.getFollowingPosts();
           this.loginServ.triggerRetrieveCurrent();
           
         }
@@ -241,7 +292,10 @@ export class TimeLineComponent implements OnInit,OnDestroy {
       this.likeServ.insertNewLike(newLike).subscribe(
         data=>{
           
-          this.getAllPosts();
+          //gets everyone's post
+          //this.getAllPosts();
+          this.resetPage();
+          this.getFollowingPosts();
           this.loginServ.triggerRetrieveCurrent();
         }
       );
@@ -286,7 +340,10 @@ export class TimeLineComponent implements OnInit,OnDestroy {
       this.commentService.insertNewComment(newComment).subscribe(
         data=>{
           
-          this.getAllPosts();
+          //gets everyone's post
+          //this.getAllPosts();
+          this.resetPage();
+          this.getFollowingPosts();
           this.loginServ.triggerRetrieveCurrent();
         }
       );
@@ -306,8 +363,6 @@ export class TimeLineComponent implements OnInit,OnDestroy {
     }
     
   }
-  
-
   
 
   

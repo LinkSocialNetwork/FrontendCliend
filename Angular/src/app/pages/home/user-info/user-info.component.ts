@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output,EventEmitter } from '@angular/core';
 import { User } from 'src/app/shared/model/User';
 import { LoginService } from 'src/app/shared/services/login.service';
 import { UserService } from 'src/app/shared/services/user.service';
@@ -29,6 +29,9 @@ export class UserInfoComponent implements OnInit {
   followers: User[] = [];
   following: User[] = [];
 
+  @Output()
+  newFollowingEmitter:EventEmitter<User[]> = new EventEmitter<User[]>();
+
   constructor(private loginServ:LoginService, private userServ: UserService) { }
 
   ngOnInit(): void {
@@ -46,6 +49,7 @@ export class UserInfoComponent implements OnInit {
 
           this.userServ.getFollowees(data.userID).subscribe(data => {
             this.following = data;
+            this.newFollowingEmitter.emit(this.following);
             console.log("FOLLOWING", data)
           })
         }

@@ -3,7 +3,7 @@
 <app-navbar></app-navbar>
 
 <div class="wrapper">
-    <div class="two"><app-user-info></app-user-info></div>
-    <div class="three"><app-time-line></app-time-line></div>
+    <div class="two"><app-user-info (newFollowingEmitter)="udpateFollowingList($event)"></app-user-info></div>
+    <div class="three"><app-time-line [following]="this.following"></app-time-line></div>
 
   </div>
