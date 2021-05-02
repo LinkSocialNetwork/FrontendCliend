@@ -2,6 +2,7 @@ import { ThrowStmt } from '@angular/compiler';
 import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UserWithImg } from 'src/app/shared/model/UserWithImg';
 import { GetCookieService } from 'src/app/shared/services/get-cookie.service';
 import { GetUserService } from 'src/app/shared/services/get-user.service';
 import { WebSocketAPI } from '../../api/WebSocketAPI';
@@ -26,11 +27,16 @@ export class ChatComponent implements OnInit,OnDestroy{
     'imgUrl':""
   };
 
+  currentOnlineUser: UserWithImg = {
+    'userName': "",
+    "imgUrl": ""
+  }
+
   allMessages:ChatMessage[];
   msglocation: string;
   lastMsgSender: string;
   userInput = new FormControl('');
-  onlineUsers:string[];
+  onlineUsers:UserWithImg[];
 
   constructor(private userService:GetUserService,private loginService:LoginService,private router:Router,private cookieServ:GetCookieService){
     this.allMessages=[];
@@ -115,6 +121,7 @@ export class ChatComponent implements OnInit,OnDestroy{
     this.userService.getCurrentUser().subscribe(
       userName => {
         this.message.sender = userName.userName;
+        this.message.imgUrl = userName.profileImg;
         this.lastMsgSender = userName.userName;
         this.webSocketAPI._send(this.message);
       }
@@ -137,7 +144,9 @@ export class ChatComponent implements OnInit,OnDestroy{
     this.userService.getCurrentUser().subscribe(
       userName => {
         if(userName!=null){
-          this.webSocketAPI._sendStatus(userName.userName);
+          this.currentOnlineUser.userName = userName.userName;
+          this.currentOnlineUser.imgUrl = userName.profileImg;
+          this.webSocketAPI._sendStatus(this.currentOnlineUser);
           this.sendForOldMessages();
         }
       }

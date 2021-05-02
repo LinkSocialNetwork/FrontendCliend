@@ -20,10 +20,10 @@
                 <div *ngFor='let newUser of onlineUsers'>
                     <a class="list-group-item media" href="">
                         <div class="pull-left">
-                            <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="" class="img-avatar">
+                            <img [src]="newUser.imgUrl" onerror="this.src='assets/logo.png'" alt="" class="img-avatar">
                         </div>
                         <div class="media-body">
-                            <small class="list-group-item-heading">@{{newUser}}</small>
+                            <small class="list-group-item-heading" style="margin-left: 2px;"> @{{newUser.userName}}</small>
                         </div>
                     </a>
                 </div>
@@ -55,7 +55,7 @@
             <div *ngFor='let chatmessage of allMessages'>
                 <div *ngIf="checkUser(chatmessage); else rightMsgBox" class="message-feed media">
                     <div class="pull-left">
-                        <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" class="img-avatar">
+                        <img [src]="chatmessage.imgUrl" onerror="this.src='assets/logo.png'" alt="" class="img-avatar">
                     </div>
                     <div class="media-body">
                         <div class="mf-content">
@@ -67,7 +67,7 @@
                 <ng-template #rightMsgBox>
                     <div class="message-feed right">
                         <div class="pull-right">
-                            <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="" class="img-avatar">
+                            <img [src]="chatmessage.imgUrl" onerror="this.src='assets/logo.png'" alt="" class="img-avatar">
                         </div>
                         <div class="media-body">
                             <div class="mf-content">
