@@ -31,8 +31,7 @@ export class HomeComponent implements OnInit {
 
       }
     )
-    this.appCom = document.getElementById("home-navbar");
-    this.appCom.setAttribute("style","");
+
     //this.loginService.logoutUser().subscribe();
   }
 

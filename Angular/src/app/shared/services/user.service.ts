@@ -11,6 +11,7 @@ import { GetCookieService } from './get-cookie.service';
   providedIn: 'root'
 })
 export class UserService {
+  
 
   constructor(private myHttpCli:HttpClient, private cookieService: GetCookieService) { }
 
@@ -59,6 +60,12 @@ export class UserService {
     console.log("FOLLOW BB",follow)
     let url: string = `http://localhost:9080/api/userservice/follow`;
     return this.myHttpCli.post<boolean>(url,follow,{withCredentials:true});
+  }
+
+  unfollowUser(follow: Follow) : Observable<boolean>{
+    console.log("UNFOLLOW BB",follow)
+    let url: string = `http://localhost:9080/api/userservice/follow/${follow.follower.userID}/${follow.followee.userID}`;
+    return this.myHttpCli.delete<boolean>(url,{withCredentials:true});
   }
   
 }

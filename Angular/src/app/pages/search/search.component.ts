@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -44,24 +45,19 @@ export class SearchComponent implements OnInit {
     private loginServ:LoginService,
     private likeServ:LikeService,
     private router:Router,
-    private userServe: UserService) { }
+    private userServe: UserService
+    ) { }
 
   ngOnInit(): void {
 
-    this.loginServ.getLoggedInUser().subscribe(
-      data =>{
+    this.loginServ.getLoggedInUser().subscribe(data =>{
         if(data==null){
           this.router.navigate(['/login']);
         }
         else {
           this.currentUser=data;
         }
-
-      }
-    )
-
-    
-  
+      })
 
     this.getUserService.getAllUsers().subscribe(
       data => {
@@ -72,6 +68,13 @@ export class SearchComponent implements OnInit {
 
 
   }
+
+  toggleFollowing(bool: boolean){
+    console.log("TOGGLE FOLLOWING TRIGGERED")
+    this.isFollowing = bool;
+    
+  }
+
 
   selectUser(){
     for (const user of this.users) {

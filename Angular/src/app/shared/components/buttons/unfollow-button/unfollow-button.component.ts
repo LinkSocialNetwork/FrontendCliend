@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { Follow } from 'src/app/shared/model/Follow';
 import { User } from 'src/app/shared/model/User';
 import { LoginService } from 'src/app/shared/services/login.service';
@@ -26,8 +27,13 @@ export class UnfollowButtonComponent implements OnInit {
     'following': []
   };
 
+  disabled: boolean = false;
+
   @Input()
   searchedUser:User;
+
+  @Output()
+  isFollowing: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor(private loginService:LoginService, private userService: UserService) { }
 
@@ -45,6 +51,11 @@ export class UnfollowButtonComponent implements OnInit {
       follower: this.loggedInUser,
       followee: this.searchedUser
     }
+
+    this.disabled = true;
+    this.userService.unfollowUser(follow).subscribe(data => {
+      this.isFollowing.emit(false);
+    })
     
   }
 
