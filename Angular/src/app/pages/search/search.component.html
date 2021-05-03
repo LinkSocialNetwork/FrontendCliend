@@ -36,7 +36,7 @@
                       <div class="col-lg-3 order-lg-2">
                         <div class="card-profile-image">
                           <a href="#">
-                            <img class="rounded-circle" *ngIf="selectedUser" [src]="selectedUser?.profile_img_url" alt="" onerror="this.src='../assets/logo.png'" >
+                            <img class="rounded-circle" *ngIf="selectedUser" [src]="selectedUser?.profileImg" alt="" onerror="this.src='../assets/logo.png'" >
                           </a>
                         </div>
                       </div>
@@ -98,7 +98,7 @@
                                           <div class="mr-2">
                                              <!-- The following s3 link refers to the project LOGO and NEEDS to be hardcoded as it does not belong to a USER -->
                                               <!-- Once we obtain the full S3 link for the application logo we can uncomment and hardcode it below -->
-                                              <img class="rounded-circle" width="45" [src]="post?.user?.profile_img_url" alt="" onerror="this.src='../assets/logo.png'" >
+                                              <img class="rounded-circle-small" width="45" [src]="post?.user?.profileImg" alt="" onerror="this.src='../assets/logo.png'" >
                                           </div>
                                           <div class="ml-2">
                                               <div class="h5 m-0">@{{post?.user?.userName}}</div>

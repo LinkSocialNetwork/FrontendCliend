@@ -1100,6 +1100,7 @@
     width: 150px;
     height: 150px;
     border-radius: 50% !important;
+    object-fit: cover;
   }
   .d-none {
     display: none !important;
