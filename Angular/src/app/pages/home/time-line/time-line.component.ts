@@ -207,7 +207,6 @@ export class TimeLineComponent implements OnInit,OnDestroy {
               //gets everyone's post
               //this.getAllPosts();
               this.resetPage();
-              this.getFollowingPosts();
               this.postImage=null;
               this.postContrnt=null;
               this.youtubeUrl=null;
@@ -230,7 +229,6 @@ export class TimeLineComponent implements OnInit,OnDestroy {
           //gets everyone's posts
           //this.getAllPosts();
           this.resetPage();
-          this.getFollowingPosts();
           this.postImage=null;
           this.postContrnt=null;
           this.youtubeUrl=null;
