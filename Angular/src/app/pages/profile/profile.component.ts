@@ -225,4 +225,19 @@ export class ProfileComponent implements OnInit {
       );
     }
 }
+
+  filterPosts(event: any){
+    let matcher = new RegExp(event.target.value, "gi");
+
+    for (var i=0;i<document.getElementsByClassName("postHolder").length;i++) {
+      if (
+        matcher.test(document.getElementsByClassName("posttext")[i].innerHTML)
+      ) {
+        (<HTMLElement>document.getElementsByClassName("postHolder")[i]).style.display="";
+      } else {
+        (<HTMLElement>document.getElementsByClassName("postHolder")[i]).style.display="none";
+      }
+    }
+  }
+
 }
