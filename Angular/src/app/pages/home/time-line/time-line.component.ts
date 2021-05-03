@@ -240,55 +240,7 @@ export class TimeLineComponent implements OnInit,OnDestroy {
     }
   }
 
-  toggleLike(valueOfPost:Post,isLiked:boolean){
-    
-    if(isLiked){//if the Post is liked by the User it will call delete
-      //first get the loggedInUser
-      
-      let loggedIn:User = this.loginServ.getCurrent();
-      let valueOfLike:Like|null = null;
-      let found:boolean=false;
-      for(var like of valueOfPost.usersWhoLiked){//will search the post for the Like that connects the user and post
-        for(var likeOfUser of loggedIn.likes){
-          
-          if(like.likeId===likeOfUser.likeId){
-            valueOfLike=like;
-            found=true;
-            break;
-          }
-        }
-        if(found){
-          break;
-        }
-      }
-      this.likeServ.deleteLike(valueOfLike).subscribe(
-        data=>{
-          
-          //gets everyone's post
-          //this.getAllPosts();
-          this.resetPage();
-          this.getFollowingPosts();
-          this.loginServ.triggerRetrieveCurrent();
-          
-        }
-      );
-    }
-    else{
-      let newLike:Like = {"likeId":0,"user":this.loginServ.getCurrent(),"post":valueOfPost}
-      
-
-      this.likeServ.insertNewLike(newLike).subscribe(
-        data=>{
-          
-          //gets everyone's post
-          //this.getAllPosts();
-          this.resetPage();
-          this.getFollowingPosts();
-          this.loginServ.triggerRetrieveCurrent();
-        }
-      );
-    }
-  }
+  
 
   filterPosts(event: any){
     let matcher = new RegExp(event.target.value, "gi");

@@ -1,9 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import Swal from 'sweetalert2';
 import { Comments } from '../../model/Comments';
+import { Like } from '../../model/LIke';
 import { Post } from '../../model/Post';
 import { User } from '../../model/User';
 import { CommentService } from '../../services/comment.service';
+import { LikeService } from '../../services/like.service';
 import { LoginService } from '../../services/login.service';
 
 @Component({
@@ -13,11 +15,15 @@ import { LoginService } from '../../services/login.service';
 })
 export class PostComponent implements OnInit {
 
+  //================================================= INPUT ====================================================//
+
   @Input()
   post: Post;
 
   @Input()
   currentUser: User;
+
+  //================================================== OUTPUT ==================================================//
 
   @Output()
   getFollowingPosts: EventEmitter<void> = new EventEmitter();
@@ -25,16 +31,16 @@ export class PostComponent implements OnInit {
   @Output()
   resetPage: EventEmitter<void> = new EventEmitter();
 
-//---------------------------------------------------------------------------------------------------------------//
+//-============================================== CONSTRUCTOR / HOOKS =============================================//
 
 
   constructor(private loginServ: LoginService,
-    private commentService: CommentService) { }
+    private commentService: CommentService, private likeServ: LikeService) { }
 
   ngOnInit(): void {
   }
 
-  //---------------------------------------------------------------------------------------------------------------//
+  //-=============================================== METHODS ====================================================//
 
   checkIfPostIsLiked(post:Post):boolean{
     let loggedInUser:User = this.loginServ.getCurrent();
@@ -87,5 +93,53 @@ export class PostComponent implements OnInit {
 
   //---------------------------------------------------------------------------------------------------------------//
 
+  toggleLike(valueOfPost:Post,isLiked:boolean){
+    
+    if(isLiked){//if the Post is liked by the User it will call delete
+      //first get the loggedInUser
+      
+      let loggedIn:User = this.loginServ.getCurrent();
+      let valueOfLike:Like|null = null;
+      let found:boolean=false;
+      for(var like of valueOfPost.usersWhoLiked){//will search the post for the Like that connects the user and post
+        for(var likeOfUser of loggedIn.likes){
+          
+          if(like.likeId===likeOfUser.likeId){
+            valueOfLike=like;
+            found=true;
+            break;
+          }
+        }
+        if(found){
+          break;
+        }
+      }
+      this.likeServ.deleteLike(valueOfLike).subscribe(
+        data=>{
+          
+          //gets everyone's post
+          //this.getAllPosts();
+          this.resetPage.emit();
+          this.getFollowingPosts.emit();
+          this.loginServ.triggerRetrieveCurrent();
+          
+        }
+      );
+    }
+    else{
+      let newLike:Like = {"likeId":0,"user":this.loginServ.getCurrent(),"post":valueOfPost}
+      
 
+      this.likeServ.insertNewLike(newLike).subscribe(
+        data=>{
+          
+          //gets everyone's post
+          //this.getAllPosts();
+          this.resetPage.emit();
+          this.getFollowingPosts.emit();
+          this.loginServ.triggerRetrieveCurrent();
+        }
+      );
+    }
+  }
 }

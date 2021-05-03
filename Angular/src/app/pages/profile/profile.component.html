@@ -76,47 +76,7 @@
                         <div class="col-md-12 gedf-main">
                         <!--- \\\\\\\Post-->
                         <div *ngFor="let post of posts" class="card gedf-card postCard">
-                          <div class="card-header">
-                              <div class="d-flex justify-content-between align-items-center">
-                                  <div class="d-flex justify-content-between align-items-center">
-                                      <div class="mr-2">
-                                          <img class="rounded-circle" [src]='post?.creator?.profile_img_url' alt="">
-                                      </div>
-                                      <div class="ml-2">
-                                          <div class="h5 m-0">@{{post?.creator?.userName}}</div>
-                                          <div class="h7 text-muted">{{post?.creator?.firstName}} {{post?.creator?.lastName}}</div>
-                                      </div>
-                                  </div>
-                                  
-                              </div>
-
-                          </div>
-                          <div class="card-body">
-                              <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i> {{post?.postedAt | date:'medium'}}</div>
-
-                              <p class="card-text">
-                                  {{post?.postContent}}
-                              </p>
-                              <div class="vid-container" *ngIf="post.postImageUrl!=null">
-                                <!-- The following s3 link refers to the project LOGO and NEEDS to be hardcoded as it does not belong to a USER -->
-                                <!-- Once we obtain the full S3 link for the application logo we can uncomment and hardcode it below -->
-                                  <img height="100%" width="100%" onerror="this.src='../assets/logo.png'" [src]="post.postImageUrl" alt="">
-                              </div>
-                              <div class="vid-container" *ngIf="post.youtubeUrl!=null">
-                                  <iframe width="100%" height="350" [src]="post.youtubeUrl | safe" frameborder="0" allowfullscreen></iframe>
-                              </div>
-                              
-                          </div>
-                          <div class="card-footer">
-                              <span *ngIf="checkIfPostIsLiked(post); else postIsNotLiked">
-                                  <button href="" class="btn btn-link" style="color: green;"><i class="fa fa-gittip"></i> Liked <span class="badge badge-danger">{{post?.usersWhoLiked.length}}</span></button>
-                              </span>
-                              <ng-template #postIsNotLiked>
-                                  <button href="" class="btn btn-link" ><i class="fa fa-gittip"></i> Like <span class="badge badge-danger">{{post?.usersWhoLiked.length}}</span></button>
-                              </ng-template>
-                              
-                              <a href="#" class="card-link" (click)="addComment()"><i class="fa fa-comment"></i> Comment</a>
-                          </div>
+                          <app-post (getFollowingPosts)='getFollowingPosts' (resetPage)='resetPage()' [currentUser]='currentUser' [post]='post'></app-post>
                       </div>
                       <!-- Post /////-->
                       </div>

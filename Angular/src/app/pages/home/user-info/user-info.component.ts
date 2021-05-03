@@ -56,7 +56,5 @@ export class UserInfoComponent implements OnInit {
       }
     )
 
-    
-
   }
 }

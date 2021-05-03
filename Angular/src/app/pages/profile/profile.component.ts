@@ -88,7 +88,7 @@ export class ProfileComponent implements OnInit {
 
           // Initialize the updated user with the current fields
           this.updatedUser = data;
-          
+          this.getUserPosts(data.userID);
         }
       }
     )
