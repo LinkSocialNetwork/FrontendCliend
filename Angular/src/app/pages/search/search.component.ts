@@ -71,7 +71,7 @@ export class SearchComponent implements OnInit {
 
   toggleFollowing(bool: boolean){
     console.log("TOGGLE FOLLOWING TRIGGERED")
-    this.isFollowing = bool;
+    this.isFollowing = !this.isFollowing;
     
   }
 

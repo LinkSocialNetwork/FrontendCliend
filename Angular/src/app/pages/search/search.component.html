@@ -62,9 +62,13 @@
                         </div>
 
 
-                        <div>
-                            <app-follow-button *ngIf="isFollowing === false" [searchedUser]="selectedUser"></app-follow-button>
-                            <app-unfollow-button *ngIf="isFollowing === true" [searchedUser]="selectedUser"></app-unfollow-button>
+                        <div *ngIf="isFollowing !== null">
+                          <app-unfollow-button *ngIf="isFollowing; else displayFollowButton" [searchedUser]="selectedUser"
+                          (click)="toggleFollowing()"></app-unfollow-button>
+                          <ng-template #displayFollowButton>
+                            <app-follow-button [searchedUser]="selectedUser" (click)="toggleFollowing()"></app-follow-button>
+                          </ng-template>
+                            
                         </div>
 
                         <hr class="my-4">

@@ -26,6 +26,7 @@ export class FollowButtonComponent implements OnInit {
     'following': []
   };
   followStatus:boolean = false;
+  disabled: boolean = false;
 
   @Input()
   searchedUser:User;
@@ -46,6 +47,8 @@ export class FollowButtonComponent implements OnInit {
       follower: this.loggedInUser,
       followee: this.searchedUser
     }
+
+    this.disabled = true;
     this.userService.followUser(follow).subscribe(data => {
       console.log(data)
     })
