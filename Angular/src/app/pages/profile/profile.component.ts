@@ -24,6 +24,7 @@ export class ProfileComponent implements OnInit {
   mySubscription: any;
   appCom: HTMLElement;
   isChecked:boolean = false;
+  
   currentUser:User ={
     userID: 0,
     userName: '',

@@ -17,13 +17,13 @@ export class NotificationComponent implements OnInit {
 
   triggeredUser: User;
   post: Post;
-  profilePic: string;
+
   constructor(private getUserServ: GetUserService) { }
   
   ngOnInit(): void {
     this.getUserServ.getUserById(this.notification.triggeredId).subscribe(data => {
       this.triggeredUser=data;
-      this.triggeredUser.profileImg;
+      this.triggeredUser.profileImg = data.profileImg;
     })
   }
 
