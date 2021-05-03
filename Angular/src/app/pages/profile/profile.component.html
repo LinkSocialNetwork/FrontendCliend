@@ -22,8 +22,7 @@
                   
                 </div>
               </div>
-              <br><br><br><br>
-              <div class="text-center">
+              <div class="text-center" style="padding-top: 100px;">
                 <h3>
                   {{currentUser?.firstName +" "+ currentUser?.lastName}}
                 </h3>
@@ -165,21 +164,21 @@
         <div class="col-xl-8 order-xl-1">
           <div class="card bg-secondary shadow">
             <div class="card-header bg-white border-0">
+              <form class="float-right">
+                <div class="input-group">
+                    <input type="text" class="form-control" aria-label="Recipient's userName" aria-describedby="button-addon2 " (keyup) = "filterPosts($event)">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-primary" type="button" id="button-addon2" >
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
               <div class="row align-items-center">
                 <div class="col-8">
                   <h3 class="mb-0">My Posts</h3>
                 </div>
                 
-                <form class="form-inline">
-                  <div class="input-group">
-                      <input type="text" class="form-control" aria-label="Recipient's userName" aria-describedby="button-addon2 " (keyup) = "filterPosts($event)">
-                      <div class="input-group-append">
-                          <button class="btn btn-outline-primary" type="button" id="button-addon2" >
-                              <i class="fa fa-search"></i>
-                          </button>
-                      </div>
-                  </div>
-              </form>
               </div>
             </div>
 
