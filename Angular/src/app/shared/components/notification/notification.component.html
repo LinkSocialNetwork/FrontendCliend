@@ -1,2 +1,6 @@
-<p>{{notification.noteId}}</p>
-<p>User {{notification.triggeredId}} {{notification.type}}ed your post.</p>
+<div style="padding: 5px">
+    <img style="width: 35px; height: 35px; float: left;" alt src='../assets/logo.png'/>
+    <p>{{notification.noteId}}</p>
+    <p>{{triggeredUser.userName}} {{notification.type}}ed your post.</p>
+    <p *ngIf='!triggeredUser'>Blank</p>
+</div>
