@@ -43,9 +43,8 @@ nav {
 
 .notifications {
   z-index: 10;
-  width: 300px;
+  min-width: 300px;
   height: auto;
-  position: absolute;
   top: 63px;
   right: 62px;
   border-radius: 5px 0px 5px 5px;
@@ -96,6 +95,8 @@ nav {
     color: #aaa;
     font-size: 12px
 }
+
+
 
 .rounded-circle {
     border-radius: 50% !important;

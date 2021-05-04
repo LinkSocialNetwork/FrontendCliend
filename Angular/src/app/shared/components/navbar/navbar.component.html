@@ -5,50 +5,48 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li id="home" [ngClass]="'nav-item ' + (active == 'home' ? 'active' : '')">
+        <li id="home" class="nav-item active">
           <a class="nav-link" (click)="activate('home')" routerLink="/home">
             <i class="fa fa-home"></i>
             Home
             <span class="sr-only">(current)</span>
             </a>
         </li>
-        <li id="profile" [ngClass]="'nav-item ' + (active == 'profile' ? 'active' : '')">
+        <li id="profile" class="nav-item">
           <a class="nav-link" (click)="activate('profile')" routerLink="/profile">
             <i class="fa fa-user"></i>
             Profile
           </a>
         </li>
-        <li id="chatroom" [ngClass]="'nav-item ' + (active == 'chatroom' ? 'active' : '')">
+        <li id="chatroom" class="nav-item">
             <a class="nav-link" (click)="activate('chatroom')" routerLink="/chatroom">
               <i class="fa fa-comment"></i>
               Chat Room
             </a>
           </li>
-          <li id="search" [ngClass]="'nav-item ' + (active == 'search' ? 'active' : '')">
+          <li id="search" class="nav-item">
             <a class="nav-link" (click)="activate('search')" routerLink="/search">
               <i class="fa fa-search"></i>
               Users Search
             </a>
           </li>
-        
       </ul>
-      <ul class="navbar-nav ">
-        
-        <li class="nav-item">
-          <a class="nav-link" id="notifications-menu" role="button" data-toggle="collapse" href="#" aria-controls="box" aria-expanded="false" >Edit Account</a>
 
-            <!-- <div class="icon" (click)="notify()" id="bell"> <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 17H2a3 3 0 0 0 3-3V9a7 7 0 0 1 14 0v5a3 3 0 0 0 3 3zm-8.27 4a2 2 0 0 1-3.46 0"></path></svg>
-                    <i class="fa ">
-                      <span style="width: 25px; height: 25px" class="fa badge-info" *ngIf="notifications.length > 0">{{notifications.length}}</span>
-                    </i>     
-            </div> -->
-            <div class="collapse notifications" style="background-color: azure;" aria-labelledby="notifications-menu" id="box">
-                <h2>{{notifications?.length}} Notifications</h2>
-                <div *ngFor='let notification of notifications'>
-                  <app-notification [notification]='notification'></app-notification>
-                </div>
-            </div>
-        </li>
+      <ul class="navbar-nav ">
+        <div class="dropdown">
+          <button class="icon btn btn-secondary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span style="width: 25px; height: 25px" class="fa badge-info" *ngIf="notifications.length > 0">{{notifications.length}}</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 17H2a3 3 0 0 0 3-3V9a7 7 0 0 1 14 0v5a3 3 0 0 0 3 3zm-8.27 4a2 2 0 0 1-3.46 0"></path></svg>  
+          </button>
+          <div class="dropdown-menu dropdown-menu-right notifications" aria-labelledby="dropdownMenuButton" style="background-color: azure;" id="box">
+            <div class="" >
+              <h2>{{notifications?.length}} Notifications</h2>
+              <div *ngFor='let notification of notifications'>
+                <app-notification [notification]='notification'></app-notification>
+              </div>
+          </div>
+          </div>
+        </div>
         
         <li class="nav-item dropdown">
             <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
