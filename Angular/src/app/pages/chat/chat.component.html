@@ -78,12 +78,14 @@
                     </div>
                 </ng-template>
             </div>
-            
-            
         </div>
+        <div class="pull-right" id="currentTyping">
+            <span *ngFor="let user of typingUsers"><span>{{user}}</span> is typing..</span>
+        </div>
+        <div></div>
 		<div class="msb-reply">
             <form>
-                <input type="text" [(ngModel)]="messagefield" class="form-control" name="message">
+                <input type="text" [(ngModel)]="messagefield" class="form-control" name="message" (keyup)="sendNewUserTyping()" (blur)="sendUserStoppedTyping()">
 			    <button type="submit" (click)="sendMessage()"><i class="fa fa-paper-plane-o"></i></button>
             </form>
             

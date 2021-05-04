@@ -109,7 +109,7 @@
 .msb-reply {
   box-shadow: 0 -20px 20px -5px #fff;
   position: relative;
-  margin-top: 30px;
+  /* margin-top: 30px; */
   border-top: 1px solid #eee;
   background: #f8f8f8;
 }
@@ -201,7 +201,9 @@
   text-align: right;
 }
 
-
+#currentTyping {
+  background-color: white;
+}
 
 
 

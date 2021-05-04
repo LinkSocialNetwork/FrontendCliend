@@ -37,6 +37,7 @@ export class ChatComponent implements OnInit,OnDestroy{
   lastMsgSender: string;
   userInput = new FormControl('');
   onlineUsers:UserWithImg[];
+  typingUsers:String[];
 
   constructor(private userService:GetUserService,private loginService:LoginService,private router:Router,private cookieServ:GetCookieService){
     this.allMessages=[];
@@ -124,6 +125,7 @@ export class ChatComponent implements OnInit,OnDestroy{
         this.message.imgUrl = userName.profileImg;
         this.lastMsgSender = userName.userName;
         this.webSocketAPI._send(this.message);
+        
       }
     );
     
@@ -132,6 +134,7 @@ export class ChatComponent implements OnInit,OnDestroy{
   handleMessage(message) {
     //console.log(this.allMessages);
     this.messagefield = "";
+    this.sendUserStoppedTyping();
     this.allMessages.push(message);
     console.log(this.allMessages);
     console.log(message.sender);
@@ -178,6 +181,24 @@ export class ChatComponent implements OnInit,OnDestroy{
 
   handleOldMessages(messageList) {
     this.allMessages = messageList;
+  }
+
+  sendNewUserTyping() {
+    this.webSocketAPI._sendNewUserTyping(this.lastMsgSender);
+  }
+
+  sendUserStoppedTyping() {
+    if(this.messagefield == ""){
+      this.webSocketAPI._sendUserStoppedTyping(this.lastMsgSender);
+    }
+  }
+
+  handleTypingUsers(userList) {
+    this.typingUsers = userList;
+    for(var user of this.typingUsers){
+      if(user==this.lastMsgSender)
+        this.typingUsers.splice(this.typingUsers.indexOf(this.lastMsgSender),1);
+    }
   }
 
 
