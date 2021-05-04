@@ -44,12 +44,12 @@ export class PostComponent implements OnInit {
 
   checkIfPostIsLiked(post:Post):boolean{
     let loggedInUser:User = this.loginServ.getCurrent();
-    for(var like of post.usersWhoLiked){//will search the post for the Like that connects the user and post
 
-      if(like.user.userID==loggedInUser.userID){
-        return true;
-      }
-    }
+    let userLiked = post.usersWhoLiked.find(element => element.user.userID === loggedInUser.userID)
+
+    if(userLiked)
+      return true;
+
     return false;
   }
 
