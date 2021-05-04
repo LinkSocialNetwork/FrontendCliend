@@ -3,6 +3,14 @@
     
 html, body { 
     height: 100%; 
-    background-color: #e4e4e4;
+    background-color: rgb(228, 228, 228);
 }
 body { font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mainbg{
+    position: fixed;
+    height: 100vh;
+    width: 100%;
+    background-color: rgb(228, 228, 228);
+    z-index: 0;
+}

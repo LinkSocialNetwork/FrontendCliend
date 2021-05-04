@@ -2247,6 +2247,7 @@
     background: #FF416C;
 	background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);
 	background: linear-gradient(to right, #FF4B2B, #FF416C);
+  z-index: 1;
   }
   .three {
     
@@ -2256,5 +2257,5 @@
     background: #FF416C;
 	background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);
 	background: linear-gradient(to right, #FF4B2B, #FF416C);
-    
+    z-index: 1;
   }
