@@ -15,20 +15,7 @@ export class FeedComponent implements OnInit, OnChanges, OnDestroy {
   posts:Post[];
 
   @Input()
-  currentUser:User = {
-    userID: 0,
-    userName: '',
-    password: '',
-    email: '',
-    dob: null,
-    profileImg: '',
-    bio: '',
-    posts: null,
-    likes: null,
-    firstName:'',
-    lastName:'',
-    following: []
-  };
+  currentUser:User;
 
   @Input()
   profileUser: User;
@@ -36,8 +23,8 @@ export class FeedComponent implements OnInit, OnChanges, OnDestroy {
   @Input()
   notSpecificUser:boolean = false;
 
-  // @Output()
-  // getFollowingPosts: EventEmitter<void> = new EventEmitter();
+  @Output()
+  refreshNav: EventEmitter<void> = new EventEmitter();
 
   page:number = 0;
 
@@ -53,15 +40,14 @@ export class FeedComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges():void {
-
     this.resetPage();
-
   }
 
   ngOnDestroy(): void {
     this.page = 0;
     this.posts = [];
   }
+
   //---------------------------------------------------------------------------------------------------------------//
 
   /**
@@ -79,6 +65,7 @@ export class FeedComponent implements OnInit, OnChanges, OnDestroy {
       this.addPage()
     }
   }
+
 //---------------------------------------------------------------------------------------------------------------//
 
   /**
@@ -92,6 +79,7 @@ export class FeedComponent implements OnInit, OnChanges, OnDestroy {
       this.getFollowingPosts();
     }
   }
+
 //---------------------------------------------------------------------------------------------------------------//
 
   /**
@@ -107,6 +95,7 @@ export class FeedComponent implements OnInit, OnChanges, OnDestroy {
       this.getFollowingPosts();
     }
   }
+
 //---------------------------------------------------------------------------------------------------------------//
 
   /**
@@ -141,5 +130,10 @@ export class FeedComponent implements OnInit, OnChanges, OnDestroy {
         }
       }
     )
+  }
+
+  refreshNavbar(): void{
+    console.log("Refresh reached feed");
+    this.refreshNav.emit();
   }
 }

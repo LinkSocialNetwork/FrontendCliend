@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
+import { NavbarComponent } from 'src/app/shared/components/navbar/navbar.component';
 import { User } from 'src/app/shared/model/User';
 import { LoginService } from 'src/app/shared/services/login.service';
 
@@ -14,6 +15,9 @@ import { LoginService } from 'src/app/shared/services/login.service';
 })
 export class HomeComponent implements OnInit {
 
+  @ViewChild("NavbarComponent")
+  navBar: NavbarComponent;
+
   appCom;
   constructor(private loginService:LoginService,private router:Router) { }
 
@@ -26,9 +30,6 @@ export class HomeComponent implements OnInit {
         if(data==null){
           this.router.navigate(['/login']);
         }
-        else {
-             
-        }
 
       }
     )
@@ -40,6 +41,11 @@ export class HomeComponent implements OnInit {
   udpateFollowingList(e): void{
     this.following = e;
     console.log(this.following);
+  }
+
+  refreshNavbar(): void{
+    console.log("Refresh reached home");
+    this.navBar.ngOnInit();
   }
 
 }
