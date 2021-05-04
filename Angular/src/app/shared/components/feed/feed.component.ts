@@ -48,13 +48,13 @@ export class FeedComponent implements OnInit, OnChanges, OnDestroy {
     this.getUserService.getCurrentUser().subscribe(
       data=>{
         this.currentUser=data;
-        this.resetPage();
+        //this.resetPage();
       })
   }
 
   ngOnChanges():void {
 
-    //this.resetPage();
+    this.resetPage();
 
   }
 
