@@ -132,18 +132,16 @@ export class SearchComponent implements OnInit {
     if(isLiked){//if the Post is liked by the User it will call delete
       //first get the loggedInUser
       console.log("/////////////DELETING LIKE");
-      let loggedIn:User = this.loginServ.getCurrent();
+      let loggedIn:User = this.currentUser;
       let valueOfLike:Like|null = null;
       let found:boolean=false;
       for(var like of valueOfPost.usersWhoLiked){//will search the post for the Like that connects the user and post
-        for(var likeOfUser of loggedIn.likes){
-          console.log("Like id:"+like.likeId+" likeOfUser:"+likeOfUser.likeId);
-          if(like.likeId===likeOfUser.likeId){
-            valueOfLike=like;
-            found=true;
-            break;
-          }
+        if(like.user.userID===loggedIn.userID){
+          valueOfLike=like;
+          found=true;
+          break;
         }
+        
         if(found){
           break;
         }
@@ -158,7 +156,7 @@ export class SearchComponent implements OnInit {
       );
     }
     else{
-      let newLike:Like = {"likeId":0,"user":this.loginServ.getCurrent(),"post":valueOfPost}
+      let newLike:Like = {"likeId":0,"user":this.currentUser,"post":valueOfPost}
       console.log("////////////NEWLIKE: POST:"+newLike.post.postId +" USER:"+newLike.user.userID +" "+newLike.user.userName+" "+JSON.stringify(newLike.user.likes));
 
       this.likeServ.insertNewLike(newLike).subscribe(
@@ -170,66 +168,16 @@ export class SearchComponent implements OnInit {
       );
     }
   }
-  checkIfPostIsLiked(post:Post):boolean{
-    let loggedInUser:User = this.loginServ.getCurrent();
-    for(var like of post.usersWhoLiked){//will search the post for the Like that connects the user and post
 
-      for(var likeOfUser of loggedInUser.likes){
-        if(like.likeId===likeOfUser.likeId){
-          return true;
-        }
-      }
+  checkIfPostIsLiked(post:Post):boolean{
+    let loggedInUser:User = this.currentUser;
+    for(var like of post.usersWhoLiked){//will search the post for the Like that connects the user and post
+      if(like.user.userID===loggedInUser.userID){
+        return true;
+      }   
     }
     return false;
   }
-
-  
-  /**
-   * this will make a request to get more posts when reach bottom of page
-   */
-  // @HostListener("window:scroll", ["$event"])
-  // onWindowScroll() {
-  //   //In chrome and some browser scroll is given to body tag
-  //   let pos = (document.documentElement.scrollTop || document.body.scrollTop) + document.documentElement.offsetHeight;
-  //   let max = document.documentElement.scrollHeight;
-  //   // pos/max will give you the distance between scroll bottom and and bottom of screen in percentage.
-  //   if(pos == max )   {
-  //     //Do your action here
-  //     this.addPage()
-  //   }
-  // }
-//---------------------------------------------------------------------------------------------------------------//
-
-  /**
-   * this will make the request to get more posts
-   */
-  // addPage() {
-  //   this.page += 1;
-  //   this.getFollowingPosts();
-  // }
-
-//---------------------------------------------------------------------------------------------------------------//
-
-  /**
-   * this will make the request to the back-end to get posts (used in addPage() and resetPage())
-   */
-  // getFollowingPosts():void{
-  //   this.getPostService.getUsersFollowingPosts(this.currentUser.userID,this.page).subscribe(
-  //     data =>{
-  //       let newPosts:Post[];
-  //       newPosts=data;
-  //       console.log("in getFollowingPosts" , newPosts)
-  //       newPosts.sort((a,b) => (a.postedAt > b.postedAt) ? -1 : ((b.postedAt > a.postedAt) ? 1 : 0))
-  //       console.log(newPosts)
-  //       for (const post of newPosts) {
-  //         this.userPosts.push(post);
-  //       }
-  //     }
-  //   )
-  // }
-
-
-  
 }
 
 

@@ -98,17 +98,9 @@ export class PostComponent implements OnInit {
       
       let loggedIn:User = this.loginServ.getCurrent();
       let valueOfLike:Like|null = null;
-      let found:boolean=false;
       for(var like of valueOfPost.usersWhoLiked){//will search the post for the Like that connects the user and post
-        for(var likeOfUser of loggedIn.likes){
-          
-          if(like.likeId===likeOfUser.likeId){
-            valueOfLike=like;
-            found=true;
-            break;
-          }
-        }
-        if(found){
+        if(like.user.userID===loggedIn.userID){
+          valueOfLike=like;
           break;
         }
       }
