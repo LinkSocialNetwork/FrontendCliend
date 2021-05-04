@@ -37,7 +37,7 @@
     
     <div class="box-comments">
         <div *ngFor="let comment of post.comments" class="comment">
-            <img onerror="this.src='../assets/logo.png'" [src]="comment.commentWriter.profile_img_url" alt="" />
+            <img onerror="this.src='../assets/logo.png'" [src]="comment.commentWriter.profileImg" alt="" />
             <div class="content">
                 <h4>{{post.comments.commentContent}}</h4>
                 <h3><a href="">@{{comment.commentWriter.userName}}</a><span><time> {{comment.commentedAt | date:'medium'}} </time></span></h3>
@@ -47,7 +47,7 @@
     </div>
 
     <div class="box-new-comment" *ngIf="currentUser">
-        <img onerror="this.src='../assets/logo.png'" [src]="currentUser.profile_img_url" alt="" />
+        <img onerror="this.src='../assets/logo.png'" [src]="currentUser.profileImg" alt="" />
         <textarea [id]="post.postId" class="comment-box" placeholder="write a comment..."></textarea>
         <div class="smile-icon">
             <span class="ion-android-attach"></span>
