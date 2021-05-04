@@ -19,8 +19,8 @@ export class GetPostService {
     return this.myHttpCli.get<Post>(url,{withCredentials:true});
   }
 
-  getPostsCreatedByUser(id:number):Observable<Post[]>{
-    let url:string =`http://localhost:9080/api/postservice/post/user/${id}`;
+  getPostsCreatedByUser(id:number, page:number):Observable<Post[]>{
+    let url:string =`http://localhost:9080/api/postservice/post/user/${id}/page/${page}/temp`;
     return this.myHttpCli.get<Post[]>(url,{withCredentials:true});
   }
 

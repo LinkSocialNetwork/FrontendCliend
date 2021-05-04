@@ -21,6 +21,7 @@ import { FollowButtonComponent } from './shared/components/buttons/follow-button
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { UnfollowButtonComponent } from './shared/components/buttons/unfollow-button/unfollow-button.component';
 import { PostComponent } from './shared/components/post/post.component';
+import { FeedComponent } from './shared/components/feed/feed.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { PostComponent } from './shared/components/post/post.component';
     FollowButtonComponent,
     NavbarComponent,
     UnfollowButtonComponent,
-    PostComponent
+    PostComponent,
+    FeedComponent
   ],
   imports: [
     BrowserModule,

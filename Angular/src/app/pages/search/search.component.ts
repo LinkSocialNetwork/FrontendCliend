@@ -1,7 +1,8 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import { FeedComponent } from 'src/app/shared/components/feed/feed.component';
 import { Like } from 'src/app/shared/model/LIke';
 import { Post } from 'src/app/shared/model/Post';
 import { User } from 'src/app/shared/model/User';
@@ -40,6 +41,9 @@ export class SearchComponent implements OnInit {
     userName: ''
     });
   
+  page:number = 0;
+
+  
   constructor(private formBuilder: FormBuilder, private getUserService:GetUserService,
     private getPostService:GetPostService,
     private loginServ:LoginService,
@@ -57,12 +61,13 @@ export class SearchComponent implements OnInit {
         else {
           this.currentUser=data;
         }
+        
       })
 
     this.getUserService.getAllUsers().subscribe(
       data => {
         this.users = data ;
-        
+        this.page = 0;
       }
     );
 
@@ -91,21 +96,22 @@ export class SearchComponent implements OnInit {
         })
       }
     }
-    this.getAllPosts();
+    //this.getAllPosts();
 
   }
 
-  getAllPosts():void{
-    this.getPostService.getPostsCreatedByUser(this.selectedUser.userID).subscribe(
-      data =>{
+  // getAllPosts():void{
+  //   this.getPostService.getPostsCreatedByUser(this.selectedUser.userID, this.page).subscribe(
+  //     data =>{
         
-        let newPosts:Post[];
-        newPosts=data;
-        newPosts.sort((a,b) => (a.postedAt > b.postedAt) ? -1 : ((b.postedAt > a.postedAt) ? 1 : 0))
-        this.userPosts= newPosts;
-      }
-    );
-  }
+  //       let newPosts:Post[];
+  //       newPosts=data;
+  //       newPosts.sort((a,b) => (a.postedAt > b.postedAt) ? -1 : ((b.postedAt > a.postedAt) ? 1 : 0))
+  //       this.userPosts= newPosts;
+  //       console.log(this.userPosts)
+  //     }
+  //   );
+  // }
 
   selectUserByKey(event:any){
     for (const user of this.users) {
@@ -113,7 +119,7 @@ export class SearchComponent implements OnInit {
         this.selectedUser=user;
       }
     }
-    this.getPostService.getPostsCreatedByUser(this.selectedUser.userID).subscribe(
+    this.getPostService.getPostsCreatedByUser(this.selectedUser.userID, this.page).subscribe(
 
       data =>{
         this.userPosts= data;
@@ -145,7 +151,7 @@ export class SearchComponent implements OnInit {
       this.likeServ.deleteLike(valueOfLike).subscribe(
         data=>{
           console.log(data);
-          this.getAllPosts();
+          // this.getAllPosts();
           this.loginServ.triggerRetrieveCurrent();
           
         }
@@ -158,7 +164,7 @@ export class SearchComponent implements OnInit {
       this.likeServ.insertNewLike(newLike).subscribe(
         data=>{
           console.log(data);
-          this.getAllPosts();
+          // this.getAllPosts();
           this.loginServ.triggerRetrieveCurrent();
         }
       );
@@ -176,6 +182,52 @@ export class SearchComponent implements OnInit {
     }
     return false;
   }
+
+  
+  /**
+   * this will make a request to get more posts when reach bottom of page
+   */
+  // @HostListener("window:scroll", ["$event"])
+  // onWindowScroll() {
+  //   //In chrome and some browser scroll is given to body tag
+  //   let pos = (document.documentElement.scrollTop || document.body.scrollTop) + document.documentElement.offsetHeight;
+  //   let max = document.documentElement.scrollHeight;
+  //   // pos/max will give you the distance between scroll bottom and and bottom of screen in percentage.
+  //   if(pos == max )   {
+  //     //Do your action here
+  //     this.addPage()
+  //   }
+  // }
+//---------------------------------------------------------------------------------------------------------------//
+
+  /**
+   * this will make the request to get more posts
+   */
+  // addPage() {
+  //   this.page += 1;
+  //   this.getFollowingPosts();
+  // }
+
+//---------------------------------------------------------------------------------------------------------------//
+
+  /**
+   * this will make the request to the back-end to get posts (used in addPage() and resetPage())
+   */
+  // getFollowingPosts():void{
+  //   this.getPostService.getUsersFollowingPosts(this.currentUser.userID,this.page).subscribe(
+  //     data =>{
+  //       let newPosts:Post[];
+  //       newPosts=data;
+  //       console.log("in getFollowingPosts" , newPosts)
+  //       newPosts.sort((a,b) => (a.postedAt > b.postedAt) ? -1 : ((b.postedAt > a.postedAt) ? 1 : 0))
+  //       console.log(newPosts)
+  //       for (const post of newPosts) {
+  //         this.userPosts.push(post);
+  //       }
+  //     }
+  //   )
+  // }
+
 
   
 }

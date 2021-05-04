@@ -1,5 +1,5 @@
 import { HttpResponse } from '@angular/common/http';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { NavigationEnd, Router } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
@@ -89,7 +89,6 @@ export class ProfileComponent implements OnInit {
 
           // Initialize the updated user with the current fields
           this.updatedUser = data;
-          this.getUserPosts(data.userID);
         }
       }
     )
@@ -103,17 +102,6 @@ export class ProfileComponent implements OnInit {
     console.log("file size:"+this.updatedImage.size);
   }
 
-
-  getUserPosts(userID:number):void{
-    this.getPostService.getPostsCreatedByUser(userID).subscribe(
-      data =>{
-        let newPosts:Post[];
-        newPosts=data;
-        newPosts.sort((a,b) => (a.postedAt > b.postedAt) ? -1 : ((b.postedAt > a.postedAt) ? 1 : 0))
-        this.posts= newPosts;
-      }
-    )
-  }
 
   checkIfPostIsLiked(post:Post):boolean{
     let loggedInUser:User =this.currentUser;

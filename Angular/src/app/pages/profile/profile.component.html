@@ -188,11 +188,9 @@
                   <div class="container-fluid gedf-wrapper">
                     <div class="row">
                       <div class="col-md-12">
-                        <div *ngFor="let post of posts" class="card gedf-card postCard">
-                          <div class='post-wrapper'>
-                            <app-post (getFollowingPosts)='getFollowingPosts' (resetPage)='resetPage()' [currentUser]='currentUser' [post]='post'></app-post>
-                          </div>
-                        </div>
+
+                        <app-feed [posts]="posts" [profileUser]="currentUser" [notSpecificUser]="true"></app-feed>
+
                       </div>
                     </div>
                   </div>
