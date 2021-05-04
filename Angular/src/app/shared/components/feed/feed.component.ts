@@ -23,6 +23,9 @@ export class FeedComponent implements OnInit, OnChanges, OnDestroy {
   @Input()
   notSpecificUser:boolean = false;
 
+  @Output()
+  refreshNav: EventEmitter<void> = new EventEmitter();
+
   page:number = 0;
 
 
@@ -32,13 +35,12 @@ export class FeedComponent implements OnInit, OnChanges, OnDestroy {
     this.getUserService.getCurrentUser().subscribe(
       data=>{
         this.currentUser=data;
-        this.resetPage();
+        //this.resetPage();
       })
   }
 
   ngOnChanges():void {
     this.resetPage();
-    //this.resetPage();
   }
 
   ngOnDestroy(): void {
@@ -128,5 +130,10 @@ export class FeedComponent implements OnInit, OnChanges, OnDestroy {
         }
       }
     )
+  }
+
+  refreshNavbar(): void{
+    console.log("Refresh reached feed");
+    this.refreshNav.emit();
   }
 }

@@ -31,6 +31,9 @@ export class PostComponent implements OnInit {
   @Output()
   resetPage: EventEmitter<void> = new EventEmitter();
 
+  @Output()
+  refreshNav: EventEmitter<void> = new EventEmitter();
+
 //-============================================== CONSTRUCTOR / HOOKS =============================================//
 
 
@@ -85,6 +88,8 @@ export class PostComponent implements OnInit {
           this.resetPage.emit();
           this.getFollowingPosts.emit();
           this.loginServ.triggerRetrieveCurrent();
+          this.refreshNav.emit();
+
         }
       );
   }
@@ -114,22 +119,22 @@ export class PostComponent implements OnInit {
           this.loginServ.triggerRetrieveCurrent();
           
         }
-      );
-    }
-    else{
-      let newLike:Like = {"likeId":0,"user":this.loginServ.getCurrent(),"post":valueOfPost}
-      
-
-      this.likeServ.insertNewLike(newLike).subscribe(
-        data=>{
-          
-          //gets everyone's post
-          //this.getAllPosts();
-          this.resetPage.emit();
-          this.getFollowingPosts.emit();
-          this.loginServ.triggerRetrieveCurrent();
-        }
-      );
+        );
+      }
+      else{
+        let newLike:Like = {"likeId":0,"user":this.loginServ.getCurrent(),"post":valueOfPost}
+        
+        this.likeServ.insertNewLike(newLike).subscribe(
+          data=>{
+            
+            //gets everyone's post
+            //this.getAllPosts();
+            this.resetPage.emit();
+            this.getFollowingPosts.emit();
+            this.loginServ.triggerRetrieveCurrent();
+            this.refreshNav.emit();
+          }
+          );
     }
   }
 }

@@ -15,7 +15,6 @@ export class NavbarComponent implements OnInit {
 
   user:User;
   notifications: Array<Notifications> = [];
-  down:boolean = false;
 
   @Input()
   active: string = "home";
@@ -36,7 +35,6 @@ export class NavbarComponent implements OnInit {
         }
       );
     }
-    this.down = false;
   }
 
   getNotifications(){
@@ -60,15 +58,6 @@ export class NavbarComponent implements OnInit {
         this.router.navigate([currentUrl]);
     });
 }
-
-  notify(){
-    let box = document.getElementById("box");
-    if(this.down){
-      this.down = false;
-      }else{
-        this.down = true;
-      }
-  }
 
   activate(link:string){
     console.log(link);
