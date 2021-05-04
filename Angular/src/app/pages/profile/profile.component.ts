@@ -65,6 +65,8 @@ export class ProfileComponent implements OnInit {
   newPassword1:string = '';
   newPassword2:string = '';
   oldPassword:string = '';
+
+  isOldPasswordValid = true;
   
   constructor(private getUserService:GetUserService,
     private userService:UserService,
@@ -119,7 +121,7 @@ export class ProfileComponent implements OnInit {
   // Updates the logged in user with field values from the form (if they are not empty)
   // We set the updatedUser object to the currentUser object onInit, so if they are not changed, then they will all be the current values
   // TODO: if the user inputs a value, but then deletes the value, the updateUser object field should be changed back to the currentUser object field
-  updateUserInfo(){
+  updateUserChecks(){
     Swal.fire({
       title: 'Updating',
       allowEscapeKey: false,
@@ -138,81 +140,67 @@ export class ProfileComponent implements OnInit {
     // If so, then we use the userService.checkOldPass with the entered in old password to verify if it's valid
     // If not, we return and don't update anything
     if(this.isChecked){
-      if(this.newPassword1 != this.newPassword2 || this.newPassword1.length==0 || this.newPassword2.length==0)
-      {
-        Swal.fire({
-          icon: 'warning',
-          title: "Passwords do not match",
-          timer: 4000,
-          showConfirmButton: true
-        });
-        return;
+      //check if new passwords are the same and not empty
+      if(this.newPassword1 != this.newPassword2 || this.newPassword1.length==0) {
+        Swal.fire({ icon: 'warning', title: "Passwords do not match", timer: 4000, showConfirmButton: true });
       }
-      else
-      {
-        this.updatedUser.password = this.oldPassword;
-
+      else {
         // If the entered in current password value is not what's in the db,
         // we don't update anything
+        this.updatedUser.password = this.oldPassword;
         this.userService.checkOldPass(this.updatedUser).subscribe(data => {
-          if(data)
-          {
-            Swal.fire({
-              icon: 'warning',
-              title: "Incorrect Old Password",
-              timer: 4000,
-              showConfirmButton: true
-            });
-            return;
+          this.isOldPasswordValid = data;
+          if(this.isOldPasswordValid){
+            this.updatedUser.password = this.newPassword1;
+            this.updateImageCheck();
+          
+          }else{
+            Swal.fire({ icon: 'warning', title: "Incorrect Old Password", timer: 4000, showConfirmButton: true });
           }
         })
       }
-    }
-
-    // If there's a new image, upload it and set it to the updatedUser object
-    if(this.updatedImage != null){ 
-      // console.log('updatedImg: ', this.updatedImage); 
-      let file:FormData=new FormData;
-      file.append("file",this.updatedImage)
-      this.imageServ.imageUpload(file).subscribe(
-        data=>{
-          console.log("We got the url:"+data.message);
-          //Set it to the updated user
-          this.updatedUser.profileImg=data.message;
-          
-          console.log('updated user img url: ',this.updatedUser.profileImg);
-
-          // This will update the user by sending the updatedUser object through the service
-          this.userService.updateUser(this.updatedUser).subscribe(
-            response =>{
-              Swal.fire({ 
-                icon: 'success',
-                title: 'Done',
-                timer: 4000,
-                showConfirmButton: true
-              });
-              this.ngOnInit();
-              // console.log("UpdateUser result: "+data);
-              
-            }
-          );
-
-        }
-      );
     }else{
-      this.userService.updateUser(this.updatedUser).subscribe(
-        response =>{
-          Swal.fire({ 
-            icon: 'success',
-            title: 'Done',
-            timer: 4000,
-            showConfirmButton: true
-          });
-          this.ngOnInit();
-        }
-      );
+      //if password check box is unchecked, dont check anything above.
+      this.updateImageCheck();
     }
 }
+
+  updateImageCheck(){
+// If there's a new image, upload it and set it to the updatedUser object
+      if(this.updatedImage != null){ 
+        // console.log('updatedImg: ', this.updatedImage); 
+        let file:FormData=new FormData;
+        file.append("file",this.updatedImage)
+        this.imageServ.imageUpload(file).subscribe(
+          data=>{
+            console.log("We got the url:"+data.message);
+            //Set it to the updated user
+            this.updatedUser.profileImg=data.message;
+            
+            console.log('updated user img url: ',this.updatedUser.profileImg);
+
+            // This will update the user by sending the updatedUser object through the service
+            this.updateUser();
+
+          }
+        );
+      }else{
+        this.updateUser();  
+      }
+  }
+
+  updateUser(){
+    this.userService.updateUser(this.updatedUser).subscribe(
+      response =>{
+        if(response === true)
+          Swal.fire({ icon: 'success', title: 'Done', timer: 4000, showConfirmButton: true });
+        else
+          Swal.fire({ icon: 'warning', title: 'Username or Email already taken', timer: 4000, showConfirmButton: true });
+        
+        this.ngOnInit();
+      }
+    );
+  }
 
   filterPosts(event: any){
     let matcher = new RegExp(event.target.value, "gi");
