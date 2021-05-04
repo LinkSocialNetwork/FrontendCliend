@@ -42,6 +42,9 @@ export class WebSocketAPI {
             _this.stompClient.subscribe("/topic/loadMessages", function (sdkEvent){
                 _this.onOldMessagesReceived(sdkEvent);
             });
+            _this.stompClient.subscribe("/topic/typing", function (sdkEvent){
+                _this.onTypingUsersReceived(sdkEvent);
+            });
             _this.tempObs.next("Done");
         }, this.errorCallBack);
     };
@@ -90,5 +93,18 @@ export class WebSocketAPI {
     onOldMessagesReceived(message) {
         console.log("Message Recieved from Server :: " + message.body);
         this.chatComponent.handleOldMessages(JSON.parse(message.body));
+    }
+
+    _sendNewUserTyping(message) {
+        this.stompClient.send("/app/typing", {}, JSON.stringify(message));
+    }
+
+    _sendUserStoppedTyping(message) {
+        this.stompClient.send("/app/notTyping", {}, JSON.stringify(message));
+    }
+
+    onTypingUsersReceived(message) {
+        console.log("Message Recieved from Server :: " + message.body);
+        this.chatComponent.handleTypingUsers(JSON.parse(message.body));
     }
 }

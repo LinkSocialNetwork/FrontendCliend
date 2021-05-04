@@ -1,4 +1,4 @@
-import { Component, HostListener, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { Comments } from 'src/app/shared/model/Comments';
 import { Like } from 'src/app/shared/model/LIke';
 import { Post } from 'src/app/shared/model/Post';
@@ -27,6 +27,8 @@ export class TimeLineComponent implements OnInit,OnDestroy {
   @Input()
   following:User[]=[];
 
+  @Output()
+  refreshNav: EventEmitter<void> = new EventEmitter();
 
   page:number = 0;
 
@@ -236,6 +238,11 @@ export class TimeLineComponent implements OnInit,OnDestroy {
       }
     }
     
+  }
+
+  refreshNavbar(): void{
+    console.log("Refresh reached timeline");
+    this.refreshNav.emit();
   }
   
 }
