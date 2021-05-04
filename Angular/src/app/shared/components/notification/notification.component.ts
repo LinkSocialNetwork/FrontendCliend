@@ -33,14 +33,12 @@ export class NotificationComponent implements OnInit {
       this.triggeredUser.profileImg = data.profileImg;
       this.triggeredUsername = data.userName;
     })
-    this.notificationId = this.notification.noteId;
+    this.notificationId = this.notification.id;
   }
 
   markAsRead(): void{
-    console.log(this.notification.noteId);
-    this.notificationServ.markAsRead(this.notificationId).subscribe(data => {
-      data;
-    })
+    console.log(this.notification.id);
+    this.notificationServ.markAsRead(this.notificationId).subscribe();
     this.refreshNav.emit();
   }
 
