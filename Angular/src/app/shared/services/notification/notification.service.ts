@@ -11,7 +11,7 @@ export class NotificationService {
   constructor(private httpCli: HttpClient) { }
 
   getAllNotifications(userId: number):Observable<Notifications[]> {
-    return this.httpCli.get<Notifications[]>(`http://localhost:9080/api/notificationservice/user/${userId}`, {withCredentials:true});
+    return this.httpCli.get<Notifications[]>(`http://localhost:9080/api/notificationservice/user/${userId}/unread`, {withCredentials:true});
   }
 
   getOneNotification(notificationId: number):Observable<Notifications> {
