@@ -1,4 +1,4 @@
-import { Component, HostListener, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Comments } from 'src/app/shared/model/Comments';
 import { Like } from 'src/app/shared/model/LIke';
 import { Post } from 'src/app/shared/model/Post';
@@ -13,6 +13,7 @@ import { PostService } from 'src/app/shared/services/post.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 import Swal from 'sweetalert2';
+import { FeedComponent } from 'src/app/shared/components/feed/feed.component';
 
 
 
@@ -26,17 +27,6 @@ export class TimeLineComponent implements OnInit,OnDestroy {
   @Input()
   following:User[]=[];
 
-  @HostListener("window:scroll", ["$event"])
-  onWindowScroll() {
-    //In chrome and some browser scroll is given to body tag
-    let pos = (document.documentElement.scrollTop || document.body.scrollTop) + document.documentElement.offsetHeight;
-    let max = document.documentElement.scrollHeight;
-    // pos/max will give you the distance between scroll bottom and and bottom of screen in percentage.
-    if(pos == max )   {
-      //Do your action here
-      this.addPage()
-    }
-  }
 
   page:number = 0;
 
@@ -66,22 +56,13 @@ export class TimeLineComponent implements OnInit,OnDestroy {
     this.getUserService.getCurrentUser().subscribe(
       data=>{
         this.currentUser=data;
-        this.getFollowingPosts();
       }
     );
   }
 
   
-  addPage() {
-      this.page += 1;
-      this.getFollowingPosts();
-  }
-
-  resetPage() {
-    this.posts = [];
-    this.page = 0;
-    this.getFollowingPosts();
-  }
+  @ViewChild('feedComponent')
+  feedComponent:FeedComponent;
 
   scroll = (event): void => {
     const topButton = document.getElementById("topButton");
@@ -113,8 +94,8 @@ export class TimeLineComponent implements OnInit,OnDestroy {
     document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
     //gets everyone's posts
     //this.getAllPosts();
-    this.resetPage();
-    this.getFollowingPosts();
+    // this.resetPage();
+    // this.getFollowingPosts();
   }
 
   getAllPosts():void{
@@ -206,7 +187,8 @@ export class TimeLineComponent implements OnInit,OnDestroy {
               });
               //gets everyone's post
               //this.getAllPosts();
-              this.resetPage();
+              // this.resetPage();
+              this.feedComponent.resetPage();
               this.postImage=null;
               this.postContrnt=null;
               this.youtubeUrl=null;
@@ -228,7 +210,8 @@ export class TimeLineComponent implements OnInit,OnDestroy {
           });
           //gets everyone's posts
           //this.getAllPosts();
-          this.resetPage();
+          // this.resetPage();
+          this.feedComponent.resetPage();
           this.postImage=null;
           this.postContrnt=null;
           this.youtubeUrl=null;

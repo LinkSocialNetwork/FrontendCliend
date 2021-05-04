@@ -20,11 +20,11 @@ export class UserService {
     return this.myHttpCli.post<ResponseMessage>(url,user,{withCredentials:true});
   }
 
-  updateUser(user:User): Observable<HttpResponse<string>>{
+  updateUser(user:User): Observable<boolean>{
     let authtoken = this.cookieService.getCookie("token")
     let url: string = "http://localhost:9080/api/userservice/user";
     console.log(" inside the user update >>> "+user);
-    return this.myHttpCli.put<HttpResponse<string>>(url,user,{
+    return this.myHttpCli.put<boolean>(url,user,{
       headers: {
         token: authtoken
       }, withCredentials:true
@@ -38,10 +38,10 @@ export class UserService {
     this.myHttpCli.delete<HttpResponse<ArrayBuffer>>(url);
   }
 
-  checkOldPass(user:User): Observable<HttpResponse<string>>{
-    let url: string = "http://localhost:9080/api/userservice/user/validate-password";
+  checkOldPass(user:User): Observable<boolean>{
+    let url: string = "http://localhost:9080/api/userservice/validate-password";
     
-    return this.myHttpCli.post<HttpResponse<string>>(url,user,{withCredentials:true});
+    return this.myHttpCli.post<boolean>(url,user,{withCredentials:true});
   }
 
 
