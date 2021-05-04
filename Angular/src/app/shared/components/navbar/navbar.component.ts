@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Notifications } from '../../model/Notifications';
 import { User } from '../../model/User';
@@ -16,6 +16,9 @@ export class NavbarComponent implements OnInit {
   user:User;
   notifications: Array<Notifications> = [];
   down:boolean = false;
+
+  @Input()
+  active: string = "home";
 
   constructor(private loginService:LoginService, private cookieService: GetCookieService,private router:Router, private notificationServ: NotificationService){
   }
