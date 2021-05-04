@@ -26,9 +26,6 @@ export class HomeComponent implements OnInit {
         if(data==null){
           this.router.navigate(['/login']);
         }
-        else {
-             
-        }
 
       }
     )
