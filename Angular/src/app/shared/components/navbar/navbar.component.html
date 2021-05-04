@@ -40,9 +40,15 @@
           </button>
           <div class="dropdown-menu dropdown-menu-right notifications" aria-labelledby="dropdownMenuButton" style="background-color: azure;" id="box">
             <div class="" >
-              <h2>{{notifications?.length}} Notifications</h2>
+              <h2>{{notifications?.length}} Notifications
+
+                <span class="float-right">
+                  <button  class="btn btn-link" (click)='clearAllNotifications()'>Clear All</button>
+                </span>
+
+              </h2>
               <div *ngFor='let notification of notifications'>
-                <app-notification [notification]='notification'></app-notification>
+                <app-notification (refreshNav)='ngOnInit()' [notification]='notification'></app-notification>
               </div>
           </div>
           </div>
