@@ -115,6 +115,11 @@ export class ProfileComponent implements OnInit {
     )
   }
 
+  resetPage() {
+    this.posts = [];
+    this.getUserPosts(this.currentUser.userID);
+  }
+
   checkIfPostIsLiked(post:Post):boolean{
     let loggedInUser:User =this.currentUser;
     for(var like of post.usersWhoLiked){//will search the post for the Like that connects the user and post

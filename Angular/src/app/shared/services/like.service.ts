@@ -16,7 +16,7 @@ export class LikeService {
     return this.myHttpCli.post<string>(url,like,{withCredentials:true});
   }
   deleteLike(like:Like):Observable<ArrayBuffer>{
-    let url:string = `http://localhost:9080/api/postservice/post/like/${like.likeId}`;
+    let url:string = `http://localhost:9080/api/postservice/like/${like.likeId}`;
     return this.myHttpCli.delete<ArrayBuffer>(url);
   }
 }
