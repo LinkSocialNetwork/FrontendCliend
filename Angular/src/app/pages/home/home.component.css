@@ -23,8 +23,8 @@
   .two {
     position: fixed;
     top: 120px;
-    padding-bottom: 10px;
-    border-radius: 20px;
+    padding-bottom: 15px;
+    border-radius: 8px;
     width: 32%;
     background: #FF416C;
     background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);

@@ -94,6 +94,17 @@
     height: 100%;
   }
 
+  .comment-btn{
+    color: #43bbeb;
+    transition: .3s;
+  }
+
+  .comment-btn:hover{
+    color: #046cbb;
+    transition: .3s;
+    
+  }
+
   .rounded-circle {
     width: 80px;
     height: 80px;
