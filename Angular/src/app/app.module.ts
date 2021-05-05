@@ -22,6 +22,9 @@ import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { UnfollowButtonComponent } from './shared/components/buttons/unfollow-button/unfollow-button.component';
 import { PostComponent } from './shared/components/post/post.component';
 import { FeedComponent } from './shared/components/feed/feed.component';
+import { UsergeneralinfoComponent } from './pages/profile/usergeneralinfo/usergeneralinfo.component';
+import { UserpasswordinfoComponent } from './pages/profile/userpasswordinfo/userpasswordinfo.component';
+import { UsernameinfoComponent } from './pages/profile/usernameinfo/usernameinfo.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +42,10 @@ import { FeedComponent } from './shared/components/feed/feed.component';
     NavbarComponent,
     UnfollowButtonComponent,
     PostComponent,
-    FeedComponent
+    FeedComponent,
+    UsergeneralinfoComponent,
+    UserpasswordinfoComponent,
+    UsernameinfoComponent
   ],
   imports: [
     BrowserModule,
