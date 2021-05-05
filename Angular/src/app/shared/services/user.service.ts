@@ -38,10 +38,14 @@ export class UserService {
     this.myHttpCli.delete<HttpResponse<ArrayBuffer>>(url);
   }
 
-  checkOldPass(user:User): Observable<boolean>{
+  checkOldPass(user:User,oldPassword:string, newPassword: string): Observable<boolean>{
+    const formData = new FormData();
+    formData.append("username",user.userName)
+    formData.append("oldpassword",oldPassword)
+    formData.append("newpassword",newPassword)
     let url: string = "http://localhost:9080/api/userservice/validate-password";
     
-    return this.myHttpCli.post<boolean>(url,user,{withCredentials:true});
+    return this.myHttpCli.post<boolean>(url,formData,{withCredentials:true});
   }
 
 

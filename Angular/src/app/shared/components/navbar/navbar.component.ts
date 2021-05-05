@@ -74,4 +74,10 @@ export class NavbarComponent implements OnInit {
 
   }
 
+  clearAllNotifications(): void{
+    this.notificationServ.clearAllNotifications(this.user.userID).subscribe(data => {
+      this.ngOnInit();
+    })
+  }
+
 }

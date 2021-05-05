@@ -44,13 +44,11 @@ export class UserInfoComponent implements OnInit {
         if(data !== null){
           this.userServ.getFollowers(data.userID).subscribe(data => {
             this.followers = data;
-            console.log("FOLLOWERS", data)
           })
 
           this.userServ.getFollowees(data.userID).subscribe(data => {
             this.following = data;
             this.newFollowingEmitter.emit(this.following);
-            console.log("FOLLOWING", data)
           })
         }
       }

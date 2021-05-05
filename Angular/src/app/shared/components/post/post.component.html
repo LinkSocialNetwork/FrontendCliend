@@ -31,7 +31,7 @@
         <ng-template #postIsNotLiked>
             <button href="" class="btn btn-link" (click)=toggleLike(post,false)><i class="fa fa-gittip"></i> Like <span class="badge badge-danger">{{post?.usersWhoLiked.length}}</span> </button>
         </ng-template>
-        <a href="home" class="card-link" (click)="addComment()"><i class="fa fa-comment"></i> Comments <span class="badge badge-danger">{{post?.comments.length}}</span></a>
+        <a href="home" class="btn btn-link" (click)="addComment()"><i class="fa fa-comment"></i> Comments <span class="badge badge-danger">{{post?.comments.length}}</span></a>
     </div>
     <!--////////Comment-->
     
@@ -51,6 +51,6 @@
         <textarea [id]="post.postId" class="comment-box" placeholder="write a comment..."></textarea>
         <div class="smile-icon">
             <span class="ion-android-attach"></span>
-            <span (click)="addNewComment(post)" class="fa fa-smile-o fa-2x"></span>
+            <span><i (click)="addNewComment(post)" class="fa fa-paper-plane-o fa-2x comment-btn"></i></span>
         </div>
     </div>

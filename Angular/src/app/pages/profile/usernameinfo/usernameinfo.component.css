@@ -1012,9 +1012,8 @@
   
   .card-header {
     margin-bottom: 0;
-    padding: 1.25rem 1.5rem;
     border-bottom: 1px solid rgba(0, 0, 0, .05);
-    background-color: #fff;
+    
   }
   
   .card-header:first-child {
@@ -1092,19 +1091,17 @@
   }
   
   .rounded-circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50% !important;
+  }
+  
+  .big-rounded-circle {
     width: 150px;
     height: 150px;
     border-radius: 50% !important;
     object-fit: cover;
   }
-
-  .rounded-circle-small {
-    width: 50px;
-    height: 50px;
-    border-radius: 50% !important;
-    object-fit: cover;
-  }
-  
   .d-none {
     display: none !important;
   }
@@ -1350,8 +1347,6 @@
       display: none;
     }
   }
-
-  
   
   figcaption,
   main {
@@ -2228,30 +2223,6 @@
   height: 100%;
 }
 
-.wrapper {
-  padding-left: 20px;
-  padding-right: 20px;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  grid-auto-rows: minmax(100px, auto);
-  background-color: rgb(228, 228, 228);
-}
- 
-.two {
-  border-radius: 50px;
-  background: #FF416C;
-  background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);
-  background: linear-gradient(to right, #FF4B2B, #FF416C);
-  z-index: 1;
-  margin-bottom: 30px;
-}
-
-.three {
-  border-radius: 20px;
-  grid-column: 1 / 4;
-  grid-row: 3 / 7 ;
-  background: #FF416C;
-  background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);
-  background: linear-gradient(to right, #FF4B2B, #FF416C);
-  z-index: 1;
+.post-wrapper{
+  box-shadow: 0px 0px 5px 1px #00000030;
 }

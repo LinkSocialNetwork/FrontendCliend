@@ -178,7 +178,7 @@ export class TimeLineComponent implements OnInit,OnDestroy {
         data=>{
           post.postImageUrl=data.message;
           
-          let response =  this.postservice.insertNewPost(post).subscribe(
+          this.postservice.insertNewPost(post).subscribe(
             data =>{
               
               Swal.fire({ 
@@ -195,13 +195,14 @@ export class TimeLineComponent implements OnInit,OnDestroy {
               this.postContrnt=null;
               this.youtubeUrl=null;
               this.postimg=null;
+              this.imageURL=null;
             }
           )
         }
       )
     }
     else{
-      let response =  this.postservice.insertNewPost(post).subscribe(
+      this.postservice.insertNewPost(post).subscribe(
         data =>{
           
           Swal.fire({ 
@@ -218,6 +219,7 @@ export class TimeLineComponent implements OnInit,OnDestroy {
           this.postContrnt=null;
           this.youtubeUrl=null;
           this.postimg=null;
+          
         }
       )
     }

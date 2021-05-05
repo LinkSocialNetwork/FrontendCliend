@@ -10,8 +10,9 @@ nav {
 
 .icon {
     cursor: pointer;
-    margin-right: 50px;
-    line-height: 60px
+    margin-top: 5px;
+    margin-right: 15px;
+    line-height: 15px
 }
 
 .icon span {
@@ -20,7 +21,9 @@ nav {
     border-radius: 50%;
     color: #fff;
     vertical-align: top;
-    margin-left: -25px
+    margin-left: -25px;
+    margin-top: -15px;
+    font-family: sans-serif;
 }
 
 .icon img {
@@ -41,15 +44,21 @@ nav {
     font-family: monospace
 }
 
+.notification-frame{
+  overflow-y: auto;
+  max-height: 500px;
+
+}
+
 .notifications {
   z-index: 10;
   min-width: 300px;
-  height: auto;
-  top: 63px;
+  top: 61px;
   right: 62px;
   border-radius: 5px 0px 5px 5px;
   background-color: #fff;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  padding: 5px;
 }
 
 

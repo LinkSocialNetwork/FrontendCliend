@@ -168,7 +168,7 @@ export class LoginComponent implements OnInit {
       lastName:"",
       following: []
     };
-  let response =  this.userService.insertNewUser(user).subscribe(
+  this.userService.insertNewUser(user).subscribe(
     data=> {
       if(data.message=="User was created"){
         Swal.fire({ 
@@ -182,10 +182,18 @@ export class LoginComponent implements OnInit {
         this.loginForm.value.userName=this.registrationForm.value.userName;
         (<HTMLInputElement>document.getElementById("loginpassword")).value=this.registrationForm.value.password;
         this.loginForm.value.password=this.registrationForm.value.password;
-      }else if(data.message=="userName already taken"){
+      }else if(data.message=="Username already exists in system"){
         Swal.fire({ 
           icon: 'warning',
-          title: '"userName already taken try again',
+          title: '"Username already taken',
+          timer: 4000,
+          showConfirmButton: true
+        });
+      }
+      else if(data.message=="email already exists in system"){
+        Swal.fire({ 
+          icon: 'warning',
+          title: '"Email already taken',
           timer: 4000,
           showConfirmButton: true
         });
