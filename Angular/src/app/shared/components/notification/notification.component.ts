@@ -23,8 +23,6 @@ export class NotificationComponent implements OnInit {
 
   triggeredUsername: string;
 
-  notificationId: number;
-
   constructor(private getUserServ: GetUserService, private notificationServ: NotificationService) { }
   
   ngOnInit(): void {
@@ -33,12 +31,10 @@ export class NotificationComponent implements OnInit {
       this.triggeredUser.profileImg = data.profileImg;
       this.triggeredUsername = data.userName;
     })
-    this.notificationId = this.notification.id;
   }
 
   markAsRead(): void{
-    console.log(this.notification.id);
-    this.notificationServ.markAsRead(this.notificationId).subscribe();
+    this.notificationServ.markAsRead(this.notification.id).subscribe();
     this.refreshNav.emit();
   }
 

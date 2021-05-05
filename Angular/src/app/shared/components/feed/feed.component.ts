@@ -35,7 +35,7 @@ export class FeedComponent implements OnInit, OnChanges, OnDestroy {
     this.getUserService.getCurrentUser().subscribe(
       data=>{
         this.currentUser=data;
-        //this.resetPage();
+        console.log(data.userID)
       })
   }
 
@@ -61,7 +61,6 @@ export class FeedComponent implements OnInit, OnChanges, OnDestroy {
     // pos/max will give you the distance between scroll bottom and and bottom of screen in percentage.
     if(pos == max )   {
       //Do your action here
-      console.log("PAGE is ", this.page)
       this.addPage()
     }
   }
@@ -88,7 +87,6 @@ export class FeedComponent implements OnInit, OnChanges, OnDestroy {
   resetPage() {
     this.posts = [];
     this.page = 0;
-    console.log("////////////",this.profileUser)
     if (this.notSpecificUser){
       this.getSpecificUserPosts()
     } else {
@@ -106,9 +104,7 @@ export class FeedComponent implements OnInit, OnChanges, OnDestroy {
       data =>{
         let newPosts:Post[];
         newPosts=data;
-        console.log("in getFollowingPosts" , newPosts)
         newPosts.sort((a,b) => (a.postedAt > b.postedAt) ? -1 : ((b.postedAt > a.postedAt) ? 1 : 0))
-        console.log(newPosts)
         for (const post of newPosts) {
           this.posts.push(post);
         }
@@ -117,14 +113,11 @@ export class FeedComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   getSpecificUserPosts():void{
-    console.log("in getPostsCreateByUser///////", this.currentUser)
     this.getPostService.getPostsCreatedByUser(this.profileUser.userID,this.page).subscribe(
       data =>{
         let newPosts:Post[];
         newPosts=data;
-        console.log("in getPostsCreateByUser" , newPosts)
         newPosts.sort((a,b) => (a.postedAt > b.postedAt) ? -1 : ((b.postedAt > a.postedAt) ? 1 : 0))
-        console.log(newPosts)
         for (const post of newPosts) {
           this.posts.push(post);
         }
@@ -133,7 +126,6 @@ export class FeedComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   refreshNavbar(): void{
-    console.log("Refresh reached feed");
     this.refreshNav.emit();
   }
 }

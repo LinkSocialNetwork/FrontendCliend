@@ -40,11 +40,9 @@ export class HomeComponent implements OnInit {
   following: User[] = [];
   udpateFollowingList(e): void{
     this.following = e;
-    console.log(this.following);
   }
 
   refreshNavbar(): void{
-    console.log("Refresh reached home");
     this.navBar.ngOnInit();
   }
 
