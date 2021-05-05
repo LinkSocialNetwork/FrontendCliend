@@ -3,35 +3,21 @@
     <!-- Page content -->
     <div class="container-fluid" style="padding-top: 150px;">
       <div class="row">
-        <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
+        <div class="col-xl-6 order-xl-2 mb-5 mb-xl-0">
           <div class="card card-profile shadow">
             <div class="row justify-content-center">
               <div class="col-lg-3 order-lg-2">
                 <div class="card-profile-image">
-                  
-                    <img onerror="this.src='../assets/logo.png'" [src]='currentUser?.profileImg' class="big-rounded-circle"> 
-                  
+                  <img onerror="this.src='../assets/logo.png'" [src]='currentUser?.profileImg' class="big-rounded-circle"> 
                 </div>
               </div>
             </div>
             <br>
             <div class="card-body pt-0 pt-md-4">
-              <div class="row">
-                <div class="col">
-                  
-                </div>
-              </div>
               <div class="text-center" style="padding-top: 100px;">
-                <h3>
-                  {{currentUser?.firstName +" "+ currentUser?.lastName}}
-                </h3>
-                <div class="h5 font-weight-300">
-                    {{currentUser.email}}
-                </div>
-                
-                <div>
-                  <i class="ni education_hat mr-2"></i>@{{currentUser?.userName}}
-                </div>
+                <h3> {{currentUser?.firstName +" "+ currentUser?.lastName}} </h3>
+                <div class="h5 font-weight-300"> {{currentUser.email}} </div>
+                <div> <i class="ni education_hat mr-2"></i>@{{currentUser?.userName}} </div>
                 <hr class="my-4">
                 <p>{{currentUser?.bio}}</p>
                 
@@ -48,11 +34,9 @@
               <div class="collapse tab-pane fade" id="profileSetting" role="tabpanel" aria-labelledby="profile-tab">
                 <div class="card bg-secondary shadow">
                   <div class="card-body">
-                   <!--  <form (ngSubmit)= "updateUserChecks()"> -->
                       <app-usergeneralinfo [user]="currentUser"></app-usergeneralinfo>
                       <app-usernameinfo [user]="currentUser"></app-usernameinfo>
                       <app-userpasswordinfo [user]="currentUser"></app-userpasswordinfo>
-                    <!-- </form> -->
                   </div>
                 </div>
                 
@@ -65,19 +49,9 @@
               <!---------------------------------- EDIT PROFILE INFO END  ---------------------------------------->
 
 
-        <div class="col-xl-8 order-xl-1">
+        <div class="col-xl-6 order-xl-1">
           <div class="card bg-secondary shadow">
             <div class="card-header bg-white border-0">
-              <form class="float-right">
-                <div class="input-group">
-                    <input type="text" class="form-control" aria-label="Recipient's userName" aria-describedby="button-addon2 " (keyup) = "filterPosts($event)">
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-primary" type="button" id="button-addon2" >
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </div>
-                </div>
-            </form>
               <div class="row align-items-center">
                 <div class="col-8">
                   <h3 class="mb-0">My Posts</h3>
