@@ -1,5 +1,37 @@
 /* You can add global styles to this file, and also import other style files */
 
     
-html, body { height: 100%; }
+html, body { 
+    height: 100%; 
+    background-color: rgb(228, 228, 228);
+}
 body { font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mainbg{
+    position: fixed;
+    height: 100vh;
+    width: 100%;
+    background-color: rgb(228, 228, 228);
+    z-index: -1;
+}
+
+::-webkit-scrollbar {
+    width: 7px;
+    margin: 0px 1px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+    border-radius: 5px;
+
+  }

@@ -2,23 +2,29 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
-import { TimeLineComponent } from './time-line/time-line.component';
-import { HomeComponent } from './home/home.component';
-import { UserInfoComponent } from './user-info/user-info.component';
+import { LoginComponent } from './pages/login/login.component';
+import { TimeLineComponent } from './pages/home/time-line/time-line.component';
+import { HomeComponent } from './pages/home/home.component';
+import { UserInfoComponent } from './pages/home/user-info/user-info.component';
 import {HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { LoginService } from './shared/login.service';
+
 import { ReactiveFormsModule } from '@angular/forms';
-import { ProfileComponent } from './profile/profile.component';
-import { ChatComponent } from './chat/chat.component';
-import { SearchComponent } from './search/search.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { ChatComponent } from './pages/chat/chat.component';
+import { SearchComponent } from './pages/search/search.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SafePipe } from './pipes/safe.pipe';
-
-
-
-
+import { SafePipe } from './shared/pipes/safe.pipe';
+import { LoginService } from './shared/services/login.service';
+import { NotificationComponent } from './shared/components/notification/notification.component';
+import { FollowButtonComponent } from './shared/components/buttons/follow-button/follow-button.component';
+import { NavbarComponent } from './shared/components/navbar/navbar.component';
+import { UnfollowButtonComponent } from './shared/components/buttons/unfollow-button/unfollow-button.component';
+import { PostComponent } from './shared/components/post/post.component';
+import { FeedComponent } from './shared/components/feed/feed.component';
+import { UsergeneralinfoComponent } from './pages/profile/usergeneralinfo/usergeneralinfo.component';
+import { UserpasswordinfoComponent } from './pages/profile/userpasswordinfo/userpasswordinfo.component';
+import { UsernameinfoComponent } from './pages/profile/usernameinfo/usernameinfo.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +36,16 @@ import { SafePipe } from './pipes/safe.pipe';
     ProfileComponent,
     ChatComponent,
     SearchComponent,
-    SafePipe
+    SafePipe,
+    NotificationComponent,
+    FollowButtonComponent,
+    NavbarComponent,
+    UnfollowButtonComponent,
+    PostComponent,
+    FeedComponent,
+    UsergeneralinfoComponent,
+    UserpasswordinfoComponent,
+    UsernameinfoComponent
   ],
   imports: [
     BrowserModule,
