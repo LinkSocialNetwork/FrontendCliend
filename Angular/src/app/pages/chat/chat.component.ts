@@ -38,6 +38,9 @@ export class ChatComponent implements OnInit,OnDestroy{
   userInput = new FormControl('');
   onlineUsers:UserWithImg[];
   typingUsers:String[];
+  lastThreeTyping:String[] = [];
+  overFlowTypers:number;
+  verbToUse:string = "is";
 
   constructor(private userService:GetUserService,private loginService:LoginService,private router:Router,private cookieServ:GetCookieService){
     this.allMessages=[];
@@ -125,7 +128,7 @@ export class ChatComponent implements OnInit,OnDestroy{
         this.message.imgUrl = userName.profileImg;
         this.lastMsgSender = userName.userName;
         this.webSocketAPI._send(this.message);
-        
+        this.messagefield = "";
       }
     );
     
@@ -133,7 +136,7 @@ export class ChatComponent implements OnInit,OnDestroy{
 
   handleMessage(message) {
     //console.log(this.allMessages);
-    this.messagefield = "";
+    //this.messagefield = "";
     this.sendUserStoppedTyping();
     this.allMessages.push(message);
     console.log(this.allMessages);
@@ -194,11 +197,27 @@ export class ChatComponent implements OnInit,OnDestroy{
   }
 
   handleTypingUsers(userList) {
+    this.lastThreeTyping = [];
     this.typingUsers = userList;
     for(var user of this.typingUsers){
       if(user==this.lastMsgSender)
         this.typingUsers.splice(this.typingUsers.indexOf(this.lastMsgSender),1);
     }
+    
+    if(this.typingUsers.length < 3) {
+      this.lastThreeTyping = this.typingUsers;
+    }
+    else {
+      this.lastThreeTyping = this.typingUsers.slice(this.typingUsers.length-3, this.typingUsers.length-1);
+    }
+    console.log("typingUsers"+this.typingUsers);
+    console.log("lastThreeTyping"+this.lastThreeTyping);
+
+    if(this.typingUsers.length > 1)
+      this.verbToUse = "are";
+    else
+      this.verbToUse = "is";
+    this.overFlowTypers = this.typingUsers.length - this.lastThreeTyping.length;
   }
 
 

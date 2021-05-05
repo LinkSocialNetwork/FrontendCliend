@@ -203,7 +203,10 @@
 
 #currentTyping {
   background-color: white;
-}
+  color: rgb(69, 189, 238);
+  margin: 5px;
+  font-size: 18px;
+} 
 
 
 
