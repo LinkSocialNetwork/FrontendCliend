@@ -1,7 +1,6 @@
 # Link Social Media
 
 ## Project Description
-Link is the second iteration of a social media application created by Team Avatar as part of the Revature Full Stack Angular training program in April 2021. Developed with a microservice architecture, this web application allows every user to follow each other and view each other's posts. Each user has their own account that they can customize with their own information. Within this network, users can interact with each other through comments, likes, and a global chatroom. This social media application is meant to ease the transition of becoming a Revature employee.
 
 The FrontendClient contains the web page developed in Angular and TypeScript.
 
@@ -34,17 +33,6 @@ The FrontendClient contains the web page developed in Angular and TypeScript.
 
 ## Getting Started
    
-> Clone all service repositories
-```
-git clone https://github.com/LinkSocialNetwork/Eureka.git
-git clone https://github.com/LinkSocialNetwork/Gateway.git
-git clone https://github.com/LinkSocialNetwork/UserService.git
-git clone https://github.com/LinkSocialNetwork/PostService.git
-git clone https://github.com/LinkSocialNetwork/NotificationService.git
-git clone https://github.com/LinkSocialNetwork/ChatService.git
-git clone https://github.com/LinkSocialNetwork/FrontendClient.git
-```
-
 > npm install in angular project folder
 ```
 npm i FrontendClient/Angular
@@ -52,21 +40,7 @@ npm i FrontendClient/Angular
 
 ## **Usage**
 
-> Run all services sequentially
-```
-Euerka > Gateway > UserService > PostService > NotificationService > ChatService
-```
-
-> Run angular project
-```
-cd FrontendClient/Angular
-npm run start
-```
-
-> Visit the url
-```
-http://localhost:4200
-```
+Please refer to our meta-repository to view how to use our social media applicaiton.
 
 ## **License**
 
