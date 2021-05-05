@@ -2236,3 +2236,9 @@
   font-family: Roboto, "Helvetica Neue", sans-serif;
   font-size: 16px;
 }
+
+#myTabContent{
+  border-radius: 10px;
+  padding-top: 2rem;
+  background: linear-gradient(to right, #FF4B2B, #FF416C);
+}
