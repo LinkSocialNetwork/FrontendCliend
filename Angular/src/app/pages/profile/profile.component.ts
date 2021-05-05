@@ -87,7 +87,9 @@ export class ProfileComponent implements OnInit {
         else {
           //force update the current user
           this.loginService.setCurrent(data);
+          
           this.currentUser = data;
+          console.log("FROM PROFILE", this.currentUser)
 
           // Initialize the updated user with the current fields
           this.updatedUser = data;
@@ -147,7 +149,7 @@ export class ProfileComponent implements OnInit {
       else {
         // If the entered in current password value is not what's in the db,
         // we don't update anything
-        this.updatedUser.password = this.oldPassword;
+        /* this.updatedUser.password = this.oldPassword;
         this.userService.checkOldPass(this.updatedUser).subscribe(data => {
           this.isOldPasswordValid = data;
           if(this.isOldPasswordValid){
@@ -157,7 +159,7 @@ export class ProfileComponent implements OnInit {
           }else{
             Swal.fire({ icon: 'warning', title: "Incorrect Old Password", timer: 4000, showConfirmButton: true });
           }
-        })
+        }) */
       }
     }else{
       //if password check box is unchecked, dont check anything above.

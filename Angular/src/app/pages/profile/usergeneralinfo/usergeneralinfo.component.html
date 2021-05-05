@@ -1,0 +1,65 @@
+<form (ngSubmit)= "update()">
+    <h6 class="heading-small text-muted mb-4">User information</h6>
+    <div *ngIf="user.userName">
+        <div class="pl-lg-4">
+        <div class="row">
+            <div class="col-lg-6">
+            <div class="form-group">
+                <label class="form-control-label" for="input-email">Profile Image</label>
+                <input type="file" id="input-image" accept="image/x-png,image/gif,image/jpeg" class="form-control form-control-alternative" placeholder="Select Your Image" (change)="handleFileInput($event.target.files)">
+            </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+            <div class="form-group focused">
+                <label class="form-control-label" for="input-first-name">First name</label>
+                <input type="text" id="input-first-name" class="form-control form-control-alternative" placeholder="First name" [value]="user.firstName" [(ngModel)]="user.firstName" name="firstName">
+            </div>
+            </div>
+            <div class="col-lg-6">
+            <div class="form-group focused">
+                <label class="form-control-label" for="input-last-name">Last name</label>
+                <input type="text" id="input-last-name" class="form-control form-control-alternative" placeholder="Last name" [value]="user.lastName" [(ngModel)]="user.lastName" name="lastName">
+            </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+            <div class="form-group focused">
+                <label class="form-control-label" for="input-dob">Date of Birth</label>
+                <input type="date" id="input-dob" class="form-control form-control-alternative" placeholder="Birth date" [value]="user.dob" [(ngModel)]="user.dob" name="dob">
+            </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group focused">
+                  <label class="form-control-label" for="input-old-password">About Me</label>
+                  <textarea id="input-bio" rows="4" class="form-control form-control-alternative" placeholder="A few words about you ..." [value]="user.bio" [(ngModel)]="user.bio" name="bio"></textarea>
+                </div>
+              </div>
+              
+        </div>
+    </div>
+        <div class="col-12 text-right">
+            <button type="submit" class="btn btn-sm btn-primary">Update General Info</button>
+        </div>
+    </div>
+</form>
+
+
+
+<!-- <div class="row">
+    <div class="col-lg-6">
+    <div class="form-group focused">
+        <label class="form-control-label" for="input-userName">Username</label>
+        
+        <input type="text" id="input-userName" class="form-control form-control-alternative" placeholder="Username" [value]="user.userName" [(ngModel)]="user.userName" name="userName">
+    </div>
+    </div>
+    <div class="col-lg-6">
+    <div class="form-group">
+        <label class="form-control-label" for="input-email">Email address</label>
+        <input type="email" id="input-email" class="form-control form-control-alternative" placeholder="Email" [value]="user.email" [(ngModel)]="user.email" name="email">
+    </div>
+    </div>
+</div> -->
