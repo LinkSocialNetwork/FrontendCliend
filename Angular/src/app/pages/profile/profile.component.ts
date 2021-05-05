@@ -40,6 +40,10 @@ export class ProfileComponent implements OnInit {
     following: []
   };
 
+  followers: User[];
+  following: User[];
+
+
   // This will hold the updated profile pic file
   updatedImage:File=null;
 
@@ -51,7 +55,8 @@ export class ProfileComponent implements OnInit {
   isOldPasswordValid = true;
   
   constructor( private router:Router,
-    private loginService:LoginService) {  }
+    private loginService:LoginService,
+    private userServ: UserService) {  }
 
   ngOnInit(): void {
 
@@ -68,7 +73,14 @@ export class ProfileComponent implements OnInit {
           this.currentUser = data;
 
         }
+        this.userServ.getFollowers(data.userID).subscribe(data2 => {
+          this.followers = data2;
+        })
+        this.userServ.getFollowees(data.userID).subscribe(data3 => {
+          this.following = data3;
+        })
       }
+      
     )
   }
 

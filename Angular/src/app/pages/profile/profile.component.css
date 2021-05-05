@@ -2226,3 +2226,13 @@
 .post-wrapper{
   box-shadow: 0px 0px 5px 1px #00000030;
 }
+
+.followers-container{
+  display: inline-block;
+  margin: 0 10px;
+}
+
+.followers-container h6{
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 16px;
+}

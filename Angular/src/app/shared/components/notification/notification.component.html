@@ -6,7 +6,7 @@
         <span aria-hidden="true" (click)='markAsRead()'>&times;</span>
       </button>
     </div>
-    <div class="toast-body">
-      {{triggeredUsername}} {{notification.type}}ed your post.
+    <div style="display: flex" class="toast-body">
+      {{triggeredUsername}} {{notification.type}}ed your post. postId: {{notification.postId}}.
     </div>
   </div>

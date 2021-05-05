@@ -16,10 +16,22 @@
             <div class="card-body pt-0 pt-md-4">
               <div class="text-center" style="padding-top: 100px;">
                 <h3> {{currentUser?.firstName +" "+ currentUser?.lastName}} </h3>
-                <div class="h5 font-weight-300"> {{currentUser.email}} </div>
                 <div> <i class="ni education_hat mr-2"></i>@{{currentUser?.userName}} </div>
-                <hr class="my-4">
+                
                 <p>{{currentUser?.bio}}</p>
+
+                <hr class="my-4"> 
+                
+                <span class="followers-container">
+                  <h6><a routerLink="">Followers</a></h6>
+                  <h5>{{followers?.length}}</h5>
+                </span>
+                <span class="followers-container">
+                  <h6><a routerLink="">Following</a></h6>
+                  <h5>{{following?.length}}</h5>
+                </span>
+                <hr class="my-4">
+                
                 
               </div>
               
