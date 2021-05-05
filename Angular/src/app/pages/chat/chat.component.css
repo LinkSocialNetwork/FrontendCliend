@@ -74,14 +74,11 @@
 }
 .message-feed {
   padding: 20px;
-  margin-left: 15px;
 }
 #footer, .fc-toolbar .ui-button, .fileinput .thumbnail, .four-zero, .four-zero footer>a, .ie-warning, .login-content, .login-navigation, .pt-inner, .pt-inner .pti-footer>a {
   text-align: center;
 }
-.message-feed.right>.pull-right {
-  margin-left: 15px;
-}
+
 .message-feed:not(.right) .mf-content {
   background: #03a9f4;
   color: #fff;
@@ -92,6 +89,8 @@
 }
 .mf-content {
   padding: 12px 17px 13px;
+  margin-left: 15px;
+  margin-right: 15px;
   border-radius: 2px;
   display: inline-block;
   max-width: 80%
@@ -99,7 +98,7 @@
 .mf-date {
   display: block;
   color: #B3B3B3;
-  margin-top: 7px;
+  margin-top: 3px;
 }
 .mf-date>i {
   font-size: 14px;
