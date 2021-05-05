@@ -83,7 +83,7 @@
                 <span>{{user}}</span>
             </span>
             <span *ngIf="overFlowTypers>0"> and {{overFlowTypers}} other users</span>
-            <span *ngIf="lastThreeTyping.length>0"> {{verbToUse}} typing..</span>
+            <span class= "loader-inner ball-pulse" *ngIf="lastThreeTyping.length>0"> {{verbToUse}} typing..</span>
         </div>
         <br>
 		<div class="msb-reply">

@@ -22,6 +22,7 @@
     "@angular/platform-browser-dynamic": "~11.2.7",
     "@angular/router": "~11.2.7",
     "angular-nicescroll": "0.0.0",
+    "loaders.css": "^0.1.2",
     "net": "^1.0.2",
     "rxjs": "~6.6.0",
     "sockjs-client": "^1.5.1",

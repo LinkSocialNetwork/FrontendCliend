@@ -2237,6 +2237,10 @@
   font-size: 16px;
 }
 
+.card{
+  padding-bottom: 15px;
+}
+
 #myTabContent{
   border-radius: 10px;
   padding-top: 2rem;

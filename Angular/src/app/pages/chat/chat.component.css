@@ -74,6 +74,7 @@
 }
 .message-feed {
   padding: 20px;
+  margin-left: 15px;
 }
 #footer, .fc-toolbar .ui-button, .fileinput .thumbnail, .four-zero, .four-zero footer>a, .ie-warning, .login-content, .login-navigation, .pt-inner, .pt-inner .pti-footer>a {
   text-align: center;
@@ -107,7 +108,7 @@
   top: 1px;
 }
 .msb-reply {
-  box-shadow: 0 -20px 20px -5px #fff;
+  /* box-shadow: 0 -20px 20px -5px #fff; */
   position: relative;
   /* margin-top: 30px; */
   border-top: 1px solid #eee;
