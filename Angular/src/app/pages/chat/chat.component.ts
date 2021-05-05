@@ -1,5 +1,5 @@
 import { ThrowStmt } from '@angular/compiler';
-import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserWithImg } from 'src/app/shared/model/UserWithImg';
@@ -16,7 +16,7 @@ import { LoginService } from '../../shared/services/login.service';
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css']
 })
-export class ChatComponent implements OnInit,OnDestroy{
+export class ChatComponent implements OnInit,OnDestroy, AfterViewChecked{
   title = 'Chat'
 
   webSocketAPI: WebSocketAPI;
@@ -46,6 +46,11 @@ export class ChatComponent implements OnInit,OnDestroy{
     this.allMessages=[];
     window.addEventListener("unload", this.sendDisconnect.bind(this));
   }
+  ngAfterViewChecked(): void {
+    this.container.nativeElement.scrollTop = this.container.nativeElement.scrollHeight;
+  }
+  
+  @ViewChild('scroll') private container: ElementRef;
 
   ngOnInit(): void {
     this.loginService.getLoggedInUser().subscribe(
@@ -80,6 +85,7 @@ export class ChatComponent implements OnInit,OnDestroy{
     container.scrollTop = container.scrollHeight;
     
   }
+
 
   @HostListener('window:beforeunload')
   ngOnDestroy(): void {
@@ -135,15 +141,11 @@ export class ChatComponent implements OnInit,OnDestroy{
   }
 
   handleMessage(message) {
-    //console.log(this.allMessages);
-    //this.messagefield = "";
     this.sendUserStoppedTyping();
     this.allMessages.push(message);
     console.log(this.allMessages);
     console.log(message.sender);
     console.log(message.text);
-    let container = document.getElementById("msgContainer");
-    container.scrollTop = container.scrollHeight;
   }
 
   sendStatus() {
@@ -165,13 +167,6 @@ export class ChatComponent implements OnInit,OnDestroy{
       this.webSocketAPI._sendDisconnect(userName.userName);
       this.disconnect();
     }
-    // this.userService.getCurrentUser().subscribe(
-    //   userName => {
-    //     console.log("send disconnect");
-    //     this.webSocketAPI._sendDisconnect(userName.userName);
-    //     this.disconnect();
-    //   }
-    // );
   }
 
   handleStatus(newList) {
