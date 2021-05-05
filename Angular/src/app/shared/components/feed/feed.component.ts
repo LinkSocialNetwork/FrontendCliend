@@ -112,6 +112,8 @@ export class FeedComponent implements OnInit, OnChanges, OnDestroy {
     )
   }
 
+  //---------------------------------------------------------------------------------------------------------------//
+
   getSpecificUserPosts():void{
     this.getPostService.getPostsCreatedByUser(this.profileUser.userID,this.page).subscribe(
       data =>{
@@ -125,7 +127,12 @@ export class FeedComponent implements OnInit, OnChanges, OnDestroy {
     )
   }
 
+  //---------------------------------------------------------------------------------------------------------------//
+
   refreshNavbar(): void{
     this.refreshNav.emit();
   }
+
+  //---------------------------------------------------------------------------------------------------------------//
+
 }

@@ -44,16 +44,16 @@ nav {
     font-family: monospace
 }
 
-.notification-border{
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.19);
-  margin-bottom: 5px;
+.notification-frame{
+  overflow-y: auto;
+  max-height: 500px;
+
 }
 
 .notifications {
   z-index: 10;
   min-width: 300px;
-  height: auto;
-  top: 63px;
+  top: 61px;
   right: 62px;
   border-radius: 5px 0px 5px 5px;
   background-color: #fff;
