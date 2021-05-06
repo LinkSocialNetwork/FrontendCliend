@@ -158,6 +158,9 @@
   background: #f8f8f8;
   padding: 15px 13px 15px 17px;
 }
+#chatHeader{
+  margin-left: 22.9%;
+}
 .ah-actions {
   z-index: 3;
   float: right;
@@ -201,12 +204,38 @@
   text-align: right;
 }
 
+#whiteBackground{
+  background-color: white;
+}
+
 #currentTyping {
   background-color: white;
   color: rgb(69, 189, 238);
-  margin: 5px;
-  font-size: 18px;
+  /* margin-bottom: 2px; */
+  font-size: 22px;
+  padding: 0 15px 0 0;
 } 
+
+.ball-pulse > div {
+  background-color: rgb(69, 189, 238);
+  transform: scale(0.5, 0.5);
+  padding: 5px;
+}
+
+.loader-small .loader-inner {
+  transform: scale(0.5, 0.5);
+}
+
+#input {
+  margin-top: 30px;
+  background-color: white;
+}
+
+#background {
+  background: linear-gradient(to right, #FF4B2B, #FF416C);
+  padding: 30px;
+  border-radius: 10px;
+}
 
 
 

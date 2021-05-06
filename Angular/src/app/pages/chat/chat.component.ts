@@ -37,8 +37,8 @@ export class ChatComponent implements OnInit,OnDestroy, AfterViewChecked{
   lastMsgSender: string;
   userInput = new FormControl('');
   onlineUsers:UserWithImg[];
-  typingUsers:String[];
-  lastThreeTyping:String[] = [];
+  typingUsers:String[] = [];
+  lastTyping:String = "";
   overFlowTypers:number;
   verbToUse:string = "is";
 
@@ -162,6 +162,7 @@ export class ChatComponent implements OnInit,OnDestroy, AfterViewChecked{
   }
   
   sendDisconnect() {
+    this.webSocketAPI._sendUserStoppedTyping(this.lastMsgSender);
     let userName=this.loginService.getCurrent();
     if(userName !=null){
       this.webSocketAPI._sendDisconnect(userName.userName);
@@ -192,27 +193,21 @@ export class ChatComponent implements OnInit,OnDestroy, AfterViewChecked{
   }
 
   handleTypingUsers(userList) {
-    this.lastThreeTyping = [];
+    this.lastTyping = "";
     this.typingUsers = userList;
     for(var user of this.typingUsers){
       if(user==this.lastMsgSender)
         this.typingUsers.splice(this.typingUsers.indexOf(this.lastMsgSender),1);
     }
     
-    if(this.typingUsers.length < 3) {
-      this.lastThreeTyping = this.typingUsers;
-    }
-    else {
-      this.lastThreeTyping = this.typingUsers.slice(this.typingUsers.length-3, this.typingUsers.length-1);
-    }
-    console.log("typingUsers"+this.typingUsers);
-    console.log("lastThreeTyping"+this.lastThreeTyping);
+    
+    this.lastTyping = this.typingUsers[this.typingUsers.length-1];
 
     if(this.typingUsers.length > 1)
       this.verbToUse = "are";
     else
       this.verbToUse = "is";
-    this.overFlowTypers = this.typingUsers.length - this.lastThreeTyping.length;
+    this.overFlowTypers = this.typingUsers.length - 1;
   }
 
 
