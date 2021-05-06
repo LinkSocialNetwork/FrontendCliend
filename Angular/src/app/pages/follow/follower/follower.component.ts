@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { User } from 'src/app/shared/model/User';
 import { UserService } from 'src/app/shared/services/user.service';
 
@@ -17,16 +18,18 @@ export class FollowerComponent implements OnInit {
 
   isFollowing:boolean = false;
 
-  constructor(    private userServe: UserService
+  searchForm = this.formBuilder.group({
+    userName: '',
+  });
+
+  constructor(    
+    private formBuilder: FormBuilder,
+    private userServe: UserService
     ) { }
 
   ngOnInit(): void {
   }
 
-  toggleFollowing(bool: boolean){
-    console.log("TOGGLE FOLLOWING TRIGGERED")
-    this.isFollowing = !this.isFollowing;
-    
-  }
+
 
 }

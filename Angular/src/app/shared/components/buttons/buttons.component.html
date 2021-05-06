@@ -1,0 +1,13 @@
+<div *ngIf="isFollowing !== null">
+    <app-unfollow-button
+      *ngIf="isFollowing; else displayFollowButton"
+      [searchedUser]="selectedUser"
+      (click)="toggleFollowing()"
+    ></app-unfollow-button>
+    <ng-template #displayFollowButton>
+      <app-follow-button
+        [searchedUser]="selectedUser"
+        (click)="toggleFollowing()"
+      ></app-follow-button>
+    </ng-template>
+  </div>

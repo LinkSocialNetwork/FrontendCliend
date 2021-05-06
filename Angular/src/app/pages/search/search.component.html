@@ -80,7 +80,7 @@
                     }}
                   </div>
 
-                  <div *ngIf="isFollowing !== null">
+                  <!-- <div *ngIf="isFollowing !== null">
                     <app-unfollow-button
                       *ngIf="isFollowing; else displayFollowButton"
                       [searchedUser]="selectedUser"
@@ -92,7 +92,9 @@
                         (click)="toggleFollowing()"
                       ></app-follow-button>
                     </ng-template>
-                  </div>
+                  </div> -->
+
+                  <app-buttons [users]="users" [selectedUser]="selectedUser" [currentUser]="currentUser" [searchForm]="searchForm" #buttonsComponent></app-buttons>
 
                   <hr class="my-4" />
                   <p>{{ selectedUser?.bio }}</p>

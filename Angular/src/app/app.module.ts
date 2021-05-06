@@ -28,6 +28,7 @@ import { FollowComponent } from './pages/follow/follow.component';
 import { FollowingComponent } from './pages/follow/following/following.component';
 import { FollowerComponent } from './pages/follow/follower/follower.component';
 import { AddPostComponent } from './shared/components/add-post/add-post.component';
+import { ButtonsComponent } from './shared/components/buttons/buttons.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { AddPostComponent } from './shared/components/add-post/add-post.componen
     FollowComponent,
     FollowingComponent,
     FollowerComponent,
-    AddPostComponent
+    AddPostComponent,
+    ButtonsComponent
   ],
   imports: [
     BrowserModule,

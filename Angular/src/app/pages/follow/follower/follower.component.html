@@ -34,14 +34,8 @@
                   </div>
 
 
-                  <div *ngIf="isFollowing !== null">
-                    <app-unfollow-button *ngIf="isFollowing; else displayFollowButton" [searchedUser]="u"
-                    (click)="toggleFollowing()"></app-unfollow-button>
-                    <ng-template #displayFollowButton>
-                      <app-follow-button [searchedUser]="u" (click)="toggleFollowing()"></app-follow-button>
-                    </ng-template>
-                      
-                  </div>
+                  <app-buttons [users]="followers" [selectedUser]="u" [currentUser]="currentUser" [searchForm]="searchForm" [isFollowing]="isFollowing" #buttonsComponent></app-buttons>
+
 
                   <hr class="my-4">
                   <p>{{u?.bio}}</p>
