@@ -3,7 +3,6 @@ import { ActivatedRoute} from '@angular/router';
 import { Post } from 'src/app/shared/model/Post';
 import { User } from 'src/app/shared/model/User';
 import { GetUserService } from 'src/app/shared/services/get-user.service';
-import { LoginService } from 'src/app/shared/services/login.service';
 import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
@@ -48,12 +47,12 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     private router: ActivatedRoute,
-    private loginService: LoginService,
     private userServ: UserService,
     private getUserServ: GetUserService
   ) {}
 
   ngOnInit(): void {
+    this.posts = null;
     this.router.params.subscribe((params) => {
       this.profileUser.userID = params['id'];
       this.getUserServ

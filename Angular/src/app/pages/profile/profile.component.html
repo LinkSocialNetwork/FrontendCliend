@@ -91,6 +91,7 @@
       <!---------------------------------- EDIT PROFILE INFO END  ---------------------------------------->
 
       <div class="col-xl-6 order-xl-1">
+        <app-add-post (refreshFeed)="feedComponent.resetPage()"></app-add-post>
         <div class="card bg-secondary shadow">
           <div class="card-header bg-white border-0">
             <div class="row align-items-center">
@@ -108,10 +109,12 @@
                 role="tabpanel"
                 aria-labelledby="posts-tab"
               >
+
                 <div class="container-fluid gedf-wrapper">
                   <div class="row">
                     <div class="col-md-12">
                       <app-feed
+                        #feedComponent
                         [profileUser]="profileUser"
                         [notSpecificUser]="true"
                       ></app-feed>
