@@ -52,7 +52,6 @@ export class ProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.posts = null;
     this.router.params.subscribe((params) => {
       this.profileUser.userID = params['id'];
       this.getUserServ

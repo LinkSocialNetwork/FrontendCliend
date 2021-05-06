@@ -23,6 +23,9 @@ export class FeedComponent implements OnInit, OnChanges, OnDestroy {
   @Input()
   notSpecificUser:boolean = false;
 
+  @Input()
+  feedTitle: string;
+
   @Output()
   refreshNav: EventEmitter<void> = new EventEmitter();
 
