@@ -79,10 +79,7 @@
             </div>
         
             <app-feed (refreshNav)='refreshNavbar()' [posts]="posts" [currentUser]="currentUser" [notSpecificUser]="false" #feedComponent></app-feed>
-            <!-- <div *ngFor="let post of posts" class="card gedf-card postCard postHolder">
-                <app-post (getFollowingPosts)='getFollowingPosts' (resetPage)='resetPage()' [currentUser]='currentUser' [post]='post'></app-post>
-                    
-            </div> -->
+
             <!-- Post /////-->
         </div>
     </div>

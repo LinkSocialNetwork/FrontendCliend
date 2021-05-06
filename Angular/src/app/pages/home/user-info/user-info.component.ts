@@ -36,18 +36,18 @@ export class UserInfoComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginServ.getLoggedInUser().subscribe(
-      data => {
+      userData => {
         
-        this.loggedInUser=data;
+        this.loggedInUser=userData;
         this.loginServ.setCurrent(this.loggedInUser);
 
-        if(data !== null){
-          this.userServ.getFollowers(data.userID).subscribe(data => {
-            this.followers = data;
+        if(userData !== null){
+          this.userServ.getFollowers(userData.userID).subscribe(followersData => {
+            this.followers = followersData;
           })
 
-          this.userServ.getFollowees(data.userID).subscribe(data => {
-            this.following = data;
+          this.userServ.getFollowees(userData.userID).subscribe(followeeData => {
+            this.following = followeeData;
             this.newFollowingEmitter.emit(this.following);
           })
         }

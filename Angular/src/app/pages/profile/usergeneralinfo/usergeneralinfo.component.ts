@@ -21,17 +21,12 @@ export class UsergeneralinfoComponent implements OnInit {
   constructor(private imageServ: ImageUploadService, private userService: UserService) { }
 
 
-  ngOnInit(): void {
-    console.log(this.user)
-  }
+
 
 
   // Basically a ngModel for the updatedImage field
   handleFileInput(files:FileList){
     this.updatedImage = files.item(0);
-    console.log("file name:"+this.updatedImage.name);
-    console.log("file type:"+this.updatedImage.type);
-    console.log("file size:"+this.updatedImage.size);
   }
 
 
@@ -39,16 +34,13 @@ export class UsergeneralinfoComponent implements OnInit {
   update(){
     // If there's a new image, upload it and set it to the user object
           if(this.updatedImage != null){ 
-            // console.log('updatedImg: ', this.updatedImage); 
             let file:FormData=new FormData;
             file.append("file",this.updatedImage)
             this.imageServ.imageUpload(file).subscribe(
               data=>{
-                console.log("We got the url:"+data.message);
                 //Set it to the updated user
                 this.user.profileImg=data.message;
                 
-                console.log('updated user img url: ',this.user.profileImg);
     
                 // This will update the user by sending the user object through the service
                 this.updateUser();

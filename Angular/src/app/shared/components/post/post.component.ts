@@ -61,7 +61,6 @@ export class PostComponent implements OnInit {
   addNewComment(valueOfPost:Post){
     let commentText = (<HTMLInputElement>document.getElementById(<string><unknown>valueOfPost.postId)).value;
 
-    console.log("commentText= "+ commentText)
     if(commentText.length==0){
       Swal.fire({
         icon: 'warning',

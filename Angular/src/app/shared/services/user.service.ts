@@ -23,7 +23,6 @@ export class UserService {
   updateUser(user:User): Observable<boolean>{
     let authtoken = this.cookieService.getCookie("token")
     let url: string = "http://localhost:9080/api/userservice/user";
-    console.log(" inside the user update >>> "+user);
     return this.myHttpCli.put<boolean>(url,user,{
       headers: {
         token: authtoken
@@ -34,7 +33,6 @@ export class UserService {
 
   deleteUser(id:number): void{
     let url: string = `http://localhost:9080/api/userservice/user/${id}`;
-    //TODO: change in Java from deletemapping to postmapping
     this.myHttpCli.delete<HttpResponse<ArrayBuffer>>(url);
   }
 
@@ -61,13 +59,11 @@ export class UserService {
   }
 
   followUser(follow: Follow): Observable<boolean>{
-    console.log("FOLLOW BB",follow)
     let url: string = `http://localhost:9080/api/userservice/follow`;
     return this.myHttpCli.post<boolean>(url,follow,{withCredentials:true});
   }
 
   unfollowUser(follow: Follow) : Observable<boolean>{
-    console.log("UNFOLLOW BB",follow)
     let url: string = `http://localhost:9080/api/userservice/follow/${follow.follower.userID}/${follow.followee.userID}`;
     return this.myHttpCli.delete<boolean>(url,{withCredentials:true});
   }

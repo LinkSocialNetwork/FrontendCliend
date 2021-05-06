@@ -2,7 +2,6 @@
 import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { FeedComponent } from 'src/app/shared/components/feed/feed.component';
 import { Like } from 'src/app/shared/model/LIke';
 import { Post } from 'src/app/shared/model/Post';
 import { User } from 'src/app/shared/model/User';
@@ -75,7 +74,6 @@ export class SearchComponent implements OnInit {
   }
 
   toggleFollowing(bool: boolean){
-    console.log("TOGGLE FOLLOWING TRIGGERED")
     this.isFollowing = !this.isFollowing;
     
   }
@@ -88,7 +86,6 @@ export class SearchComponent implements OnInit {
         //verify user is following selected user
         this.userServe.getFollowers(this.selectedUser.userID).subscribe(data => {
           let found = data.find(element => element.userID === this.currentUser.userID)
-          console.log("FOUND",found, data)
           if(found)
             this.isFollowing = true;
           else
@@ -96,22 +93,7 @@ export class SearchComponent implements OnInit {
         })
       }
     }
-    //this.getAllPosts();
-
   }
-
-  // getAllPosts():void{
-  //   this.getPostService.getPostsCreatedByUser(this.selectedUser.userID, this.page).subscribe(
-  //     data =>{
-        
-  //       let newPosts:Post[];
-  //       newPosts=data;
-  //       newPosts.sort((a,b) => (a.postedAt > b.postedAt) ? -1 : ((b.postedAt > a.postedAt) ? 1 : 0))
-  //       this.userPosts= newPosts;
-  //       console.log(this.userPosts)
-  //     }
-  //   );
-  // }
 
   selectUserByKey(event:any){
     for (const user of this.users) {
@@ -128,10 +110,8 @@ export class SearchComponent implements OnInit {
   }
 
   toggleLike(valueOfPost:Post,isLiked:boolean){
-    console.log("/////////////IN TOGGLE LIKE: POST IS LIKED:"+isLiked);
     if(isLiked){//if the Post is liked by the User it will call delete
       //first get the loggedInUser
-      console.log("/////////////DELETING LIKE");
       let loggedIn:User = this.currentUser;
       let valueOfLike:Like|null = null;
       let found:boolean=false;
@@ -148,8 +128,6 @@ export class SearchComponent implements OnInit {
       }
       this.likeServ.deleteLike(valueOfLike).subscribe(
         data=>{
-          console.log(data);
-          // this.getAllPosts();
           this.loginServ.triggerRetrieveCurrent();
           
         }
@@ -157,12 +135,9 @@ export class SearchComponent implements OnInit {
     }
     else{
       let newLike:Like = {"likeId":0,"user":this.currentUser,"post":valueOfPost}
-      console.log("////////////NEWLIKE: POST:"+newLike.post.postId +" USER:"+newLike.user.userID +" "+newLike.user.userName+" "+JSON.stringify(newLike.user.likes));
 
       this.likeServ.insertNewLike(newLike).subscribe(
         data=>{
-          console.log(data);
-          // this.getAllPosts();
           this.loginServ.triggerRetrieveCurrent();
         }
       );

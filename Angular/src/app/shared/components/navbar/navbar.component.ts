@@ -60,7 +60,6 @@ export class NavbarComponent implements OnInit {
 }
 
   activate(link:string){
-    console.log(link);
     let home=document.getElementById("home");
     let profile=document.getElementById("profile");
     let cahtRoom=document.getElementById("chatroom");

@@ -19,13 +19,8 @@ export class UserpasswordinfoComponent implements OnInit {
 
   constructor(private userService: UserService) { }
 
-  ngOnInit(): void {
-  }
 
   updatePassword(){
-    console.log("CURRENT USER", this.user.password);
-    console.log("newpassword1", this.newPassword1);
-    console.log("oldPassword", this.oldPassword)
     //form validation
     if(this.newPassword1 != this.newPassword2 || this.newPassword1.length==0) {
       Swal.fire({ icon: 'warning', title: "Passwords do not match", timer: 4000, showConfirmButton: true });

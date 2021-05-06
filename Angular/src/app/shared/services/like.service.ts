@@ -12,7 +12,6 @@ export class LikeService {
 
   insertNewLike(like:Like):Observable<string>{
     let url:string=`http://localhost:9080/api/postservice/post/like`;
-    //console.log("The like being sent: "+like);
     return this.myHttpCli.post<string>(url,like,{withCredentials:true});
   }
   deleteLike(like:Like):Observable<ArrayBuffer>{

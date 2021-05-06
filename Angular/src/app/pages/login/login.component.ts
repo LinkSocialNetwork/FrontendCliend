@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder} from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { User } from 'src/app/shared/model/User';
 import { DateService } from 'src/app/shared/pipes/date.service';
 import { GetCookieService } from 'src/app/shared/services/get-cookie.service';
-import { GetUserService } from 'src/app/shared/services/get-user.service';
 import { LoginService } from 'src/app/shared/services/login.service';
 import { UserService } from 'src/app/shared/services/user.service';
 import Swal from 'sweetalert2';
@@ -34,11 +33,9 @@ export class LoginComponent implements OnInit {
   });
 
   constructor(private formBuilder: FormBuilder,
-    private route: ActivatedRoute,
     private router: Router,
     private dobModifier : DateService,
     private loginService: LoginService,
-    private getUserService:GetUserService,
     private userService:UserService,
     private cookieService:GetCookieService) { 
     
@@ -53,14 +50,12 @@ export class LoginComponent implements OnInit {
     if(authtoken){
       this.loginService.getLoggedInUser().subscribe(
         data =>{
-          // info=data;
           
           if(data) {
             this.router.navigate(['/home']);   
           }
 
           this.loginService.setCurrent(data);
-          console.log("data is null");
         }
       )
     }
@@ -94,9 +89,6 @@ export class LoginComponent implements OnInit {
       }
       
     });
-    //TODO: probably should remove this log after we are done with it -Author: Devin Kadrie
-    console.log(this.loginForm.value.password);
-    console.log(this.loginForm.value.userName);
     let user: User = {
       userID: null,
       userName: this.loginForm.value.userName,
@@ -113,7 +105,6 @@ export class LoginComponent implements OnInit {
     };
     this.loginService.loginUser(user).subscribe(
       (RCurrentUser)=> {
-        console.log("RCurrentUser"+RCurrentUser);
         if (RCurrentUser){
           Swal.fire({ 
             icon: 'success',
@@ -151,9 +142,6 @@ export class LoginComponent implements OnInit {
       }
     });
     
-    console.log(this.registrationForm.value.password);
-    console.log(this.registrationForm.value.userName);
-    console.log(this.registrationForm.value.email);
     let user: User = {
       userID: null,
       userName: this.registrationForm.value.userName,
@@ -229,10 +217,8 @@ export class LoginComponent implements OnInit {
       confirmButtonText: 'Send Email',
       showLoaderOnConfirm: true,
       preConfirm: (userToReset) => {
-        console.log(userToReset);
         this.loginService.resetPassword(userToReset).subscribe(
           data=>{
-            console.log("Password reset result: "+data);
           }
         )
       },
@@ -248,28 +234,6 @@ export class LoginComponent implements OnInit {
       }   
         
     });
-
-    // Swal.fire({
-    //   title: 'Do you want to save the changes?',
-    //   showDenyButton: true,
-    //   showCancelButton: true,
-    //   confirmButtonText: `Save`,
-    //   denyButtonText: `Don't save`,
-      // showClass: {
-      //   popup: 'animate__animated animate__fadeInDown'
-      // },
-      // hideClass: {
-      //   popup: 'animate__animated animate__fadeOutUp'
-      // },
-    // }).then((result) => {
-    //   /* Read more about isConfirmed, isDenied below */
-    //   if (result.isConfirmed) {
-    //     Swal.fire('Saved!', '', 'success')
-    //   } else if (result.isDenied) {
-    //     Swal.fire('Changes are not saved', '', 'info')
-    //   }
-    // })
-
   }
 
 }

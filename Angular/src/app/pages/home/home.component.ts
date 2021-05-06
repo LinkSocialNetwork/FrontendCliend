@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { AppComponent } from 'src/app/app.component';
 import { NavbarComponent } from 'src/app/shared/components/navbar/navbar.component';
 import { User } from 'src/app/shared/model/User';
 import { LoginService } from 'src/app/shared/services/login.service';
@@ -25,7 +24,6 @@ export class HomeComponent implements OnInit {
 
     this.loginService.getLoggedInUser().subscribe(
       data =>{
-        // info=data;
         
         if(data==null){
           this.router.navigate(['/login']);
@@ -34,7 +32,6 @@ export class HomeComponent implements OnInit {
       }
     )
 
-    //this.loginService.logoutUser().subscribe();
   }
 
   following: User[] = [];

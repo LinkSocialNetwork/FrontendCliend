@@ -30,7 +30,6 @@ export class PostService {
   
     let url:string="http://localhost:9080/api/postservice/post";
     console.log("New post", post);
-    // post.user = currentUser;
     return this.myHttpCli.post<string>(url,post,{withCredentials:true});
   }
   updatePost(post:Post):Observable<string>{

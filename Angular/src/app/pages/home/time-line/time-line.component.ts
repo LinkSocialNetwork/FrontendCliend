@@ -1,6 +1,4 @@
-import { Component, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
-import { Comments } from 'src/app/shared/model/Comments';
-import { Like } from 'src/app/shared/model/LIke';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { Post } from 'src/app/shared/model/Post';
 import { User } from 'src/app/shared/model/User';
 import { CommentService } from 'src/app/shared/services/comment.service';
@@ -10,7 +8,7 @@ import { ImageUploadService } from 'src/app/shared/services/image-upload.service
 import { LikeService } from 'src/app/shared/services/like.service';
 import { LoginService } from 'src/app/shared/services/login.service';
 import { PostService } from 'src/app/shared/services/post.service';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 
 import Swal from 'sweetalert2';
 import { FeedComponent } from 'src/app/shared/components/feed/feed.component';
@@ -42,11 +40,8 @@ export class TimeLineComponent implements OnInit,OnDestroy {
 
   constructor(private postservice:PostService,
     private getPostService:GetPostService,
-    private loginServ:LoginService,
-    private likeServ:LikeService,
     private imageServ:ImageUploadService,
     private getUserService:GetUserService,
-    private commentService:CommentService,
     public fb: FormBuilder
     ) {}
 
@@ -94,10 +89,6 @@ export class TimeLineComponent implements OnInit,OnDestroy {
   goToTop(){
     document.body.scrollTop = 0; // For Safari
     document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-    //gets everyone's posts
-    //this.getAllPosts();
-    // this.resetPage();
-    // this.getFollowingPosts();
   }
 
   getAllPosts():void{
@@ -105,9 +96,7 @@ export class TimeLineComponent implements OnInit,OnDestroy {
       data =>{
         let newPosts:Post[];
         newPosts=data;
-        console.log(newPosts)
         newPosts.sort((a,b) => (a.postedAt > b.postedAt) ? -1 : ((b.postedAt > a.postedAt) ? 1 : 0))
-        console.log(newPosts)
         this.posts= newPosts;
       }
     )
@@ -118,9 +107,7 @@ export class TimeLineComponent implements OnInit,OnDestroy {
       data =>{
         let newPosts:Post[];
         newPosts=data;
-        console.log("in getFollowingPosts" , newPosts)
         newPosts.sort((a,b) => (a.postedAt > b.postedAt) ? -1 : ((b.postedAt > a.postedAt) ? 1 : 0))
-        console.log(newPosts)
         for (const post of newPosts) {
           this.posts.push(post);
         }
@@ -159,7 +146,6 @@ export class TimeLineComponent implements OnInit,OnDestroy {
         Swal.showLoading();
       }
     });
-    //todo add current user to the post object and image url to
     let post:Post = {
       'postId':0,
       'user':this.currentUser,
@@ -179,7 +165,7 @@ export class TimeLineComponent implements OnInit,OnDestroy {
           post.postImageUrl=data.message;
           
           this.postservice.insertNewPost(post).subscribe(
-            data =>{
+            secondData =>{
               
               Swal.fire({ 
                 icon: 'success',
@@ -187,9 +173,6 @@ export class TimeLineComponent implements OnInit,OnDestroy {
                 timer: 4000,
                 showConfirmButton: true
               });
-              //gets everyone's post
-              //this.getAllPosts();
-              // this.resetPage();
               this.feedComponent.resetPage();
               this.postImage=null;
               this.postContrnt=null;
@@ -211,9 +194,6 @@ export class TimeLineComponent implements OnInit,OnDestroy {
             timer: 4000,
             showConfirmButton: true
           });
-          //gets everyone's posts
-          //this.getAllPosts();
-          // this.resetPage();
           this.feedComponent.resetPage();
           this.postImage=null;
           this.postContrnt=null;
@@ -243,7 +223,6 @@ export class TimeLineComponent implements OnInit,OnDestroy {
   }
 
   refreshNavbar(): void{
-    console.log("Refresh reached timeline");
     this.refreshNav.emit();
   }
   

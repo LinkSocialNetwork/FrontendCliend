@@ -1,5 +1,4 @@
-import { ThrowStmt } from '@angular/compiler';
-import { AfterViewChecked, AfterViewInit, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewChecked, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserWithImg } from 'src/app/shared/model/UserWithImg';
@@ -37,8 +36,8 @@ export class ChatComponent implements OnInit,OnDestroy, AfterViewChecked{
   lastMsgSender: string;
   userInput = new FormControl('');
   onlineUsers:UserWithImg[];
-  typingUsers:String[];
-  lastThreeTyping:String[] = [];
+  typingUsers:string[];
+  lastThreeTyping:string[] = [];
   overFlowTypers:number;
   verbToUse:string = "is";
 
@@ -54,9 +53,7 @@ export class ChatComponent implements OnInit,OnDestroy, AfterViewChecked{
 
   ngOnInit(): void {
     this.loginService.getLoggedInUser().subscribe(
-      data =>{
-        // info=data;
-        
+      data =>{        
         if(data==null){
           this.router.navigate(['/login']);
         }
@@ -80,7 +77,6 @@ export class ChatComponent implements OnInit,OnDestroy, AfterViewChecked{
       }
     )
     this.connect();
-    //this.sendStatus();
     let container = document.getElementById("msgContainer");
     container.scrollTop = container.scrollHeight;
     
@@ -91,7 +87,6 @@ export class ChatComponent implements OnInit,OnDestroy, AfterViewChecked{
   ngOnDestroy(): void {
     
     this.sendDisconnect();
-    console.log("ng destroy");
     window.removeEventListener("unload", this.sendDisconnect.bind(this));
     
   }
@@ -99,7 +94,6 @@ export class ChatComponent implements OnInit,OnDestroy, AfterViewChecked{
   logoutAndDisconnect(): void {
     
     this.sendDisconnect();
-    console.log("logout and disconnect");
     
     
   }
@@ -143,9 +137,6 @@ export class ChatComponent implements OnInit,OnDestroy, AfterViewChecked{
   handleMessage(message) {
     this.sendUserStoppedTyping();
     this.allMessages.push(message);
-    console.log(this.allMessages);
-    console.log(message.sender);
-    console.log(message.text);
   }
 
   sendStatus() {
@@ -205,8 +196,6 @@ export class ChatComponent implements OnInit,OnDestroy, AfterViewChecked{
     else {
       this.lastThreeTyping = this.typingUsers.slice(this.typingUsers.length-3, this.typingUsers.length-1);
     }
-    console.log("typingUsers"+this.typingUsers);
-    console.log("lastThreeTyping"+this.lastThreeTyping);
 
     if(this.typingUsers.length > 1)
       this.verbToUse = "are";

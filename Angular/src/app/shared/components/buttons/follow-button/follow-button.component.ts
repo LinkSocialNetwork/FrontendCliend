@@ -50,7 +50,6 @@ export class FollowButtonComponent implements OnInit {
 
     this.disabled = true;
     this.userService.followUser(follow).subscribe(data => {
-      console.log(data)
     })
   }
 

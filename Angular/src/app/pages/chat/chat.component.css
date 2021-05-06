@@ -62,6 +62,7 @@
   height: 100%;
   padding-right: 10px;
   padding-top: 19px;
+  cursor:pointer;
 }
 #ms-menu-trigger i {
   font-size: 21px;
@@ -186,17 +187,7 @@
 .ms-body{
   background:#fff;    
 }
-#ms-menu-trigger {
-  user-select: none;
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 50px;
-  height: 100%;
-  padding-right: 10px;
-  padding-top: 19px;
-  cursor:pointer;
-}
+
 #ms-menu-trigger, .message-feed.right {
   text-align: right;
 }
