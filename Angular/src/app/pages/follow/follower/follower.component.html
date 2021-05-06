@@ -1,0 +1,51 @@
+<div *ngFor="let u of followers">{{currentUser.userName}}
+
+    <div class="container-fluid mt--7">
+        <div class="row">
+          <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
+            <div class="card card-profile shadow">
+              <div class="row justify-content-center">
+                <div class="col-lg-3 order-lg-2">
+                  <div class="card-profile-image">
+                    <a href="#">
+                      <img class="rounded-circle" *ngIf="selectedUser" [src]="selectedUser?.profileImg" alt="" onerror="this.src='../assets/logo.png'" >
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <br>
+              <div class="card-body pt-0 pt-md-4">
+                <div class="row">
+                  <div class="col">
+                    
+                  </div>
+                </div>
+                <br><br><br><br>
+                <div class="text-center">
+                  <h3>
+                    {{u?.firstName +" "+ u?.lastName}}
+                  </h3>
+                  <div class="h5 font-weight-300">
+                      {{u?.email}}
+                  </div>
+                  
+                  <div *ngIf="u.userID">
+                    <i class="ni education_hat mr-2"></i>@{{u?.userName}}
+                  </div>
+
+
+                  <app-buttons [users]="followers" [selectedUser]="u" [currentUser]="currentUser" [searchForm]="searchForm" [isFollowing]="isFollowing" #buttonsComponent></app-buttons>
+
+
+                  <hr class="my-4">
+                  <p>{{u?.bio}}</p>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+
+      </div>
+      
+    </div>
+</div>

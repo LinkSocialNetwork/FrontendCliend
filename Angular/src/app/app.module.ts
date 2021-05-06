@@ -24,7 +24,11 @@ import { FeedComponent } from './shared/components/feed/feed.component';
 import { UsergeneralinfoComponent } from './pages/profile/usergeneralinfo/usergeneralinfo.component';
 import { UserpasswordinfoComponent } from './pages/profile/userpasswordinfo/userpasswordinfo.component';
 import { UsernameinfoComponent } from './pages/profile/usernameinfo/usernameinfo.component';
+import { FollowComponent } from './pages/follow/follow.component';
+import { FollowingComponent } from './pages/follow/following/following.component';
+import { FollowerComponent } from './pages/follow/follower/follower.component';
 import { AddPostComponent } from './shared/components/add-post/add-post.component';
+import { ButtonsComponent } from './shared/components/buttons/buttons.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +49,11 @@ import { AddPostComponent } from './shared/components/add-post/add-post.componen
     UsergeneralinfoComponent,
     UserpasswordinfoComponent,
     UsernameinfoComponent,
-    AddPostComponent
+    FollowComponent,
+    FollowingComponent,
+    FollowerComponent,
+    AddPostComponent,
+    ButtonsComponent
   ],
   imports: [
     BrowserModule,

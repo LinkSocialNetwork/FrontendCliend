@@ -1,0 +1,3 @@
+<app-navbar #NavbarComponent active="home"></app-navbar>
+<app-follower *ngIf="currentFollowType == 'followers'" [followers] = "followers" [currentUser]="currentUser"></app-follower>
+<app-following *ngIf="currentFollowType == 'following'" [following] = "following" [currentUser]="currentUser"></app-following>

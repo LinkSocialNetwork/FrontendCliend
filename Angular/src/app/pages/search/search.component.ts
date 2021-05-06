@@ -1,6 +1,7 @@
 import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ButtonsComponent } from 'src/app/shared/components/buttons/buttons.component';
 import { FeedComponent } from 'src/app/shared/components/feed/feed.component';
 import { Like } from 'src/app/shared/model/LIke';
 import { Post } from 'src/app/shared/model/Post';
@@ -40,6 +41,9 @@ export class SearchComponent implements OnInit {
     userName: '',
   });
 
+  @ViewChild("buttonsComponent")
+  buttonsComponent: ButtonsComponent
+
   page: number = 0;
 
   constructor(
@@ -67,24 +71,24 @@ export class SearchComponent implements OnInit {
     });
   }
 
-  toggleFollowing(bool: boolean) {
-    this.isFollowing = !this.isFollowing;
-  }
+  // toggleFollowing(bool: boolean) {
+  //   this.isFollowing = !this.isFollowing;
+  // }
 
   selectUser() {
     for (const user of this.users) {
       if (user.userName == this.searchForm.value.userName) {
         this.selectedUser = user;
-        //verify user is following selected user
-        this.userServe
-          .getFollowers(this.selectedUser.userID)
-          .subscribe((data) => {
-            let found = data.find(
-              (element) => element.userID === this.currentUser.userID
-            );
-            if (found) this.isFollowing = true;
-            else this.isFollowing = false;
-          });
+        // //verify user is following selected user
+        // this.userServe
+        //   .getFollowers(this.selectedUser.userID)
+        //   .subscribe((data) => {
+        //     let found = data.find(
+        //       (element) => element.userID === this.currentUser.userID
+        //     );
+        //     if (found) this.isFollowing = true;
+        //     else this.isFollowing = false;
+        //   });
       }
     }
   }
