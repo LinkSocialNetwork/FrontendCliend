@@ -19,6 +19,8 @@ export class UserpasswordinfoComponent implements OnInit {
 
   constructor(private userService: UserService) { }
 
+  ngOnInit(): void {
+  }
 
   updatePassword(){
     //form validation

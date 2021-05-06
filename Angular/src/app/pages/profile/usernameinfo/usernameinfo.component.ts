@@ -16,6 +16,8 @@ export class UsernameinfoComponent implements OnInit {
 
   constructor(private userService: UserService) { }
 
+  ngOnInit(): void {
+  }
 
   /* update user */
   updateUser(){

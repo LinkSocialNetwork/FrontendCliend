@@ -21,7 +21,8 @@ export class UsergeneralinfoComponent implements OnInit {
   constructor(private imageServ: ImageUploadService, private userService: UserService) { }
 
 
-
+  ngOnInit(): void {
+  }
 
 
   // Basically a ngModel for the updatedImage field
