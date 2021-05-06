@@ -2,6 +2,21 @@
 <div class="container-fluid">
   <div style="padding-top: 100px;" class="row">
       <div class="col-md-4 component-border"><app-user-info (newFollowingEmitter)="udpateFollowingList($event)"></app-user-info></div>
-      <div class="col-md-8"><app-time-line  (refreshNav)='refreshNavbar()' [following]="this.following"></app-time-line></div>
+      <div class="col-md-8">
+        <div class="component-border">
+          <app-add-post (refreshFeed)='feedComponent.resetPage()' ></app-add-post>
+        </div>
+        <div class="component-border">
+          <app-feed
+            (refreshNav)="refreshNavbar()"
+            [posts]="posts"
+            [currentUser]="currentUser"
+            [notSpecificUser]="false"
+            #feedComponent
+          ></app-feed>
+        </div>
+      </div>
+
+
     </div>
 </div>
