@@ -48,9 +48,9 @@ export class ButtonsComponent implements OnInit, OnChanges {
   }
 
   selectUser() {
-    for (const user of this.users) {
-      if (user.userName == this.searchForm.value.userName) {
-        this.selectedUser = user;
+    // for (const user of this.users) {
+    //   if (user.userName == this.searchForm.value.userName) {
+    //     this.selectedUser = user;
         //verify user is following selected user
         this.userServe
           .getFollowers(this.selectedUser.userID)
@@ -61,7 +61,7 @@ export class ButtonsComponent implements OnInit, OnChanges {
             if (found) this.isFollowing = true;
             else this.isFollowing = false;
           });
-      }
-    }
+    //   }
+    // }
   }
 }
