@@ -25,7 +25,7 @@
 
 .postCard{
     animation-duration: 2s;
-    animation-name: slide-top; 
+    animation-name: slide-top;
 }
 
 @keyframes slidein {
@@ -33,13 +33,13 @@
       margin-left: 100%;
       width: 200%;
     }
-  
+
     75% {
       font-size: 200%;
       margin-left: 50%;
       width: 150%;
     }
-  
+
     to {
       margin-left: 0%;
       width: 100%;
@@ -71,7 +71,7 @@
     position: relative;
     overflow: hidden;
     width: 100%;
-    
+
   }
   .imagePreview{
     max-width: 400px;
@@ -81,7 +81,7 @@
     margin-right: auto;
     margin-bottom: 2em;
   }
-  
+
   /* Then style the iframe to fit in the container div with full height and width */
   .responsive-iframe {
     position: absolute;
@@ -114,7 +114,7 @@
     border-radius: 10px; /* Rounded corners */
     font-size: 18px; /* Increase font size */
   }
-  
+
   #topButton:hover {
     background-color: #555; /* Add a dark-grey background on hover */
   }
@@ -185,12 +185,12 @@
     height: 40px;
     margin: 0px 10px;
     object-fit: cover;
-    width: 40px;  
+    width: 40px;
   }
    .box-new-comment > .content {
-    
+
     margin: 0 0 0 52px;
-    
+
     padding: 0;
     position: relative;
     width: initial;
@@ -202,7 +202,7 @@
     background: transparent;
     display: inline-block;
     height: 20px;
-    
+
     position: relative;
     vertical-align: middle;
     width: 100%;

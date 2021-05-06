@@ -15,20 +15,21 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { FeedComponent } from 'src/app/shared/components/feed/feed.component';
 
-
-
 @Component({
-  selector: 'app-time-line',
-  templateUrl: './time-line.component.html',
-  styleUrls: ['./time-line.component.css']
+  selector: 'app-add-post',
+  templateUrl: './add-post.component.html',
+  styleUrls: ['./add-post.component.css']
 })
-export class TimeLineComponent implements OnInit,OnDestroy {
+export class AddPostComponent implements OnInit {
 
   @Input()
   following:User[]=[];
 
   @Output()
   refreshNav: EventEmitter<void> = new EventEmitter();
+
+  @Output()
+  refreshFeed: EventEmitter<void> = new EventEmitter();
 
   page:number = 0;
 
@@ -63,8 +64,6 @@ export class TimeLineComponent implements OnInit,OnDestroy {
   }
 
 
-  @ViewChild('feedComponent')
-  feedComponent:FeedComponent;
 
   scroll = (event): void => {
     const topButton = document.getElementById("topButton");
@@ -183,7 +182,7 @@ export class TimeLineComponent implements OnInit,OnDestroy {
                 timer: 4000,
                 showConfirmButton: true
               });
-              this.feedComponent.resetPage();
+              this.refreshFeed.emit();
               this.postImage=null;
               this.postContrnt=null;
               this.youtubeUrl=null;
@@ -204,7 +203,7 @@ export class TimeLineComponent implements OnInit,OnDestroy {
             timer: 4000,
             showConfirmButton: true
           });
-          this.feedComponent.resetPage();
+          this.refreshFeed.emit();
           this.postImage=null;
           this.postContrnt=null;
           this.youtubeUrl=null;

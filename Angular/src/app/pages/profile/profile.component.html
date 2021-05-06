@@ -10,7 +10,7 @@
               <div class="card-profile-image">
                 <img
                   onerror="this.src='../assets/logo.png'"
-                  [src]="currentUser?.profileImg"
+                  [src]="profileUser?.profileImg"
                   class="big-rounded-circle"
                 />
               </div>
@@ -20,15 +20,15 @@
           <div class="card-body pt-0 pt-md-4">
             <div class="text-center" style="padding-top: 100px">
               <h3>
-                {{ currentUser?.firstName + " " + currentUser?.lastName }}
+                {{ profileUser?.firstName + " " + profileUser?.lastName }}
               </h3>
               <div>
                 <i class="ni education_hat mr-2"></i>@{{
-                  currentUser?.userName
+                  profileUser?.userName
                 }}
               </div>
 
-              <p>{{ currentUser?.bio }}</p>
+              <p>{{ profileUser?.bio }}</p>
 
               <hr class="my-4" />
 
@@ -49,6 +49,7 @@
               class="nav nav-tabs card-header-tabs justify-content-center"
               id="myTab"
             >
+
               <li class="nav-item">
                 <a
                   class="nav-link"
@@ -72,11 +73,11 @@
               <div class="card bg-secondary shadow">
                 <div class="card-body">
                   <app-usergeneralinfo
-                    [user]="currentUser"
+                    [user]="profileUser"
                   ></app-usergeneralinfo>
-                  <app-usernameinfo [user]="currentUser"></app-usernameinfo>
+                  <app-usernameinfo [user]="profileUser"></app-usernameinfo>
                   <app-userpasswordinfo
-                    [user]="currentUser"
+                    [user]="profileUser"
                   ></app-userpasswordinfo>
                 </div>
               </div>
@@ -111,7 +112,7 @@
                   <div class="row">
                     <div class="col-md-12">
                       <app-feed
-                        [profileUser]="currentUser"
+                        [profileUser]="profileUser"
                         [notSpecificUser]="true"
                       ></app-feed>
                     </div>

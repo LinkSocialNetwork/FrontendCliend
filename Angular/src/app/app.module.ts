@@ -25,6 +25,7 @@ import { FeedComponent } from './shared/components/feed/feed.component';
 import { UsergeneralinfoComponent } from './pages/profile/usergeneralinfo/usergeneralinfo.component';
 import { UserpasswordinfoComponent } from './pages/profile/userpasswordinfo/userpasswordinfo.component';
 import { UsernameinfoComponent } from './pages/profile/usernameinfo/usernameinfo.component';
+import { AddPostComponent } from './shared/components/add-post/add-post.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { UsernameinfoComponent } from './pages/profile/usernameinfo/usernameinfo
     FeedComponent,
     UsergeneralinfoComponent,
     UserpasswordinfoComponent,
-    UsernameinfoComponent
+    UsernameinfoComponent,
+    AddPostComponent
   ],
   imports: [
     BrowserModule,
