@@ -37,15 +37,6 @@
                   </div>
                 </a>
               </div>
-
-              <!-- <a class="list-group-item media" href="">
-                            <div class="pull-left">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="" class="img-avatar">
-                            </div>
-                            <div class="media-body">
-                                <small class="list-group-item-heading">Davil Parnell</small>
-                            </div>
-                        </a> -->
             </div>
           </div>
           <div class="action-header clearfix" id="chatHeader">
@@ -77,7 +68,7 @@
                   </div>
                   <small class="mf-date">
                     {{ chatmessage.sender }} at {{ chatmessage.time }}
-                    <i class="fa fa-clock-o"></i
+                    <em class="fa fa-clock-o"></em
                   ></small>
                 </div>
               </div>
@@ -97,7 +88,7 @@
                     </div>
                     <small class="mf-date">
                       {{ chatmessage.sender }} at {{ chatmessage.time }}
-                      <i class="fa fa-clock-o"></i
+                      <em class="fa fa-clock-o"></em
                     ></small>
                   </div>
                 </div>
@@ -119,7 +110,6 @@
                 <div></div>
                 <div></div>
               </span>
-              <!-- <span class= "loader-inner ball-pulse" *ngIf="typingUsers.length>0"> {{verbToUse}} typing..</span> -->
             </div>
           </div>
           <!-- <br> -->
@@ -134,7 +124,7 @@
                 (blur)="sendUserStoppedTyping()"
               />
               <button type="submit" (click)="sendMessage()">
-                <i class="fa fa-paper-plane-o"></i>
+                <em class="fa fa-paper-plane-o"></em>
               </button>
             </form>
           </div>
