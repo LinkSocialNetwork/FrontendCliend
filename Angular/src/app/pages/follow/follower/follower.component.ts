@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { User } from 'src/app/shared/model/User';
+import { LoginService } from 'src/app/shared/services/login.service';
 import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
@@ -24,7 +25,7 @@ export class FollowerComponent implements OnInit {
 
   constructor(    
     private formBuilder: FormBuilder,
-    private userServe: UserService
+    private loginServ: LoginService
     ) { }
 
   ngOnInit(): void {

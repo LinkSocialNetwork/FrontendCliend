@@ -40,7 +40,7 @@ export class ButtonsComponent implements OnInit, OnChanges {
   }
 
   
-  @Input()
+  // @Input()
   isFollowing: boolean = true;
 
   toggleFollowing(bool: boolean) {

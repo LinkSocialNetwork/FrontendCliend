@@ -11,10 +11,10 @@
                 <a href="#">
                   <img
                     class="rounded-circle"
-                    *ngIf="selectedUser"
-                    [src]="selectedUser?.profileImg"
+                    *ngIf="u"
+                    [src]="u?.profileImg"
                     alt=""
-                    onerror="this.src='../../../../assets/logo.png'"
+                    onerror="this.src='../../assets/logo.png'"
                   />
                 </a>
               </div>
