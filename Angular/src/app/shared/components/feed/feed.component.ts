@@ -99,6 +99,9 @@ export class FeedComponent implements OnInit, OnChanges, OnDestroy {
    * this will make the request to the back-end to get posts (used in addPage() and resetPage())
    */
   getFollowingPosts():void{
+    if(this.currentUser===undefined){
+      return;
+    }
     this.getPostService.getUsersFollowingPosts(this.currentUser.userID,this.page).subscribe(
       data =>{
         let newPosts:Post[];

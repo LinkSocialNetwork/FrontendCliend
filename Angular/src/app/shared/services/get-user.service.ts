@@ -23,11 +23,10 @@ export class GetUserService {
 
   getCurrentUser(): Observable<User> {
     let authtoken = this.cookieService.getCookie("token")
-    console.log(authtoken); 
     return this.myHttpCli.get<User>(`http://localhost:9080/api/userservice/checkToken`, {
       headers: {
         token: authtoken
       }, withCredentials:true
     })}
-  
+
 }
