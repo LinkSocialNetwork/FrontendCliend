@@ -119,7 +119,7 @@ export class FeedComponent implements OnInit, OnChanges, OnDestroy {
   getSpecificUserPosts():void{
     this.getPostService.getPostsCreatedByUser(this.profileUser.userID,this.page).subscribe(
       data =>{
-        let newPosts:Post[];
+        let newPosts: Post[];
         newPosts=data;
         newPosts.sort((a,b) => (a.postedAt > b.postedAt) ? -1 : ((b.postedAt > a.postedAt) ? 1 : 0))
         for (const post of newPosts) {
@@ -137,4 +137,25 @@ export class FeedComponent implements OnInit, OnChanges, OnDestroy {
 
   //---------------------------------------------------------------------------------------------------------------//
 
+  goToTop(){
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+  }
+
+  //---------------------------------------------------------------------------------------------------------------//
+
+  filterPosts(event: any){
+    let matcher = new RegExp(event.target.value, "gi");
+
+    for (var i=0;i<document.getElementsByClassName("postHolder").length;i++) {
+      if (
+        matcher.test(document.getElementsByClassName("posttext")[i].innerHTML)
+      ) {
+        (<HTMLElement>document.getElementsByClassName("postHolder")[i]).style.display="";
+      } else {
+        (<HTMLElement>document.getElementsByClassName("postHolder")[i]).style.display="none";
+      }
+    }
+
+  }
 }

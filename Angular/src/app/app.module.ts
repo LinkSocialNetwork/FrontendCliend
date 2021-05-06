@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/login/login.component';
-import { TimeLineComponent } from './pages/home/time-line/time-line.component';
 import { HomeComponent } from './pages/home/home.component';
 import { UserInfoComponent } from './pages/home/user-info/user-info.component';
 import {HttpClientModule } from '@angular/common/http';
@@ -28,12 +27,12 @@ import { UsernameinfoComponent } from './pages/profile/usernameinfo/usernameinfo
 import { FollowComponent } from './pages/follow/follow.component';
 import { FollowingComponent } from './pages/follow/following/following.component';
 import { FollowerComponent } from './pages/follow/follower/follower.component';
+import { AddPostComponent } from './shared/components/add-post/add-post.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    TimeLineComponent,
     HomeComponent,
     UserInfoComponent,
     ProfileComponent,
@@ -51,7 +50,8 @@ import { FollowerComponent } from './pages/follow/follower/follower.component';
     UsernameinfoComponent,
     FollowComponent,
     FollowingComponent,
-    FollowerComponent
+    FollowerComponent,
+    AddPostComponent
   ],
   imports: [
     BrowserModule,
