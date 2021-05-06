@@ -7,26 +7,26 @@
       <ul class="navbar-nav mr-auto">
         <li id="home" [ngClass]="'nav-item '+ (active === 'home' ? 'active' : '')">
           <a class="nav-link" (click)="activate('home')" routerLink="/home">
-            <i class="fa fa-home"></i>
+            <em class="fa fa-home"></em>
             Home
             <span class="sr-only">(current)</span>
             </a>
         </li>
         <li id="profile" [ngClass]="'nav-item '+ (active === 'profile' ? 'active' : '')">
           <a class="nav-link" (click)="activate('profile')" routerLink="/profile">
-            <i class="fa fa-user"></i>
+            <em class="fa fa-user"></em>
             Profile
           </a>
         </li>
         <li id="chatroom" [ngClass]="'nav-item '+ (active === 'chatroom' ? 'active' : '')">
             <a class="nav-link" (click)="activate('chatroom')" routerLink="/chatroom">
-              <i class="fa fa-comment"></i>
+              <em class="fa fa-comment"></em>
               Chat Room
             </a>
           </li>
           <li id="search" [ngClass]="'nav-item '+ (active === 'search' ? 'active' : '')">
             <a class="nav-link" (click)="activate('search')" routerLink="/search">
-              <i class="fa fa-search"></i>
+              <em class="fa fa-search"></em>
               Users Search
             </a>
           </li>
@@ -73,12 +73,12 @@
                 <h6 class="text-overflow m-0">Welcome!</h6>
               </div>
               <a routerLink="/profile" class="dropdown-item">
-                <i class="ni ni-single-02"></i>
+                <em class="ni ni-single-02"></em>
                 <span>My profile</span>
               </a>
               <div class="dropdown-divider"></div>
               <button (click)="logout()" class="dropdown-item">
-                <i class="ni ni-user-run"></i>
+                <em class="ni ni-user-run"></em>
                 <span>Logout</span>
               </button>
             </div>

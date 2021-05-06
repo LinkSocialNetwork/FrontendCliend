@@ -60,7 +60,7 @@
                         <div class="mf-content">
                             {{chatmessage.text}}
                         </div>
-                        <small class="mf-date"> {{ chatmessage.sender }} at {{chatmessage.time}} <i class="fa fa-clock-o"></i></small>
+                        <small class="mf-date"> {{ chatmessage.sender }} at {{chatmessage.time}} <em class="fa fa-clock-o"></em></small>
                     </div>
                 </div>
                 <ng-template #rightMsgBox>
@@ -72,7 +72,7 @@
                             <div class="mf-content">
                                 {{ chatmessage.text }}
                             </div>
-                            <small class="mf-date"> {{ chatmessage.sender }} at {{ chatmessage.time }}  <i class="fa fa-clock-o"></i></small>
+                            <small class="mf-date"> {{ chatmessage.sender }} at {{ chatmessage.time }}  <em class="fa fa-clock-o"></em></small>
                         </div>
                     </div>
                 </ng-template>
@@ -89,7 +89,7 @@
 		<div class="msb-reply">
             <form>
                 <input type="text" [(ngModel)]="messagefield" class="form-control" name="message" (keyup)="sendNewUserTyping()" (blur)="sendUserStoppedTyping()">
-			    <button type="submit" (click)="sendMessage()"><i class="fa fa-paper-plane-o"></i></button>
+			    <button type="submit" (click)="sendMessage()"><em class="fa fa-paper-plane-o"></em></button>
             </form>
             
 		</div>
