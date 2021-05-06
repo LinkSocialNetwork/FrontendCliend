@@ -10,7 +10,7 @@ import { SearchComponent } from './pages/search/search.component';
 const routes: Routes = [
 {path: 'login', component:LoginComponent},
 {path: 'home', component:HomeComponent},
-{path: 'profile', component:ProfileComponent},
+{path: 'profile/:id', component:ProfileComponent},
 {path: 'chatroom', component: ChatComponent},
 {path: 'search', component: SearchComponent},
 {path:'',redirectTo:'login',pathMatch:'full'},
