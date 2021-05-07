@@ -15,7 +15,13 @@
             />
           </div>
           <div class="ml-2">
-            <div style="cursor: pointer" routerLink="/profile/{{ post?.user?.userID }}" class="h5 m-0">@{{ post?.user?.userName }}</div>
+            <div
+              style="cursor: pointer"
+              routerLink="/profile/{{ post?.user?.userID }}"
+              class="h5 m-0"
+            >
+              @{{ post?.user?.userName }}
+            </div>
             <div class="h7 text-muted">
               {{ post?.user?.firstName }} {{ post?.user?.lastName }}
             </div>
@@ -41,7 +47,6 @@
         ></iframe>
       </div>
     </div>
-
     <div class="card-footer" *ngIf="currentUser">
       <span *ngIf="checkIfPostIsLiked(post); else postIsNotLiked">
         <button
@@ -69,7 +74,6 @@
         <span class="badge badge-danger">{{ post?.comments.length }}</span></a
       >
     </div>
-
     <div class="box-comments">
       <div *ngFor="let comment of post.comments" class="comment">
         <img
@@ -92,7 +96,6 @@
         </div>
       </div>
     </div>
-
     <div class="box-new-comment" *ngIf="currentUser">
       <img
         onerror="this.src='../assets/logo.png'"

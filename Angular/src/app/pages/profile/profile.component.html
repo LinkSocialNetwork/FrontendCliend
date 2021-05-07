@@ -1,13 +1,11 @@
-<main [attr.theme]='theme'>
-  <div class = "mainbg">
-  </div>
-  <app-navbar (toggleTheme)='toggleTheme()' active="profile"></app-navbar>
+<main [attr.theme]="theme">
+  <div class="mainbg"></div>
+  <app-navbar (toggleTheme)="toggleTheme()" active="profile"></app-navbar>
   <div class="main-content">
     <div class="container-fluid" style="padding-top: 150px">
       <div class="row">
         <div class="col-xl-6 order-xl-2 mb-5 mb-xl-0">
           <div class="component-border">
-
             <div class="card card-profile shadow">
               <div class="row justify-content-center">
                 <div class="col-lg-3 order-lg-2">
@@ -32,11 +30,8 @@
                       profileUser?.userName
                     }}
                   </div>
-
                   <p>{{ profileUser?.bio }}</p>
-
                   <hr class="my-4" />
-
                   <span class="followers-container">
                     <h6><a routerLink="/follow/followers">Followers</a></h6>
                     <h5>{{ followers?.length }}</h5>
@@ -50,7 +45,8 @@
 
                 <!---------------------------------- EDIT PROFILE INFO START  ---------------------------------------->
 
-                <ul *ngIf='editable'
+                <ul
+                  *ngIf="editable"
                   class="nav nav-tabs card-header-tabs justify-content-center"
                   id="myTab"
                 >
@@ -67,7 +63,6 @@
                     >
                   </li>
                 </ul>
-
                 <div
                   class="collapse tab-pane fade"
                   id="profileSetting"
@@ -85,7 +80,6 @@
                       ></app-userpasswordinfo>
                     </div>
                   </div>
-
                   <div class="py-4"></div>
                 </div>
               </div>
@@ -97,9 +91,11 @@
 
         <div class="col-xl-6 order-xl-1">
           <div class="component-border">
-            <app-add-post (refreshFeed)="feedComponent.resetPage()"></app-add-post>
+            <app-add-post
+              (refreshFeed)="feedComponent.resetPage()"
+            ></app-add-post>
           </div>
-          <div class=" shadow">
+          <div class="shadow">
             <div class="tab-content" id="myTabContent">
               <div
                 class="tab-pane fade show active"
@@ -107,14 +103,15 @@
                 role="tabpanel"
                 aria-labelledby="posts-tab"
               >
-              <div class="component-border">
-                <app-feed
-                  feedTitle="My Posts"
-                  #feedComponent
-                  [profileUser]="profileUser"
-                  [notSpecificUser]="true"
-                ></app-feed>
-              </div>
+                <div class="component-border">
+                  <app-feed
+                    feedTitle="My Posts"
+                    #feedComponent
+                    [posts]="posts"
+                    [profileUser]="profileUser"
+                    [notSpecificUser]="true"
+                  ></app-feed>
+                </div>
               </div>
             </div>
           </div>

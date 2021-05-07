@@ -40,12 +40,12 @@ export class HomeComponent implements OnInit {
     private router: Router,
     private getPostService: GetPostService,
     private getUserService: GetUserService,
-    public fb: FormBuilder,
+    public fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
-    if(window.localStorage.getItem('theme')!=undefined){
-      this.theme =window.localStorage.getItem('theme');
+    if (window.localStorage.getItem('theme') != undefined) {
+      this.theme = window.localStorage.getItem('theme');
     }
     this.loginService.getLoggedInUser().subscribe((data) => {
       if (data == null) {
@@ -108,14 +108,14 @@ export class HomeComponent implements OnInit {
       });
   }
 
-  toggleTheme(): void{
-    if(this.theme==='light'){
-      this.theme='dark';
+  toggleTheme(): void {
+    if (this.theme === 'light') {
+      this.theme = 'dark';
       window.localStorage['theme'] = this.theme;
       return;
     }
-    if(this.theme==='dark'){
-      this.theme='light';
+    if (this.theme === 'dark') {
+      this.theme = 'light';
       window.localStorage['theme'] = this.theme;
       return;
     }

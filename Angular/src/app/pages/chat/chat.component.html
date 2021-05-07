@@ -1,6 +1,6 @@
 <main [attr.theme]="theme">
   <div class="mainbg"></div>
-  <app-navbar (toggleTheme)='toggleTheme()' active="chatroom"></app-navbar>
+  <app-navbar (toggleTheme)="toggleTheme()" active="chatroom"></app-navbar>
   <div
     style="padding-top: 100px"
     class="container bootstrap snippets bootdey"
@@ -16,7 +16,6 @@
                   <span>Online</span>
                 </div>
               </div>
-
               <div class="list-group lg-alt DivWithScroll">
                 <div *ngFor="let newUser of onlineUsers">
                   <a class="list-group-item media" href="">
@@ -113,7 +112,6 @@
                 </span>
               </div>
             </div>
-            <!-- <br> -->
             <div>
               <form class="msb-reply" id="input">
                 <input

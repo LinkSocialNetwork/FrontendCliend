@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute} from '@angular/router';
+import { FeedComponent } from 'src/app/shared/components/feed/feed.component';
 import { Post } from 'src/app/shared/model/Post';
 import { User } from 'src/app/shared/model/User';
 import { GetUserService } from 'src/app/shared/services/get-user.service';
@@ -37,6 +38,9 @@ export class ProfileComponent implements OnInit {
 
   followers: User[];
   following: User[];
+
+  @ViewChild("feedComponent")
+  feedComponent: FeedComponent;
 
   // This will hold the updated profile pic file
   updatedImage: File = null;
