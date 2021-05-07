@@ -39,11 +39,12 @@ export class FeedComponent implements OnInit, OnChanges, OnDestroy {
     this.getUserService.getCurrentUser().subscribe(
       data=>{
         this.currentUser=data;
+        this.resetPage();
       })
   }
 
   ngOnChanges():void {
-    this.resetPage();
+    // this.resetPage();
   }
 
   ngOnDestroy(): void {
@@ -124,6 +125,7 @@ export class FeedComponent implements OnInit, OnChanges, OnDestroy {
     this.getPostService.getPostsCreatedByUser(this.profileUser.userID,this.page).subscribe(
       data =>{
         let newPosts: Post[];
+        console.log(data)
         newPosts=data;
         newPosts.sort((a,b) => (a.postedAt > b.postedAt) ? -1 : ((b.postedAt > a.postedAt) ? 1 : 0))
         for (const post of newPosts) {

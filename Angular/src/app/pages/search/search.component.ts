@@ -46,6 +46,9 @@ export class SearchComponent implements OnInit {
   @ViewChild("buttonsComponent")
   buttonsComponent: ButtonsComponent
 
+  @ViewChild("feedComponent")
+  feedComponent: FeedComponent;
+
   page: number = 0;
 
   constructor(
@@ -84,6 +87,7 @@ export class SearchComponent implements OnInit {
     for (const user of this.users) {
       if (user.userName == this.searchForm.value.userName) {
         this.selectedUser = user;
+        this.feedComponent.ngOnInit();
         // //verify user is following selected user
         // this.userServe
         //   .getFollowers(this.selectedUser.userID)
