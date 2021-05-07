@@ -93,6 +93,7 @@ export class SearchComponent implements OnInit {
     for (const user of this.users) {
       if (user.userName == this.searchForm.value.userName) {
         this.selectedUser = user;
+        this.feedComponent.ngOnInit();
       }
     }
   }
