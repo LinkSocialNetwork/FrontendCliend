@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Notifications } from '../../model/Notifications';
 import { User } from '../../model/User';
@@ -18,11 +18,14 @@ export class NavbarComponent implements OnInit {
   @Input()
   active: string = 'home';
 
+  @Output()
+  toggleTheme: EventEmitter<void> = new EventEmitter();
+
   constructor(
     private loginService: LoginService,
     private cookieService: GetCookieService,
     private router: Router,
-    private notificationServ: NotificationService
+    private notificationServ: NotificationService,
   ) {}
 
   title = 'Project2';
@@ -82,4 +85,9 @@ export class NavbarComponent implements OnInit {
         this.ngOnInit();
       });
   }
+
+  toggleDarkMode(): void{
+    this.toggleTheme.emit();
+  }
+
 }

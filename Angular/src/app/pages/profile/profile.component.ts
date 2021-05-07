@@ -56,6 +56,9 @@ export class ProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    if(window.localStorage.getItem('theme')!=undefined){
+      this.theme =window.localStorage.getItem('theme');
+    }
     this.router.params.subscribe((params) => {
       this.profileUser.userID = params['id'];
       this.getUserServ
@@ -79,6 +82,19 @@ export class ProfileComponent implements OnInit {
 
   toggleFollowing(bool: boolean) {
     this.isFollowing = !this.isFollowing;
+  }
+
+  toggleTheme(): void{
+    if(this.theme==='light'){
+      this.theme='dark';
+      window.localStorage['theme'] = this.theme;
+      return;
+    }
+    if(this.theme==='dark'){
+      this.theme='light';
+      window.localStorage['theme'] = this.theme;
+      return;
+    }
   }
 
 }

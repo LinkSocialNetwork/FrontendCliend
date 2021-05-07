@@ -1,7 +1,7 @@
 <main [attr.theme]='theme'>
   <div class = "mainbg">
   </div>
-  <app-navbar active="profile"></app-navbar>
+  <app-navbar (toggleTheme)='toggleTheme()' active="profile"></app-navbar>
   <div class="main-content">
     <div class="container-fluid" style="padding-top: 150px">
       <div class="row">

@@ -1,7 +1,7 @@
 <main [attr.theme]='theme'>
   <div class = "mainbg">
   </div>
-  <app-navbar active="search"></app-navbar>
+  <app-navbar (toggleTheme)='toggleTheme()' active="search"></app-navbar>
   <link
     href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
     rel="stylesheet"

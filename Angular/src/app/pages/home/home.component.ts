@@ -10,6 +10,7 @@ import { GetUserService } from 'src/app/shared/services/get-user.service';
 import { ImageUploadService } from 'src/app/shared/services/image-upload.service';
 import { LoginService } from 'src/app/shared/services/login.service';
 import { PostService } from 'src/app/shared/services/post.service';
+import { ThemeService } from 'src/app/shared/services/theme/theme.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -43,10 +44,13 @@ export class HomeComponent implements OnInit {
     private router: Router,
     private getPostService: GetPostService,
     private getUserService: GetUserService,
-    public fb: FormBuilder
+    public fb: FormBuilder,
   ) {}
 
   ngOnInit(): void {
+    if(window.localStorage.getItem('theme')!=undefined){
+      this.theme =window.localStorage.getItem('theme');
+    }
     this.loginService.getLoggedInUser().subscribe((data) => {
       if (data == null) {
         this.router.navigate(['/login']);
@@ -106,5 +110,18 @@ export class HomeComponent implements OnInit {
           this.posts.push(post);
         }
       });
+  }
+
+  toggleTheme(): void{
+    if(this.theme==='light'){
+      this.theme='dark';
+      window.localStorage['theme'] = this.theme;
+      return;
+    }
+    if(this.theme==='dark'){
+      this.theme='light';
+      window.localStorage['theme'] = this.theme;
+      return;
+    }
   }
 }

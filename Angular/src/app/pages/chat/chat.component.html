@@ -1,6 +1,6 @@
 <main [attr.theme]="theme">
   <div class="mainbg"></div>
-  <app-navbar active="chatroom"></app-navbar>
+  <app-navbar (toggleTheme)='toggleTheme()' active="chatroom"></app-navbar>
   <div
     style="padding-top: 100px"
     class="container bootstrap snippets bootdey"

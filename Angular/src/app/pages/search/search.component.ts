@@ -59,6 +59,9 @@ export class SearchComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    if(window.localStorage.getItem('theme')!=undefined){
+      this.theme =window.localStorage.getItem('theme');
+    }
     this.loginServ.getLoggedInUser().subscribe((data) => {
       if (data == null) {
         this.router.navigate(['/login']);
@@ -152,5 +155,18 @@ export class SearchComponent implements OnInit {
       }
     }
     return false;
+  }
+
+  toggleTheme(): void{
+    if(this.theme==='light'){
+      this.theme='dark';
+      window.localStorage['theme'] = this.theme;
+      return;
+    }
+    if(this.theme==='dark'){
+      this.theme='light';
+      window.localStorage['theme'] = this.theme;
+      return;
+    }
   }
 }

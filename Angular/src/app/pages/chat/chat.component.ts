@@ -54,6 +54,9 @@ export class ChatComponent implements OnInit,OnDestroy, AfterViewChecked{
   @ViewChild('scroll') private container: ElementRef;
 
   ngOnInit(): void {
+    if(window.localStorage.getItem('theme')!=undefined){
+      this.theme =window.localStorage.getItem('theme');
+    }
     this.loginService.getLoggedInUser().subscribe(
       data =>{
         // info=data;
@@ -217,5 +220,18 @@ export class ChatComponent implements OnInit,OnDestroy, AfterViewChecked{
       return false;
     }
     return true;
+  }
+
+  toggleTheme(): void{
+    if(this.theme==='light'){
+      this.theme='dark';
+      window.localStorage['theme'] = this.theme;
+      return;
+    }
+    if(this.theme==='dark'){
+      this.theme='light';
+      window.localStorage['theme'] = this.theme;
+      return;
+    }
   }
 }

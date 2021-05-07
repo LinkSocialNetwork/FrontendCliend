@@ -16,8 +16,9 @@ export class FollowComponent implements OnInit {
   currentUser: User = null;
   followers: User[];
   following: User[];
+  theme: string = 'light';
 
-  constructor(    
+  constructor(
     private router: ActivatedRoute,
     private userServ: UserService,
     private getUserServ: GetUserService,
@@ -25,6 +26,9 @@ export class FollowComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+    if(window.localStorage.getItem('theme')!=undefined){
+      this.theme =window.localStorage.getItem('theme');
+    }
     this.router.params.subscribe((params) => {
       this.currentFollowType = params['followType'];
       this.currentUser = this.loginService.getCurrent();
@@ -42,6 +46,19 @@ export class FollowComponent implements OnInit {
       });
 
 
+  }
+
+  toggleTheme(): void{
+    if(this.theme==='light'){
+      this.theme='dark';
+      window.localStorage['theme'] = this.theme;
+      return;
+    }
+    if(this.theme==='dark'){
+      this.theme='light';
+      window.localStorage['theme'] = this.theme;
+      return;
+    }
   }
 
 }
