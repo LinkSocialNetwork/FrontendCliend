@@ -23,8 +23,13 @@ import Swal from 'sweetalert2';
   styleUrls: ['./add-post.component.css'],
 })
 export class AddPostComponent implements OnInit {
+
+  //================================================= INPUT ====================================================//
+
   @Input()
   following: User[] = [];
+
+  //================================================== OUTPUT ==================================================//
 
   @Output()
   refreshNav: EventEmitter<void> = new EventEmitter();
@@ -32,12 +37,16 @@ export class AddPostComponent implements OnInit {
   @Output()
   refreshFeed: EventEmitter<void> = new EventEmitter();
 
+  //================================================== VARIABLES ==================================================//
+
   currentUser: User;
   postContrnt: string = null;
   youtubeUrl: string = null;
   postimg: string = null;
   postImage: File = null;
   imageURL: string;
+
+  //-============================================== CONSTRUCTOR / HOOKS =============================================//
 
   constructor(
     private postservice: PostService,
@@ -52,9 +61,13 @@ export class AddPostComponent implements OnInit {
     });
   }
 
+  //-=============================================== METHODS ====================================================//
+
   handleFileInput(files: FileList) {
     this.postImage = files.item(0);
   }
+
+  //---------------------------------------------------------------------------------------------------------------//
 
   showPreview(event) {
     const file = (event.target as HTMLInputElement).files[0];
@@ -65,6 +78,8 @@ export class AddPostComponent implements OnInit {
     reader.readAsDataURL(file);
     this.postImage = file;
   }
+
+  //---------------------------------------------------------------------------------------------------------------//
 
   addPost() {
     if (this.postContrnt.length < 5) {
@@ -120,7 +135,6 @@ export class AddPostComponent implements OnInit {
       file.append('file', this.postImage);
       this.imageServ.postImageUpload(file).subscribe((data) => {
         post.postImageUrl = data.message;
-
         this.postservice.insertNewPost(post).subscribe((data) => {
           Swal.fire({
             icon: 'success',
@@ -153,8 +167,13 @@ export class AddPostComponent implements OnInit {
     }
   }
 
+  //---------------------------------------------------------------------------------------------------------------//
+
   refreshNavbar(): void {
     console.log('Refresh reached timeline');
     this.refreshNav.emit();
   }
+
+  //---------------------------------------------------------------------------------------------------------------//
+
 }

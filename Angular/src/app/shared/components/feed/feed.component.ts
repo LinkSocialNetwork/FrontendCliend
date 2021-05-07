@@ -12,6 +12,8 @@ import { GetUserService } from '../../services/get-user.service';
 })
 export class FeedComponent implements OnInit, OnChanges, OnDestroy {
 
+  //================================================= INPUT ====================================================//
+
   @Input()
   posts:Post[];
 
@@ -27,11 +29,16 @@ export class FeedComponent implements OnInit, OnChanges, OnDestroy {
   @Input()
   feedTitle: string;
 
+  //================================================== OUTPUT ==================================================//
+
   @Output()
   refreshNav: EventEmitter<void> = new EventEmitter();
 
+  //================================================== VARIABLES ==================================================//
+
   page:number = 0;
 
+  //-============================================== CONSTRUCTOR / HOOKS =============================================//
 
   constructor(private getPostService:GetPostService,private getUserService:GetUserService) { }
 
@@ -39,7 +46,7 @@ export class FeedComponent implements OnInit, OnChanges, OnDestroy {
     this.getUserService.getCurrentUser().subscribe(
       data=>{
         this.currentUser=data;
-      })
+    })
   }
 
   ngOnChanges():void {
@@ -51,7 +58,8 @@ export class FeedComponent implements OnInit, OnChanges, OnDestroy {
     this.posts = [];
   }
 
-  //---------------------------------------------------------------------------------------------------------------//
+  //-=============================================== METHODS ====================================================//
+
 
   /**
    * this will make a request to get more posts when reach bottom of page

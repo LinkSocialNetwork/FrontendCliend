@@ -12,14 +12,24 @@ import { NotificationService } from '../../services/notification/notification.se
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
-  user: User;
-  notifications: Array<Notifications> = [];
+
+  //================================================= INPUT ====================================================//
 
   @Input()
   active: string = 'home';
 
+  //================================================== OUTPUT ==================================================//
+
   @Output()
   toggleTheme: EventEmitter<void> = new EventEmitter();
+
+  //================================================== VARIABLES ==================================================//
+
+  title = 'Project2';
+  user: User;
+  notifications: Array<Notifications> = [];
+
+  //-============================================== CONSTRUCTOR / HOOKS =============================================//
 
   constructor(
     private loginService: LoginService,
@@ -28,7 +38,6 @@ export class NavbarComponent implements OnInit {
     private notificationServ: NotificationService,
   ) {}
 
-  title = 'Project2';
   ngOnInit(): void {
     let authtoken = this.cookieService.getCookie('token');
     if (authtoken) {
@@ -41,6 +50,8 @@ export class NavbarComponent implements OnInit {
     }
   }
 
+  //-=============================================== METHODS ====================================================//
+
   getNotifications() {
     this.notificationServ
       .getAllNotifications(this.user.userID)
@@ -49,13 +60,14 @@ export class NavbarComponent implements OnInit {
       });
   }
 
-  logout() {
-    // this.chatCom.logoutAndDisconnect();
-    //this.webSocketAPI._sendDisconnect(this.user.userName);
+  //---------------------------------------------------------------------------------------------------------------//
 
+  logout() {
     this.cookieService.eraseCookie('token');
     this.router.navigate(['login']);
   }
+
+  //---------------------------------------------------------------------------------------------------------------//
 
   reloadCurrentRoute() {
     let currentUrl = this.router.url;
@@ -63,6 +75,8 @@ export class NavbarComponent implements OnInit {
       this.router.navigate([currentUrl]);
     });
   }
+
+  //---------------------------------------------------------------------------------------------------------------//
 
   activate(link: string) {
     console.log(link);
@@ -74,9 +88,10 @@ export class NavbarComponent implements OnInit {
     profile.setAttribute('class', 'nav-item');
     cahtRoom.setAttribute('class', 'nav-item');
     search.setAttribute('class', 'nav-item');
-
     document.getElementById(link).setAttribute('class', 'nav-item active');
   }
+
+  //---------------------------------------------------------------------------------------------------------------//
 
   clearAllNotifications(): void {
     this.notificationServ
@@ -86,8 +101,12 @@ export class NavbarComponent implements OnInit {
       });
   }
 
+  //---------------------------------------------------------------------------------------------------------------//
+
   toggleDarkMode(): void{
     this.toggleTheme.emit();
   }
+
+  //---------------------------------------------------------------------------------------------------------------//
 
 }

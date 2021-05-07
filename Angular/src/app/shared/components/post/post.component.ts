@@ -14,6 +14,7 @@ import { LoginService } from '../../services/login.service';
   styleUrls: ['./post.component.css'],
 })
 export class PostComponent implements OnInit {
+
   //================================================= INPUT ====================================================//
 
   @Input()
@@ -63,8 +64,6 @@ export class PostComponent implements OnInit {
     let commentText = (<HTMLInputElement>(
       document.getElementById(<string>(<unknown>valueOfPost.postId))
     )).value;
-
-    console.log('commentText= ' + commentText);
     if (commentText.length == 0) {
       Swal.fire({
         icon: 'warning',
@@ -74,7 +73,6 @@ export class PostComponent implements OnInit {
       });
       return;
     }
-
     let newComment: Comments = {
       commentId: 0,
       commentContent: commentText,
@@ -82,10 +80,7 @@ export class PostComponent implements OnInit {
       commentWriter: this.loginServ.getCurrent(),
       commentPost: valueOfPost,
     };
-
     this.commentService.insertNewComment(newComment).subscribe((data) => {
-      //gets everyone's post
-      //this.getAllPosts();
       this.resetPage.emit();
       this.getFollowingPosts.emit();
       this.loginServ.triggerRetrieveCurrent();
@@ -99,7 +94,6 @@ export class PostComponent implements OnInit {
     if (isLiked) {
       //if the Post is liked by the User it will call delete
       //first get the loggedInUser
-
       let loggedIn: User = this.loginServ.getCurrent();
       let valueOfLike: Like | null = null;
       for (var like of valueOfPost.usersWhoLiked) {
@@ -110,8 +104,6 @@ export class PostComponent implements OnInit {
         }
       }
       this.likeServ.deleteLike(valueOfLike).subscribe((data) => {
-        //gets everyone's post
-        //this.getAllPosts();
         this.resetPage.emit();
         this.getFollowingPosts.emit();
         this.loginServ.triggerRetrieveCurrent();
@@ -124,8 +116,6 @@ export class PostComponent implements OnInit {
       };
 
       this.likeServ.insertNewLike(newLike).subscribe((data) => {
-        //gets everyone's post
-        //this.getAllPosts();
         this.resetPage.emit();
         this.getFollowingPosts.emit();
         this.loginServ.triggerRetrieveCurrent();
@@ -133,4 +123,7 @@ export class PostComponent implements OnInit {
       });
     }
   }
+
+  //---------------------------------------------------------------------------------------------------------------//
+
 }

@@ -1,8 +1,7 @@
-import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ButtonsComponent } from 'src/app/shared/components/buttons/buttons.component';
-import { FeedComponent } from 'src/app/shared/components/feed/feed.component';
 import { Like } from 'src/app/shared/model/LIke';
 import { Post } from 'src/app/shared/model/Post';
 import { User } from 'src/app/shared/model/User';
@@ -10,7 +9,6 @@ import { GetPostService } from 'src/app/shared/services/get-post.service';
 import { GetUserService } from 'src/app/shared/services/get-user.service';
 import { LikeService } from 'src/app/shared/services/like.service';
 import { LoginService } from 'src/app/shared/services/login.service';
-import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
   selector: 'app-search',
@@ -18,9 +16,21 @@ import { UserService } from 'src/app/shared/services/user.service';
   styleUrls: ['./search.component.css'],
 })
 export class SearchComponent implements OnInit {
+  //================================================== VARIABLES ==================================================//
 
   theme: string = 'light';
+
+  // variable to check if user is following searched user
+  isFollowing: boolean = null;
+
   users: User[];
+
+  userPosts: Post[];
+
+  page: number = 0;
+
+  currentUser: User;
+
   selectedUser: User = {
     userID: 0,
     userName: '',
@@ -35,18 +45,15 @@ export class SearchComponent implements OnInit {
     lastName: '',
     following: [],
   };
-  currentUser: User;
-  /* variable to check if user is following searched user */
-  isFollowing: boolean = null;
-  userPosts: Post[];
+
   searchForm = this.formBuilder.group({
     userName: '',
   });
 
-  @ViewChild("buttonsComponent")
-  buttonsComponent: ButtonsComponent
+  @ViewChild('buttonsComponent')
+  buttonsComponent: ButtonsComponent;
 
-  page: number = 0;
+  //-============================================== CONSTRUCTOR / HOOKS =============================================//
 
   constructor(
     private formBuilder: FormBuilder,
@@ -54,13 +61,14 @@ export class SearchComponent implements OnInit {
     private getPostService: GetPostService,
     private loginServ: LoginService,
     private likeServ: LikeService,
-    private router: Router,
-    private userServe: UserService
+    private router: Router
   ) {}
 
+  //---------------------------------------------------------------------------------------------------------------//
+
   ngOnInit(): void {
-    if(window.localStorage.getItem('theme')!=undefined){
-      this.theme =window.localStorage.getItem('theme');
+    if (window.localStorage.getItem('theme') != undefined) {
+      this.theme = window.localStorage.getItem('theme');
     }
     this.loginServ.getLoggedInUser().subscribe((data) => {
       if (data == null) {
@@ -69,34 +77,23 @@ export class SearchComponent implements OnInit {
         this.currentUser = data;
       }
     });
-
     this.getUserService.getAllUsers().subscribe((data) => {
       this.users = data;
       this.page = 0;
     });
   }
 
-  // toggleFollowing(bool: boolean) {
-  //   this.isFollowing = !this.isFollowing;
-  // }
+  //-=============================================== METHODS ====================================================//
 
   selectUser() {
     for (const user of this.users) {
       if (user.userName == this.searchForm.value.userName) {
         this.selectedUser = user;
-        // //verify user is following selected user
-        // this.userServe
-        //   .getFollowers(this.selectedUser.userID)
-        //   .subscribe((data) => {
-        //     let found = data.find(
-        //       (element) => element.userID === this.currentUser.userID
-        //     );
-        //     if (found) this.isFollowing = true;
-        //     else this.isFollowing = false;
-        //   });
       }
     }
   }
+
+  //---------------------------------------------------------------------------------------------------------------//
 
   selectUserByKey(event: any) {
     for (const user of this.users) {
@@ -110,6 +107,8 @@ export class SearchComponent implements OnInit {
         this.userPosts = data;
       });
   }
+
+  //---------------------------------------------------------------------------------------------------------------//
 
   toggleLike(valueOfPost: Post, isLiked: boolean) {
     if (isLiked) {
@@ -125,7 +124,6 @@ export class SearchComponent implements OnInit {
           found = true;
           break;
         }
-
         if (found) {
           break;
         }
@@ -139,12 +137,13 @@ export class SearchComponent implements OnInit {
         user: this.currentUser,
         post: valueOfPost,
       };
-
       this.likeServ.insertNewLike(newLike).subscribe((data) => {
         this.loginServ.triggerRetrieveCurrent();
       });
     }
   }
+
+  //---------------------------------------------------------------------------------------------------------------//
 
   checkIfPostIsLiked(post: Post): boolean {
     let loggedInUser: User = this.currentUser;
@@ -157,16 +156,20 @@ export class SearchComponent implements OnInit {
     return false;
   }
 
-  toggleTheme(): void{
-    if(this.theme==='light'){
-      this.theme='dark';
+  //---------------------------------------------------------------------------------------------------------------//
+
+  toggleTheme(): void {
+    if (this.theme === 'light') {
+      this.theme = 'dark';
       window.localStorage['theme'] = this.theme;
       return;
     }
-    if(this.theme==='dark'){
-      this.theme='light';
+    if (this.theme === 'dark') {
+      this.theme = 'light';
       window.localStorage['theme'] = this.theme;
       return;
     }
   }
+
+  //---------------------------------------------------------------------------------------------------------------//
 }
