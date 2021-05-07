@@ -2,13 +2,13 @@ import { ThrowStmt } from '@angular/compiler';
 import { AfterViewChecked, AfterViewInit, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ChatMessage } from 'src/app/shared/model/ChatMessage';
 import { UserWithImg } from 'src/app/shared/model/UserWithImg';
 import { GetCookieService } from 'src/app/shared/services/get-cookie.service';
 import { GetUserService } from 'src/app/shared/services/get-user.service';
+import { LoginService } from 'src/app/shared/services/login.service';
 import { WebSocketAPI } from '../../api/WebSocketAPI';
-import { ChatMessage } from '../../shared/model/ChatMessage';
 
-import { LoginService } from '../../shared/services/login.service';
 
 
 @Component({

@@ -4,6 +4,7 @@ import { User } from '../../model/User';
 import { GetPostService } from '../../services/get-post.service';
 import { GetUserService } from '../../services/get-user.service';
 
+
 @Component({
   selector: 'app-feed',
   templateUrl: './feed.component.html',
