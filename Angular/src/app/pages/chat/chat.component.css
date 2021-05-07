@@ -224,7 +224,7 @@
 }
 
 #currentTyping {
-  background-color: white;
+  background-color: var(--primary-background);
   color: rgb(69, 189, 238);
   /* margin-bottom: 2px; */
   font-size: 22px;

@@ -14,11 +14,15 @@
   --primary-background: #242726;
   --secondary-background: #2f3337;
 
-  --primary-color: #FF4B2B;
-  --secondary-color: #FF416C;
+  --primary-color: #45bdee;
+  --secondary-color: #006cbb;
 
   --primary-text: #9fa6ad;;
   --secondary-text: #71787e;
+}
+
+*{
+  transition: background-color .2s ease-in;
 }
 
 html, body {
@@ -69,8 +73,8 @@ h3{
     padding: 10px;
     border-radius: 10px;
     margin-bottom: 15px;
-    background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);
-  	background: linear-gradient(to right, #FF4B2B, #FF416C);
+    background: -webkit-linear-gradient(to right, var(--primary-color), var(--secondary-color));
+  	background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
   }
 
 
