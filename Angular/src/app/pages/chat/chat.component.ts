@@ -18,6 +18,7 @@ import { WebSocketAPI } from '../../api/WebSocketAPI';
 })
 export class ChatComponent implements OnInit,OnDestroy, AfterViewChecked{
   title = 'Chat'
+  theme: string = 'light';
 
   webSocketAPI: WebSocketAPI;
   message: ChatMessage = {
@@ -49,19 +50,19 @@ export class ChatComponent implements OnInit,OnDestroy, AfterViewChecked{
   ngAfterViewChecked(): void {
     this.container.nativeElement.scrollTop = this.container.nativeElement.scrollHeight;
   }
-  
+
   @ViewChild('scroll') private container: ElementRef;
 
   ngOnInit(): void {
     this.loginService.getLoggedInUser().subscribe(
       data =>{
         // info=data;
-        
+
         if(data==null){
           this.router.navigate(['/login']);
         }
         else {
-           this.lastMsgSender = data.userName;  
+           this.lastMsgSender = data.userName;
            this.router.events.subscribe(
              event =>{
                this.sendDisconnect();
@@ -72,7 +73,7 @@ export class ChatComponent implements OnInit,OnDestroy, AfterViewChecked{
 
       }
     )
-    
+
     this.webSocketAPI = new WebSocketAPI(this,this.loginService,this.cookieServ);
     this.webSocketAPI.getObs().subscribe(
       data=>{
@@ -83,25 +84,25 @@ export class ChatComponent implements OnInit,OnDestroy, AfterViewChecked{
     //this.sendStatus();
     let container = document.getElementById("msgContainer");
     container.scrollTop = container.scrollHeight;
-    
+
   }
 
 
   @HostListener('window:beforeunload')
   ngOnDestroy(): void {
-    
+
     this.sendDisconnect();
     console.log("ng destroy");
     window.removeEventListener("unload", this.sendDisconnect.bind(this));
-    
+
   }
 
   logoutAndDisconnect(): void {
-    
+
     this.sendDisconnect();
     console.log("logout and disconnect");
-    
-    
+
+
   }
 
 
@@ -137,7 +138,7 @@ export class ChatComponent implements OnInit,OnDestroy, AfterViewChecked{
         this.messagefield = "";
       }
     );
-    
+
   }
 
   handleMessage(message) {
@@ -160,7 +161,7 @@ export class ChatComponent implements OnInit,OnDestroy, AfterViewChecked{
       }
     );
   }
-  
+
   sendDisconnect() {
     this.webSocketAPI._sendUserStoppedTyping(this.lastMsgSender);
     let userName=this.loginService.getCurrent();
@@ -199,8 +200,8 @@ export class ChatComponent implements OnInit,OnDestroy, AfterViewChecked{
       if(user==this.lastMsgSender)
         this.typingUsers.splice(this.typingUsers.indexOf(this.lastMsgSender),1);
     }
-    
-    
+
+
     this.lastTyping = this.typingUsers[this.typingUsers.length-1];
 
     if(this.typingUsers.length > 1)

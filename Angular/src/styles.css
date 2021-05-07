@@ -1,9 +1,29 @@
 /* You can add global styles to this file, and also import other style files */
+[theme='light']{
+  --primary-background: #e4e4e4;
+  --secondary-background: #fff;
 
+  --primary-color: #FF4B2B;
+  --secondary-color: #FF416C;
+
+  --primary-text: #000000;
+  --secondary-text: #65676b;
+}
+
+[theme='dark']{
+  --primary-background: #242726;
+  --secondary-background: #2f3337;
+
+  --primary-color: #FF4B2B;
+  --secondary-color: #FF416C;
+
+  --primary-text: #9fa6ad;;
+  --secondary-text: #71787e;
+}
 
 html, body {
     height: 100%;
-    background-color: rgb(228, 228, 228);
+    background-color: var(--primary-background);
 }
 body { font-family: Roboto, "Helvetica Neue", sans-serif; }
 
@@ -20,8 +40,8 @@ h3{
     position: fixed;
     height: 100vh;
     width: 100%;
-    background: #e4e4e4;
-    z-index: 0;
+    background: var(--primary-background);
+    z-index: -15;
 }
 
 ::-webkit-scrollbar {

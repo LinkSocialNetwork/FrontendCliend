@@ -18,6 +18,8 @@ import { UserService } from 'src/app/shared/services/user.service';
   styleUrls: ['./search.component.css'],
 })
 export class SearchComponent implements OnInit {
+
+  theme: string = 'light';
   users: User[];
   selectedUser: User = {
     userID: 0,

@@ -5,13 +5,15 @@
         <!-- The following s3 link refers to the project LOGO and NEEDS to be hardcoded as it does not belong to a USER -->
         <!-- Once we obtain the full S3 link for the application logo we can uncomment and hardcode it below -->
         <img
+          style="cursor: pointer"
+          routerLink="/profile/{{loggedInUser?.userID}"
           alt="profile-pic"
           class="rounded-circle"
           onerror="this.src='../assets/logo.png'"
           [src]="loggedInUser?.profileImg"
         />
         <div class="h5">
-          <a routerLink="">@{{ loggedInUser?.userName }}</a>
+          <a routerLink="/profile/{{loggedInUser?.userID}">@{{ loggedInUser?.userName }}</a>
         </div>
         <div class="h7 text-muted">
           {{ loggedInUser?.firstName }} {{ loggedInUser?.lastName }}
