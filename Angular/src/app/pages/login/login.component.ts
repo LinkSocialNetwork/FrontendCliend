@@ -203,7 +203,15 @@ export class LoginComponent implements OnInit {
       if (result.isConfirmed) {
         Swal.fire({
           icon: 'success',
-          title: 'Done',
+          title: 'Email Sent: check spam folder if you cant see it yet or try again.',
+          timer: 4000,
+          showConfirmButton: true,
+        });
+      }
+      if(result.isDenied){
+        Swal.fire({
+          icon: 'error',
+          title: 'Given Username is not in our system',
           timer: 4000,
           showConfirmButton: true,
         });
