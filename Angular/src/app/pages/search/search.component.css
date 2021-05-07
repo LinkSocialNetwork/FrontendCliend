@@ -261,7 +261,7 @@
     font-weight: 600;
     line-height: 1.5;
     margin-bottom: .5rem;
-    color: #32325d;
+    color: var(--primary-color);
   }
 
   h1,
@@ -460,64 +460,9 @@
     }
   }
 
-  .form-control {
-    font-size: 1rem;
-    line-height: 1.5;
-    display: block;
-    width: 100%;
-    height: calc(2.75rem + 2px);
-    padding: .625rem .75rem;
-    transition: all .2s cubic-bezier(.68, -.55, .265, 1.55);
-    color: #8898aa;
-    border: 1px solid #cad1d7;
-    border-radius: .375rem;
-    background-color: #fff;
-    background-clip: padding-box;
-    box-shadow: none;
-  }
+
 
   @media screen and (prefers-reduced-motion: reduce) {
-    .form-control {
-      transition: none;
-    }
-  }
-
-  .form-control::-ms-expand {
-    border: 0;
-    background-color: transparent;
-  }
-
-  .form-control:focus {
-    color: #8898aa;
-    border-color: rgba(50, 151, 211, .25);
-    outline: 0;
-    background-color: #fff;
-    box-shadow: none, none;
-  }
-
-  .form-control:-ms-input-placeholder {
-    opacity: 1;
-    color: #adb5bd;
-  }
-
-  .form-control::-ms-input-placeholder {
-    opacity: 1;
-    color: #adb5bd;
-  }
-
-  .form-control::placeholder {
-    opacity: 1;
-    color: #adb5bd;
-  }
-
-  .form-control:disabled,
-  .form-control[readonly] {
-    opacity: 1;
-    background-color: #e9ecef;
-  }
-
-  textarea.form-control {
-    height: auto;
   }
 
   .form-group {
@@ -544,12 +489,6 @@
       flex: 0 0 auto;
       flex-flow: row wrap;
       align-items: center;
-    }
-
-    .form-inline .form-control {
-      display: inline-block;
-      width: auto;
-      vertical-align: middle;
     }
 
     .form-inline .input-group {
@@ -812,31 +751,6 @@
     align-items: stretch;
   }
 
-  .input-group>.form-control {
-    position: relative;
-    width: 1%;
-    margin-bottom: 0;
-    flex: 1 1 auto;
-  }
-
-  .input-group>.form-control+.form-control {
-    margin-left: -1px;
-  }
-
-  .input-group>.form-control:focus {
-    z-index: 3;
-  }
-
-  .input-group>.form-control:not(:last-child) {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-  }
-
-  .input-group>.form-control:not(:first-child) {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-  }
-
   .input-group-prepend {
     display: flex;
   }
@@ -988,17 +902,6 @@
     color: rgba(255, 255, 255, .65);
   }
 
-  .card {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-    word-wrap: break-word;
-    border: 1px solid rgba(0, 0, 0, .05);
-    border-radius: .375rem;
-    background-color: #fff;
-    background-clip: border-box;
-  }
 
   .card>hr {
     margin-right: 0;
@@ -1641,28 +1544,6 @@
     font-size: .875rem;
   }
 
-  .form-control-label {
-    font-size: .875rem;
-    font-weight: 600;
-    color: #525f7f;
-  }
-
-  .form-control {
-    font-size: .875rem;
-  }
-
-  .form-control:focus:-ms-input-placeholder {
-    color: #adb5bd;
-  }
-
-  .form-control:focus::-ms-input-placeholder {
-    color: #adb5bd;
-  }
-
-  .form-control:focus::placeholder {
-    color: #adb5bd;
-  }
-
   textarea[resize='none'] {
     resize: none !important;
   }
@@ -1679,37 +1560,9 @@
     resize: horizontal !important;
   }
 
-  .form-control-alternative {
-    transition: box-shadow .15s ease;
-    border: 0;
-    box-shadow: 0 1px 3px rgba(50, 50, 93, .15), 0 1px 0 rgba(0, 0, 0, .02);
-  }
-
-  .form-control-alternative:focus {
-    box-shadow: 0 4px 6px rgba(50, 50, 93, .11), 0 1px 3px rgba(0, 0, 0, .08);
-  }
-
   .input-group {
     transition: all .15s ease;
     border-radius: .375rem;
-    box-shadow: none;
-  }
-
-  .input-group .form-control {
-    box-shadow: none;
-  }
-
-  .input-group .form-control:not(:first-child) {
-    padding-left: 0;
-    border-left: 0;
-  }
-
-  .input-group .form-control:not(:last-child) {
-    padding-right: 0;
-    border-right: 0;
-  }
-
-  .input-group .form-control:focus {
     box-shadow: none;
   }
 
@@ -1723,11 +1576,6 @@
     box-shadow: 0 1px 3px rgba(50, 50, 93, .15), 0 1px 0 rgba(0, 0, 0, .02);
   }
 
-  .input-group-alternative .form-control,
-  .input-group-alternative .input-group-text {
-    border: 0;
-    box-shadow: none;
-  }
 
   .focused .input-group-alternative {
     box-shadow: 0 4px 6px rgba(50, 50, 93, .11), 0 1px 3px rgba(0, 0, 0, .08) !important;
@@ -1743,9 +1591,6 @@
     background-color: #fff;
   }
 
-  .focused .form-control {
-    border-color: rgba(50, 151, 211, .25);
-  }
 
   .header {
     position: relative;
@@ -1757,24 +1602,6 @@
     box-shadow: none;
   }
 
-  .input-group .form-control {
-    box-shadow: none;
-  }
-
-  .input-group .form-control:not(:first-child) {
-    padding-left: 0;
-    border-left: 0;
-  }
-
-  .input-group .form-control:not(:last-child) {
-    padding-right: 0;
-    border-right: 0;
-  }
-
-  .input-group .form-control:focus {
-    box-shadow: none;
-  }
-
   .input-group-text {
     transition: all .2s cubic-bezier(.68, -.55, .265, 1.55);
   }
@@ -1783,12 +1610,6 @@
     transition: box-shadow .15s ease;
     border: 0;
     box-shadow: 0 1px 3px rgba(50, 50, 93, .15), 0 1px 0 rgba(0, 0, 0, .02);
-  }
-
-  .input-group-alternative .form-control,
-  .input-group-alternative .input-group-text {
-    border: 0;
-    box-shadow: none;
   }
 
   .focused .input-group-alternative {
@@ -1805,9 +1626,7 @@
     background-color: #fff;
   }
 
-  .focused .form-control {
-    border-color: rgba(50, 151, 211, .25);
-  }
+
 
   .mask {
     position: absolute;
@@ -1848,10 +1667,6 @@
     background-color: transparent;
   }
 
-  .navbar-search .form-control {
-    width: 270px;
-    background-color: transparent;
-  }
 
   .navbar-search-dark .input-group {
     border-color: rgba(255, 255, 255, .6);
@@ -1861,21 +1676,6 @@
     color: rgba(255, 255, 255, .6);
   }
 
-  .navbar-search-dark .form-control {
-    color: rgba(255, 255, 255, .9);
-  }
-
-  .navbar-search-dark .form-control:-ms-input-placeholder {
-    color: rgba(255, 255, 255, .6);
-  }
-
-  .navbar-search-dark .form-control::-ms-input-placeholder {
-    color: rgba(255, 255, 255, .6);
-  }
-
-  .navbar-search-dark .form-control::placeholder {
-    color: rgba(255, 255, 255, .6);
-  }
 
   .navbar-search-dark .focused .input-group {
     border-color: rgba(255, 255, 255, .9);

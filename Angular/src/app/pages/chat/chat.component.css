@@ -17,7 +17,7 @@
   padding-bottom: 50px;
   height: 100%;
   width: 240px;
-  background: #fff;
+  background: var(--primary-background);
 }
 @media (min-width: 768px) {
   #messages-main .ms-body {
@@ -168,7 +168,8 @@
 }
 .action-header {
   position: relative;
-  background: #f8f8f8;
+  background: var(--primary-background);
+  color: var(--primary-text);
   padding: 15px 13px 15px 17px;
 }
 #chatHeader {
@@ -200,7 +201,7 @@
   padding: 0 10px;
 }
 .ms-body {
-  background: #fff;
+  background: var(--primary-background);
 }
 #ms-menu-trigger {
   user-select: none;
@@ -219,7 +220,7 @@
 }
 
 #whiteBackground {
-  background-color: white;
+  background-color: var(--primary-background);
 }
 
 #currentTyping {

@@ -261,7 +261,7 @@
     font-weight: 600;
     line-height: 1.5;
     margin-bottom: .5rem;
-    color: #32325d;
+    color: var(--primary-color);
   }
 
   h1,
@@ -988,17 +988,6 @@
     color: rgba(255, 255, 255, .65);
   }
 
-  .card {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-    word-wrap: break-word;
-    border: 1px solid rgba(0, 0, 0, .05);
-    border-radius: .375rem;
-    background-color: #fff;
-    background-clip: border-box;
-  }
 
   .card>hr {
     margin-right: 0;

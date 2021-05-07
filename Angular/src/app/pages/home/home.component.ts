@@ -7,11 +7,7 @@ import { Post } from 'src/app/shared/model/Post';
 import { User } from 'src/app/shared/model/User';
 import { GetPostService } from 'src/app/shared/services/get-post.service';
 import { GetUserService } from 'src/app/shared/services/get-user.service';
-import { ImageUploadService } from 'src/app/shared/services/image-upload.service';
 import { LoginService } from 'src/app/shared/services/login.service';
-import { PostService } from 'src/app/shared/services/post.service';
-import { ThemeService } from 'src/app/shared/services/theme/theme.service';
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-home',

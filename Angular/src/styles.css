@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 [theme='light']{
-  --primary-background: #e4e4e4;
-  --secondary-background: #fff;
+  --primary-background: #fff;
+  --secondary-background: #e4e4e4;
 
   --primary-color: #FF4B2B;
   --secondary-color: #FF416C;
@@ -33,14 +33,14 @@ h3{
   margin: 0 0 16px;
   font-weight: 600;
   line-height: 1.5;
-  color: #32325d
+  color: var(--secondary-color);
 }
 
 .mainbg{
     position: fixed;
     height: 100vh;
     width: 100%;
-    background: var(--primary-background);
+    background: var(--secondary-background);
     z-index: -15;
 }
 
@@ -50,7 +50,7 @@ h3{
   }
 
   ::-webkit-scrollbar-track {
-    background: #f1f1f1;
+    background: var(--primary-background);
   }
 
   ::-webkit-scrollbar-thumb {
@@ -71,4 +71,14 @@ h3{
     margin-bottom: 15px;
     background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);
   	background: linear-gradient(to right, #FF4B2B, #FF416C);
+  }
+
+
+  .card, .list-group-item, .primary-bg, .nav-tabs .nav-link.active, .form-control, .form-control:focus, textarea{
+    background-color: var(--primary-background);
+    color: var(--primary-text);
+  }
+
+  textarea{
+    border-color: var(--primary-text);
   }

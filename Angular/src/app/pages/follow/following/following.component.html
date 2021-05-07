@@ -1,8 +1,3 @@
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
-
 <!-- Team -->
 <div class="container">
 <section id="users" class="pb-5">
@@ -24,7 +19,7 @@
                       <div class="backside">
                           <div class="card">
                               <div class="card-body text-center">
-                                
+
                                   <h4 class="card-title">@{{ u.userName }}</h4>
                                   <p><img class="img-fluid" *ngIf="u" [src]="u?.profileImg" alt="User Image" onerror="this.src='../../assets/logo.png'"/></p>
                                   <h6 class="card-text">
@@ -33,9 +28,9 @@
                                   <h6 class="card-text">
                                     {{ u?.email }}
                                   </h6>
-                                  
+
                                   <p>{{ u?.bio }}</p>
-                    
+
                                   <app-buttons
                                     [users]="following"
                                     [selectedUser]="u"
@@ -43,8 +38,8 @@
                                     [searchForm]="searchForm"
                                     #buttonsComponent
                                   ></app-buttons>
-                    
-                                  
+
+
                               </div>
                           </div>
                       </div>
