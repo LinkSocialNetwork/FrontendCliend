@@ -3,6 +3,7 @@ import { ActivatedRoute} from '@angular/router';
 import { Post } from 'src/app/shared/model/Post';
 import { User } from 'src/app/shared/model/User';
 import { GetUserService } from 'src/app/shared/services/get-user.service';
+import { LoginService } from 'src/app/shared/services/login.service';
 import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
@@ -16,6 +17,8 @@ export class ProfileComponent implements OnInit {
   appCom: HTMLElement;
   isChecked: boolean = false;
   isFollowing: boolean = null;
+  editable: boolean = false;
+  theme: string = 'light';
 
   profileUser: User = {
     userID: 0,
@@ -48,7 +51,8 @@ export class ProfileComponent implements OnInit {
   constructor(
     private router: ActivatedRoute,
     private userServ: UserService,
-    private getUserServ: GetUserService
+    private getUserServ: GetUserService,
+    private loginServ: LoginService
   ) {}
 
   ngOnInit(): void {
@@ -58,6 +62,11 @@ export class ProfileComponent implements OnInit {
         .getUserById(this.profileUser.userID)
         .subscribe((data) => {
           this.profileUser=data;
+          this.loginServ.getLoggedInUser().subscribe(loggedInUser =>{
+            if(loggedInUser.userID==data.userID){
+              this.editable = true;
+            }
+          });
           this.userServ.getFollowers(data.userID).subscribe((data2) => {
             this.followers = data2;
           });

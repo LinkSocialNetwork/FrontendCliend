@@ -27,6 +27,7 @@ export class HomeComponent implements OnInit {
   currentUser: User;
   posts: Post[] = [];
   following: User[] = [];
+  theme: string = 'light';
 
   youtubeUrl: string = null;
   page: number = 0;

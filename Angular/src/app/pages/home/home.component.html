@@ -1,27 +1,31 @@
-<app-navbar #NavbarComponent active="home"></app-navbar>
-<div class="container-fluid">
-  <div style="padding-top: 100px" class="row">
-    <div class="col-md-4">
-      <div class="component-border">
-        <app-user-info
-          (newFollowingEmitter)="udpateFollowingList($event)"
-        ></app-user-info>
+<main [attr.theme]='theme'>
+  <div class = "mainbg">
+  </div>
+  <app-navbar #NavbarComponent active="home"></app-navbar>
+  <div class="container-fluid">
+    <div style="padding-top: 100px" class="row">
+      <div class="col-md-4">
+        <div class="component-border">
+          <app-user-info
+            (newFollowingEmitter)="udpateFollowingList($event)"
+          ></app-user-info>
+        </div>
       </div>
-    </div>
-    <div class="col-md-8">
-      <div class="component-border">
-        <app-add-post (refreshFeed)="feedComponent.resetPage()"></app-add-post>
-      </div>
-      <div class="component-border">
-        <app-feed
-          feedTitle="My Feed"
-          (refreshNav)="navBar.ngOnInit()"
-          [posts]="posts"
-          [currentUser]="currentUser"
-          [notSpecificUser]="false"
-          #feedComponent
-        ></app-feed>
+      <div class="col-md-8">
+        <div class="component-border">
+          <app-add-post (refreshFeed)="feedComponent.resetPage()"></app-add-post>
+        </div>
+        <div class="component-border">
+          <app-feed
+            feedTitle="My Feed"
+            (refreshNav)="navBar.ngOnInit()"
+            [posts]="posts"
+            [currentUser]="currentUser"
+            [notSpecificUser]="false"
+            #feedComponent
+          ></app-feed>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</main>
