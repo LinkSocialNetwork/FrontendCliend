@@ -62,7 +62,7 @@ export class LoginService {
   }
 
   resetPassword(userName:string):Observable<string>{
-    let url:string = "http://localhost:9080/api/userservice/user/password-reset";
+    let url:string = "http://localhost:9080/api/userservice/resetPassword";
     return this.httpCli.post<string>(url,userName,{withCredentials:true});
   }
 }
