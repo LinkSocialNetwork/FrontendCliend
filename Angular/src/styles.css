@@ -2,6 +2,7 @@
 [theme="light"] {
   --primary-background: #fff;
   --secondary-background: #e4e4e4;
+  --tertiary-background: seashell;
 
   --primary-color: #ff4b2b;
   --secondary-color: #ff416c;
@@ -13,6 +14,8 @@
 [theme="dark"] {
   --primary-background: #242726;
   --secondary-background: #2f3337;
+  --tertiary-background: #404040;
+
 
   --primary-color: #45bdee;
   --secondary-color: #006cbb;
