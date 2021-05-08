@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Post } from '../model/Post';
-import { User } from '../model/User';
 import { GetCookieService } from './get-cookie.service';
 
 @Injectable({
@@ -14,8 +13,6 @@ export class PostService {
 
   insertNewPost(post:Post):Observable<string>{
     let url:string="http://localhost:9080/api/postservice/post";
-    console.log("New post", post);
-    // post.user = currentUser;
     return this.myHttpCli.post<string>(url,post,{withCredentials:true});
   }
   updatePost(post:Post):Observable<string>{

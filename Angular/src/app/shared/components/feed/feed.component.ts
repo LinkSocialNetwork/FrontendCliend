@@ -43,7 +43,6 @@ export class FeedComponent implements OnInit, OnChanges, OnDestroy {
   constructor(private getPostService:GetPostService,private getUserService:GetUserService) { }
 
   ngOnInit(): void {
-    console.log("in onInit")
     this.page = 0;
     this.posts = [];
     this.getUserService.getCurrentUser().subscribe(
@@ -54,10 +53,7 @@ export class FeedComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges():void {
-    // this.resetPage();
-    console.log("in onChanges")
-    // this.page = 0;
-    // this.posts = [];
+
   }
 
   ngOnDestroy(): void {
@@ -80,7 +76,6 @@ export class FeedComponent implements OnInit, OnChanges, OnDestroy {
     if(pos == max )   {
       //Do your action here
       if (this.flag){
-        console.log("in scroll")
         this.addPage()
       }
     }
@@ -128,7 +123,6 @@ export class FeedComponent implements OnInit, OnChanges, OnDestroy {
     this.getPostService.getUsersFollowingPosts(this.currentUser.userID,this.page).subscribe(
       data =>{
         let newPosts:Post[];
-        console.log("in get postssss",data)
         newPosts=data;
         newPosts.sort((a,b) => (a.postedAt > b.postedAt) ? -1 : ((b.postedAt > a.postedAt) ? 1 : 0))
         for (const post of newPosts) {
@@ -144,7 +138,6 @@ export class FeedComponent implements OnInit, OnChanges, OnDestroy {
     this.getPostService.getPostsCreatedByUser(this.profileUser.userID,this.page).subscribe(
       data =>{
         let newPosts: Post[];
-        console.log("in get posts",data)
         newPosts=data;
         newPosts.sort((a,b) => (a.postedAt > b.postedAt) ? -1 : ((b.postedAt > a.postedAt) ? 1 : 0))
         for (const post of newPosts) {

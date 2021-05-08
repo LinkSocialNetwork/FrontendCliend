@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { from, Observable, of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import * as SockJS from 'sockjs-client';
 import * as Stomp from 'stompjs';
 import { ChatMessage } from '../model/ChatMessage';
@@ -18,7 +18,6 @@ export class WebSocket2Service {
   constructor(private loginService:LoginService) { }
 
   _connect(){
-    console.log("started websocket connection");
     if(this.loginService.getCurrent()==null){
       return;
     }
@@ -42,11 +41,9 @@ export class WebSocket2Service {
     if(this.stompClient !==null){
       this.stompClient.disconnect();
     }
-    console.log("Disconnected");
   }
 
   errorCallBack(error:any){
-    console.log("errorCallBack ->"+error)
     setTimeout(()=>{
       this._connect();
     },5000);
@@ -57,7 +54,6 @@ export class WebSocket2Service {
   }
 
   onMessageReceived(message) {
-    console.log("Message Recieved from Server :: " + message);
     this.messageList.push(JSON.parse(message.body));
   }
 
@@ -70,7 +66,6 @@ _sendDisconnect(message) {
 }
 
 onStatusReceived(message) {
-    console.log("Message Recieved from Server :: " + JSON.parse(message.body));
     this.chatComponent.handleStatus(JSON.parse(message.body));
 }
 
@@ -79,7 +74,6 @@ _sendForOldMessages(message) {
 }
 
 onOldMessagesReceived(message) {
-    console.log("Message Recieved from Server :: " + message.body);
     this.chatComponent.handleOldMessages(JSON.parse(message.body));
 }
   

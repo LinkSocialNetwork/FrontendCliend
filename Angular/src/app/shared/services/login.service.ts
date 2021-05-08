@@ -56,7 +56,6 @@ export class LoginService {
   triggerRetrieveCurrent():void{
     this.getLoggedInUser().subscribe(
       data=>{
-        console.log("Retrieve Triggered")
         this.setCurrent(data);
       }
     )

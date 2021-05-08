@@ -1,16 +1,12 @@
 import {
   Component,
   EventEmitter,
-  HostListener,
   Input,
-  OnDestroy,
   OnInit,
   Output,
-  ViewChild,
 } from '@angular/core';
 import { Post } from 'src/app/shared/model/Post';
 import { User } from 'src/app/shared/model/User';
-import { GetPostService } from 'src/app/shared/services/get-post.service';
 import { GetUserService } from 'src/app/shared/services/get-user.service';
 import { ImageUploadService } from 'src/app/shared/services/image-upload.service';
 import { PostService } from 'src/app/shared/services/post.service';
@@ -170,7 +166,6 @@ export class AddPostComponent implements OnInit {
   //---------------------------------------------------------------------------------------------------------------//
 
   refreshNavbar(): void {
-    console.log('Refresh reached timeline');
     this.refreshNav.emit();
   }
 
