@@ -1,3 +1,43 @@
-<div *ngFor="let post of posts" class="card gedf-card postCard postHolder">
-    <app-post (refreshNav)='refreshNavbar()' (getFollowingPosts)='getFollowingPosts' (resetPage)='resetPage()' [currentUser]='currentUser' [post]='post'></app-post>
+<div class="row">
+  <div class="col-md-12">
+    <div class="">
+      <nav class="navbar navbar-light primary-bg">
+        <h3 style="font-weight: 600">{{ feedTitle }}</h3>
+        <form class="form-inline">
+          <div class="input-group">
+            <input
+              type="text"
+              class="form-control"
+              aria-label="Recipient's userName"
+              aria-describedby="button-addon2 "
+              (keyup)="filterPosts($event)"
+            />
+            <div class="input-group-append">
+              <button
+                class="btn btn-outline-primary"
+                type="button"
+                id="button-addon2"
+              >
+                <em class="fa fa-search"></em>
+              </button>
+            </div>
+          </div>
+        </form>
+      </nav>
+      <button (click)="goToTop()" id="topButton" title="Go to top">
+        <em class="fa fa-arrow-circle-up"></em>
+      </button>
+      <div *ngFor="let post of posts">
+        <div>
+          <app-post
+            (refreshNav)="refreshNavbar()"
+            (getFollowingPosts)="(getFollowingPosts)"
+            (resetPage)="resetPage()"
+            [currentUser]="currentUser"
+            [post]="post"
+          ></app-post>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

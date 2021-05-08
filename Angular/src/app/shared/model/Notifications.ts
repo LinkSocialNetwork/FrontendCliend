@@ -5,5 +5,5 @@ export interface Notifications{
     postId: number;
     type: string;
     read: boolean;
-    date: Date;
+    date: string;
 }

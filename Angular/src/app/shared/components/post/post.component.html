@@ -1,56 +1,120 @@
+<div class="container-fluidr">
+  <div style="margin-bottom: 15px" class="card gedf-card postCard postHolder">
     <div class="card-header">
-    <div class="d-flex justify-content-between align-items-center">
+      <div class="d-flex justify-content-between align-items-center">
         <div class="d-flex justify-content-between align-items-center">
-            <div class="mr-2">
-                <img class="rounded-circle" width="45" onerror="this.src='../assets/logo.png'" [src]='post?.user?.profileImg' alt="">
+          <div class="mr-2">
+            <img
+              routerLink="/profile/{{ post?.user?.userID }}"
+              style="cursor: pointer"
+              class="rounded-circle"
+              width="45"
+              onerror="this.src='../assets/logo.png'"
+              [src]="post?.user?.profileImg"
+              alt=""
+            />
+          </div>
+          <div class="ml-2">
+            <div
+              style="cursor: pointer"
+              routerLink="/profile/{{ post?.user?.userID }}"
+              class="h5 m-0"
+            >
+              @{{ post?.user?.userName }}
             </div>
-            <div class="ml-2">
-                <div class="h5 m-0">@{{post?.user?.userName}}</div>
-                <div class="h7 text-muted">{{post?.user?.firstName}} {{post?.user?.lastName}}</div>
+            <div class="h7 text-muted">
+              {{ post?.user?.firstName }} {{ post?.user?.lastName }}
             </div>
+          </div>
         </div>
-        
+      </div>
     </div>
-
+    <div class="card-body">
+      <div class="text-muted h7 mb-2">
+        <em class="fa fa-clock-o"></em> {{ post?.postedAt | date: "medium" }}
+      </div>
+      <p class="card-text posttext">{{ post?.postContent }}</p>
+      <div class="vid-container" *ngIf="post?.postImageUrl != null">
+        <img height="100%" width="100%" [src]="post?.postImageUrl" alt="" />
+      </div>
+      <div class="vid-container" *ngIf="post?.youtubeUrl != null">
+        <iframe
+          title="yt-vid"
+          width="100%"
+          height="350"
+          [src]="post?.youtubeUrl | safe"
+          allowfullscreen
+        ></iframe>
+      </div>
     </div>
-        <div class="card-body">
-            <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i> {{post?.postedAt | date:'medium'}}</div>
-            <p class="card-text posttext">{{post?.postContent}}</p>
-        <div class="vid-container" *ngIf="post.postImageUrl!=null">
-            <img height="100%" width="100%" [src]="post.postImageUrl" alt="">
-        </div>
-        <div class="vid-container" *ngIf="post.youtubeUrl!=null">
-            <iframe width="100%" height="350" [src]="post.youtubeUrl | safe" frameborder="0" allowfullscreen></iframe>
-        </div>
-    </div>
-
     <div class="card-footer" *ngIf="currentUser">
-        <span *ngIf="checkIfPostIsLiked(post); else postIsNotLiked">
-            <button href="" class="btn btn-link" style="color: green;" (click)=toggleLike(post,true)><i class="fa fa-gittip"></i> Liked <span class="badge badge-danger">{{post?.usersWhoLiked.length}}</span></button>
-        </span>
-        <ng-template #postIsNotLiked>
-            <button href="" class="btn btn-link" (click)=toggleLike(post,false)><i class="fa fa-gittip"></i> Like <span class="badge badge-danger">{{post?.usersWhoLiked.length}}</span> </button>
-        </ng-template>
-        <a href="home" class="btn btn-link" (click)="addComment()"><i class="fa fa-comment"></i> Comments <span class="badge badge-danger">{{post?.comments.length}}</span></a>
+      <span *ngIf="checkIfPostIsLiked(post); else postIsNotLiked">
+        <button
+          href=""
+          class="btn btn-link"
+          style="color: green"
+          (click)="toggleLike(post, true)"
+        >
+          <em class="fa fa-gittip"></em> Liked
+          <span class="badge badge-danger">{{
+            post?.usersWhoLiked.length
+          }}</span>
+        </button>
+      </span>
+      <ng-template #postIsNotLiked>
+        <button href="" class="btn btn-link" (click)="toggleLike(post, false)">
+          <em class="fa fa-gittip"></em> Like
+          <span class="badge badge-danger">{{
+            post?.usersWhoLiked.length
+          }}</span>
+        </button>
+      </ng-template>
+      <a href="#" class="btn btn-link" routerLink="/post/{{post?.postId}}"
+        ><em class="fa fa-comment"></em> Comments
+        <span class="badge badge-danger">{{ post?.comments.length }}</span></a
+      >
     </div>
-    <!--////////Comment-->
-    
     <div class="box-comments">
-        <div *ngFor="let comment of post.comments" class="comment">
-            <img onerror="this.src='../assets/logo.png'" [src]="comment.commentWriter.profileImg" alt="" />
-            <div class="content">
-                <h4>{{post.comments.commentContent}}</h4>
-                <h3><a href="">@{{comment.commentWriter.userName}}</a><span><time> {{comment.commentedAt | date:'medium'}} </time></span></h3>
-                <p>{{comment.commentContent}}</p>
-            </div>
+      <div *ngFor="let comment of post?.comments" class="comment">
+        <img
+          style="cursor: pointer"
+          routerLink="/profile/{{ comment.commentWriter.userID }}"
+          onerror="this.src='../assets/logo.png'"
+          [src]="comment.commentWriter.profileImg"
+          alt=""
+        />
+        <div class="content">
+          <h3>
+            <a routerLink="/profile/{{ comment.commentWriter.userID }}"
+              >@{{ comment.commentWriter.userName }}</a
+            ><span
+              ><time> {{ comment.commentedAt | date: "medium" }} </time></span
+            >
+          </h3>
+          <p>{{ comment.commentContent }}</p>
         </div>
+      </div>
     </div>
-
     <div class="box-new-comment" *ngIf="currentUser">
-        <img onerror="this.src='../assets/logo.png'" [src]="currentUser.profileImg" alt="" />
-        <textarea [id]="post.postId" class="comment-box" placeholder="write a comment..."></textarea>
-        <div class="smile-icon">
-            <span class="ion-android-attach"></span>
-            <span><i (click)="addNewComment(post)" class="fa fa-paper-plane-o fa-2x comment-btn"></i></span>
-        </div>
+      <img
+        onerror="this.src='../assets/logo.png'"
+        [src]="currentUser.profileImg"
+        alt=""
+      />
+      <textarea
+        [id]="post?.postId"
+        class="comment-box"
+        placeholder="write a comment..."
+      ></textarea>
+      <div class="smile-icon">
+        <span class="ion-android-attach"></span>
+        <span
+          ><em
+            (click)="addNewComment(post)"
+            class="fa fa-paper-plane-o fa-2x comment-btn"
+          ></em
+        ></span>
+      </div>
     </div>
+  </div>
+</div>

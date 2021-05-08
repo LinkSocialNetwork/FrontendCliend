@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Notifications } from '../../model/Notifications';
 import { User } from '../../model/User';
@@ -9,75 +9,109 @@ import { NotificationService } from '../../services/notification/notification.se
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
 
-  user:User;
-  notifications: Array<Notifications> = [];
+  //================================================= INPUT ====================================================//
 
   @Input()
-  active: string = "home";
+  active: string = 'home';
 
-  constructor(private loginService:LoginService, private cookieService: GetCookieService,private router:Router, private notificationServ: NotificationService){
-  }
-  
+  //================================================== OUTPUT ==================================================//
+
+  @Output()
+  toggleTheme: EventEmitter<void> = new EventEmitter();
+
+  //================================================== VARIABLES ==================================================//
+
   title = 'Project2';
+  user: User;
+  notifications: Array<Notifications> = [];
+
+  //-============================================== CONSTRUCTOR / HOOKS =============================================//
+
+  constructor(
+    private loginService: LoginService,
+    private cookieService: GetCookieService,
+    private router: Router,
+    private notificationServ: NotificationService,
+  ) {}
+
   ngOnInit(): void {
-    let authtoken = this.cookieService.getCookie("token")
-    if(authtoken){
-      this.loginService.getLoggedInUser().subscribe(
-        data=> {
-          if(data){
-            this.user=data;
-            this.getNotifications();
-          }
+    this.notifications = [];
+    let authtoken = this.cookieService.getCookie('token');
+    if (authtoken) {
+      this.loginService.getLoggedInUser().subscribe((data) => {
+        if (data) {
+          this.user = data;
+          this.getNotifications();
         }
-      );
+      });
     }
   }
 
-  getNotifications(){
-    this.notificationServ.getAllNotifications(this.user.userID).subscribe(note => {
-        this.notifications = note;
-    });
+  //-=============================================== METHODS ====================================================//
+
+  getNotifications() {
+    this.notificationServ
+      .getAllNotifications(this.user.userID)
+      .subscribe(note => {
+        let newNotes:Notifications[]=[];
+        newNotes = note;
+        newNotes.sort((a,b) => (a.date > b.date) ? -1 : ((b.date > a.date) ? 1 : 0))
+        for(const noti of newNotes){
+          this.notifications.push(noti);
+        }
+      });
   }
 
-  logout(){
-    // this.chatCom.logoutAndDisconnect();
-    //this.webSocketAPI._sendDisconnect(this.user.userName);
-    
-    this.cookieService.eraseCookie("token");
+  //---------------------------------------------------------------------------------------------------------------//
+
+  logout() {
+    this.cookieService.eraseCookie('token');
     this.router.navigate(['login']);
-
   }
+
+  //---------------------------------------------------------------------------------------------------------------//
 
   reloadCurrentRoute() {
     let currentUrl = this.router.url;
-    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-        this.router.navigate([currentUrl]);
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate([currentUrl]);
     });
-}
-
-  activate(link:string){
-    console.log(link);
-    let home=document.getElementById("home");
-    let profile=document.getElementById("profile");
-    let cahtRoom=document.getElementById("chatroom");
-    let search=document.getElementById("search");
-    home.setAttribute("class","nav-item");
-    profile.setAttribute("class","nav-item");
-    cahtRoom.setAttribute("class","nav-item");
-    search.setAttribute("class","nav-item");
-    
-    document.getElementById(link).setAttribute("class","nav-item active");
-
   }
 
-  clearAllNotifications(): void{
-    this.notificationServ.clearAllNotifications(this.user.userID).subscribe(data => {
-      this.ngOnInit();
-    })
+  //---------------------------------------------------------------------------------------------------------------//
+
+  activate(link: string) {
+    let home = document.getElementById('home');
+    let profile = document.getElementById('profile');
+    let cahtRoom = document.getElementById('chatroom');
+    let search = document.getElementById('search');
+    home.setAttribute('class', 'nav-item');
+    profile.setAttribute('class', 'nav-item');
+    cahtRoom.setAttribute('class', 'nav-item');
+    search.setAttribute('class', 'nav-item');
+    document.getElementById(link).setAttribute('class', 'nav-item active');
   }
+
+  //---------------------------------------------------------------------------------------------------------------//
+
+  clearAllNotifications(): void {
+    this.notificationServ
+      .clearAllNotifications(this.user.userID)
+      .subscribe((data) => {
+        this.ngOnInit();
+      });
+    }
+
+  //---------------------------------------------------------------------------------------------------------------//
+
+  toggleDarkMode(): void{
+    this.toggleTheme.emit();
+  }
+
+  //---------------------------------------------------------------------------------------------------------------//
 
 }

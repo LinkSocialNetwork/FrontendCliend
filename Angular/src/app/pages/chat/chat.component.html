@@ -1,98 +1,135 @@
-
-<app-navbar active = "chatroom"></app-navbar>
-
-<div style="padding-top: 100px;" class="container bootstrap snippets bootdey" (unload)="ngOnDestroy()">
-    <div class="tile tile-alt" id="messages-main">
-        <div class="ms-menu">
-            
-
-            <div class="action-header clearfix">
-                <div class="pull-left hidden-xs"> 
-                    
-                    <span>Online</span>
-
-                </div> 
-                 
-            </div> 
-            
-            <div class="list-group lg-alt DivWithScroll" >
-                <div *ngFor='let newUser of onlineUsers'>
-                    <a class="list-group-item media" href="">
-                        <div class="pull-left">
-                            <img [src]="newUser.imgUrl" onerror="this.src='assets/logo.png'" alt="" class="img-avatar">
-                        </div>
-                        <div class="media-body">
-                            <small class="list-group-item-heading" style="margin-left: 2px;"> @{{newUser.userName}}</small>
-                        </div>
-                    </a>
+<main [attr.theme]="theme">
+  <div class="mainbg"></div>
+  <app-navbar (toggleTheme)="toggleTheme()" active="chatroom"></app-navbar>
+  <div
+    style="padding-top: 100px"
+    class="container bootstrap snippets bootdey"
+    (unload)="ngOnDestroy()"
+  >
+    <div class="component-border">
+      <div id="">
+        <div id="whiteBackground">
+          <div class="tile tile-alt" id="messages-main">
+            <div class="ms-menu">
+              <div class="action-header clearfix">
+                <div class="pull-left hidden-xs">
+                  <span>Online</span>
                 </div>
-                
-				<!-- <a class="list-group-item media" href="">
+              </div>
+              <div class="list-group lg-alt DivWithScroll">
+                <div *ngFor="let newUser of onlineUsers">
+                  <a class="list-group-item media" href="">
                     <div class="pull-left">
-                        <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="" class="img-avatar">
+                      <img
+                        [src]="newUser.imgUrl"
+                        onerror="this.src='assets/logo.png'"
+                        alt=""
+                        class="img-avatar"
+                      />
                     </div>
                     <div class="media-body">
-                        <small class="list-group-item-heading">Davil Parnell</small>
+                      <small
+                        class="list-group-item-heading"
+                        style="margin-left: 2px"
+                      >
+                        @{{ newUser.userName }}</small
+                      >
                     </div>
-                </a> -->
-
+                  </a>
+                </div>
+              </div>
             </div>
-    
-            
-        </div>
-        
-        <div class="ms-body DivToScroll DivWithScroll" id="msgContainer" #scroll>
-            <div class="action-header clearfix">
-                <div class="pull-left hidden-xs"> 
-                    <div class="lv-avatar pull-left">   
+            <div class="action-header clearfix" id="chatHeader">
+              <div class="pull-left hidden-xs">
+                <span>Chat Room</span>
+              </div>
+            </div>
+            <div
+              class="ms-body DivToScroll DivWithScroll"
+              id="msgContainer"
+              #scroll
+            >
+              <div *ngFor="let chatmessage of allMessages">
+                <div
+                  *ngIf="checkUser(chatmessage); else rightMsgBox"
+                  class="message-feed media"
+                >
+                  <div class="pull-left">
+                    <img
+                      [src]="chatmessage.imgUrl"
+                      onerror="this.src='assets/logo.png'"
+                      alt=""
+                      class="img-avatar"
+                    />
+                  </div>
+                  <div class="media-body">
+                    <div class="mf-content">
+                      {{ chatmessage.text }}
                     </div>
-                    <span>Chat Room</span>
-
-                </div> 
-                 
-            </div> 
-            <div *ngFor='let chatmessage of allMessages'>
-                <div *ngIf="checkUser(chatmessage); else rightMsgBox" class="message-feed media">
-                    <div class="pull-left">
-                        <img [src]="chatmessage.imgUrl" onerror="this.src='assets/logo.png'" alt="" class="img-avatar">
-                    </div>
-                    <div class="media-body">
-                        <div class="mf-content">
-                            {{chatmessage.text}}
-                        </div>
-                        <small class="mf-date"> {{ chatmessage.sender }} at {{chatmessage.time}} <i class="fa fa-clock-o"></i></small>
-                    </div>
+                    <small class="mf-date">
+                      {{ chatmessage.sender }} at {{ chatmessage.time }}
+                      <em class="fa fa-clock-o"></em
+                    ></small>
+                  </div>
                 </div>
                 <ng-template #rightMsgBox>
-                    <div class="message-feed right">
-                        <div class="pull-right">
-                            <img [src]="chatmessage.imgUrl" onerror="this.src='assets/logo.png'" alt="" class="img-avatar">
-                        </div>
-                        <div class="media-body">
-                            <div class="mf-content">
-                                {{ chatmessage.text }}
-                            </div>
-                            <small class="mf-date"> {{ chatmessage.sender }} at {{ chatmessage.time }}  <i class="fa fa-clock-o"></i></small>
-                        </div>
+                  <div class="message-feed right">
+                    <div class="pull-right">
+                      <img
+                        [src]="chatmessage.imgUrl"
+                        onerror="this.src='assets/logo.png'"
+                        alt=""
+                        class="img-avatar"
+                      />
                     </div>
+                    <div class="media-body">
+                      <div class="mf-content">
+                        {{ chatmessage.text }}
+                      </div>
+                      <small class="mf-date">
+                        {{ chatmessage.sender }} at {{ chatmessage.time }}
+                        <em class="fa fa-clock-o"></em
+                      ></small>
+                    </div>
+                  </div>
                 </ng-template>
+              </div>
             </div>
-        </div> 
-        <div class="pull-right" id="currentTyping">
-            <span *ngFor="let user of lastThreeTyping">
-                <span>{{user}}</span>
-            </span>
-            <span *ngIf="overFlowTypers>0"> and {{overFlowTypers}} other users</span>
-            <span class= "loader-inner ball-pulse" *ngIf="lastThreeTyping.length>0"> {{verbToUse}} typing..</span>
+            <div id="typingContainer">
+              <div class="pull-right" id="currentTyping">
+                <span *ngIf="lastTyping != ''">
+                  <span>{{ lastTyping }} </span>
+                </span>
+                <span *ngIf="overFlowTypers > 0"
+                  >and {{ overFlowTypers }} other users
+                </span>
+                <span
+                  *ngIf="typingUsers.length > 0"
+                  class="ball-pulse loader-inner loader-small"
+                  ><div></div>
+                  <div></div>
+                  <div></div>
+                </span>
+              </div>
+            </div>
+            <div>
+              <form class="msb-reply" id="input">
+                <input
+                  type="text"
+                  [(ngModel)]="messagefield"
+                  class="form-control"
+                  name="message"
+                  (keyup)="sendNewUserTyping()"
+                  (blur)="sendUserStoppedTyping()"
+                />
+                <button type="submit" (click)="sendMessage()">
+                  <em class="fa fa-paper-plane-o"></em>
+                </button>
+              </form>
+            </div>
+          </div>
         </div>
-        <br>
-		<div class="msb-reply">
-            <form>
-                <input type="text" [(ngModel)]="messagefield" class="form-control" name="message" (keyup)="sendNewUserTyping()" (blur)="sendUserStoppedTyping()">
-			    <button type="submit" (click)="sendMessage()"><i class="fa fa-paper-plane-o"></i></button>
-            </form>
-            
-		</div>
+      </div>
     </div>
-    <br><br>
-</div>
+  </div>
+</main>

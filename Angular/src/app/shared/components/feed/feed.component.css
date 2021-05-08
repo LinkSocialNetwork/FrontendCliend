@@ -1,35 +1,4 @@
 
-.h7 {
-    font-size: 0.8rem;
-}
-
-.gedf-wrapper {
-    margin-top: 0.97rem;
-}
-
-.gedf-card {
-  margin-bottom: 2rem;
-}
-
-@media (min-width: 992px) {
-    .gedf-main {
-        padding-left: 4rem;
-        padding-right: 4rem;
-    }
-    
-}
-
-/**Reset Bootstrap*/
-.dropdown-toggle::after {
-    content: none;
-    display: none;
-}
-
-.postCard{
-    animation-duration: 2s;
-    animation-name: slide-top; 
-}
-
 @keyframes slidein {
     from {
       margin-left: 100%;

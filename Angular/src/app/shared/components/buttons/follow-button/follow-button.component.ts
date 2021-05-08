@@ -21,6 +21,8 @@ export class FollowButtonComponent implements OnInit {
     'bio':null,
     'firstName':null,
     'lastName':null,
+    'checkPassword':0,
+    'checkEmail':0,
     'posts':[],
     'likes':[],
     'following': []
@@ -50,7 +52,6 @@ export class FollowButtonComponent implements OnInit {
 
     this.disabled = true;
     this.userService.followUser(follow).subscribe(data => {
-      console.log(data)
     })
   }
 

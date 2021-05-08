@@ -1,11 +1,11 @@
-
-
 #messages-main {
   position: relative;
   margin: 0 auto;
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12);
 }
-#messages-main:after, #messages-main:before {
+#messages-main:after,
+#messages-main:before {
   content: " ";
   display: table;
 }
@@ -17,31 +17,32 @@
   padding-bottom: 50px;
   height: 100%;
   width: 240px;
-  background: #fff;
+  background: var(--primary-background);
 }
-@media (min-width:768px) {
+@media (min-width: 768px) {
   #messages-main .ms-body {
-  padding-left: 240px;
+    padding-left: 240px;
+  }
 }
-}@media (max-width:767px) {
+@media (max-width: 767px) {
   #messages-main .ms-menu {
-  height: calc(100% - 58px);
-  display: none;
-  z-index: 1;
-  top: 58px;
-}
-#messages-main .ms-menu.toggled {
-  display: block;
-}
-#messages-main .ms-body {
-  overflow: hidden;
-}
+    height: calc(100% - 58px);
+    display: none;
+    z-index: 1;
+    top: 58px;
+  }
+  #messages-main .ms-menu.toggled {
+    display: block;
+  }
+  #messages-main .ms-body {
+    overflow: hidden;
+  }
 }
 #messages-main .ms-user {
   padding: 15px;
   background: #f8f8f8;
 }
-#messages-main .ms-user>div {
+#messages-main .ms-user > div {
   overflow: hidden;
   padding: 3px 5px 0 15px;
   font-size: 11px;
@@ -51,7 +52,7 @@
   bottom: 120px;
   z-index: 1;
   right: 30px;
-  box-shadow: 0 0 4px rgba(0, 0, 0, .14), 0 4px 8px rgba(0, 0, 0, .28);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.14), 0 4px 8px rgba(0, 0, 0, 0.28);
 }
 #ms-menu-trigger {
   user-select: none;
@@ -67,22 +68,33 @@
   font-size: 21px;
 }
 #ms-menu-trigger.toggled i:before {
-  content: '\f2ea'
+  content: "\f2ea";
 }
-.fc-toolbar:before, .login-content:after {
-  content: ""
+.fc-toolbar:before,
+.login-content:after {
+  content: "";
 }
 .message-feed {
   padding: 20px;
 }
-#footer, .fc-toolbar .ui-button, .fileinput .thumbnail, .four-zero, .four-zero footer>a, .ie-warning, .login-content, .login-navigation, .pt-inner, .pt-inner .pti-footer>a {
+#footer,
+.fc-toolbar .ui-button,
+.fileinput .thumbnail,
+.four-zero,
+.four-zero footer > a,
+.ie-warning,
+.login-content,
+.login-navigation,
+.pt-inner,
+.pt-inner .pti-footer > a {
   text-align: center;
 }
 
 .message-feed:not(.right) .mf-content {
   background: #03a9f4;
   color: #fff;
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12);
 }
 .message-feed.right .mf-content {
   background: #eee;
@@ -93,14 +105,14 @@
   margin-right: 15px;
   border-radius: 2px;
   display: inline-block;
-  max-width: 80%
+  max-width: 80%;
 }
 .mf-date {
   display: block;
-  color: #B3B3B3;
+  color: #b3b3b3;
   margin-top: 3px;
 }
-.mf-date>i {
+.mf-date > i {
   font-size: 14px;
   line-height: 100%;
   position: relative;
@@ -113,8 +125,9 @@
   border-top: 1px solid #eee;
   background: #f8f8f8;
 }
-.four-zero, .lc-block {
-  box-shadow: 0 1px 11px rgba(0, 0, 0, .27);
+.four-zero,
+.lc-block {
+  box-shadow: 0 1px 11px rgba(0, 0, 0, 0.27);
 }
 .msb-reply textarea {
   width: 100%;
@@ -148,15 +161,19 @@
   border: 0;
 }
 .p-15 {
-  padding: 15px!important;
+  padding: 15px !important;
 }
 .btn:not(.btn-alt) {
   border: 0;
 }
 .action-header {
   position: relative;
-  background: #f8f8f8;
+  background: var(--primary-background);
+  color: var(--primary-text);
   padding: 15px 13px 15px 17px;
+}
+#chatHeader {
+  margin-left: 22.9%;
 }
 .ah-actions {
   z-index: 3;
@@ -169,22 +186,22 @@
   padding: 0;
   margin: 0;
 }
-.actions>li {
+.actions > li {
   display: inline-block;
 }
 
-.actions:not(.a-alt)>li>a>i {
+.actions:not(.a-alt) > li > a > i {
   color: #939393;
 }
-.actions>li>a>i {
+.actions > li > a > i {
   font-size: 20px;
 }
-.actions>li>a {
+.actions > li > a {
   display: block;
   padding: 0 10px;
 }
-.ms-body{
-  background:#fff;    
+.ms-body {
+  background: var(--primary-background);
 }
 #ms-menu-trigger {
   user-select: none;
@@ -195,24 +212,48 @@
   height: 100%;
   padding-right: 10px;
   padding-top: 19px;
-  cursor:pointer;
+  cursor: pointer;
 }
-#ms-menu-trigger, .message-feed.right {
+#ms-menu-trigger,
+.message-feed.right {
   text-align: right;
 }
 
+#whiteBackground {
+  background-color: var(--primary-background);
+}
+
 #currentTyping {
-  background-color: white;
+  background-color: var(--primary-background);
   color: rgb(69, 189, 238);
-  margin: 5px;
-  font-size: 18px;
-} 
+  /* margin-bottom: 2px; */
+  font-size: 22px;
+  padding: 0 15px 0 0;
+}
 
+.ball-pulse > div {
+  background-color: rgb(69, 189, 238);
+  transform: scale(0.5, 0.5);
+  padding: 5px;
+}
 
+.loader-small .loader-inner {
+  transform: scale(0.5, 0.5);
+}
 
-.DivWithScroll{
-  padding: 10px 7px 5px;
+#input {
+  margin-top: 30px;
+  background-color: white;
+}
+
+#background {
+  background: linear-gradient(to right, #ff4b2b, #ff416c);
+  padding: 30px;
+  border-radius: 10px;
+}
+
+.DivWithScroll {
   height: 500px;
-  overflow:scroll;
-  overflow-x:hidden;
+  overflow: scroll;
+  overflow-x: hidden;
 }

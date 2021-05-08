@@ -13,6 +13,8 @@ export interface User{
     'bio':string;
     'firstName':string;
     'lastName':string;
+    'checkPassword':number;
+    'checkEmail':number;
     'posts':Post[];
     'likes':Like[];
     'following': User[];
