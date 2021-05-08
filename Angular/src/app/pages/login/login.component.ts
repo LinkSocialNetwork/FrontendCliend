@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
 
   onLoginSubmit() {
     Swal.fire({
-      title: 'LOGGING IN ...',
+      title: 'Logging in...',
       allowEscapeKey: false,
       allowOutsideClick: false,
       showConfirmButton: false,
@@ -89,7 +89,7 @@ export class LoginComponent implements OnInit {
       if (RCurrentUser) {
         Swal.fire({
           icon: 'success',
-          title: 'Logged IN',
+          title: 'Logged in.',
           timer: 4000,
           showConfirmButton: true,
         });
@@ -155,14 +155,14 @@ export class LoginComponent implements OnInit {
       } else if (data.message == 'Username already exists in system') {
         Swal.fire({
           icon: 'warning',
-          title: 'Username already taken',
+          title: 'Username is already taken',
           timer: 4000,
           showConfirmButton: true,
         });
       } else if (data.message == 'email already exists in system') {
         Swal.fire({
           icon: 'warning',
-          title: 'Email already taken',
+          title: 'Email is already taken',
           timer: 4000,
           showConfirmButton: true,
         });
@@ -179,7 +179,7 @@ export class LoginComponent implements OnInit {
 
   onPasswordReset(): void {
     Swal.fire({
-      title: 'Enter your user name',
+      title: 'Enter your User Name...',
       input: 'text',
       inputAttributes: {
         autocapitalize: 'on',
@@ -189,7 +189,7 @@ export class LoginComponent implements OnInit {
       showLoaderOnConfirm: true,
       preConfirm: (userToReset) => {
         Swal.fire({
-          title: 'Sending Password Reset Email',
+          title: 'Sending Password Reset Email...',
           allowEscapeKey: false,
           allowOutsideClick: false,
           showConfirmButton: false,
@@ -202,14 +202,14 @@ export class LoginComponent implements OnInit {
           if (data.message=="no user with this user name") {
             Swal.fire({
               icon: 'error',
-              title: 'Given Username is not in our system',
+              title: 'Given User Name is not in our system.',
               timer: 10000,
               showConfirmButton: true,
             });
           }else if(data.message=="Email sent."){
             Swal.fire({
               icon: 'success',
-              title: "Rest Email Sent\n check spam folder if you can't see it in the inbox.",
+              title: "Reset Email Sent\n check spam folder if you can't see it in the inbox.",
               timer: 10000,
               showConfirmButton: true,
             });

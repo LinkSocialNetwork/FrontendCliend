@@ -67,7 +67,7 @@ export class PostComponent implements OnInit {
     if (commentText.length == 0) {
       Swal.fire({
         icon: 'warning',
-        title: 'please Write a comment first',
+        title: 'Please write a comment first.',
         timer: 8000,
         showConfirmButton: true,
       });

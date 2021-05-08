@@ -81,7 +81,7 @@ export class UserInfoComponent implements OnInit {
     user.lastName = "sendEmail";
 
     Swal.fire({
-      title: 'Sending The Email',
+      title: 'Sending Email...',
       allowEscapeKey: false,
       allowOutsideClick: false,
       showConfirmButton: false,
@@ -96,7 +96,7 @@ export class UserInfoComponent implements OnInit {
         if (data.message=="sent"){
           
           Swal.fire({
-            title: 'A Verification Email has been sent check your inbox or spam box and enter the code ',
+            title: 'A Verification Email has been sent, check your inbox or spam box, and enter the code ',
             input: 'text',
             inputAttributes: {
               autocapitalize: 'on',
@@ -106,7 +106,7 @@ export class UserInfoComponent implements OnInit {
             showLoaderOnConfirm: true,
             preConfirm: (EnteredCode) => {
               Swal.fire({
-                title: 'Checking the code',
+                title: 'Checking the code...',
                 allowEscapeKey: false,
                 allowOutsideClick: false,
                 showConfirmButton: false,
@@ -121,14 +121,14 @@ export class UserInfoComponent implements OnInit {
                 if (data.message=="wrong code") {
                   Swal.fire({
                     icon: 'error',
-                    title: 'you need to enter the right code try again',
+                    title: 'You need to enter the right code, try again',
                     timer: 10000,
                     showConfirmButton: true,
                   });
                 }else if(data.message=="email Verified"){
                   Swal.fire({
                     icon: 'success',
-                    title: "Thank you. Your email Verified",
+                    title: "Thank you. Your email is Verified",
                     timer: 10000,
                     showConfirmButton: true,
                   });

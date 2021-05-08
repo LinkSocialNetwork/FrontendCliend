@@ -81,7 +81,7 @@ export class AddPostComponent implements OnInit {
     if (this.postContrnt.length < 5) {
       Swal.fire({
         icon: 'warning',
-        title: 'you need to add more than one or two words',
+        title: 'You need to add more than one or two words',
         timer: 8000,
         showConfirmButton: true,
       });
@@ -95,7 +95,7 @@ export class AddPostComponent implements OnInit {
       ) {
         Swal.fire({
           icon: 'warning',
-          title: 'please enter a valid youtube vidoe ID ',
+          title: 'Please enter a valid youtube video ID ',
           timer: 8000,
           showConfirmButton: true,
         });
