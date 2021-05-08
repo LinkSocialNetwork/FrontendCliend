@@ -59,7 +59,7 @@ export class UsergeneralinfoComponent implements OnInit {
       else
         Swal.fire({
           icon: 'warning',
-          title: 'Username or Email already taken',
+          title: 'Username or Email is already taken',
           timer: 4000,
           showConfirmButton: true,
         });
