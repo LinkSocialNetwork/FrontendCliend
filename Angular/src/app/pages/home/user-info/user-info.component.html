@@ -12,6 +12,7 @@
         />
         <div class="h5">
           <a routerLink="/profile/{{ loggedInUser?.userID }}">@{{ loggedInUser?.userName }}</a>
+
         </div>
         <div class="h7 text-muted">
           {{ loggedInUser?.firstName }} {{ loggedInUser?.lastName }}
@@ -36,13 +37,11 @@
                 <div id="inner-message" class="alert alert-error" (click)="verifyEmail()" style="cursor: pointer;"> 
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
                     Please verify your email
-                    <!-- <button class="btn btn-primary verify-btn" (click)="verifyEmail()"> Verify </button> -->
                 </div>
             </div>
           </div>
         </li>
       </ul>
-      
-    </div>
     </div>
   </div>
+</div>

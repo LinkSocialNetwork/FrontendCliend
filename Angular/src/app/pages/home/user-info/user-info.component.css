@@ -34,7 +34,7 @@ body {
     width: 150px;
     height: 150px;
     border-radius: 50%;
-  
+
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
@@ -51,8 +51,8 @@ body {
     font-size: medium;
     font-style: italic;
     font-weight: bold;
-    color: red;
-    background-color: seashell;
+    color: var(--primary-color);
+    background-color: var(--tertiary-background);
     border-radius: 50px;
     top: 0;
     left: 0;
@@ -60,4 +60,5 @@ body {
 }
 #inner-message {
     margin: 0 auto;
+    display: inline-block;
 }
