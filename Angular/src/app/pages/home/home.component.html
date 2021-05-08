@@ -1,8 +1,8 @@
 <main [attr.theme]='theme'>
-  
+
   <div class = "mainbg">
   </div>
-  <app-navbar (toggleTheme)='toggleTheme()' active="home"></app-navbar>
+  <app-navbar #navBar (toggleTheme)='toggleTheme()' active="home"></app-navbar>
   <div class="container-fluid">
     <div style="padding-top: 100px" class="row">
       <div class="col-md-4">
@@ -28,8 +28,8 @@
         </div>
       </div>
     </div>
-    
+
   </div>
 
-  
+
 </main>

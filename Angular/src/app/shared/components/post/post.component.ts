@@ -49,8 +49,8 @@ export class PostComponent implements OnInit {
   checkIfPostIsLiked(post: Post): boolean {
     let loggedInUser: User = this.loginServ.getCurrent();
 
-    let userLiked = post.usersWhoLiked.find(
-      (element) => element.user.userID === loggedInUser.userID
+    let userLiked = post?.usersWhoLiked.find(
+      (element) => element.user.userID === loggedInUser?.userID
     );
 
     if (userLiked) return true;

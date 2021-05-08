@@ -34,15 +34,15 @@
         <em class="fa fa-clock-o"></em> {{ post?.postedAt | date: "medium" }}
       </div>
       <p class="card-text posttext">{{ post?.postContent }}</p>
-      <div class="vid-container" *ngIf="post.postImageUrl != null">
-        <img height="100%" width="100%" [src]="post.postImageUrl" alt="" />
+      <div class="vid-container" *ngIf="post?.postImageUrl != null">
+        <img height="100%" width="100%" [src]="post?.postImageUrl" alt="" />
       </div>
-      <div class="vid-container" *ngIf="post.youtubeUrl != null">
+      <div class="vid-container" *ngIf="post?.youtubeUrl != null">
         <iframe
           title="yt-vid"
           width="100%"
           height="350"
-          [src]="post.youtubeUrl | safe"
+          [src]="post?.youtubeUrl | safe"
           allowfullscreen
         ></iframe>
       </div>
@@ -69,13 +69,13 @@
           }}</span>
         </button>
       </ng-template>
-      <a href="home" class="btn btn-link" (click)="addComment()"
+      <a href="#" class="btn btn-link" routerLink="/post/{{post?.postId}}"
         ><em class="fa fa-comment"></em> Comments
         <span class="badge badge-danger">{{ post?.comments.length }}</span></a
       >
     </div>
     <div class="box-comments">
-      <div *ngFor="let comment of post.comments" class="comment">
+      <div *ngFor="let comment of post?.comments" class="comment">
         <img
           style="cursor: pointer"
           routerLink="/profile/{{ comment.commentWriter.userID }}"
@@ -84,7 +84,6 @@
           alt=""
         />
         <div class="content">
-          <h4>{{ post.comments.commentContent }}</h4>
           <h3>
             <a routerLink="/profile/{{ comment.commentWriter.userID }}"
               >@{{ comment.commentWriter.userName }}</a
@@ -103,7 +102,7 @@
         alt=""
       />
       <textarea
-        [id]="post.postId"
+        [id]="post?.postId"
         class="comment-box"
         placeholder="write a comment..."
       ></textarea>

@@ -6,6 +6,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { SearchComponent } from './pages/search/search.component';
+import { ViewPostComponent } from './pages/view-post/view-post.component';
 
 
 const routes: Routes = [
@@ -15,6 +16,7 @@ const routes: Routes = [
 {path: 'chatroom', component: ChatComponent},
 {path: 'search', component: SearchComponent},
 {path: 'follow/:followType', component: FollowComponent},
+{path: 'post/:id', component:ViewPostComponent},
 {path:'',redirectTo:'login',pathMatch:'full'},
 {path:'**',redirectTo:'login'}
 ];

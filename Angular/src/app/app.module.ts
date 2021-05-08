@@ -30,6 +30,7 @@ import { NotificationComponent } from './shared/components/notification/notifica
 import { PostComponent } from './shared/components/post/post.component';
 import { LoginService } from './shared/services/login.service';
 import { SafePipe } from './pipes/safe.pipe';
+import { ViewPostComponent } from './pages/view-post/view-post.component';
 
 
 @NgModule({
@@ -55,7 +56,8 @@ import { SafePipe } from './pipes/safe.pipe';
     FollowingComponent,
     FollowerComponent,
     AddPostComponent,
-    ButtonsComponent
+    ButtonsComponent,
+    ViewPostComponent
   ],
   imports: [
     BrowserModule,

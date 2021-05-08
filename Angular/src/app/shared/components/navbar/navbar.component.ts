@@ -55,8 +55,13 @@ export class NavbarComponent implements OnInit {
   getNotifications() {
     this.notificationServ
       .getAllNotifications(this.user.userID)
-      .subscribe((note) => {
-        this.notifications = note;
+      .subscribe(note => {
+        let newNotes:Notifications[]=[];
+        newNotes = note;
+        newNotes.sort((a,b) => (a.date > b.date) ? -1 : ((b.date > a.date) ? 1 : 0))
+        for(const noti of newNotes){
+          this.notifications.push(noti);
+        }
       });
   }
 
