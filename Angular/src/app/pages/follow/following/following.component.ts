@@ -1,8 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { User } from 'src/app/shared/model/User';
-import { LoginService } from 'src/app/shared/services/login.service';
-import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
   selector: 'app-following',
@@ -24,9 +22,7 @@ export class FollowingComponent implements OnInit {
     userName: '',
   });
 
-  constructor(
-    private formBuilder: FormBuilder,
-    private loginServ: LoginService) { }
+  constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     if(window.localStorage.getItem('theme')!=undefined){

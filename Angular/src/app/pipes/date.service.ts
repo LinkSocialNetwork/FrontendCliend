@@ -27,6 +27,5 @@ export class DateService {
   dobModifier(dob: string) {
     const dateSendingToServer = new DatePipe('en-US').transform(dob, 'MM-dd-yyyy')
     return dateSendingToServer;
-    /* console.log(dateSendingToServer); */
   }
 }

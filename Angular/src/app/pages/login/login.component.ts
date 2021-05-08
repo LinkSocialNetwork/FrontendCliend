@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { User } from 'src/app/shared/model/User';
 import { DateService } from 'src/app/pipes/date.service';
 import { GetCookieService } from 'src/app/shared/services/get-cookie.service';
-import { GetUserService } from 'src/app/shared/services/get-user.service';
 import { LoginService } from 'src/app/shared/services/login.service';
 import { UserService } from 'src/app/shared/services/user.service';
 import Swal from 'sweetalert2';
@@ -29,11 +28,9 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute,
     private router: Router,
     private dobModifier: DateService,
     private loginService: LoginService,
-    private getUserService: GetUserService,
     private userService: UserService,
     private cookieService: GetCookieService
   ) {}
@@ -49,7 +46,6 @@ export class LoginComponent implements OnInit {
         }
 
         this.loginService.setCurrent(data);
-        console.log('data is null');
       });
     }
   }
