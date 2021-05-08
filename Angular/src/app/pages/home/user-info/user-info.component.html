@@ -4,14 +4,14 @@
       <div class="card-body">
         <img
           style="cursor: pointer"
-          routerLink="/profile/{{loggedInUser?.userID}"
+          routerLink="/profile/{{ loggedInUser?.userID }}"
           alt="profile-pic"
           class="rounded-circle"
           onerror="this.src='../assets/logo.png'"
           [src]="loggedInUser?.profileImg"
         />
         <div class="h5">
-          <a routerLink="/profile/{{loggedInUser?.userID}">@{{ loggedInUser?.userName }}</a>
+          <a routerLink="/profile/{{ loggedInUser?.userID }}">@{{ loggedInUser?.userName }}</a>
         </div>
         <div class="h7 text-muted">
           {{ loggedInUser?.firstName }} {{ loggedInUser?.lastName }}
@@ -33,10 +33,10 @@
         <li *ngIf="loggedInUser.checkEmail==1" class="list-group-item">
           <div id="message">
             <div style="padding: 5px;">
-                <div id="inner-message" class="alert alert-error">
+                <div id="inner-message" class="alert alert-error" (click)="verifyEmail()" style="cursor: pointer;"> 
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
                     Please verify your email
-                    <button class="btn btn-primary " style="float: right; margin-right: 10px; margin-bottom: 10px;" (click)="verifyEmail()"> Verify </button>
+                    <!-- <button class="btn btn-primary verify-btn" (click)="verifyEmail()"> Verify </button> -->
                 </div>
             </div>
           </div>

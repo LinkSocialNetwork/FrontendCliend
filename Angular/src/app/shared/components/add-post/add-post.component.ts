@@ -126,6 +126,7 @@ export class AddPostComponent implements OnInit {
       comments: [],
       postedAt: <string>(<unknown>new Date().getTime()),
     };
+    console.log("POST", post)
     if (this.postImage != null) {
       let file: FormData = new FormData();
       file.append('file', this.postImage);

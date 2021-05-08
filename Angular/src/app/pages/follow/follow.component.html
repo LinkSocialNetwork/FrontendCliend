@@ -1,18 +1,1 @@
-<main [attr.theme]="theme">
-  <div class="mainbg"></div>
-  <app-navbar
-    (toggleTheme)="toggleTheme()"
-    #NavbarComponent
-    active="home"
-  ></app-navbar>
-  <app-follower
-    *ngIf="currentFollowType == 'followers'"
-    [followers]="followers"
-    [currentUser]="currentUser"
-  ></app-follower>
-  <app-following
-    *ngIf="currentFollowType == 'following'"
-    [following]="following"
-    [currentUser]="currentUser"
-  ></app-following>
-</main>
+

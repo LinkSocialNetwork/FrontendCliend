@@ -19,6 +19,10 @@ body {
     }
 }
 
+.verify-btn{
+    
+}
+
 /**Reset Bootstrap*/
 .dropdown-toggle::after {
     content: none;
