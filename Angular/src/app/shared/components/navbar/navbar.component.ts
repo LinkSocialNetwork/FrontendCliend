@@ -39,6 +39,7 @@ export class NavbarComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.notifications = [];
     let authtoken = this.cookieService.getCookie('token');
     if (authtoken) {
       this.loginService.getLoggedInUser().subscribe((data) => {
@@ -103,7 +104,7 @@ export class NavbarComponent implements OnInit {
       .subscribe((data) => {
         this.ngOnInit();
       });
-  }
+    }
 
   //---------------------------------------------------------------------------------------------------------------//
 
