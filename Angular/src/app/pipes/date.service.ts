@@ -17,6 +17,8 @@ export class DateService {
     'bio':'',
     'firstName':'',
     'lastName':'',
+    'checkPassword':0,
+    'checkEmail':0,
     'posts':[],
     'likes':[],
     'following': []

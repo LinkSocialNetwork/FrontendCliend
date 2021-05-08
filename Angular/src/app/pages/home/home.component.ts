@@ -8,6 +8,7 @@ import { User } from 'src/app/shared/model/User';
 import { GetPostService } from 'src/app/shared/services/get-post.service';
 import { GetUserService } from 'src/app/shared/services/get-user.service';
 import { LoginService } from 'src/app/shared/services/login.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-home',
@@ -54,6 +55,15 @@ export class HomeComponent implements OnInit {
     });
     this.getUserService.getCurrentUser().subscribe((data) => {
       this.currentUser = data;
+      if(data.checkPassword==1){
+        Swal.fire({
+          icon: 'warning',
+          title: 'Please update your password in your profile',
+          timer: 8000,
+          customClass: {popup: 'popup-class'},
+          showConfirmButton: true,
+        });
+      }
     });
   }
 

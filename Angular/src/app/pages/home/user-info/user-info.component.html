@@ -30,6 +30,19 @@
           </div>
           <div class="h5">{{ following?.length }}</div>
         </li>
+        <li *ngIf="loggedInUser.checkEmail==1" class="list-group-item">
+          <div id="message">
+            <div style="padding: 5px;">
+                <div id="inner-message" class="alert alert-error">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    Please verify your email
+                    <button class="btn btn-primary " style="float: right; margin-right: 10px; margin-bottom: 10px;" (click)="verifyEmail()"> Verify </button>
+                </div>
+            </div>
+          </div>
+        </li>
       </ul>
+      
+    </div>
     </div>
   </div>

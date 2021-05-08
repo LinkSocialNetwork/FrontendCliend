@@ -13,21 +13,6 @@ export class PostService {
   constructor(private myHttpCli:HttpClient,private cookieService: GetCookieService) { }
 
   insertNewPost(post:Post):Observable<string>{
-    //temporary hardcode USER object for testing
-    let currentUser:User ={
-      userID: 1,
-      userName: 'dang1',
-      password: '',
-      email: '',
-      dob: '',
-      profileImg: '',
-      bio: '',
-      posts: null,
-      likes: null,
-      firstName:'',
-      lastName:'',
-      following: []};
-  
     let url:string="http://localhost:9080/api/postservice/post";
     console.log("New post", post);
     // post.user = currentUser;

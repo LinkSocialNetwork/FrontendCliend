@@ -2,7 +2,7 @@ import { Component, OnInit, Output,EventEmitter } from '@angular/core';
 import { User } from 'src/app/shared/model/User';
 import { LoginService } from 'src/app/shared/services/login.service';
 import { UserService } from 'src/app/shared/services/user.service';
-
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-user-info',
@@ -23,6 +23,8 @@ export class UserInfoComponent implements OnInit {
     likes: null,
     firstName:'',
     lastName:'',
+    checkPassword:0,
+    checkEmail:0,
     following: []
   };
 
@@ -55,4 +57,102 @@ export class UserInfoComponent implements OnInit {
     )
 
   }
+
+  verifyEmail(){
+    let code = this.generateTempCode(5)
+    let user:User= {
+      userID: null,
+      userName:null,
+      password: null,
+      email: null,
+      dob: null,
+      profileImg: null,
+      bio: null,
+      posts: null,
+      likes: null,
+      firstName: '',
+      lastName: '',
+      checkPassword:0,
+      checkEmail:0,
+      following: [],
+    };
+    user.userName = this.loggedInUser.userName;
+    user.firstName = code;
+    user.lastName = "sendEmail";
+
+    Swal.fire({
+      title: 'Sending The Email',
+      allowEscapeKey: false,
+      allowOutsideClick: false,
+      showConfirmButton: false,
+      timer: 8000,
+      onOpen: () => {
+        Swal.showLoading();
+      },
+    });
+    this.userServ.verifyEmail(user).subscribe(
+
+      data =>{
+        if (data.message=="sent"){
+          
+          Swal.fire({
+            title: 'A Verification Email has been sent check your inbox or spam box and enter the code ',
+            input: 'text',
+            inputAttributes: {
+              autocapitalize: 'on',
+            },
+            showCancelButton: true,
+            confirmButtonText: 'Verify',
+            showLoaderOnConfirm: true,
+            preConfirm: (EnteredCode) => {
+              Swal.fire({
+                title: 'Checking the code',
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                showConfirmButton: false,
+                timer: 8000,
+                onOpen: () => {
+                  Swal.showLoading();
+                },
+              });
+              user.lastName=EnteredCode;
+              user.firstName =code;
+              this.userServ.verifyEmail(user).subscribe((data) => {
+                if (data.message=="wrong code") {
+                  Swal.fire({
+                    icon: 'error',
+                    title: 'you need to enter the right code try again',
+                    timer: 10000,
+                    showConfirmButton: true,
+                  });
+                }else if(data.message=="email Verified"){
+                  Swal.fire({
+                    icon: 'success',
+                    title: "Thank you. Your email Verified",
+                    timer: 10000,
+                    showConfirmButton: true,
+                  });
+                }
+                
+              });
+            },
+            allowOutsideClick: () => !Swal.isLoading(),
+          })
+
+        }
+
+      }
+    );
+
+  }
+
+  generateTempCode(length:number):string {
+    let result           = [];
+    let characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let charactersLength = characters.length;
+    for ( var i = 0; i < length; i++ ) {
+      result.push(characters.charAt(Math.floor(Math.random() * charactersLength)));
+   }
+   return result.join('');
+}
 }

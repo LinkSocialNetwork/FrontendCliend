@@ -33,6 +33,8 @@ export class ProfileComponent implements OnInit {
     likes: null,
     firstName: '',
     lastName: '',
+    checkPassword:0,
+    checkEmail:0,
     following: [],
   };
 

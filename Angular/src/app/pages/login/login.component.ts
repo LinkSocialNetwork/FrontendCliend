@@ -85,6 +85,8 @@ export class LoginComponent implements OnInit {
       likes: null,
       firstName: '',
       lastName: '',
+      checkPassword:0,
+      checkEmail:0,
       following: [],
     };
     this.loginService.loginUser(user).subscribe((RCurrentUser) => {
@@ -133,7 +135,9 @@ export class LoginComponent implements OnInit {
       likes: null,
       firstName: '',
       lastName: '',
-      following: [],
+      checkPassword:0,
+      checkEmail:1,
+      following: []
     };
     this.userService.insertNewUser(user).subscribe((data) => {
       if (data.message == 'User was created') {
@@ -155,21 +159,21 @@ export class LoginComponent implements OnInit {
       } else if (data.message == 'Username already exists in system') {
         Swal.fire({
           icon: 'warning',
-          title: '"Username already taken',
+          title: 'Username already taken',
           timer: 4000,
           showConfirmButton: true,
         });
       } else if (data.message == 'email already exists in system') {
         Swal.fire({
           icon: 'warning',
-          title: '"Email already taken',
+          title: 'Email already taken',
           timer: 4000,
           showConfirmButton: true,
         });
       } else if (data.message == 'Could not create user') {
         Swal.fire({
           icon: 'warning',
-          title: '"Could not create user at this time',
+          title: 'Could not create user at this time',
           timer: 4000,
           showConfirmButton: true,
         });
@@ -179,43 +183,45 @@ export class LoginComponent implements OnInit {
 
   onPasswordReset(): void {
     Swal.fire({
-      title: 'Enter Your userName',
+      title: 'Enter your user name',
       input: 'text',
-      showClass: {
-        popup: 'animate__animated animate__fadeInDown',
-      },
-      hideClass: {
-        popup: 'animate__animated animate__fadeOutUp',
-      },
       inputAttributes: {
-        autocapitalize: 'off',
+        autocapitalize: 'on',
       },
       showCancelButton: true,
-      confirmButtonText: 'Send Email',
+      confirmButtonText: 'Reset Password',
       showLoaderOnConfirm: true,
       preConfirm: (userToReset) => {
+        Swal.fire({
+          title: 'Sending Password Reset Email',
+          allowEscapeKey: false,
+          allowOutsideClick: false,
+          showConfirmButton: false,
+          timer: 8000,
+          onOpen: () => {
+            Swal.showLoading();
+          },
+        });
         this.loginService.resetPassword(userToReset).subscribe((data) => {
-          console.log('Password reset result: ' + data);
+          if (data.message=="no user with this user name") {
+            Swal.fire({
+              icon: 'error',
+              title: 'Given Username is not in our system',
+              timer: 10000,
+              showConfirmButton: true,
+            });
+          }else if(data.message=="Email sent."){
+            Swal.fire({
+              icon: 'success',
+              title: "Rest Email Sent\n check spam folder if you can't see it in the inbox.",
+              timer: 10000,
+              showConfirmButton: true,
+            });
+          }
+          
         });
       },
       allowOutsideClick: () => !Swal.isLoading(),
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire({
-          icon: 'success',
-          title: 'Email Sent: check spam folder if you cant see it yet or try again.',
-          timer: 4000,
-          showConfirmButton: true,
-        });
-      }
-      if(result.isDenied){
-        Swal.fire({
-          icon: 'error',
-          title: 'Given Username is not in our system',
-          timer: 4000,
-          showConfirmButton: true,
-        });
-      }
-    });
+    })
   }
 }

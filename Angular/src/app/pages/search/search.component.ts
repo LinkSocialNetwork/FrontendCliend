@@ -44,7 +44,9 @@ export class SearchComponent implements OnInit {
     likes: null,
     firstName: '',
     lastName: '',
-    following: [],
+    checkPassword:0,
+    checkEmail:0,
+    following: []
   };
 
   searchForm = this.formBuilder.group({

@@ -42,3 +42,18 @@ body {
     border-radius: 50% !important;
     object-fit: cover;
   }
+
+  #message {
+    font-size: medium;
+    font-style: italic;
+    font-weight: bold;
+    color: red;
+    background-color: seashell;
+    border-radius: 50px;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+#inner-message {
+    margin: 0 auto;
+}

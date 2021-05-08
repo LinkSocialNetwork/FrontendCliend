@@ -21,6 +21,8 @@ export class FollowButtonComponent implements OnInit {
     'bio':null,
     'firstName':null,
     'lastName':null,
+    'checkPassword':0,
+    'checkEmail':0,
     'posts':[],
     'likes':[],
     'following': []

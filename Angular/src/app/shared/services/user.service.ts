@@ -61,15 +61,18 @@ export class UserService {
   }
 
   followUser(follow: Follow): Observable<boolean>{
-    console.log("FOLLOW BB",follow)
     let url: string = `http://localhost:9080/api/userservice/follow`;
     return this.myHttpCli.post<boolean>(url,follow,{withCredentials:true});
   }
 
   unfollowUser(follow: Follow) : Observable<boolean>{
-    console.log("UNFOLLOW BB",follow)
     let url: string = `http://localhost:9080/api/userservice/follow/${follow.follower.userID}/${follow.followee.userID}`;
     return this.myHttpCli.delete<boolean>(url,{withCredentials:true});
+  }
+
+  verifyEmail(user:User) : Observable<ResponseMessage>{
+    let url: string = `http://localhost:9080/api/userservice/verify-email`;
+    return this.myHttpCli.post<ResponseMessage>(url,user,{withCredentials:true});
   }
   
 }

@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { ResponseMessage } from '../model/ResponseMessage';
 import { User } from '../model/User';
 import { GetCookieService } from './get-cookie.service';
 
@@ -61,8 +62,8 @@ export class LoginService {
     )
   }
 
-  resetPassword(userName:string):Observable<string>{
+  resetPassword(userName:string):Observable<ResponseMessage>{
     let url:string = "http://localhost:9080/api/userservice/resetPassword";
-    return this.httpCli.post<string>(url,userName,{withCredentials:true});
+    return this.httpCli.post<ResponseMessage>(url,userName,{withCredentials:true});
   }
 }
