@@ -31,13 +31,14 @@
           </div>
           <div class="h5">{{ following?.length }}</div>
         </li>
-        <li *ngIf="loggedInUser.checkEmail==1" class="list-group-item">
+        <li *ngIf="loggedInUser.checkEmail==1 && visible" class="list-group-item">
           <div id="message">
             <div style="padding: 5px;">
                 <div id="inner-message" class="alert alert-error" (click)="verifyEmail()" style="cursor: pointer;"> 
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    
                     Please verify your email
                 </div>
+                <button type="button" class="close" data-dismiss="alert" (click)="dismiss()">&times;</button>
             </div>
           </div>
         </li>

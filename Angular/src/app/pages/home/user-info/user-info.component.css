@@ -19,8 +19,8 @@ body {
     }
 }
 
-.verify-btn{
-    
+.close{
+    margin: 10px;
 }
 
 /**Reset Bootstrap*/
