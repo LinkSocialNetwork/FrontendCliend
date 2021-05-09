@@ -47,7 +47,6 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log("ON INIT BB")
     let authtoken = this.cookieService.getCookie("token")
     if(!authtoken)
       this.router.navigate(['login'])
@@ -56,14 +55,12 @@ export class HomeComponent implements OnInit {
       this.theme = window.localStorage.getItem('theme');
     }
     this.loginService.getLoggedInUser().subscribe((data) => {
-      console.log("DATAAAA",data)
       if (data == null) {
         this.router.navigate(['/login']);
       }
     });
     this.getUserService.getCurrentUser().subscribe((data) => {
       this.currentUser = data;
-      console.log("DATAAAA",data)
       if(data.checkPassword==1){
         Swal.fire({
           icon: 'warning',
