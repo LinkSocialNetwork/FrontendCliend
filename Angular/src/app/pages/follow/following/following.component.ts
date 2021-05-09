@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 import { User } from 'src/app/shared/model/User';
+import { GetCookieService } from 'src/app/shared/services/get-cookie.service';
 import { LoginService } from 'src/app/shared/services/login.service';
 import { UserService } from 'src/app/shared/services/user.service';
 
@@ -24,9 +26,14 @@ export class FollowingComponent implements OnInit {
     userName: '',
   });
 
-  constructor(private formBuilder: FormBuilder, private loginServ: LoginService, private userServ: UserService) { }
+  constructor(private formBuilder: FormBuilder, private loginServ: LoginService, private userServ: UserService,private cookieService: GetCookieService, private router: Router) { }
 
   ngOnInit(): void {
+
+    let authtoken = this.cookieService.getCookie("token")
+    if(!authtoken)
+      this.router.navigate(['login'])
+
     if(window.localStorage.getItem('theme')!=undefined){
       this.theme =window.localStorage.getItem('theme');
     }

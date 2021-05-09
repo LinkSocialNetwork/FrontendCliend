@@ -65,6 +65,10 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
   @ViewChild('scroll') private container: ElementRef;
 
   ngOnInit(): void {
+    let authtoken = this.cookieServ.getCookie("token")
+    if(!authtoken)
+      this.router.navigate(['login'])
+
     if (window.localStorage.getItem('theme') != undefined) {
       this.theme = window.localStorage.getItem('theme');
     }

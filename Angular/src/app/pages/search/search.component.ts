@@ -6,6 +6,7 @@ import { FeedComponent } from 'src/app/shared/components/feed/feed.component';
 import { Like } from 'src/app/shared/model/LIke';
 import { Post } from 'src/app/shared/model/Post';
 import { User } from 'src/app/shared/model/User';
+import { GetCookieService } from 'src/app/shared/services/get-cookie.service';
 import { GetPostService } from 'src/app/shared/services/get-post.service';
 import { GetUserService } from 'src/app/shared/services/get-user.service';
 import { LikeService } from 'src/app/shared/services/like.service';
@@ -67,12 +68,18 @@ export class SearchComponent implements OnInit {
     private getPostService: GetPostService,
     private loginServ: LoginService,
     private likeServ: LikeService,
-    private router: Router
+    private router: Router,
+    private cookieService: GetCookieService
   ) {}
 
   //---------------------------------------------------------------------------------------------------------------//
 
   ngOnInit(): void {
+
+    let authtoken = this.cookieService.getCookie("token")
+    if(!authtoken)
+      this.router.navigate(['login'])
+
     if (window.localStorage.getItem('theme') != undefined) {
       this.theme = window.localStorage.getItem('theme');
     }

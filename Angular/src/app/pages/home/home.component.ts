@@ -5,6 +5,7 @@ import { FeedComponent } from 'src/app/shared/components/feed/feed.component';
 import { NavbarComponent } from 'src/app/shared/components/navbar/navbar.component';
 import { Post } from 'src/app/shared/model/Post';
 import { User } from 'src/app/shared/model/User';
+import { GetCookieService } from 'src/app/shared/services/get-cookie.service';
 import { GetPostService } from 'src/app/shared/services/get-post.service';
 import { GetUserService } from 'src/app/shared/services/get-user.service';
 import { LoginService } from 'src/app/shared/services/login.service';
@@ -41,11 +42,16 @@ export class HomeComponent implements OnInit {
     private router: Router,
     private getPostService: GetPostService,
     private getUserService: GetUserService,
-    public fb: FormBuilder
+    public fb: FormBuilder,
+    private cookieService: GetCookieService
   ) {}
 
   ngOnInit(): void {
     console.log("ON INIT BB")
+    let authtoken = this.cookieService.getCookie("token")
+    if(!authtoken)
+      this.router.navigate(['login'])
+
     if (window.localStorage.getItem('theme') != undefined) {
       this.theme = window.localStorage.getItem('theme');
     }

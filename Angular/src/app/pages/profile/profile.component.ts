@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute} from '@angular/router';
+import { ActivatedRoute, Router} from '@angular/router';
 import { FeedComponent } from 'src/app/shared/components/feed/feed.component';
 import { Post } from 'src/app/shared/model/Post';
 import { User } from 'src/app/shared/model/User';
+import { GetCookieService } from 'src/app/shared/services/get-cookie.service';
 import { GetUserService } from 'src/app/shared/services/get-user.service';
 import { LoginService } from 'src/app/shared/services/login.service';
 import { UserService } from 'src/app/shared/services/user.service';
@@ -58,10 +59,17 @@ export class ProfileComponent implements OnInit {
     private router: ActivatedRoute,
     private userServ: UserService,
     private getUserServ: GetUserService,
-    private loginServ: LoginService
+    private loginServ: LoginService,
+    private cookieService: GetCookieService,
+    private route: Router
   ) {}
 
   ngOnInit(): void {
+
+    let authtoken = this.cookieService.getCookie("token")
+    if(!authtoken)
+      this.route.navigate(['login'])
+
     if(window.localStorage.getItem('theme')!=undefined){
       this.theme =window.localStorage.getItem('theme');
     }

@@ -89,9 +89,10 @@
 
         <!---------------------------------- EDIT PROFILE INFO END  ---------------------------------------->
 
-        <div class="col-xl-6 order-xl-1">
-          <div class="component-border">
+        <div class="col-xl-6 order-xl-1" >
+          <div class="component-border" *ngIf="editable">
             <app-add-post
+            
               (refreshFeed)="feedComponent.resetPage()"
             ></app-add-post>
           </div>

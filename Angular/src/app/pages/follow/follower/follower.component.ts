@@ -1,7 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 import { User } from 'src/app/shared/model/User';
+import { GetCookieService } from 'src/app/shared/services/get-cookie.service';
 import { LoginService } from 'src/app/shared/services/login.service';
+import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
   selector: 'app-follower',
@@ -25,13 +28,36 @@ export class FollowerComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private loginServ: LoginService
+    private loginServ: LoginService,
+    private cookieService: GetCookieService,
+    private router: Router,
+    private userServ: UserService
     ) { }
 
   ngOnInit(): void {
+
+    let authtoken = this.cookieService.getCookie("token")
+    if(!authtoken)
+      this.router.navigate(['login'])
+
     if(window.localStorage.getItem('theme')!=undefined){
       this.theme =window.localStorage.getItem('theme');
     }
+
+    this.loginServ.getLoggedInUser().subscribe(
+      data => {
+        
+        this.currentUser=data;
+        this.loginServ.setCurrent(this.currentUser);
+
+        if(data !== null){
+
+          this.userServ.getFollowers(data.userID).subscribe(data => {
+            this.followers = data;
+          })
+        }
+      }
+    )
   }
 
   toggleTheme(): void{

@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Post } from 'src/app/shared/model/Post';
 import { User } from 'src/app/shared/model/User';
+import { GetCookieService } from 'src/app/shared/services/get-cookie.service';
 import { GetPostService } from 'src/app/shared/services/get-post.service';
 import { GetUserService } from 'src/app/shared/services/get-user.service';
 
@@ -20,10 +21,18 @@ export class ViewPostComponent implements OnInit {
   constructor(
     private router: ActivatedRoute,
     private getPostServ: GetPostService,
-    private getUserServ: GetUserService
+    private getUserServ: GetUserService,
+    private route: Router,
+    private cookieService: GetCookieService
+
   ) {}
 
   ngOnInit(): void {
+
+    let authtoken = this.cookieService.getCookie("token")
+    if(!authtoken)
+      this.route.navigate(['login'])
+    
     this.getUserServ.getCurrentUser().subscribe(data2 => {
       this.currentUser=data2;
     });
