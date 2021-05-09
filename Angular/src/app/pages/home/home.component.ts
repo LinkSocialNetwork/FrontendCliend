@@ -45,16 +45,19 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    console.log("ON INIT BB")
     if (window.localStorage.getItem('theme') != undefined) {
       this.theme = window.localStorage.getItem('theme');
     }
     this.loginService.getLoggedInUser().subscribe((data) => {
+      console.log("DATAAAA",data)
       if (data == null) {
         this.router.navigate(['/login']);
       }
     });
     this.getUserService.getCurrentUser().subscribe((data) => {
       this.currentUser = data;
+      console.log("DATAAAA",data)
       if(data.checkPassword==1){
         Swal.fire({
           icon: 'warning',

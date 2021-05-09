@@ -31,6 +31,8 @@ export class UserInfoComponent implements OnInit {
   followers: User[] = [];
   following: User[] = [];
 
+  visible=true;
+
   @Output()
   newFollowingEmitter:EventEmitter<User[]> = new EventEmitter<User[]>();
 
@@ -56,6 +58,10 @@ export class UserInfoComponent implements OnInit {
       }
     )
 
+  }
+
+  dismiss(){
+    this.visible = false;
   }
 
   verifyEmail(){
