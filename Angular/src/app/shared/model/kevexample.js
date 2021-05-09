@@ -1,6 +1,5 @@
 const input = document.querySelector('.imageFile');
 input.addEventListener('change', function(e){
-    console.log(input.files);
     const reader = new FileReader();
     reader.onload = function(){
 
