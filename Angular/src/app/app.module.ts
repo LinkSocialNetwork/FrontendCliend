@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/login/login.component';
-import { TimeLineComponent } from './pages/home/time-line/time-line.component';
 import { HomeComponent } from './pages/home/home.component';
 import { UserInfoComponent } from './pages/home/user-info/user-info.component';
 import {HttpClientModule } from '@angular/common/http';
@@ -14,23 +13,30 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { ChatComponent } from './pages/chat/chat.component';
 import { SearchComponent } from './pages/search/search.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SafePipe } from './shared/pipes/safe.pipe';
-import { LoginService } from './shared/services/login.service';
-import { NotificationComponent } from './shared/components/notification/notification.component';
-import { FollowButtonComponent } from './shared/components/buttons/follow-button/follow-button.component';
-import { NavbarComponent } from './shared/components/navbar/navbar.component';
-import { UnfollowButtonComponent } from './shared/components/buttons/unfollow-button/unfollow-button.component';
-import { PostComponent } from './shared/components/post/post.component';
+
 import { FeedComponent } from './shared/components/feed/feed.component';
 import { UsergeneralinfoComponent } from './pages/profile/usergeneralinfo/usergeneralinfo.component';
 import { UserpasswordinfoComponent } from './pages/profile/userpasswordinfo/userpasswordinfo.component';
 import { UsernameinfoComponent } from './pages/profile/usernameinfo/usernameinfo.component';
+import { FollowComponent } from './pages/follow/follow.component';
+import { FollowingComponent } from './pages/follow/following/following.component';
+import { FollowerComponent } from './pages/follow/follower/follower.component';
+import { AddPostComponent } from './shared/components/add-post/add-post.component';
+import { ButtonsComponent } from './shared/components/buttons/buttons.component';
+import { FollowButtonComponent } from './shared/components/buttons/follow-button/follow-button.component';
+import { UnfollowButtonComponent } from './shared/components/buttons/unfollow-button/unfollow-button.component';
+import { NavbarComponent } from './shared/components/navbar/navbar.component';
+import { NotificationComponent } from './shared/components/notification/notification.component';
+import { PostComponent } from './shared/components/post/post.component';
+import { LoginService } from './shared/services/login.service';
+import { SafePipe } from './pipes/safe.pipe';
+import { ViewPostComponent } from './pages/view-post/view-post.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    TimeLineComponent,
     HomeComponent,
     UserInfoComponent,
     ProfileComponent,
@@ -45,7 +51,13 @@ import { UsernameinfoComponent } from './pages/profile/usernameinfo/usernameinfo
     FeedComponent,
     UsergeneralinfoComponent,
     UserpasswordinfoComponent,
-    UsernameinfoComponent
+    UsernameinfoComponent,
+    FollowComponent,
+    FollowingComponent,
+    FollowerComponent,
+    AddPostComponent,
+    ButtonsComponent,
+    ViewPostComponent
   ],
   imports: [
     BrowserModule,

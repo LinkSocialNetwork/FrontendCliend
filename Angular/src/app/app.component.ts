@@ -14,6 +14,7 @@ import { NotificationService } from './shared/services/notification/notification
 })
 export class AppComponent implements OnInit{
 
+  theme: string;
 
   constructor(){
   }

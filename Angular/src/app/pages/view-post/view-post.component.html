@@ -1,0 +1,18 @@
+<main [attr.theme]="theme">
+  <div class="mainbg"></div>
+  <app-navbar #navBar (toggleTheme)="toggleTheme()"></app-navbar>
+  <div style="padding-top: 100px" class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 col-sm-12">
+        <div class="component-border">
+          <app-post
+            (refreshNav)='navBar.ngOnInit()'
+            (resetPage)="ngOnInit()"
+            [post]="post"
+            [currentUser]="currentUser"
+          ></app-post>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

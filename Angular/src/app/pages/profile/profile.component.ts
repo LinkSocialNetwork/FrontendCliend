@@ -1,31 +1,28 @@
-import { HttpResponse } from '@angular/common/http';
-import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { NavigationEnd, Router } from '@angular/router';
-import { AppComponent } from 'src/app/app.component';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router} from '@angular/router';
+import { FeedComponent } from 'src/app/shared/components/feed/feed.component';
 import { Post } from 'src/app/shared/model/Post';
 import { User } from 'src/app/shared/model/User';
-import { GetPostService } from 'src/app/shared/services/get-post.service';
+import { GetCookieService } from 'src/app/shared/services/get-cookie.service';
 import { GetUserService } from 'src/app/shared/services/get-user.service';
-import { ImageUploadService } from 'src/app/shared/services/image-upload.service';
 import { LoginService } from 'src/app/shared/services/login.service';
 import { UserService } from 'src/app/shared/services/user.service';
-import Swal from 'sweetalert2';
-
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent implements OnInit {
-
-  posts:Post[]=[];
+  posts: Post[] = [];
   mySubscription: any;
   appCom: HTMLElement;
-  isChecked:boolean = false;
-  
-  currentUser:User = {
+  isChecked: boolean = false;
+  isFollowing: boolean = null;
+  editable: boolean = false;
+  theme: string = 'light';
+
+  profileUser: User = {
     userID: 0,
     userName: '',
     password: '',
@@ -35,53 +32,83 @@ export class ProfileComponent implements OnInit {
     bio: '',
     posts: null,
     likes: null,
-    firstName:'',
-    lastName:'',
-    following: []
+    firstName: '',
+    lastName: '',
+    checkPassword:0,
+    checkEmail:0,
+    following: [],
   };
 
   followers: User[];
   following: User[];
 
+  @ViewChild("feedComponent")
+  feedComponent: FeedComponent;
 
   // This will hold the updated profile pic file
-  updatedImage:File=null;
+  updatedImage: File = null;
 
   // This will hold all the password update fields
-  newPassword1:string = '';
-  newPassword2:string = '';
-  oldPassword:string = '';
+  newPassword1: string = '';
+  newPassword2: string = '';
+  oldPassword: string = '';
 
   isOldPasswordValid = true;
-  
-  constructor( private router:Router,
-    private loginService:LoginService,
-    private userServ: UserService) {  }
+
+  constructor(
+    private router: ActivatedRoute,
+    private userServ: UserService,
+    private getUserServ: GetUserService,
+    private loginServ: LoginService,
+    private cookieService: GetCookieService,
+    private route: Router
+  ) {}
 
   ngOnInit(): void {
 
-    // Get the currently logged in user and set it
-    this.loginService.getLoggedInUser().subscribe(
-      data =>{
-        if(data==null){
-          this.router.navigate(['/login']);
-        }
-        else {
-          //force update the current user
-          this.loginService.setCurrent(data);
-          
-          this.currentUser = data;
+    let authtoken = this.cookieService.getCookie("token")
+    if(!authtoken)
+      this.route.navigate(['login'])
 
-        }
-        this.userServ.getFollowers(data.userID).subscribe(data2 => {
-          this.followers = data2;
-        })
-        this.userServ.getFollowees(data.userID).subscribe(data3 => {
-          this.following = data3;
-        })
-      }
-      
-    )
+    if(window.localStorage.getItem('theme')!=undefined){
+      this.theme =window.localStorage.getItem('theme');
+    }
+    this.router.params.subscribe((params) => {
+      this.profileUser.userID = params['id'];
+      this.getUserServ
+        .getUserById(this.profileUser.userID)
+        .subscribe((data) => {
+          this.profileUser=data;
+          this.loginServ.getLoggedInUser().subscribe(loggedInUser =>{
+            if(loggedInUser.userID==data.userID){
+              this.editable = true;
+            }
+          });
+          this.userServ.getFollowers(data.userID).subscribe((data2) => {
+            this.followers = data2;
+          });
+          this.userServ.getFollowees(data.userID).subscribe((data3) => {
+            this.following = data3;
+          });
+        });
+    });
+  }
+
+  toggleFollowing(bool: boolean) {
+    this.isFollowing = !this.isFollowing;
+  }
+
+  toggleTheme(): void{
+    if(this.theme==='light'){
+      this.theme='dark';
+      window.localStorage['theme'] = this.theme;
+      return;
+    }
+    if(this.theme==='dark'){
+      this.theme='light';
+      window.localStorage['theme'] = this.theme;
+      return;
+    }
   }
 
 }

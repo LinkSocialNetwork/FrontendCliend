@@ -4,12 +4,15 @@ import { User } from '../../model/User';
 import { GetPostService } from '../../services/get-post.service';
 import { GetUserService } from '../../services/get-user.service';
 
+
 @Component({
   selector: 'app-feed',
   templateUrl: './feed.component.html',
   styleUrls: ['./feed.component.css']
 })
 export class FeedComponent implements OnInit, OnChanges, OnDestroy {
+
+  //================================================= INPUT ====================================================//
 
   @Input()
   posts:Post[];
@@ -23,23 +26,33 @@ export class FeedComponent implements OnInit, OnChanges, OnDestroy {
   @Input()
   notSpecificUser:boolean = false;
 
+  @Input()
+  feedTitle: string;
+
+  //================================================== OUTPUT ==================================================//
+
   @Output()
   refreshNav: EventEmitter<void> = new EventEmitter();
 
+  //================================================== VARIABLES ==================================================//
+
   page:number = 0;
 
+  flag: boolean = false;
 
   constructor(private getPostService:GetPostService,private getUserService:GetUserService) { }
 
   ngOnInit(): void {
+    this.page = 0;
+    this.posts = [];
     this.getUserService.getCurrentUser().subscribe(
       data=>{
         this.currentUser=data;
+        this.resetPage();
       })
   }
 
   ngOnChanges():void {
-    this.resetPage();
   }
 
   ngOnDestroy(): void {
@@ -47,7 +60,8 @@ export class FeedComponent implements OnInit, OnChanges, OnDestroy {
     this.posts = [];
   }
 
-  //---------------------------------------------------------------------------------------------------------------//
+  //-=============================================== METHODS ====================================================//
+
 
   /**
    * this will make a request to get more posts when reach bottom of page
@@ -60,7 +74,9 @@ export class FeedComponent implements OnInit, OnChanges, OnDestroy {
     // pos/max will give you the distance between scroll bottom and and bottom of screen in percentage.
     if(pos == max )   {
       //Do your action here
-      this.addPage()
+      if (this.flag){
+        this.addPage()
+      }
     }
   }
 
@@ -91,6 +107,7 @@ export class FeedComponent implements OnInit, OnChanges, OnDestroy {
     } else {
       this.getFollowingPosts();
     }
+    this.flag = true;
   }
 
 //---------------------------------------------------------------------------------------------------------------//
@@ -99,6 +116,9 @@ export class FeedComponent implements OnInit, OnChanges, OnDestroy {
    * this will make the request to the back-end to get posts (used in addPage() and resetPage())
    */
   getFollowingPosts():void{
+    if(this.currentUser===undefined){
+      return;
+    }
     this.getPostService.getUsersFollowingPosts(this.currentUser.userID,this.page).subscribe(
       data =>{
         let newPosts:Post[];
@@ -116,7 +136,7 @@ export class FeedComponent implements OnInit, OnChanges, OnDestroy {
   getSpecificUserPosts():void{
     this.getPostService.getPostsCreatedByUser(this.profileUser.userID,this.page).subscribe(
       data =>{
-        let newPosts:Post[];
+        let newPosts: Post[];
         newPosts=data;
         newPosts.sort((a,b) => (a.postedAt > b.postedAt) ? -1 : ((b.postedAt > a.postedAt) ? 1 : 0))
         for (const post of newPosts) {
@@ -134,4 +154,25 @@ export class FeedComponent implements OnInit, OnChanges, OnDestroy {
 
   //---------------------------------------------------------------------------------------------------------------//
 
+  goToTop(){
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+  }
+
+  //---------------------------------------------------------------------------------------------------------------//
+
+  filterPosts(event: any){
+    let matcher = new RegExp(event.target.value, "gi");
+
+    for (var i=0;i<document.getElementsByClassName("postHolder").length;i++) {
+      if (
+        matcher.test(document.getElementsByClassName("posttext")[i].innerHTML)
+      ) {
+        (<HTMLElement>document.getElementsByClassName("postHolder")[i]).style.display="";
+      } else {
+        (<HTMLElement>document.getElementsByClassName("postHolder")[i]).style.display="none";
+      }
+    }
+
+  }
 }

@@ -19,6 +19,10 @@ body {
     }
 }
 
+.close{
+    margin: 10px;
+}
+
 /**Reset Bootstrap*/
 .dropdown-toggle::after {
     content: none;
@@ -30,7 +34,7 @@ body {
     width: 150px;
     height: 150px;
     border-radius: 50%;
-  
+
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
@@ -42,3 +46,19 @@ body {
     border-radius: 50% !important;
     object-fit: cover;
   }
+
+  #message {
+    font-size: medium;
+    font-style: italic;
+    font-weight: bold;
+    color: var(--primary-color);
+    background-color: var(--tertiary-background);
+    border-radius: 50px;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+#inner-message {
+    margin: 0 auto;
+    display: inline-block;
+}

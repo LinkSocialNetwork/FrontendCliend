@@ -22,8 +22,7 @@ export class UserService {
 
   updateUser(user:User): Observable<boolean>{
     let authtoken = this.cookieService.getCookie("token")
-    let url: string = "http://localhost:9080/api/userservice/user";
-    console.log(" inside the user update >>> "+user);
+    let url: string = "http://localhost:9080/api/userservice/protected/user";
     return this.myHttpCli.put<boolean>(url,user,{
       headers: {
         token: authtoken
@@ -34,18 +33,22 @@ export class UserService {
 
   deleteUser(id:number): void{
     let url: string = `http://localhost:9080/api/userservice/user/${id}`;
-    //TODO: change in Java from deletemapping to postmapping
     this.myHttpCli.delete<HttpResponse<ArrayBuffer>>(url);
   }
 
   checkOldPass(user:User,oldPassword:string, newPassword: string): Observable<boolean>{
+    let authtoken = this.cookieService.getCookie("token")
     const formData = new FormData();
     formData.append("username",user.userName)
     formData.append("oldpassword",oldPassword)
     formData.append("newpassword",newPassword)
-    let url: string = "http://localhost:9080/api/userservice/validate-password";
+    let url: string = "http://localhost:9080/api/userservice/protected/validate-password";
     
-    return this.myHttpCli.post<boolean>(url,formData,{withCredentials:true});
+    return this.myHttpCli.post<boolean>(url,formData,{
+      headers: {
+        token: authtoken
+      }, withCredentials:true
+    });
   }
 
 
@@ -61,15 +64,33 @@ export class UserService {
   }
 
   followUser(follow: Follow): Observable<boolean>{
-    console.log("FOLLOW BB",follow)
-    let url: string = `http://localhost:9080/api/userservice/follow`;
-    return this.myHttpCli.post<boolean>(url,follow,{withCredentials:true});
+    let authtoken = this.cookieService.getCookie("token")
+    let url: string = `http://localhost:9080/api/userservice/protected/follow`;
+    return this.myHttpCli.post<boolean>(url,follow,{
+      headers: {
+        token: authtoken
+      }, withCredentials:true
+    });
   }
 
   unfollowUser(follow: Follow) : Observable<boolean>{
-    console.log("UNFOLLOW BB",follow)
-    let url: string = `http://localhost:9080/api/userservice/follow/${follow.follower.userID}/${follow.followee.userID}`;
-    return this.myHttpCli.delete<boolean>(url,{withCredentials:true});
+    let authtoken = this.cookieService.getCookie("token")
+    let url: string = `http://localhost:9080/api/userservice/protected/follow/${follow.follower.userID}/${follow.followee.userID}`;
+    return this.myHttpCli.delete<boolean>(url,{
+      headers: {
+        token: authtoken
+      }, withCredentials:true
+    });
+  }
+
+  verifyEmail(user:User) : Observable<ResponseMessage>{
+    let authtoken = this.cookieService.getCookie("token")
+    let url: string = `http://localhost:9080/api/userservice/protected/verify-email`;
+    return this.myHttpCli.post<ResponseMessage>(url,user,{
+      headers: {
+        token: authtoken
+      }, withCredentials:true
+    });
   }
   
 }

@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { ResponseMessage } from '../model/ResponseMessage';
 import { User } from '../model/User';
 import { GetCookieService } from './get-cookie.service';
 
@@ -55,14 +56,13 @@ export class LoginService {
   triggerRetrieveCurrent():void{
     this.getLoggedInUser().subscribe(
       data=>{
-        console.log("Retrieve Triggered")
         this.setCurrent(data);
       }
     )
   }
 
-  resetPassword(userName:string):Observable<string>{
-    let url:string = "http://localhost:9080/api/userservice/user/password-reset";
-    return this.httpCli.post<string>(url,userName,{withCredentials:true});
+  resetPassword(userName:string):Observable<ResponseMessage>{
+    let url:string = "http://localhost:9080/api/userservice/resetPassword";
+    return this.httpCli.post<ResponseMessage>(url,userName,{withCredentials:true});
   }
 }
