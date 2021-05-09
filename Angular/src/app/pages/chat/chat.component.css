@@ -156,6 +156,7 @@
   height: 37px;
   border-radius: 2px;
   width: 37px;
+  object-fit: cover;
 }
 .list-group.lg-alt .list-group-item {
   border: 0;
