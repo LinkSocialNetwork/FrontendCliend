@@ -28,12 +28,9 @@
                       />
                     </div>
                     <div class="media-body">
-                      <small
-                        class="list-group-item-heading"
-                        style="margin-left: 2px"
-                      >
-                        @{{ newUser.userName }}</small
-                      >
+                      <span class="list-group-item-heading" style="margin-left: 2px"> 
+                        <a routerLink="/profile/{{ newUser.userID }}">@{{ newUser.userName }}</a>
+                      </span>
                     </div>
                   </a>
                 </div>

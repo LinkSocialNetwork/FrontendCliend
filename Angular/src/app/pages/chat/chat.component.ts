@@ -37,6 +37,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
   currentOnlineUser: UserWithImg = {
     userName: '',
     imgUrl: '',
+    userID:0
   };
 
   allMessages: ChatMessage[];
@@ -145,6 +146,8 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
       if (userName != null) {
         this.currentOnlineUser.userName = userName.userName;
         this.currentOnlineUser.imgUrl = userName.profileImg;
+        this.currentOnlineUser.userID = userName.userID;
+        console.log(userName.userID)
         this.webSocketAPI._sendStatus(this.currentOnlineUser);
         this.sendForOldMessages();
       }
